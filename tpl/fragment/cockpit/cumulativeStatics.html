@@ -1,0 +1,32 @@
+<div class="cumulative-statics">
+    <h3 class="title">累计统计</h3>
+    <div class="select-option-container">
+        <div class="start-time select-box">
+            <input type="text" maxlength="30" ng-model="cumulativeStart" readonly="readonly" id="cumulativeStartTime" ng-trim="false" autocomplete="off">
+            <i></i>
+        </div>
+        <div class="line-through">~</div>
+        <div class="end-time select-box">
+            <input type="text" maxlength="30" ng-model="cumulativeEnd" readonly="readonly" id="cumulativeEndTime" ng-trim="false" autocomplete="off">
+            <i></i>
+        </div>
+        <button class="btn btn-primary" ng-click="getCumulativeStatics()">查询</button>
+    </div>
+    <div class="statics-lists clearfix">
+        <dl ng-repeat="item in datas" class="{{item.id}}">
+            <dt>
+                <p class="title">{{item.name}}</p>
+                <div class="count" title="{{item._allCount}}{{item._allCountUnit}}">{{item._allCount}}<span>{{item._allCountUnit}}</span></div>
+            </dt>
+            <dd ng-hide="item.allCount === 0" id="{{'trade'+$index}}" style="width: 160px; height: 160px; margin: 0 auto;"></dd>
+            <dd ng-hide="item.allCount === 0" class="percentage">{{100*item.logisticsCount/item.allCount | number:0}}<span>%</span>/{{100-100*item.logisticsCount/item.allCount | number:0}}<span>%</span></dd>
+            <dd ng-hide="item.allCount === 0" class="detail-data">
+                <p><a href="javascript:;" ng-class="{default: item.id == 'amount' || item.id == 'volume'}" ng-click="jumpTo(item.id, 'logistics')"><em class="icon-logistics"></em>物流<span title="{{item._logisticsCount}}{{item._logisticsCountUnit}}">{{item._logisticsCount}}{{item._logisticsCountUnit}}</span></a></p>
+                <p><a href="javascript:;" ng-class="{default: item.id == 'amount' || item.id == 'volume'}" ng-click="jumpTo(item.id, 'trade')"><em class="icon-trade"></em>贸易<span title="{{item._tradeCount}}{{item._tradeCountUnit}}">{{item._tradeCount}}{{item._tradeCountUnit}}</span></a></p>
+            </dd>
+            <dd ng-show="item.allCount === 0" class="count-empty"></dd>
+            <dd ng-show="item.allCount === 0" class="count-empty-msg">没有数据哦～</dd>
+            <dd class="label-icon"></dd>
+        </dl>
+    </div>
+</div>

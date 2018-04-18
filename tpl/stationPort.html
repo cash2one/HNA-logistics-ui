@@ -1,0 +1,176 @@
+<style class="test_7c1f4d6a">
+    .show-remark{
+        position: absolute;
+        bottom: 19px;
+        right: 5px;
+        color: #999;
+        line-height: 15px;
+    }
+</style>
+<section class="content test_449e02e3">
+    <div ng-controller="tableController" class="master-table test_2203e541">
+        <div class="search-box test_cf1448b4" style="padding:20px 2%;text-align: center;">
+            <span style="margin-right: 2px;" class="test_dddb4f41">关键词</span>
+            <input style="width:20%;" maxlength="30" ng-enter="retrievalPort();" ng-model="tableModel.restData.q" ng-value="q" type="text" class="form-control test_67e77ad4" placeholder="<%=port_search_list%>">
+
+            <span style="margin:0px 2px 0px 10px;" class="test_843fef8f">国家城市</span>
+            <input placeholder="<%=common_all_tips%>" autocomplete="off" type="text" style="width:20%;margin:0px 10px 0px 2px;" id="countrySearch" ng-model="countrySearch" class="form-control test_63956f45">
+            <input placeholder="<%=common_all_tips%>" ng-click="resetCitySearchData()" autocomplete="off" type="text" style="width:20%;" id="citySearch" ng-model="citySearch" class="form-control test_3706785a">
+
+            <div class="test_de2468b7" style="display: inline-block;">
+                <span style="color:#888;margin-right:10px;cursor:pointer;position:relative;" ng-click="clearData()" class="test_660def76">重置</span>
+                <button ng-click="retrievalPort();" class="btn btn-primary test_1d284e48"><%=common_list_search_btn%></button>
+
+            </div>
+        </div>
+        <div class="batch-operation test_7f195c4f">
+            <button ng-click="addPort();" class="btn btn-primary test_71a21012"><%=common_page_add%></button>
+            <button ng-click="deletePort();" class="btn btn-primary test_15fabdf8"><%=common_page_delete%></button>
+            <button ng-click="internationalization();" class="btn btn-primary test_2bf6ec65"><%=common_international%></button>
+        </div>
+        <div class="table-container test_15e1d9c6">
+            <input type="hidden" ng-model="clickTrId" class="test_fe153c7a">
+            <table class="user-table table-box airport-table test_c8714f65" cellpadding="0" cellspacing="0">
+                <thead class="test_24b4f39b">
+                <tr class="test_71574d9c">
+                    <th class="test_d9bfb84d">
+                        <div class="checkbox checkbox-info test_34e029f8">
+                            <input type="checkbox" ng-model="tableModel.selectFlag" ng-click="table.selectAll(tableModel);" class="test_16f755c1">
+                            <label class="test_ce02d3e3"></label>
+                        </div>
+                    </th>
+                    <th ng-repeat="item in tableModel.tableHeader" class="test_91a939c1">{{item}}</th>
+                </tr>
+                </thead>
+                <tbody class="test_90597831">
+                <tr ng-repeat="value in tableModel.tableBody" data-id="{{value.id}}" ng-init="renderFinish($last)" class="test_2cf52b5a">
+                    <td class="test_e1140770">
+                        <div class="checkbox checkbox-info test_0453c890">
+                            <input type="checkbox" ng-value="{{value.userId}}" ng-checked="value.checkbox" ng-click="table.selectOne(tableModel, value.checkboxId);" class="test_75bf9f54">
+                            <label class="test_aa47710d"></label>
+                        </div>
+                    </td>
+                    <td class="test_cf1ac66d">{{(tableModel.pagination.currentPage-1)*tableModel.pagination.pageSize+$index+1}}</td>
+                    <td title="{{value.name}}" class="test_cd9d85bc"><a href="javascript:;" ng-click="editPortInfo(value);" ng-bind-html="value.name | trustHtml:q" class="test_a335cc8d"></a></td>
+                    <td title="{{value.englishName}}" ng-bind-html="value.englishName | trustHtml:q">{{value.englishName}}</td>
+                    <td title="{{value.code}}" ng-bind-html="value.code | trustHtml:q" class="test_77696682">{{value.code}}</td>
+                    <td title="{{value.countryName+'('+value.countryId+')'}}" class="test_14571931">{{value.countryName+'('+value.countryId+')'}}</td>
+                    <td title="{{value.cityName}}" class="test_8293667e">{{value.cityName}}</td>
+                    <td title="{{value.address}}" class="test_8ff17e1f">{{value.address}}</td>
+                    <td title="{{value.type}}" class="test_eab94229">{{value.type}}</td>
+                    <td title="{{value.remark}}" class="test_77696682">{{value.remark}}</td>
+                </tr>
+                </tbody>
+            </table>
+            <hnapagination table-service="table" page-table-model="tableModel" class="test_521d3ffd"></hnapagination>
+        </div>
+        <div ng-show="!tableModel.pagination.isVisiblePage" style="position: absolute;top:165px;bottom:0px;width:100%;" class="test_8c5360d1">
+            <img style="width:100%;height:100%;" src="/public/img/undefined.svg" class="test_5bbd407d">
+        </div>
+    </div>
+</section>
+
+<div style="display: none" ng-show="nestPortFrom" id="nest-PortFrom" ng-init="initSelectList();" class="prompt-modal middle-box test_093f0d55">
+    <div class="prompt-wrap test_745ce00c">
+        <div class="bomb-box test_89ae7dbe">
+            <div class="title test_8b03a42c">{{title}}</div>
+            <div class="prompt-content test_a9b0562e">
+                <form name="PortFrom" novalidate="novalidate" class="test_734bc1ca">
+                    <div id="PortFrom" class="test_670299fe">
+                        <div ng-click="" class="label-text test_b44b6456"><%=stationPort_title_detail%><i class="icon-more-down icon-angle-down test_05696143"></i></div>
+                        <ul class="isContainer switch-list test_1a914fe8" data-title="<%=stationPort_title_detail%>" id="PortContent">
+                            <li class="test_ba17e3b7" id="portName">
+                                <label class="test_6f0e08dc"><b class="test_169a5952">*</b><%=stationPort_table_name%>：</label>
+                                <input ng-trim="false" class="input-text test_2e597b85" maxlength="30" verification="{'ruleType':'namecn'}" name="portName" ng-model="portName" type="text" required>
+                                <div class="verification test_d9af4330">
+                                    <span class="errors test_23d48fc2" ng-show="PortFrom.portName.$viewValue && PortFrom.portName.$error.defined && PortFrom.portName.$dirty">{{PortFrom.portName.errorTips}}</span>
+                                </div>
+                            </li>
+                            <li class="test_ba17e3b7" id='portNameEn'>
+                                <label class="test_6f0e08dc"><b>*</b><%=stationPort_table_nameEn%>：</label>
+                                <input ng-trim="false" class="input-text test_2e597b85" maxlength="30" verification="{'ruleType':'nameen'}" name="portNameEn" ng-model="portNameEn" type="text" required>
+                                <div class="verification">
+                                    <span class="errors" ng-show="PortFrom.portNameEn.$viewValue && PortFrom.portNameEn.$error.defined && PortFrom.portNameEn.$dirty">{{PortFrom.portNameEn.errorTips}}</span>
+                                </div>
+                            </li>
+                            <li class="test_3758a2c4" id="code">
+                                <label class="test_258665b8"><b class="test_71aa3abe">*</b><%=stationPort_table_code%>：</label>
+                                <input  ng-trim="false" ng-blur="checkPortCode();" ng-click="clearCodeExistTip()" name="code" class="input-text test_08895198" validate-code="{ruleReg:'code', ruleRegMsg:'请输入大小写英文、数字和符号“-”、“_”', maxLength:'15'}" name="code"  ng-model="code" type="text"  required>
+                                <div class="verification test_bc07652f">
+                                    <span class="errors test_8fd45d95" ng-show="PortFrom.code.$viewValue && PortFrom.code.$error.defined && PortFrom.code.$dirty">{{PortFrom.code.errorTips}}</span>
+                                    <span class="errors test_cbc49735" ng-show="showCodeExist">港口代码已存在！</span>
+                                </div>
+                            </li>
+                            <li class="test_4e12c504" id="countryName">
+                                <label class="test_3fe5f834"><b class="test_933e132d">*</b><%=stationPort_table_country%>：</label>
+                                <div class="select-box input-text test_b0eb3f43">
+                                    <input ng-trim="false" id="country" name="countryName" autocomplete="off" ng-value="countryId" ng-model="countryName" maxlength="30" type="text" required class="country-list test_0feb3f81">
+                                    <div class="verification">
+                                        <span class="errors" ng-show="PortFrom.countryName.$dirty"></span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="test_3a47d58d" id="cityName">
+                                <label class="test_86b0095f"><b class="test_4d72f9c4">*</b><%=stationPort_table_city%>：</label>
+                                <div class="select-box input-text test_c7e968bf">
+                                    <input ng-trim="false" name="cityName" ng-click="resetCityData()" ng-disabled="isEditCity" id="city" autocomplete="off" ng-value="cityId" ng-model="cityName" maxlength="30" type="text" required class="city-list test_bbe620ad">
+                                    <div class="verification">
+                                        <span class="errors" ng-show="PortFrom.cityName.$dirty"></span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="test_4e1dac5c" id="portAddr">
+                                <label class="test_16d894e5"><b class="test_22b0fc68">*</b><%=stationPort_table_addr%>：</label>
+                                <!--<remark description="portAddr" textareaNumber="addrNumber"></remark>-->
+                                <div class="remark-info test_fd71851a">
+                                    <textarea ng-trim="false" class="input-text test_3c359324" ng-change="showAddrNumber();" name="portAddr" ng-model="portAddr" rows="5" maxlength="140" required></textarea>
+                                    <div class="show-string-length test_e126f059"><span class="test_de5e5a37">{{addrNumber}}</span>字</div>
+                                    <div class="verification">
+                                        <span class="errors" ng-show="PortFrom.portAddr.$dirty"></span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="test_3758a2c4" id="portType">
+                                <label class="test_258665b8"><b class="test_71aa3abe">*</b><%=stationPort_table_type%>：</label>
+                                <div class="input-text radio-box test_77fbbcef" style="text-align: left;">
+                                    <div class="radio radio-single radio-primary  test_83c3fdb6">
+                                        <input value="sea_port" type="radio" ng-model="portType" name="portType" class="ng-pristine ng-valid ng-touched test_5e5734e0">
+                                        <label class="test_428d9943">  </label>
+                                    </div>
+                                    <span class="test_5bc99b90">海港</span>
+
+                                    <div class="radio radio-single radio-primary  test_4ee19422" style="margin-left: 40px;">
+                                        <input value="inner_port" type="radio" ng-model="portType" name="portType" class="ng-pristine ng-untouched ng-valid test_182191d3">
+                                        <label class="test_828ef16c"></label>
+                                    </div>
+                                    <span>内港</span>
+                                </div>
+                            </li>
+                            <li class="test_ee0051fb">
+                                <label class="test_3c296a28"><%=common_page_remarks%>：</label>
+                                <!--<remark description="remark" textareaNumber="textNumber"></remark>-->
+                                <div class="remark-info test_fd71851a">
+                                    <textarea ng-trim="false" class="input-text test_3c359324" ng-change="showTextNumber();" ng-model="remark" rows="5" maxlength="140"></textarea>
+                                    <div class="show-string-length test_e126f059"><span class="test_de5e5a37">{{textNumber}}</span>字</div>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="label-text test_ccb5e46a"><%=stationPort_title_international%><i class="icon-more-down icon-angle-down test_47c91db6"></i></div>
+                        <ul class="isContainer switch-list language-international test_ff1b2848" data-title="<%=airport_title_international%>">
+                            <li ng-repeat="item in language" class="test_21993f77">
+                                <label class="test_ec78eea3">{{item.localName}}：</label>
+                                <input ng-if="item.code == 'en-us'" ng-trim="false" ng-keyup="langVerification($event);" maxlength="30" data-id="{{item.id}}" ng-model="$parent.$parent.portNameEn" data-code="{{item.code}}" class="input-text test_797ade02" type="text">
+                                <input ng-if="item.code == 'zh-cn'" ng-trim="false" ng-keyup="langVerification($event);" maxlength="30" data-id="{{item.id}}" ng-model="$parent.$parent.portName" data-code="{{item.code}}" class="input-text test_797ade02" type="text">
+                                <input ng-if="item.code != 'en-us' && item.code != 'zh-cn'" ng-trim="false" ng-keyup="langVerification($event);" maxlength="30" data-id="{{item.id}}" data-code="{{item.code}}" class="input-text test_797ade02" type="text">
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+            <div class="operation test_c1578338">
+                <button ng-click="closePrompt();" name="prompt-close" class="btn btn-default test_75034fc3" data-event="close"><%=common_page_cancel%></button>
+                <button ng-click="savePrompt();" name="prompt-save" class="btn btn-primary test_2b751043" data-event="close"><%=common_page_save%></button>
+            </div>
+        </div>
+    </div>
+</div>

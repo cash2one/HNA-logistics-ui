@@ -1,0 +1,44 @@
+<style type="text/css">
+    .m-service-info {
+        padding: 30px;
+    }
+    .m-service-info li{
+        height:30px;
+        line-height:30px;
+    }
+    .m-service-info span{
+        display: inline-block;
+    }
+    .m-service-info span.service-type{
+        width:100px;
+    }
+    .m-service-info span.service-detail{
+        margin:0px 10px;
+    }
+    .m-service-info .list-table{
+        margin:0px;
+        padding:0px;
+        border:none;
+        border-collapse: collapse;
+    }
+    .m-service-info .list-table tr, .m-service-info .list-table td{
+        margin:0px;
+        padding:0px;
+        padding:5px;
+        border:none;
+    }
+</style>
+<div class="m-service-info">
+    <table class="list-table">
+        <tr ng-repeat="item in serviceInfoList">
+            <td style="width:20px;">{{$index+1}}.</td>
+            <td>{{item.serviceTypeName}}({{item.servicePropertyName}})</td>
+            <td style="width:10px;">：</td>
+            <td>{{item.serviceName}}<span ng-if="item.serviceCode">({{item.serviceCode}})</span></td>
+            <td>{{item.supplierName}}<span ng-if="item.supplierCode">({{item.supplierCode}})</span></td>
+            <td>实重：{{item.weight}} {{item.weightUnit}}</td>
+            <td>体积重：{{item.volumeWeight}} {{item.volumeWeightUnit}}</td>
+            <td>计费重：{{item.feeCalcWeight}} {{item.feeCalcWeightUnit}}</td>
+        </tr>
+    </table>
+</div>

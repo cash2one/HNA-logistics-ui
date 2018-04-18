@@ -1,0 +1,11 @@
+<div ng-controller="selectTypesCtrl" class="select-type">
+    <ul>
+        <li ng-repeat="item in selectTypesModel.listGoodsTypes">
+            <div data-name="{{item.name}}" class="checkbox checkbox-info">
+                <input type="checkbox" data-id="{{item.code}}" ng-class="{'active': item.checked}" ng-checked="isCheckGoodsType(item.code) || item.checked" ng-click="obtainGoodsTypes($event, item.code);">
+                <label></label>
+            </div>
+            {{item.name}}
+        </li>
+    </ul>
+</div>

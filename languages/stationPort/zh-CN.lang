@@ -1,0 +1,16 @@
+{
+    "stationPort_table_name": "名称",
+    "stationPort_table_nameEn": "英文名称",
+    "stationPort_table_country": "国家",
+    "stationPort_table_city": "城市",
+    "stationPort_table_addr": "地址",
+    "stationPort_table_type": "港口类型",
+    "stationPort_table_code": "港口代码",
+    "stationPort_table_airline": "所属航线",
+    "stationPort_prompt_new": "添加港口",
+    "stationPort_title_detail": "基本信息",
+    "stationPort_title_international": "国际化",
+    "port_prompt_edit": "港口详情",
+    "port_prompt_delete": "确定删除已选港口？",
+    "port_search_list": "请输入名称或港口代码"
+}

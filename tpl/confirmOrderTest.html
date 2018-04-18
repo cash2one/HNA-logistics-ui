@@ -1,0 +1,174 @@
+<style class="test_38423af0">
+    .depart{
+        margin: 10px 0px;
+    }
+    label {
+        display: inline-block;
+        width: 170px;
+    }
+
+</style>
+
+<div style="margin:10px " class="test_dfa7f56b">
+    <button class="btn btn-primary test_ca4a1627" ng-click="backToOrderPage();">返回</button>
+</div>
+
+<div style="margin:10px" class="test_3bab5f28">
+    <form name="order" class="test_e597f6cc">
+        <label class="test_76eb652a">订单: </label>
+        <input ng-trim="false" ng-model="order.orderNo" placeholder="请输入运单号" style="width: 300px;line-height: 34px;" class="test_ec9a377a">
+               <!--ng-blur="InitSelectByorderNo()">-->
+        <button class="btn btn-primary test_0035bc50" ng-click="orderAccept();">已受理</button>
+
+    </form>
+
+</div>
+<hr class="test_e6986665">
+
+<style class="test_783502f1">
+
+</style>
+
+<div class="container test_03adb4a6" style="margin: 10px">
+    <div class="row test_bf28c54a">
+        <div class="col-md-6 test_477ac892">
+            <div class="test_3c300c1b">
+                <label class="test_dd546ff3"><b class="test_38d37b21">供应商信息</b></label>
+            </div>
+
+            <div class="depart test_618d2b9f">
+                <label class="test_93b43fbd">编码：</label>
+                <!--服务商返回的物流消息的编码-->
+                <input required ng-model="order.code" name="codeFormProvider" type="text" id="code-Form-Provider" placeholder="请选择" class="ng-pristine ng-invalid ng-invalid-required ng-touched test_43771ac4" value="" style="width: 300px">
+            </div>
+
+            <div class="depart test_17398cda">
+                <label class="test_cb3a59e2">供应商状态</label>
+                <input required ng-model="order.statusName" type="text" id="orderStatus" placeholder="请选择" class="ng-pristine ng-invalid ng-invalid-required ng-touched test_23e0fd66" value="" style="width: 300px">
+
+            </div>
+
+            <!--<div class="depart">-->
+                <!--<label>订单 :</label>-->
+                <!--<span>{{order.orderNo}}</span>-->
+            <!--</div>-->
+
+            <div class="depart test_1a46c21b">
+                <label class="test_294957a2">订单总量</label>
+                <input ng-trim="false" ng-model="order.orderWeight" type="number" placeholder="订单总量" style="width: 300px" class="test_8eb7542a">
+            </div>
+
+            <div class="depart test_d579da92">
+                <label class="test_53d3c1fc">订单重量单位</label>
+                <input ng-trim="false" ng-model="order.orderWeightUnit" type="text" placeholder="重量单位" style="width: 300px" class="test_2cefe3dd">
+            </div>
+
+
+
+            <!--<div class="depart test_afda7f59">-->
+                <!--<label class="test_d981aa8a">子单编号（来自接口4）</label>-->
+                <!--<input ng-trim="false" id="suborderNo" ng-model="order.suborderNo" type="text" style="width: 300px" class="test_e116c50b">-->
+            <!--</div>-->
+
+            <div class="depart test_b5a82b00">
+                <label class="test_ef3181f0">服务商uid(来自接口3)</label>
+                <input ng-trim="false" id="serviceUid" ng-model="order.servicename" type="text" style="width: 300px" readonly class="test_bb0acb3f">
+            </div>
+
+            <!--<div class="depart">-->
+                <!--<label>服务商的供应商id(来自接口3,不在页面显示，通过服务商里面拿到)</label>-->
+                <!--<span>{{order.supplierId}}</span>-->
+                <!--&lt;!&ndash;<input ng-trim="false" id="supplierId" ng-model="order.supplierId" type="text"   style="width: 300px" readonly  >&ndash;&gt;-->
+            <!--</div>-->
+
+            <div class="depart test_df9b379d">
+                <label class="test_87e3bcb9">服务商的运单号，手动输入</label>
+                <input ng-trim="false" id="serviceorderNo" ng-model="order.serviceorderNo" type="number" style="width: 300px" class="test_24ec9689">
+            </div>
+
+
+
+        </div>
+
+        <div class="col-md-6 test_eab5064d">
+            <div class="depart test_f3a213bb">
+                <label class="test_e29e1e93">物流跟踪信息，需要测试输入</label>
+                <input ng-trim="false" id="trackMessage" ng-model="order.trackMessage" type="text" style="width: 300px" class="test_e01761c6">
+            </div>
+
+
+            <div class="depart test_c7804d8a">
+                <label class="test_2ad0024f">货物件数</label>
+                <input ng-trim="false" ng-model="subOrder.cargoNumber" type="number" style="width: 300px" class="test_35779ea3">
+            </div>
+
+            <div class="depart test_9d0877a3">
+                <label class="test_dda6f31b">货物长度</label>
+                <input ng-trim="false" ng-model="subOrder.length" type="number" style="width: 300px" class="test_417c495d">
+            </div>
+
+            <div class="depart test_f914099b">
+                <label class="test_10758c36">货物的宽</label>
+                <input ng-trim="false" ng-model="subOrder.width" type="number" style="width: 300px" class="test_5de115e5">
+            </div>
+
+            <div class="depart test_7cc3f490">
+                <label class="test_ac9c7436">货物的高</label>
+                <input ng-trim="false" ng-model="subOrder.height" type="number" style="width: 300px" class="test_966d5aa7">
+            </div>
+
+            <div class="depart test_90059a55">
+                <label class="test_2f1a7d57">子单的重量</label>
+                <input ng-trim="false" ng-model="subOrder.weight" type="number" style="width: 300px" class="test_1bfd9335">
+            </div>
+
+            <div class="depart test_ec94a452">
+                <label class="test_75c580da">子单的高度单位</label>
+                <input ng-trim="false" ng-model="subOrder.lwhUnit" type="text" style="width: 300px" class="test_4213ef93">
+            </div>
+            <div class="depart test_4e5570b9">
+                <label class="test_3022a4a5">子单的重量单位</label>
+                <input ng-trim="false" ng-model="subOrder.weightUnit" type="text" style="width: 300px" class="test_ac08652c">
+            </div>
+            <div style="position: absolute;top: 17px;right: 9px;
+" class="test_48fd2f25">
+                <button class="btn btn-primary test_02e826a9" ng-click="summit();">提交</button>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<hr class="test_5f38f92a">
+<div style="overflow: auto;height: 200px" class="test_baa6e252">
+    <div style="margin:10px" class="test_d8fdd8fb">
+
+        <label class="test_c5d205e1">订单: </label>
+        <input ng-trim="false" ng-model="cash.orderNo" placeholder="请输入运单号" style="width: 300px;line-height: 34px;" class="test_12e6a5e4">
+        <!--ng-blur="InitSelectByorderNo()">-->
+        <button class="btn btn-primary test_3a174053" ng-click="calcOrderSales();">计算销售价</button>
+        <button class="btn btn-primary test_783ab963" ng-click="calcOrderPurchases();">计算采购价</button>
+        <button class="btn btn-primary test_783ac963" ng-click="calcOrderProcess();">计算服务流转</button>
+
+        <!--<button class="btn btn-primary" ng-click="orderStateChangeSummit();">改变状态到提交</button>-->
+
+    </div>
+    <div style="margin:10px" class="test_88f2e736">
+        <div class="test_8cb57ff5">报价单货币总价：{{cash.money}}{{cash.currencyCode}}</div>
+        <div class="test_27ccfe8a">客户货币总价：{{cash.custcurrencyAmount}}{{cash.custCurrencyCode}}</div>
+        <div class="test_bc9b2794">是否设置汇率：{{cash.exchangeRateSetting?'是':'否'}}</div>
+        <div class="test_dc4928d1">汇率：{{cash.exchangeRate}}</div>
+    </div>
+
+    <div style="margin:10px" class="test_297521f8">
+        <span class="test_6ef8e026" style="white-space:pre-line">result：{{result}}</span>
+    </div>
+    <div style="margin:10px" class="test_297521f8">
+        <span class="test_6ef8e026" style="white-space:pre-line">msgs：{{calcMsgs}}</span>
+    </div>
+
+
+</div>
+
+
+

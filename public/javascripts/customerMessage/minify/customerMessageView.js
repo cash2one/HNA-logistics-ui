@@ -1,0 +1,1 @@
+app.factory("customerMessageView",[function(){return{}}]);

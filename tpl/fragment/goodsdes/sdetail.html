@@ -1,0 +1,122 @@
+<div ng-controller="sdetail" class="detail">
+	<h4 class="title">商品详情</h4>
+	<button class="btn btn-default btn-bill" ng-click="goBack()" >返回</button>
+	<div>
+		<ul class="order-ul">
+			<li>
+			<h4>订单信息</h4>
+			<div class="good-detail clearfix">
+				<form name="customerForm" novalidate="novalidate">
+					<ul>
+					<li>
+					    <label>商品名称</label>
+					    <div class="content-info required">
+					        <input ng-trim="false" validate-code="{ruleReg:'name', ruleRegMsg:'请输入中英文、数字和符号-、_', maxLength:'30'}" name="name"  ng-model="data.name" type="text" placeholder="" required><!--goodsTypeId-->
+					         <validatetip from-model="customerForm.name"></validatetip>
+					    </div>
+				    </li>
+				    <li>
+					    <label>商品类别-代码</label>
+					    <div class="content-info required">
+					        <input ng-trim="false" name="goodsTypeName" type="text"  ng-model="data.goodsTypeName" ng-click="loadGoodsType()" readonly="readonly" required>
+					    </div>
+				    </li>
+				    <li>
+					    <label>供应商</label>
+					    <div class="content-info required">
+					        <input ng-trim="false" validate-code="{ruleReg:'name', ruleRegMsg:'<%=common_validate_name%>', maxLength:'30'}" name="supplierName"  ng-model="data.supplierName" id="supplierName" type="text" ng-click="initSupplier()" placeholder="" required><!--supplierId-->
+					        <i class="select-icon icon-drop-down"></i>	       
+					        
+					    </div>
+				    </li>
+				    <li>
+					    <label>商品代码</label>
+					    <div class="content-info required">
+					        <p class="content-text">{{data.code}}</p>
+					    </div>
+				    </li>
+				    </ul>
+					</form>
+				</div>
+			</li>
+			<li>
+				<h4>商品信息</h4>
+				<div class="good-detail clearfix">
+					<form name="customerForm" novalidate="novalidate">
+						<ul class="clearfix">
+						<li>
+						    <label>商品类别</label>
+						    <div class="content-info required">
+						        <input ng-trim="false" validate-code="{ruleReg:'name', ruleRegMsg:'请输入中英文、数字和符号-、_', maxLength:'30'}" name="name"  ng-model="data.name" type="text" placeholder="" required><!--goodsTypeId-->
+						         <validatetip from-model="customerForm.name"></validatetip>
+						    </div>
+					    </li>
+					    <li>
+						    <label>商品</label>
+						    <div class="content-info required">
+						        <input ng-trim="false" name="goodsTypeName" type="text"  ng-model="data.goodsTypeName" ng-click="loadGoodsType()" readonly="readonly" required>
+						    </div>
+					    </li>
+					    </ul>
+					</form>
+					<div class="btn-group clearfix">
+						<button class="btn btn-primary btn-bill" ng-click="getDetail()" >添加</button>
+						<button class="btn btn-primary btn-bill" ng-click="deleteGoods()" >删除</button>
+					</div>
+					<div class="table-box-div">
+					<table class="table-box" cellpadding="0" cellspacing="0">
+					    <thead>
+					    	<tr>
+					    		<th></th>
+					    		<th>商品</th>
+					    		<th>商品类别</th>
+					    		<th>HS编码</th>
+					    		<th>计量单位</th>
+					    		<th>单价</th>
+					    		<th>币种</th>
+					    		<th>采购数量</th>
+					    		<th>采购金额</th>
+					    	</tr>
+					    </thead>
+					    <tbody>
+					    	<tr>
+					    		<td>
+					    			1
+					    		</td>
+					    		<td>
+					    			1
+					    		</td>
+					    		<td>1</td>
+					    		<td>1</td>
+					    		<td>1</td>
+					    		<td>1</td>
+					    		<td>1</td>
+					    		<td>1</td>
+					    		<td>1</td>
+					    	</tr>
+					    	<tr><td class="total" colspan="9">122</td></tr>
+					    </tbody>
+					    </table>
+					    </div>
+				</div>
+			</li>
+			<li>
+				<h4>客户留言</h4>
+				<div class="order-item">
+					<div class="textarea-div">
+						<textarea></textarea>
+						<span>140字</span>
+					</div>
+				</div>
+			</li>
+		</ul>
+
+
+		
+
+		<div class="btn-group btn-group-center mtb-30">
+			<button class="btn btn-default btn-bill" ng-click="save()" >保存草稿</button>
+			<button class="btn btn-primary btn-bill" ng-click="save()" >提交订单</button>
+		</div>
+	</div>
+</div>

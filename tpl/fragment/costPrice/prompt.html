@@ -1,0 +1,68 @@
+<style>
+    .middle-box .bomb-box {
+        min-height:350px;
+    }
+    .switch-list li label {
+        font-size:16px;
+    }
+    .radio-group {
+        display:inline-block;
+        vertical-align:middle;
+        font-size:16px;
+        text-align:left;
+    }
+    .radio-group label {
+        display:inline-block;
+        vertical-align:middle;
+        width:auto!important;
+    }
+    .price-adjust-box {
+        text-align:left;
+    }
+    .price-adjust-box input {
+        width:100px;
+        height:34px;
+        padding-left:2px;
+    }
+</style>
+<div ng-show="nestCostPriceFrom" id="nest-costPriceFrom" class="prompt-modal middle-box" style="display:none" ng-controller="promptCtr">
+    <div class="prompt-wrap">
+        <div class="bomb-box">
+            <div class="title">{{promptTitle}}</div>
+            <div class="prompt-content">
+                <form name="costPriceFrom" novalidate="novalidate">
+                    <div id="costPriceFrom">
+                        <ul class="isContainer switch-list">
+                            <li>
+                                <label><%=price_unit%>：</label>
+                                <div class="radio-group input-text">
+                                    <input type="radio" value="1" ng-model="priceType" name="priceType" id="cost-price"/>
+                                    <label style="margin-right:40px" for="cost-price"><%=price_cost%></label>
+                                    <input type="radio" value="2" ng-model="priceType" name="priceType" id="sale-price"/>
+                                    <label for="sale-price"><%=price_sale%></label>
+                                </div>
+                            </li>
+                            <li>
+                                <label><%=price_adjust%>：</label>
+                                <div class="input-text price-adjust-box">
+                                    <input type="text" ng-model="adjustType" id="adjust-type"/>
+                                    <i class="select-icon icon-drop-down" style="left:76px"></i>
+                                    <input onpaste="return false" ng-trim="false" type="text" ng-blur="isOk()" ng-change="verifyFormat()" maxLength="5" ng-model="adjustVal" style="width:85px;"/>
+                                    <input type="text" ng-model="adjustUnit" id="adjust-unit"/>
+                                    <i class="select-icon icon-drop-down" style="right:2px!important"></i>
+                                    <div class="verification">
+                                        <span class="errors" id="adjust-error-msg" style="padding-left:0!important"></span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+            <div class="operation">
+                <button ng-click="closePrompt();" name="prompt-close" class="btn btn-default" data-event="close"><%=price_cancel%></button>
+                <button ng-click="savePrompt();" name="prompt-save" class="btn btn-primary" data-event="close"><%=price_save%></button>
+            </div>
+        </div>
+    </div>
+</div>

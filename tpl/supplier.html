@@ -1,0 +1,545 @@
+<section class="content type-filter-layout test_7574d459">
+    <!-- table list -->
+    <div ng-hide="main" class="test_2a5e541d">
+        <div class="panel-left test_18aa8aa5">
+            <ul class="type-filter test_1a454df6">
+                <li ng-repeat="item in types" ng-click="getTypeTable(item.code, $event);" ng-class="{'active':item.code == -1}" class="test_7f6ab4e7">{{item.name}}</li>
+            </ul>
+        </div>
+        <div class="panel-right test_99e8ea9a" ng-controller="tableController">
+            <div class="add-search-box test_5f40f361">
+                <div class="list-search-box test_d610a3f3">
+                    <input maxlength="30" ng-enter="retrievalList();" ng-model="tableModel.restData.q" ng-value="q" type="text" class="form-control test_8445785a" placeholder="<%=supplier_placeholder_search%>">
+                    <i class="icon-search search-table test_6e1a2ebc"></i>
+                    <div class="senior-seach test_2fb9703e">
+                        <button ng-click="retrievalList();" class="btn btn-primary test_1d284e48"><%=common_list_search_btn%></button>
+                        <!--<button ng-click="seniorFilter();" class="btn btn-transparent test_1d284e48" style="width: 130px;position: relative;left: -40px;">{{seniorText}}</button>-->
+                        <span ng-click="seniorFilter();" style="color: #888888;position: relative;left: 6px" class="test_9bbe8a53">{{seniorText}}</span>
+                    </div>
+                </div>
+                <div class="senior-box test_2c452570" ng-show="showSenior">
+                    <label class="senior-label test_77db3471"><%=supplier_filter_rank_select%></label>
+                    <div ng-init="initRankSelectList();" class="select-box test_dedb5071">
+                        <input readonly="readonly" maxlength="15" type="text" ng-click="selectRank();" id="rank" ng-model="rankName" ng-value="rankId" class="test_6517b209">
+                        <i class="select-icon icon-drop-down test_ef0baaec"></i>
+                    </div>
+                    <div class="checkbox checkbox-info checkbox-filter test_44b709fb">
+                        <input type="checkbox" ng-click="checkSenior($event);" ng-checked="seniorChecked" class="check test_9bb701e3">
+                        <label class="test_5a7b803d"></label>
+                    </div>
+                    <span class="test_9cde2f13"><%=supplier_filter_rank%></span>
+                </div>
+            </div>
+
+            <div class="white-background test_92b222f8">
+                <div class="batch-operation test_17729519">
+                    <button ng-click="addSupplier();" class="btn btn-primary test_0c9bcc2d"><%=common_page_add%></button>
+                    <button ng-click="deleteSupplier();" class="btn btn-primary test_b0a62877"><%=common_page_delete%></button>
+                </div>
+                <div class="table-container test_64ebab2f">
+                    <input ng-model="typeId" type="hidden" class="test_d71db25c">
+                    <table class="supplier-table table-box test_4c88b7c3" cellpadding="0" cellspacing="0">
+                        <thead class="test_207e4bf2">
+                        <tr class="test_da2e9aaa">
+                            <th class="test_a5ec63c4">
+                                <div class="checkbox checkbox-info test_7717aaad">
+                                    <input type="checkbox" ng-model="tableModel.selectFlag" ng-click="table.selectAll(tableModel);" class="test_fb47eb2e">
+                                    <label class="test_e00ed5ca"></label>
+                                </div>
+                            </th>
+                            <th ng-repeat="item in tableModel.tableHeader" class="test_349838ad">{{item}}</th>
+                        </tr>
+                        </thead>
+
+                        <tbody class="test_7ed4ee1c">
+                        <tr ng-repeat="value in tableModel.tableBody" ng-init="renderFinish($last)" class="test_77562c06">
+                            <td class="test_17ce6252">
+                                <div class="checkbox checkbox-info test_517ed719">
+                                    <input type="checkbox" ng-checked="value.checkbox" ng-click="table.selectOne(tableModel, value.checkboxId, $event);" class="test_ef27840a">
+                                    <label class="test_46cca90b"></label>
+                                </div>
+                            </td>
+                            <td class="test_0e82a09c">{{(tableModel.pagination.currentPage-1)*tableModel.pagination.pageSize+$index+1}}</td>
+                            <td class="test_7d86e408" title="{{value.name}}" >
+                                <a href="javascript:;" ng-click="editSupplierDetail(value.id)" ng-bind-html="value.name | trustHtml:q" class="test_4534d10a"></a>
+                            </td>
+                            <td title="{{value.code}}" ng-bind-html="value.code | trustHtml:q" class="test_fb004d3d"></td>
+                            <td title="{{value.rank}}" class="test_01e43158">{{value.rank}}</td>
+                            <!--<td title="{{value.linkMan}}" class="test_22fedb83">{{value.linkMan}}</td>-->
+                            <!--<td title="{{value.linkTel}}" class="test_7894cf6d">{{value.linkTel}}</td>-->
+                            <td title="{{value.mainService}}" class="test_6c35cfa4">{{value.mainService}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <hnapagination table-service="table" page-table-model="tableModel" class="test_ef4209b0"></hnapagination>
+                </div>
+            </div>
+
+            <div ng-show="!tableModel.pagination.isVisiblePage" style="position: absolute;top:165px;bottom:0px;width:100%;" class="test_619b14f7">
+                <img style="width:100%;height:100%;" src="/public/img/undefined.svg" class="test_7c258ef4">
+            </div>
+        </div>
+    </div>
+
+    <!-- 添加 -->
+    <div ng-show="main" class="test_6001e665">
+        <input type="hidden" ng-model="supplierId" class="test_1de5dbd5">
+        <div class="go-back test_4b69e846">
+            <button ng-click="goBack();" class="btn btn-default test_705536ed"><%=common_page_back%></button>
+        </div>
+        <div class="add-title test_3eec6ad6">
+            <p class="test_c364e286"><%=supplier_add_title%></p>
+        </div>
+        <div class="from-box test_95cc9af9">
+            <div class="m-tab test_2366b7c7" id="m-tab">
+                <ul class="nav nav-tabs clearfix test_6447d659">
+                    <li class="active test_01c16d48"><a href="javascript:void(0);" class="test_01e2a843"><%=supplier_tab_detail%></a></li>
+                    <li><a href="javascript:void(0);"><%=supplier_tab_account%></a></li>
+                    <li class="test_47241913"><a href="javascript:void(0);" class="test_2f3b6ad4">BD</a></li>
+                    <li class="test_637bfb9c"><a href="javascript:void(0);" class="test_00dc5e0b"><%=supplier_tab_link_man%></a></li>
+                    <li class="test_b2ec8482"><a href="javascript:void(0);" class="test_e7ba73ca"><%=supplier_tab_contacts%></a></li>
+                    <li class="test_53bce592"><a href="javascript:void(0);" class="test_33924c4e"><%=supplier_tab_financial%></a></li>
+                </ul>
+                <div class="tab-content test_f563b64d">
+
+                    <!-- 基本信息 -->
+                    <div class="table-pane active test_0f304590">
+                        <form name="baseForm" novalidate="novalidate" class="test_b10b4d4e">
+                            <div class="operation-box right test_7f2b311c">
+                                <button ng-show="visible" name="editSupplier" ng-click="editSupplier();" class="btn btn-primary test_bb0f3164"><%=common_page_edit%></button>
+                            </div>
+                            <div class="rows test_36037839">
+                                <dl class="panel test_9da17401">
+                                    <dd class="test_b87b118c">
+                                        <label class="test_7acff25c"><b ng-hide="visible" class="test_7ee19ad5">*</b><%=supplier_label_name%></label>
+                                        <div class="content-info test_f2080291">
+                                            <span ng-show="visible" class="text-info test_32e8a4d3">{{name}}</span>
+                                            <input ng-trim="false" maxlength="100" name="nameInfo" ng-hide="visible" ng-model="nameInfo" type="text" required class="test_c3b42d09">
+                                            <!--<validatetip from-model="baseForm.nameInfo" class="test_cfe713fe"></validatetip>-->
+                                            <!--<div class="verification">-->
+                                                <!--<span class="errors " style="width: 500px;" ng-show="baseForm.nameInfo.$viewValue && baseForm.nameInfo.$error.defined && baseForm.nameInfo.$dirty">{{baseForm.nameInfo.errorTips}}</span>-->
+                                            <!--</div>-->
+                                        </div>
+                                    </dd>
+                                    <dd class="test_432a3344">
+                                        <label class="test_594bb5a8"><b ng-hide="visible" class="test_f302d8c7">*</b><%=supplier_label_simple_name%></label>
+                                        <div class="content-info test_34330d83">
+                                            <span ng-show="visible" class="text-info test_dccc7f2f">{{simpleName}}</span>
+                                            <input ng-trim="false" maxlength="30" name="simpleNameInfo" ng-hide="visible" ng-model="simpleNameInfo" type="text" required class="test_662794ee">
+                                            <!--<validatetip from-model="baseForm.simpleNameInfo" class="test_f6f89ba0"></validatetip>-->
+                                        </div>
+                                    </dd>
+                                    <dd class="test_a028e58c">
+                                        <label class="test_2f3deb6e"><b ng-hide="visible" class="test_601576c1">*</b><%=supplier_label_code%></label>
+                                        <div class="content-info test_cae16b2c">
+                                            <span ng-show="visible" class="text-info test_4b8b3258">{{code}}</span>
+                                            <input ng-trim="false" ng-blur="validateCode()" class="validate-codes" ng-focus="removeValidateCode()" validate-code="{ruleReg:'code', ruleRegMsg:'<%=supplier_validate_code%>', maxLength:'15'}" name="codeInfo" ng-hide="visible" ng-model="codeInfo" type="text" required class="test_5c893263">
+                                            <validatetip from-model="baseForm.codeInfo" class="test_5e00adb7"></validatetip>
+                                            <div class="verification test_12900edc">
+                                                <span class="isExisted test_66b8215a" ng-show="validateCodeError"><%=supplier_validate_existence_code%></span>
+                                            </div>
+                                        </div>
+                                    </dd>
+                                    <dd class="test_8f5d5c98">
+                                        <label class="test_328ff109"><%=supplier_label_fax%></label>
+                                        <div class="content-info test_ec57bed6">
+                                            <span ng-show="visible" class="text-info test_e29abe71">{{fax}}</span>
+                                            <input ng-trim="false" validate-code="{ruleReg:'fix', ruleRegMsg:'<%=common_template_fix%>', maxLength:'30'}" name="faxInfo" ng-hide="visible" ng-model="faxInfo" type="text" class="test_9cf3df51">
+                                            <validatetip from-model="baseForm.faxInfo" class="test_ae268d94"></validatetip>
+                                        </div>
+                                    </dd>
+                                    <dd>
+                                        <label><b ng-hide="visible">*</b><%=supplier_label_email%></label>
+                                        <div class="content-info">
+                                            <span ng-show="visible" class="text-info">{{email}}</span>
+                                            <input class="check-emails" ng-blur="checkEmail()" ng-focus="clearEmailErrorMsg()" ng-trim="false" validate-code="{ruleReg:'email', ruleRegMsg:'<%=common_validate_email%>', maxLength:'30'}"  name="emailInfo" ng-hide="visible" ng-model="emailInfo" type="text" placeholder="<%=customer_email_tips%>" maxLength="30" required>
+                                            <validatetip from-model="baseForm.emailInfo"></validatetip>
+                                            <div class="verification">
+                                                <span class="isExisted" ng-show="showEmailError"><%=supplier_email_exsist%></span>
+                                            </div>
+                                        </div>
+                                    </dd>
+                                </dl>
+
+                                <dl class="panel test_7b61d20a">
+                                    <dd class="test_fc631be6">
+                                        <label class="test_7d724bf7"><%=supplier_label_website%></label>
+                                        <div class="content-info test_44aa5017">
+                                            <span ng-show="visible" class="text-info test_2dca6636">{{website}}</span>
+                                            <input maxlength="140" ng-trim="false" ng-hide="visible" ng-model="websiteInfo" type="text" placeholder="<%=supplier_placeholder_website%>" class="test_bce40346">
+                                        </div>
+                                    </dd>
+                                    <dd class="test_b43d57c8">
+                                        <label class="test_f855b545"><%=supplier_label_county%></label>
+                                        <div class="content-info test_d1f87655">
+                                            <span ng-show="visible" class="text-info test_1046a8b9">{{country}}</span>
+                                            <input ng-trim="false" validate-code="{ruleReg:'name', ruleRegMsg:'<%=supplier_validate_name%>', maxLength:'30'}" name="countryInfo" ng-hide="visible" ng-model="countryInfo" type="text" class="test_6ce9135a">
+                                            <validatetip from-model="baseForm.countryInfo" class="test_4814dd75"></validatetip>
+                                        </div>
+                                    </dd>
+                                    <dd class="test_77393733">
+                                        <label class="test_b6dace6c"><b ng-hide="visible" class="test_df328443">*</b><%=supplier_label_type%></label>
+                                        <div class="content-info test_01449b33">
+                                            <span ng-show="visible" class="text-info test_85f34b96">{{serviceTypeIdsInfo}}</span>
+                                            <div class="select-box test_a516d88f">
+                                                <input ng-hide="visible" ng-click="selectTypes()" name="serviceTypeIdsInfo" ng-model="serviceTypeIdsInfo" ng-value="listTypeIds" type="text" readonly="readonly" placeholder="<%=supplier_placeholder_type%>" required class="test_596a7f10">
+                                                <i ng-hide="visible" class="select-icon icon-drop-down test_0eb8a5ed"></i>
+                                            </div>
+                                        </div>
+                                    </dd>
+                                    <dd class="test_770c8bfd">
+                                        <label class="test_b4f60e64"><b ng-hide="visible" class="test_5e728e24">*</b><%=supplier_label_rank%></label>
+                                        <div class="content-info test_a1fda154">
+                                            <input name="rankInfo" ng-value="rankInfo" style="display: none;" id="stars" value="0" type="number" class="rating test_7857e642" min="0" max="5" step="1" data-size="xs" required>
+                                            <div class="verification test_4cf69bfc">
+                                                <span class="isExisted test_715c9816" ng-show="validateRankError"><%=supplier_placeholder_rank%></span>
+                                            </div>
+                                        </div>
+                                    </dd>
+                                    <dd>
+                                        <label><%=supplier_label_remark%></label>
+                                        <div class="content-info" style="height:95px;">
+                                            <span ng-show="visible" class="text-info">{{description}}</span>
+                                            <textarea text-length="" ng-trim="false" ng-hide="visible" ng-model="descriptionInfo" maxlength="140" rows="5" class="test_e85b565e"></textarea>
+                                        </div>
+                                    </dd>
+                                </dl>
+                            </div>
+                            <div class="operation-box test_7cd570ad">
+                                <button ng-show="isVisible" name="cancelSupplier" ng-click="cancelSupplier();" class="btn btn-default test_872f66e6"><%=common_page_cancel%></button>
+                                <button ng-hide="visible" name="submitSupplier" ng-click="submitSupplier();" class="btn btn-primary test_cddd8211"><%=common_page_save%></button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- 账号 -->
+                    <div class="table-pane">
+                      <div include="tpl/fragment/supplier/account.html" ng-controller="accountCtrl"></div>
+                    </div>
+
+                    <!-- BD -->
+                    <div class="table-pane test_e170bfc9" ng-controller="tableController">
+                        <div class="batch-operation">
+                            <button ng-click="addBDUser();" class="btn btn-primary"><%=common_page_add%></button>
+                            <button ng-click="deleteBDUser();" class="btn btn-primary"><%=common_page_delete%></button>
+                        </div>
+                        <div class="table-container test_78bc1e64">
+                            <input ng-model="typeId" type="hidden" class="test_2ed1c4ef">
+                            <table class="bd-table table-box test_8b4d2331" cellpadding="0" cellspacing="0">
+                                <thead class="test_0ffc32ec">
+                                <tr class="test_9cdaf25d">
+                                    <th class="test_24bfeb4d">
+                                        <div class="checkbox checkbox-info test_b4d465f7">
+                                            <input type="checkbox" ng-model="tableBDModel.selectFlag" ng-click="table.selectAll(tableBDModel);" class="test_4dd5a628">
+                                            <label class="test_63369549"></label>
+                                        </div>
+                                    </th>
+                                    <th ng-repeat="item in tableBDModel.tableHeader" class="test_5119a991">{{item}}</th>
+                                </tr>
+                                </thead>
+
+                                <tbody class="test_53ac7302">
+                                <tr ng-repeat="value in tableBDModel.tableBody" ng-init="renderFinish($last)" class="test_da6b7284">
+                                    <td class="test_c186bdcd">
+                                        <div class="checkbox checkbox-info test_7c7f9f55">
+                                            <input type="checkbox" ng-checked="value.checkbox" ng-click="table.selectOne(tableBDModel, value.checkboxId, $event);" class="test_39ccbb88">
+                                            <label class="test_a406d7e3"></label>
+                                        </div>
+                                    </td>
+                                    <td class="test_27a78a7b">{{$index+1}}</td>
+                                    <td title="{{value.responsibility}}" class="test_726011fd">{{value.responsibility}}</td>
+                                    <td class="test_6c55b62e" title="{{value.name}}">
+                                        <a href="javascript:;" ng-click="editBDDetail(value.id)"  class="test_3ba7f303">{{value.name}}</a>
+                                    </td>
+                                    <td title="{{value.code}}" class="test_3d7d040b">{{value.code}}</td>
+                                    <td title="{{value.org}}" class="test_4aaf1312">{{value.org}}</td>
+                                    <td title="{{value.position}}" class="test_608745c1">{{value.position}}</td>
+                                    <td title="{{value.mobilephone}}" class="test_270c5cbd">{{value.mobilephone}}</td>
+                                    <td title="{{value.telephone}}" class="test_91d3ed9a">{{value.telephone}}</td>
+                                    <td title="{{value.description }}" class="test_b8f40233">{{value.description }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- 联系人 -->
+                    <div class="table-pane test_e6b5c6e7" ng-controller="tableController">
+                        <div class="batch-operation test_c8bed6e9">
+                            <button ng-click="addContactsEvent();" class="btn btn-primary test_a97cc1ac"><%=common_page_add%></button>
+                            <button ng-click="deleteContactsEvent();" class="btn btn-primary test_47108336"><%=common_page_delete%></button>
+                        </div>
+                        <div class="table-container test_1bed55aa">
+                            <input ng-model="typeId" type="hidden" class="test_7e28f277">
+                            <table class="contacts-table table-box test_c910c656" cellpadding="0" cellspacing="0">
+                                <thead class="test_c61a584e">
+                                <tr class="test_e2f7b710">
+                                    <th class="test_bf20863e">
+                                        <div class="checkbox checkbox-info test_c9f3feb9">
+                                            <input type="checkbox" ng-model="tableContactsModel.selectFlag" ng-click="table.selectAll(tableContactsModel);" class="test_dbf028a7">
+                                            <label class="test_3e22fe8f"></label>
+                                        </div>
+                                    </th>
+                                    <th ng-repeat="item in tableContactsModel.tableHeader" class="test_c11d69fd">{{item}}</th>
+                                </tr>
+                                </thead>
+
+                                <tbody class="test_1e36a2b2">
+                                <tr ng-repeat="value in tableContactsModel.tableBody" ng-init="renderFinish($last)" class="test_6d248da2">
+                                    <td class="test_d52d85ce">
+                                        <div class="checkbox checkbox-info test_970fa583">
+                                            <input type="checkbox" ng-checked="value.checkbox" ng-click="table.selectOne(tableContactsModel, value.checkboxId, $event);" class="test_b174a46b">
+                                            <label class="test_3ae79b57"></label>
+                                        </div>
+                                    </td>
+                                    <td class="test_8c83d1be">{{$index+1}}</td>
+                                    <td title="{{value.responsibility}}" class="test_944d9d6b">{{value.responsibility}}</td>
+                                    <td class="test_dbafe0d0" title="{{value.name}}">
+                                        <a href="javascript:;" ng-click="editContactsDetail(value.id)"  class="test_cf81a614">{{value.name}}</a>
+                                    </td>
+                                    <td title="{{value.org}}" class="test_a346497f">{{value.department}}</td>
+                                    <td title="{{value.position}}" class="test_4e3e17cb">{{value.position}}</td>
+                                    <td title="{{value.mobilephone}}" class="test_ca3f5c2e">{{value.mobilephone}}</td>
+                                    <td title="{{value.telephone}}" class="test_11e3ebb4">{{value.telephone}}</td>
+                                    <td title="{{value.remark}}" class="test_644275df">{{value.description}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- 业务信息 -->
+                    <div class="table-pane test_2bf6f2e4">
+                        <div class="operation-box right test_6d85a861">
+                            <button ng-show="bizVisible" name="editBusiness" ng-click="editBusiness();" class="btn btn-primary test_2f450d74"><%=common_page_edit%></button>
+                        </div>
+                        <form name="businessForm" novalidate="novalidate" class="test_a9ee9190">
+                            <div class="rows test_2eb62df7">
+                                <div class="panel test_af9ce273">
+                                    <dd class="test_f0412aa3">
+                                        <label class="test_659e5a0f"><b ng-hide="bizVisible" class="test_faee344e">*</b><%=supplier_label_main_service%></label>
+                                        <div class="content-info business test_0a773904" style="height: 175px;">
+                                            <span class="text-info test_85356db0" ng-show="bizVisible">{{mainService}}</span>
+                                            <textarea text-length="" ng-trim="false" ng-hide="bizVisible" name="mainServiceInfo" ng-model="mainServiceInfo" maxlength="140" rows="10" required class="test_c364eaf3"></textarea>
+                                        </div>
+                                    </dd>
+                                    <dd class="test_1ba4257e">
+                                        <label class="test_7c497965"><%=supplier_label_biz_scope%></label>
+                                        <div class="content-info business test_74bdcff6" style="height: 175px;">
+                                            <span class="text-info test_36c2b120" ng-show="bizVisible">{{bizScope}}</span>
+                                            <textarea text-length="" ng-trim="false" ng-hide="bizVisible" name="bizScopeInfo" ng-model="bizScopeInfo" maxlength="140" rows="10" class="test_60f76615"></textarea>
+                                        </div>
+                                    </dd>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="operation-box test_06e40b96">
+                            <button ng-show="isBizVisible" name="cancelBusiness" ng-click="cancelBusiness();" class="btn btn-default test_48951193"><%=common_page_cancel%></button>
+                            <button ng-hide="bizVisible" name="submitBusiness" ng-click="submitBusiness();" class="btn btn-primary test_bd0a9258"><%=common_page_save%></button>
+                        </div>
+                    </div>
+
+                    <!-- 财务信息 -->
+                    <div class="table-pane test_b4b8bd7e">
+                        <div class="operation-box right test_f2d27247">
+                            <button ng-show="bizVisible" name="editFinancial" ng-click="editFinancial();" class="btn btn-primary test_fe0fa093"><%=common_page_edit%></button>
+                        </div>
+                        <form name="financialForm" novalidate="novalidate" class="test_04022eca">
+                            <div class="rows test_7b6cbfa1">
+                                <dl class="panel test_db67ba83">
+                                    <dd class="test_d782c6dc">
+                                        <label class="test_e8d0faba"><b ng-hide="bizVisible" class="test_af2ddfee">*</b><%=supplier_label_taxpayer_number%><span class="subsidiary test_24315942"><%=supplier_label_taxpayer_number_subsidiary%></span></label>
+                                        <div class="content-info test_bc95d65e">
+                                            <span ng-show="bizVisible" class="text-info test_1d43b5ec">{{taxpayerNumber}}</span>
+                                            <input ng-trim="false" validate-code="{ruleReg:'code', ruleRegMsg:'<%=common_validate_code%>', maxLength:'30'}" name="taxpayerNumberInfo" ng-hide="bizVisible" ng-model="taxpayerNumberInfo" type="text" required class="test_32f3f6a1">
+                                            <validatetip from-model="financialForm.taxpayerNumberInfo" class="test_a01c9579"></validatetip>
+                                        </div>
+                                    </dd>
+                                    <dd class="test_cd9f33cb">
+                                        <label class="test_10550127"><b ng-hide="bizVisible" class="test_5040692e">*</b><%=supplier_label_bank_name%></label>
+                                        <div class="content-info test_2a4c447a">
+                                            <span ng-show="bizVisible" class="text-info test_8057ee08">{{bankName}}</span>
+                                            <input ng-trim="false" name="bankNameInfo" ng-hide="bizVisible" ng-model="bankNameInfo" type="text" maxlength="30" placeholder="<%=supplier_placeholder_bank_name%>" required class="test_02c36257">
+                                        </div>
+                                    </dd>
+                                    <dd class="test_4e356b9f">
+                                        <label class="test_d51f9dd3"><b ng-hide="bizVisible" class="test_f7315a45">*</b><%=supplier_label_bank_account%></label>
+                                        <div class="content-info test_2e5a8c5b">
+                                            <span ng-show="bizVisible" class="text-info test_f0666b6e">{{bankAccount}}</span>
+                                            <input ng-trim="false" validate-code="{ruleReg:'letterAndNum', ruleRegMsg:'<%=common_validate_letter_number%>', maxLength:'30'}" name="bankAccountInfo" ng-hide="bizVisible" ng-model="bankAccountInfo" type="text" required class="test_ef329f09">
+                                            <validatetip from-model="financialForm.bankAccountInfo" class="test_fa2c3f88"></validatetip>
+                                        </div>
+                                    </dd>
+                                    <dd class="test_ed9f6580">
+                                        <label class="test_57f6b9fe"><b ng-hide="bizVisible" class="test_f035ccaa">*</b><%=supplier_label_company_tel%></label>
+                                        <div class="content-info test_d4445f3a">
+                                            <span ng-show="bizVisible" class="text-info test_14ffd746">{{companyTel}}</span>
+                                            <input ng-trim="false" validate-code="{ruleReg:'fix', ruleRegMsg:'<%=common_template_fix%>'}" maxlength="30" name="companyTelInfo" ng-hide="bizVisible" ng-model="companyTelInfo" type="text" required class="test_9bdaab4d">
+                                            <validatetip from-model="financialForm.companyTelInfo" class="test_71a8a95e"></validatetip>
+                                        </div>
+                                    </dd>
+                                </dl>
+                                <dl class="panel test_c91d6160">
+                                    <dd class="test_c0481899">
+                                        <label class="test_5eedd7a4"><b ng-hide="bizVisible" class="test_e137d4ef">*</b><%=supplier_label_address%></label>
+                                        <div class="content-info test_640daf77">
+                                            <span ng-show="bizVisible" class="text-info test_0d8d4e81">{{address}}</span>
+                                            <input ng-trim="false" name="addressInfo" ng-hide="bizVisible" ng-model="addressInfo" type="text" maxlength="30" required class="test_da5ae084">
+                                        </div>
+                                    </dd>
+                                    <dd class="test_1220d8e7">
+                                        <label class="test_669c4e12"><b ng-hide="bizVisible" class="test_dfc7414e">*</b><%=supplier_label_leal_person%></label>
+                                        <div class="content-info test_04832b12">
+                                            <span ng-show="bizVisible" class="text-info test_2d3637b4">{{lealPerson}}</span>
+                                            <input ng-trim="false" name="lealPersonInfo" ng-hide="bizVisible" ng-model="lealPersonInfo" type="text" maxlength="30" required class="test_8d2d0687">
+                                        </div>
+                                    </dd>
+                                    <dd class="test_739be522">
+                                        <label class="test_5a5626a9"><b ng-hide="bizVisible" class="test_a66bed84">*</b><%=supplier_label_picture%></label>
+                                        <div class="content-info test_e2b81785">
+                                            <div class="img-list-box clearfix test_5fba0d05" ng-controller="pictureController">
+                                                <div class="img-box test_0420a736" ng-mouseleave="picture.mouseleave(pictureModel, $index, $event)" ng-repeat="item in pictureModel.picture">
+                                                    <div title="{{item.name}}" ng-mousedown="getPictureUrl(item.picUrlID.id)" class="img-pic test_d69b6bb0">
+                                                        <img ng-mouseover="picture.mouseover(pictureModel, $index, $event)" ng-if="item.typeImage && item.suffix!='tiff'" class="imgs test_acf1752a" ng-src="{{item.picUrlID.path}}" height="80" width="80">
+                                                        <div ng-mouseover="picture.mouseover(pictureModel, $index, $event)" ng-if="item.typePdf" type="application/pdf" class="imgs test_56187a5d" style="background-image: url('../public/img/pdf-file.svg')" height="80" width="80"></div>
+                                                        <div ng-mouseover="picture.mouseover(pictureModel, $index, $event)" ng-if="item.typeImage && item.suffix=='tiff'" type="image/tiff" class="imgs test_ea72b52c" style="background-image: url('../public/img/tiff-file.svg');" height="80" width="80"></div>
+
+                                                        <p class="file-name-box test_02ea03d3">{{item.name}}</p>
+                                                    </div>
+                                                    <div ng-show="item.delshow" class="img-del test_0bb465a6" ng-if="pictureModel.edit">
+                                                        <div ng-mousedown="getPictureUrl(item.picUrlID.id)" class="img-view test_827229bc"></div>
+                                                        <i ng-click="picture.del(pictureModel, $index)" class="icon-minus-sign icon-minus-delete test_f0f99620"></i>
+                                                    </div>
+                                                 </div>
+
+                                                <div ng-if="pictureModel.uploadShow" class="img-box img-upload-box test_a16eea57">
+                                                    <input multiple="multiple" type="file" accept="image/jpeg,image/png,image/bmp,image/tiff,application/pdf" file-model="avatarFile" class="img-file test_9ea22cc3">
+                                                    <span class="img-upload-button test_7fa9624b"></span>
+                                                </div>
+                                            </div>
+                                            <div class="verification test_8ce1e572">
+                                                <span class="isExisted test_ce6c3977" ng-show="validatePictureError"><%=supplier_placeholder_picture%></span>
+                                            </div>
+                                        </div>
+                                    </dd>
+                                </dl>
+                                <div class="panel test_f691e7ce"></div>
+                            </div>
+                        </form>
+                        <div class="operation-box test_b5cca8ca">
+                            <button ng-show="isBizVisible" name="cancelFinancial" ng-click="cancelFinancial();" class="btn btn-default test_5b65c78e"><%=common_page_cancel%></button>
+                            <button ng-hide="bizVisible" name="submitFinancial" ng-click="submitFinancial();" class="btn btn-primary test_9f34c96e"><%=common_page_save%></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="slides" class="test_7800aa3d"></div>
+
+</section>
+
+<!-- BD -->
+<div style="display: none;" id="BDDetail" ng-init="initSelectList();" class="test_0b0d11cd">
+    <form name="BDForm" novalidate="novalidate" class="test_8e84c72d">
+        <dd class="test_70951015">
+            <label class="test_8c0f3e50"><b class="test_3682e32a">*</b><%=supplier_label_user%></label>
+            <div class="content-info test_b730d0a5">
+                <input ng-trim="false" name="user" id="userList" autocomplete="off" ng-value="BDUserId" ng-model="BDUserInfo" type="text" required class="test_74ee95e1">
+                <span class="errors test_9977f422" ng-show="showBDUserExist" style="position: absolute;color: red">提示：该用户已存在!</span>
+            </div>
+        </dd>
+        <dd class="test_a37ef07e">
+            <label class="test_8d604cb2"><%=supplier_label_responsibility%></label>
+            <div class="content-info test_550b4fcf">
+                <input ng-trim="false" maxlength="30" name="BDResponsibilityInfo" ng-model="BDResponsibilityInfo" type="text" placeholder="<%=supplier_placeholder_responsibility%>" class="test_1087e962">
+
+            </div>
+        </dd>
+        <dd class="test_d446dbdf">
+            <label class="test_3a1d52a4"><%=supplier_label_remark%></label>
+            <div class="content-info test_7667826a" style="height: 175px;">
+                <textarea text-length="" ng-trim="false" name="BDDescription" ng-model="BDDescriptionInfo" type="text" maxlength="140" rows="10" class="test_81880669"></textarea>
+            </div>
+        </dd>
+    </form>
+</div>
+
+<div ng-show="nestGetTypes" id="nest-getTypes" class="prompt-modal box-form hidden test_8416a87c">
+  <div class="prompt-wrap test_5ff457ce">
+    <div class="bomb-box test_8c35fe32">
+      <div class="title test_12f6e549">请选择类型</div>
+      <div class="prompt-content test_fedd28ce">
+        <div id="getTypes" class="test_ef9d736e">
+            <ul class="test_a2d8cf53">
+                <li ng-repeat="item in listTypes" class="test_644a8f96">
+                    <div data-name="{{item.name}}" class="checkbox checkbox-info test_1d44f321">
+                        <input name="typeActive" type="checkbox" ng-model="listType" data-id="{{item.id}}" ng-class="{'active': item.checked}" ng-checked="isCheckType(item.id) || item.checked" ng-click="obtainTypes($event, item.id);" class="test_388b0f3a">
+                        <label class="test_4fd56ca0"></label>
+                    </div>
+                    {{item.name}}
+                </li>
+            </ul>
+        </div>
+      </div>
+      <div class="operation test_7dc64c6a">
+        <button ng-click="cancelTypes()" name="prompt-operation" class="btn btn-default test_238b222a">取消</button>
+        <span class="other-btn test_1112e45f">
+          <button ng-click="submitTypes()" name="prompt-operation" class="btn btn-primary test_28e630e8">确认</button>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 联系人 -->
+<div style="display: none;" id="contactsDetail" class="test_369927fd">
+    <form name="contactsForm" novalidate="novalidate" class="test_fad3c531">
+        <dd class="test_90609782">
+            <label class="test_2d2f45cf"><b class="test_5648d0be">*</b><%=supplier_label_responsibility%></label>
+            <div class="content-info test_69ded9c9">
+                <input ng-trim="false" name="contactsResponsibilityInfo" ng-model="contactsResponsibilityInfo" type="text" maxlength="30" placeholder="<%=supplier_placeholder_responsibility%>" required class="test_4669dfc8">
+            </div>
+        </dd>
+        <dd class="test_c9d3162c">
+            <label class="test_db3ce842"><b class="test_80e43e10">*</b><%=supplier_label_full_name%></label>
+            <div class="content-info test_b422eb8d">
+                <input ng-trim="false" validate-code="{ruleReg:'surname', ruleRegMsg:'<%=common_template_surname%>'}" maxlength="30" name="contactsNameInfo" ng-model="contactsNameInfo" type="text" required class="test_0bd03c0a">
+                <validatetip from-model="contactsForm.contactsNameInfo" class="test_88b0e074"></validatetip>
+            </div>
+        </dd>
+        <dd class="test_55202a6a">
+            <label class="test_23cbe879"><b class="test_c6d9b5ec">*</b><%=supplier_label_department%></label>
+            <div class="content-info test_b0465d06">
+                <input ng-trim="false" name="contactsDepartmentInfo" ng-model="contactsDepartmentInfo" type="text" maxlength="30" required class="test_ecba5565">
+            </div>
+        </dd>
+        <dd class="test_ecfcc03d">
+            <label class="test_9d0103ca"><b class="test_0c146026">*</b><%=supplier_label_position%></label>
+            <div class="content-info test_80ec883d">
+                <input ng-trim="false" name="contactsPositionInfo" ng-model="contactsPositionInfo" type="text" maxlength="30" required class="test_8e1338a9">
+            </div>
+        </dd>
+        <dd class="test_51267a68">
+            <label class="test_be1cdc1c"><%=supplier_label_mobile_phone%></label>
+            <div class="content-info test_677fb6cc">
+                <input ng-trim="false" validate-code="{ruleReg:'fix', ruleRegMsg:'<%=common_template_fix%>'}" maxlength="30" name="contactsMobilephoneInfo" ng-model="contactsMobilephoneInfo" type="text" class="test_f3b6f361">
+                <validatetip from-model="contactsForm.contactsMobilephoneInfo" class="test_e050476b"></validatetip>
+            </div>
+        </dd>
+        <dd class="test_f044e77f">
+            <label class="test_c5af7ca3"><%=supplier_label_telephone%></label>
+            <div class="content-info test_c73b1439">
+                <input ng-trim="false" validate-code="{ruleReg:'fix', ruleRegMsg:'<%=common_template_fix%>'}" maxlength="30" name="contactsTelephoneInfo" ng-model="contactsTelephoneInfo" type="text" class="test_505a8258">
+                <validatetip from-model="contactsForm.contactsTelephoneInfo" class="test_539a9bfc"></validatetip>
+            </div>
+        </dd>
+        <dd class="test_f18afd6b">
+            <label class="test_bd0a7e14"><%=supplier_label_remark%></label>
+            <div class="content-info test_925f0d3b" style="height: 175px;">
+                <textarea text-length="" ng-trim="false" name="contactsDescription" ng-model="contactsDescriptionInfo" type="text" maxlength="140" rows="10" class="test_9857f684"></textarea>
+            </div>
+        </dd>
+    </form>
+</div>

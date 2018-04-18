@@ -1,0 +1,175 @@
+.show-remark {
+    position: absolute;
+    bottom: -38px;
+    right: 5px;
+    color: #999;
+    line-height: 15px;
+}
+
+.select-icon {
+    top: 15px !important;
+}
+
+.select-icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 34px;
+    line-height: 33px;
+    text-align: center;
+    background: #3aafda;
+    color: #fff;
+    z-index: 0;
+}
+
+.delete-icon,
+.add-icon {
+    margin-left: 10px;
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    border: 2px solid #f96268;
+    vertical-align: middle;
+    border-radius: 13px;
+    cursor: pointer;
+    text-align: center;
+    line-height: 12px;
+}
+.delete-center {
+    display: inline-block;
+    height: 2px;
+    background-color: #f96268;
+    width: 60%;
+    margin-left: 0.5px;
+}
+.add-icon {
+    border: 2px solid #3bafda;
+}
+.add-center {
+    color: #3bafda;
+    font-size: 19px;
+    display: inline;
+    line-height: 15px;
+}
+.add-tips {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 5px;
+}
+
+/*.input-weight-box {*/
+/*width:295px;*/
+/*display:inline-block;*/
+/*vertical-align:top;*/
+/*}*/
+
+.productName {
+    width: 275px;
+}
+.productLevel {
+    width: 100px;
+}
+
+.lable-left {
+    width: 134px;
+    padding: 12px 0 12px 0;
+    text-align: right;
+    margin-right: 10px;
+    float: left;
+    line-height: 34px;
+}
+.lable-left:after {
+    content: '：';
+}
+
+.lable-left b {
+    color: red;
+}
+
+.textarea-text {
+    width: 436px;
+}
+
+#pricePackage-Name,
+#pricePackage-Code {
+    position: absolute;
+    top: 16px;
+    width: 436px;
+}
+.container {
+    overflow: hidden;
+    position: relative;
+    /*注意其他浏览器的问题*/
+}
+#pricePackage-PriceLevel {
+    width: 261px;
+    position: absolute;
+    top: 16px;
+}
+
+.input-weight-box {
+    position: relative;
+    width: 480px;
+    display: inline-block;
+    vertical-align: top;
+    top: 16px;
+}
+
+.input-weight-box .delete-icon {
+    margin-left: 0;
+}
+
+.priceLevel {
+    width: 104px;
+}
+.addPricePackage {
+    padding-left: 134px;
+    /* text-align: left; */
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.show-remark {
+    position: absolute;
+    bottom: 10px;
+    right: 82px;
+    color: #999;
+    line-height: 15px;
+}
+
+.remark-info {
+    position: relative;
+}
+
+.verification .errors {
+    /* position: absolute; */
+    left: 0px;
+    padding-left: 144px;
+    white-space: normal;
+    width: 100%;
+    color: #f00;
+}
+
+.verification {
+    line-height: 5px;
+    /* position: absolute; */
+    margin-top: 5px;
+    width: 100%;
+}
+
+.bomb-box {
+    min-height: 600px;
+}
+
+.bomb-box .prompt-content,
+.middle-box .prompt-content {
+    position: relative;
+}
+
+.bomb-box .operation {
+    position: relative;
+}
+
+td {
+  text-align: center !important;
+}

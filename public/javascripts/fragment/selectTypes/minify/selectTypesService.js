@@ -1,0 +1,1 @@
+app.factory("selectTypesService",["easyHttp",function(t){var e={};return e.init=function(t){return t},e}]);

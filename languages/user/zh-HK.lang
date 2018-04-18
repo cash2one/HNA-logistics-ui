@@ -1,0 +1,46 @@
+{
+    "user_page_lockUser": "已鎖定用戶",
+    "user_page_resetPassword": "重置密碼",
+    "user_page_lock": "鎖定",
+    "user_page_unlock": "解鎖",
+
+    "user_page_back": "返回",
+    "user_page_save_again": "保存並添加",
+
+    "user_page_head": "頭像：",
+    "user_page_change_head": "點擊更換頭像",
+    "user_page_fullName": "姓名：",
+    "user_page_code": "工號：",
+    "user_page_orgName": "部門：",
+    "user_page_positionName": "職務：",
+    "user_page_mobilephone": "移動電話：",
+    "user_page_telephone": "固定電話：",
+    "user_page_email": "電子郵箱：",
+    "user_page_description": "備註：",
+    "user_validate_sex": "性别：",
+
+    "user_radio_man": "男",
+    "user_radio_woman": "女",
+    "user_radio_no": "未知",
+
+    "user_page_fullNameInfo": "請輸入姓名",
+    "user_page_codeInfo": "請輸入工號",
+    "user_page_positionInfo": "請選擇職務",
+    "user_page_mobilephoneInfo": "請輸入移動電話",
+    "user_page_telephoneInfo": "請輸入固定電話",
+    "user_page_emailInfo": "請輸入工作郵箱地址",
+    "user_page_descriptionInfo": "請輸入備註",
+
+    "user_validate_codeInfo": "工號已存在",
+    "user_validate_emailInfo": "電子郵箱已存在",
+
+    "user_tree_search": "無搜索結果",
+    "user_prompt_delete_tip": "確定刪除已選用戶？",
+    "user_prompt_move_tip": "選擇部門",
+    "user_prompt_reset_tip": "確定重置已選用戶？",
+    "user_prompt_lock_tip": "確定鎖定已選用戶？",
+    "user_prompt_unlock_tip": "確定解鎖已選用戶？",
+    "user_prompt_upload_tip":"上傳成功",
+    "user_prompt_upload_too_large":"單張圖片最大支持4M！",
+    "user_prompt_upload_zero":"圖片不能為空！"
+}

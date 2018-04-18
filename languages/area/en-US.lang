@@ -1,0 +1,16 @@
+{
+    "area_countryName": "china",
+    "area_otherCountry": "other",
+    "area_search_country_condition": "please enter a country name, referred to as code or code.",
+    "area_province": "province",
+    "area_city": "urban",
+    "area_area": "district / county",
+    "area_street": "street",
+    "area_code_start": "starting point",
+    "area_code_end": "end",
+    "area_country_id": "serial number",
+    "area_country_name": "country name",
+    "area_city_name": "city name",
+    "area_no_result_tips": "no search results",
+    "area_select_tips": "please select"
+}

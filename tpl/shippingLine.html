@@ -1,0 +1,215 @@
+<section class="content has-sides-margin test_95dd311b">
+    <div class="shipping-table-page test_376b6099" ng-controller="tableController">
+        <div class="box-header test_bbb5f0cf">
+            <div class="search-box test_97836000">
+                <div class="row">
+                    <span style="margin:0px 2px 0px 50px;" class="test_80c259e9"><%=shippingLine_page_keyword%></span>
+                    <input style="width:20%;"
+                           ng-enter="getTable(true);"
+                           ng-model="tableModel.restData.q"
+                           placeholder="<%=shippingLine_page_searchPlaceholder%>"
+                           ng-value="q"
+                           maxlength="30"
+                           type="text"
+                           lass="form-control test_f6b86117">
+                    <span style="margin:0px 2px 0px 50px;"><%=shippingLine_page_start%></span>
+                    <input placeholder="国家"
+                           autocomplete="off"
+                           type="text"
+                           style="width:20%;margin:0px 10px 0px 2px;"
+                           id="countryStartSearch"
+                           ng-model="countryStartSearch"
+                           class="form-control"/>
+                    <input ng-click='resetAirportData("airportStartSearch")'
+                       placeholder="港口"
+                       autocomplete="off"
+                       type="text"
+                       style="width:20%;"
+                       id="airportStartSearch"
+                       ng-model="airportStartSearch"
+                       class="form-control"/>
+                </div>
+                <div class="row">
+                    <span style="margin:0px 2px 0px 50px;"><%=shippingLine_page_end%></span>
+                    <input placeholder="国家"
+                           autocomplete="off"
+                           type="text"
+                           style="width:20%;margin:0px 10px 0px 2px;"
+                           id="countryEndSearch"
+                           ng-model="countryEndSearch"
+                           class="form-control"/>
+                    <input ng-click='resetAirportData("airportEndSearch")'
+                           placeholder="港口"
+                           autocomplete="off"
+                           type="text"
+                           style="width:20%;"
+                           id="airportEndSearch"
+                           ng-model="airportEndSearch"
+                           class="form-control"/>
+                    <div class="shipping-search-btn test_304655bd">
+                        <span style="color:#888;cursor:pointer;position:relative;right:20px" ng-click="clearData();" class="test_24071bcf"><%=shippingLine_page_empty%></span>
+                        <button ng-click="getTable(true);" class="btn btn-primary test_147bc5f8"><%=common_list_search_btn%></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="batch-operation test_eb9ef35b">
+            <button ng-click="add();" class="btn btn-primary test_26543b24">
+                <%=common_page_add%>
+            </button>
+            <button ng-click="del();" class="btn btn-primary test_886b5bb4">
+                <%=common_page_delete%>
+            </button>
+        </div>
+
+        <div class="table-container test_17bcbfb5">
+            <table class="line-table-shipping table-box test_6d62c141" cellpadding="0" cellspacing="0">
+                <thead class="test_da48b0cf">
+                <tr class="test_7daa22f0">
+                    <th class="test_0b22993a">
+                        <div class="checkbox checkbox-info test_c1ac9a9a">
+                            <input type="checkbox" ng-model="tableModel.selectFlag" ng-click="table.selectAll(tableModel);" class="test_212167b8">
+                            <label class="test_6a076017"></label>
+                        </div>
+                    </th>
+                    <th ng-repeat="item in tableModel.tableHeader" class="test_fcea62c9">{{item}}</th>
+                </tr>
+                </thead>
+                <tbody class="test_02e14823">
+                <tr ng-repeat="value in tableModel.tableBody" ng-init="renderFinish($last)" class="test_ef7ada3a">
+                    <td class="test_91ca5ee0">
+                        <div class="checkbox checkbox-info test_03ba315a">
+                            <input type="checkbox" ng-checked="value.checkbox" ng-click="table.selectOne(tableModel, value.checkboxId, $event);" class="test_b64a6133">
+                            <label class="test_2f8a6f30"></label>
+                        </div>
+                    </td>
+                    <td class="test_971bcff0">{{(tableModel.pagination.currentPage-1)*tableModel.pagination.pageSize+$index+1}}</td>
+                    <td title="{{value.name}}" class="test_c9494193">
+                        <a href="javascript:;" ng-click="edit(value.id)" ng-bind-html="value.name | trustHtml:q" class="test_b27a24a0"></a>
+                    </td>
+                    <td title="{{value.code}}" ng-bind-html="value.code | trustHtml:q" class="test_9a6e46f0"></td>
+                    <td title="{{value.typeName}}" class="test_af211134">{{value.typeName}}</td>
+                    <td title="{{value.startEnglishName}}" class="test_e6977437">{{value.startName}}</td>
+                    <td title="{{value.endEnglishName}}" class="test_bb428b38">{{value.endName}}</td>
+                    <td title="{{value.stopOverName}}" class="test_fa7141df">{{value.stopOverName}}</td>
+                    <td title="{{value.description}}" class="test_83dfd574">{{value.description}}</td>
+                </tr>
+                </tbody>
+            </table>
+            <hnapagination table-service="table" page-table-model="tableModel" class="test_64b658b5"></hnapagination>
+        </div>
+
+        <div ng-show="!tableModel.pagination.isVisiblePage" style="position: absolute;top:165px;bottom:0px;width:100%;" class="test_894a1ff0">
+            <img style="width:100%;height:100%;" src="/public/img/undefined.svg" class="test_d2644ec1">
+        </div>
+    </div>
+    <div id="slides" class="test_c7650d62"></div>
+</section>
+
+<div style="display: none;" ng-show="nestShippingLineForm" ng-init="initSelectList();" id="nest-ShippingLineForm" class="prompt-modal middle-box test_c948750a">
+    <div class="prompt-wrap test_5c5ce303">
+        <div class="bomb-box test_45d28f6e">
+            <div class="title test_b4739932"><%=shippingLine_page_add%></div>
+            <div class="prompt-content test_4d6ce167">
+                <form name="ShippingLineForm" novalidate="novalidate" class="test_a23b1d64">
+                    <div id="ShippingLineForm" class="test_8583b752">
+                        <div ng-click="" class="label-text test_dac54440">
+                            <%=shippingLine_page_baseInfo%>
+                            <i style="transform:rotate(0deg);" class="icon-more-down icon-angle-down test_4485640e"></i>
+                        </div>
+                        <ul class="isContainer switch-list test_2a14ecf3">
+                            <li class="test_21173cb6">
+                                <label class="test_8b7e5890"><b class="test_47b7a398">*</b><%=shippingLine_page_name%>：</label>
+                                <input ng-trim="true" class="input-text test_b1f05ac7" maxlength="30" name="shippingLineName"
+                                       verification="{ruleType:'onlyname',maxLength:'30'}"
+                                       ng-model="shippingLineName" type="text" required>
+                                <div class="verification test_d59f45dd">
+                                    <span id="code-msg" class="errors test_57ed8fbc" ng-show="ShippingLineForm.shippingLineName.$viewValue &&
+                                              ShippingLineForm.shippingLineName.$error.defined &&
+                                              ShippingLineForm.shippingLineName.$dirty">
+                                        {{ShippingLineForm.shippingLineName.errorTips}}
+                                    </span>
+                                </div>
+                            </li>
+                            <li class="test_23816e13">
+                                <label class="test_6da425f2"><b class="test_453fa67d">*</b><%=shippingLine_page_code%>：</label>
+                                <input ng-trim="true" class="validate-code input-text test_8519d843" maxlength="30" name="shippingLineCode"
+                                       verification="{ruleType:'codewithblank',maxLength:'30'}"
+                                       ng-model="shippingLineCode" ng-blur="checkShippingLineCode();" type="text" required>
+                                <div class="verification test_3013223f">
+                                    <span id="code-msg-code" class="errors test_f283eb1e" ng-show="ShippingLineForm.shippingLineCode.$viewValue &&
+                                              ShippingLineForm.shippingLineCode.$error.defined &&
+                                              ShippingLineForm.shippingLineCode.$dirty">
+                                        {{ShippingLineForm.shippingLineCode.errorTips}}
+                                    </span>
+                                </div>
+                            </li>
+                            <li class="test_c293cf98">
+                                <label class="test_341a7a55"><b class="test_88501761">*</b><%=shippingLine_page_type%>：</label>
+                                <div class="select-box input-text test_fba904ac">
+                                    <input ng-trim="false"
+                                           id="add-shippingLineType"
+                                           name="addShippingLineType"
+                                           autocomplete="off"
+                                           ng-model="addShippingLineType"
+                                           type="text" required>
+                                    <i class="select-icon icon-drop-down"></i>
+                                </div>
+                            </li>
+                            <li class="test_1e8e8b3d">
+                                <label class="test_7b5fdba9"><b class="test_1e77f45a">*</b><%=shippingLine_page_starPort%>：</label>
+                                <div class="select-box input-text test_fba904ac">
+                                    <input ng-trim="false" id="add-startPort" name="addStartPort" autocomplete="off" ng-model="addStartPort" type="text" required class="test_e5cb9a49">
+                                </div>
+                            </li>
+                            <li class="test_ddff594f" style="padding-right:0px">
+                                <label class="test_18343b95"><%=shippingLine_page_subordinatePort%>：</label>
+                                <div class="input-port-box" style="text-align:left">
+                                    <div class="input-port" ng-repeat="section in attachPortList">
+                                        <input type="text" readonly
+                                               class="start-point"
+                                               name="attachPort{{$index}}"
+                                               id="attachPort-{{$index}}"
+                                               ng-click="setAttachPortList($index)"
+                                               ng-model="section.attachPort">
+                                        <div class="delete-icon"
+                                             ng-if="$last && attachPortList.length > 1"
+                                             ng-click="deleteAttachPort()">
+                                            <div class="delete-center"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input-port-box" style="text-align:left;margin-top:15px">
+                                    <div class="add-icon">
+                                        <div class="add-center" ng-click="addAttachPort()">+</div>
+                                    </div>
+                                    <div class="add-tips">
+                                        <p style="font-size:16px"><%=shippingLine_add_port%></p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="test_c50f8a79">
+                                <label class="test_d67abdc8"><b class="test_362e4bbf">*</b><%=shippingLine_page_endPort%>：</label>
+                                <div class="select-box input-text test_997445fc">
+                                    <input ng-trim="false" id="add-endPort" name="addEndPort" autocomplete="off" ng-model="addEndPort" type="text" required class="test_10e5ad9a">
+                                </div>
+                            </li>
+                            <li class="test_382b438b">
+                                <label class="test_145dd045"><%=common_page_remarks%>：</label>
+                                <div class="remark-info test_8eefea89">
+                                    <textarea style="height:92px;" ng-change="showTextNumber();" maxlength="140" ng-trim="false" rows="5" ng-model="remark" class="form-control textarea-text  test_04b65212">
+                                    </textarea>
+                                    <div class="show-string-length test_53e90095"><span class="test_34dfa5bf">{{textareaNumber}}</span>字</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+            <div class="operation test_bba3f1a3">
+                <button ng-click="cancel();" name="prompt-close" class="btn btn-default  test_ae0fea94" data-event="close"><%=common_page_cancel%></button>
+                <button ng-click="save();" name="prompt-save" class="btn btn-primary test_f909e20d" data-event="close"><%=common_page_save%></button>
+            </div>
+        </div>
+    </div>
+</div>

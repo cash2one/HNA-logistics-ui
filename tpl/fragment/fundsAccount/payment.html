@@ -1,0 +1,124 @@
+<div class="c-detail-title">
+    <div class="u-back clearfix">
+        <button ng-click="goBack();" class="btn btn-default">返回</button>
+    </div>
+    <div class="u-title">
+        付款详情
+    </div>
+</div>
+
+<div class="m-payment-block">
+    <div class="wrap-payment-block">
+        <form ng-submit="confirmPayment($event)" method="post" name="withdrawForm" novalidate="novalidate" target="_blank">
+            <h3 class="box-tips-h3">账单信息</h3>
+            <ul>
+                <li class="lists">
+                    <span class="left-text">帐单号：</span>
+                    {{billInfo.billNo}}
+                </li>
+                <li class="lists">
+                    <span class="left-text">收款方：</span>
+                    {{billInfo.bizCompanyName}}
+                </li>
+                <li class="lists">
+                    <span class="left-text">账单周期：</span>
+                    {{billInfo.startEffectTime}} ~ {{billInfo.endEffectTime}}
+                </li>
+                <li class="lists">
+                    <span class="left-text">账单金额：</span>
+                    <b class="dark-yellow">{{billInfoTotal}}</b> {{billInfo.currencyType}}
+                </li>
+            </ul>
+
+            <h3 class="box-tips-h3">付款金额</h3>
+            <ul>
+                <li class="lists">
+                    <b class="dark-yellow">{{billInfoActualTotal}}</b> {{billInfo.currencyType}}
+                </li>
+            </ul>
+
+            <h3 class="box-tips-h3">支付方式</h3>
+            <ul>
+                <li class="lists">
+                    <div class="radio radio-single radio-primary">
+                        <input value="1" ng-checked="payMethod == '1'" type="radio" name="payMethod" ng-model="payMethod">
+                        <label></label>
+                    </div>
+                    余额支付 &nbsp; 可用：{{availableBalance}} {{billInfo.currencyType}}
+                </li>
+                <li class="lists">
+                    <span class="left-text">&nbsp;</span>
+                    <button class="btn btn-primary" style="margin-top:50px;">确认付款</button>
+                </li>
+            </ul>
+        </form>
+    </div>
+</div>
+
+<style type="text/css">
+    .c-detail-title .u-title {
+        margin: 10px 0px;
+        text-align: center;
+        font-size: 22px;
+    }
+
+    .m-payment-block {
+        background: #fff;
+        padding: 45px 30px;
+        border: 1px solid #ddd;
+        min-height: 100%;
+    }
+
+    .wrap-payment-block {
+        width: 400px;
+        margin: 0px auto;
+    }
+
+    .wrap-payment-block h3.box-tips-h3 {
+        font-size: 18px;
+        margin-bottom: 15px;
+        margin-top: 15px;
+    }
+
+    .wrap-payment-block ul li.lists {
+        line-height: 30px;
+    }
+
+    .wrap-payment-block ul li.lists .left-text {
+        display: inline-block;
+        width: 90px;
+    }
+
+    .wrap-payment-block ul li.lists .dark-yellow {
+        color: #F7A42C;
+    }
+</style>
+
+<div class="prompt-modal box-tip" ng-show="paymentPrompt">
+    <div class="prompt-wrap">
+        <div class="bomb-box" style="background: #DFF0D8">
+            <div class="title" style="color: #326B31">
+                请在新开网银页面完成支付
+            </div>
+            <div class="operation">
+                <button ng-click="paymentResult('failure')" name="prompt-operation" class="btn btn-default success" style="padding:0px;">支付失败，重新支付</button>
+                <button ng-click="paymentResult('success')" name="prompt-operation" class="btn btn-primary success" style="padding:0px;">支付成功，查看结果</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="prompt-modal box-tip" ng-show="overagePrompt">
+    <div class="prompt-wrap">
+        <div class="bomb-box" style="background: #DFF0D8">
+            <div class="title" style="color: #326B31">
+                账户可用余额不足，请充值后重新支付
+            </div>
+            <div class="operation">
+                <button ng-click="overagePrompt = false" name="prompt-operation" class="btn btn-default success" style="padding:0px;">取消</button>
+                <button ng-click="goRechargePage()" name="prompt-operation" class="btn btn-primary success" style="padding:0px;">去充值</button>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="4px" height="16px" viewBox="0 0 4 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>Shape</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="仪表盘1" transform="translate(-941.000000, -849.000000)" fill="#FFFFFF">
+            <g id="card-1-copy-2" transform="translate(650.000000, 824.000000)">
+                <path d="M293,29 C294.1,29 295,28.1 295,27 C295,25.9 294.1,25 293,25 C291.9,25 291,25.9 291,27 C291,28.1 291.9,29 293,29 L293,29 Z M293,31 C291.9,31 291,31.9 291,33 C291,34.1 291.9,35 293,35 C294.1,35 295,34.1 295,33 C295,31.9 294.1,31 293,31 L293,31 Z M293,37 C291.9,37 291,37.9 291,39 C291,40.1 291.9,41 293,41 C294.1,41 295,40.1 295,39 C295,37.9 294.1,37 293,37 L293,37 Z" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

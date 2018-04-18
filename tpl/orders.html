@@ -1,0 +1,316 @@
+<style class="test_583a53ee">
+    .messageStatus {
+        position: absolute;
+        top: -12px;
+        left: -22px;
+        width: 14px;
+        height: 14px;
+    }
+    .mailStatus {
+        position: absolute;
+        top: -12px;
+        left: -10px;
+        width: 14px;
+        height: 14px;
+    }
+
+</style>
+<section class="content test_2eeae0c2">
+    <ul class="bill-tabs test_1856b1f9">
+        <li ng-class="{active: activeTab == 'DRAFT'}" ng-click="switchTab('DRAFT')" class="test_31f308dd">草稿</li>
+        <li ng-class="{active: activeTab == 'COMMITED'}" ng-click="switchTab('COMMITED')" class="test_0447e3aa">已提交</li>
+        <li ng-class="{active: activeTab == 'ACCEPT'}" ng-click="switchTab('ACCEPT')" class="test_2b2d5e1c">已受理</li>
+        <li ng-class="{active: activeTab == 'RECEGOOD'}" ng-click="switchTab('RECEGOOD')" class="test_baad2bf0">已收货</li>
+        <li ng-class="{active: activeTab == 'TRANSPORT'}" ng-click="switchTab('TRANSPORT')" class="test_99bad8c1">运输中</li>
+        <li ng-class="{active: activeTab == 'DISPACTCHING'}" ng-click="switchTab('DISPACTCHING')" class="test_4e621b10">配送中</li>
+        <li ng-class="{active: activeTab == 'RECEIVED'}" ng-click="switchTab('RECEIVED')" class="test_9fb042a3">已签收</li>
+    </ul>
+    <div class="g-orders test_3c21956f">
+        <div class="m-orders-top test_b64e93d2">
+            <div class="row row-list clearfix" ng-show="activeTab =='DRAFT'">
+                <div class="text-right col-md-3 test_f6dfdbaf">
+                    <div class="row clearfix test_2c2b369e">
+                        <div class="text-right col-md-4 test_198d2e79" style="width:80px;padding-right:0px;">
+                            	<%=orders_client_bill%>
+                        </div>
+                        <div class="text-left col-md-8 test_601dfcfb" style="padding:0px;">
+                            <input ng-model="clientNum" ng-trim="true" type="text" maxlength="30" autocomplete="off" class="test_873d8f3b">
+                        </div>
+                    </div>
+                </div>
+                <div class="text-right col-md-6 test_548e3558">
+                    <div class="row clearfix test_681c3538">
+                        <div class="text-right col-md-2 test_c888ea42" style="width:80px;padding-right:0px;">
+                            <%=orders_client%>
+                        </div>
+                        <div class="text-left col-md-4 test_e1b9c931" style="padding:0px;">
+                            <input id="select-customer" ng-click="getCustomer();" readonly="readonly" ng-model="orderCustomerName" ng-value="orderCustomerValue" ng-trim="false" type="text" maxlength="30" autocomplete="off" class="test_ff9b243b">
+                        </div>
+                        <div class="col-md-1" style="width:20px;text-align: center">
+                        </div>
+                        <div class="text-left col-md-4 test_595109d2" style="padding:0px;">
+                            <input id="select-client" ng-click="getClient();" readonly="readonly" ng-model="orderClientName" ng-value="orderClientValue" ng-trim="false" type="text" maxlength="30" autocomplete="off" class="test_9ba37391">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row row-list clearfix" ng-show="activeTab =='DRAFT'">
+                <div class="text-right col-md-3">
+                    <div class="row clearfix">
+                        <div class="text-right col-md-4" style="width:80px;padding-right:0px;">
+                            产品
+                        </div>
+                        <div class="text-left col-md-8" style="padding:0px;">
+                            <input ng-model="orderProduct" id="select-product" readonly="readonly" ng-enter="search()" ng-trim="true" type="text" maxlength="30" autocomplete="off">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row clearfix">
+                        <div class="text-right col-md-2" style="width:80px;padding-right:0px;">
+                            下单时间
+                        </div>
+                        <div class="text-left col-md-4" style="padding:0px;">
+                            <input ng-model="orderStartTime" readonly="readonly" id="begin-time" ng-trim="false" type="text" maxlength="30" autocomplete="off">
+                        </div>
+                        <div class="col-md-1" style="width:20px;text-align: center">
+                            -
+                        </div>
+                        <div class="text-left col-md-4" style="padding:0px;">
+                            <input ng-model="orderEndTime" readonly="readonly" id="end-time" ng-trim="false" type="text" maxlength="30" autocomplete="off" class="test_0e91702f">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3" style="padding-right:0px;">
+                    <div style="float: right">
+                        <span class="u-clear-condition" ng-click="clearCondition();" style="color: #888888"><%=common_clear_data%></span>
+                        <button class="btn btn-primary btn-bill" ng-click="search();"><%=common_page_search%></button>
+                    </div>
+                </div>
+            </div>
+            <div class="row row-list clearfix" ng-show="activeTab !='DRAFT'">
+                <div class="col-md-4">
+                    <div class="row clearfix">
+                        <div class="text-right col-md-4" style="width:80px;padding-right:0px;">
+                            运单号
+                        </div>
+                        <div class="text-left col-md-8" style="padding:0px;">
+                            <input ng-model="orderCode" ng-enter="search()" ng-trim="true" type="text" maxlength="30" autocomplete="off">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row clearfix">
+                        <div class="text-right col-md-4" style="width:80px;padding-right:0px;">
+                            <%=orders_client_bill%>
+                        </div>
+                        <div class="text-left col-md-8" style="padding:0px;">
+                            <input ng-model="clientNum" ng-trim="true" type="text" maxlength="30" autocomplete="off">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row clearfix">
+                        <div class="text-right col-md-4" style="width:80px;padding-right:0px;">
+                            产品
+                        </div>
+                        <div class="text-left col-md-8" style="padding:0px;">
+                            <input ng-model="orderProduct" id="select-product1" readonly="readonly" ng-enter="search()" ng-trim="true" type="text" maxlength="30" autocomplete="off">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row row-list clearfix" ng-show="activeTab !='DRAFT'">
+                <div class="col-md-8">
+                    <div class="row clearfix">
+                        <div class="text-right col-md-2" style="width:80px;padding-right:0px;">
+                            <%=orders_client%>
+                        </div>
+                        <div class="col-md-4" style="padding:0px;">
+                            <input id="select-customer1" ng-click="getCustomer();" readonly="readonly" ng-model="orderCustomerName" ng-value="orderCustomerValue" ng-trim="false" type="text" maxlength="30" autocomplete="off">
+                        </div>
+                        <div class="col-md-1" style="width:20px;text-align: center">
+                        </div>
+                        <div class="col-md-4" style="padding:0px;">
+                            <input id="select-client1" ng-click="getClient();" readonly="readonly" ng-model="orderClientName" ng-value="orderClientValue" ng-trim="false" type="text" maxlength="30" autocomplete="off">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row clearfix">
+                        <div class="text-right col-md-4" style="width:80px;padding-right:0px;">
+                            支付状态
+                        </div>
+                        <div class="text-left col-md-8" style="padding: 0px;">
+                            <div class="select-box">
+                                <input readonly="readonly" id="select-pay-status" ng-value="payStatusValue" ng-click="getPayStatus();" ng-trim="false" name="payStatus" ng-model="payStatus" type="text" placeholder="全部">
+                                <i class="select-icon icon-drop-down"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row row-list clearfix" ng-show="activeTab !='DRAFT'">
+                <div class="col-md-8">
+                    <div class="row clearfix">
+                        <div class="text-right col-md-2" style="width:80px;padding-right:0px;">
+                            下单时间
+                        </div>
+                        <div class="col-md-4" style="padding:0px;">
+                            <input ng-model="orderStartTime" readonly="readonly" id="begin-time1" ng-trim="false" type="text" maxlength="30" autocomplete="off">
+                        </div>
+                        <div class="col-md-1" style="width:20px;text-align: center">
+                            -
+                        </div>
+                        <div class="col-md-4" style="padding:0px;">
+                            <input ng-model="orderEndTime" readonly="readonly" id="end-time1" ng-trim="false" type="text" maxlength="30" autocomplete="off">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" style="padding-right:0px;">
+                    <div style="float: right">
+                        <span class="u-clear-condition" ng-click="clearCondition();" style="color: #888888"><%=common_clear_data%></span>
+                        <button class="btn btn-primary btn-bill" ng-click="search();"><%=common_page_search%></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="m-orders-btn test_f84bdf40">
+            <button ng-if="activeTab ==='DRAFT'" class="btn btn-primary btn-bill test_8a6d569a" ng-click="add();">下单</button>
+            <button ng-if="activeTab ==='DRAFT'" class="btn btn-primary btn-bill test_a4c9716f" ng-click="del();"><%=common_page_delete%></button>
+            <button ng-if="activeTab ==='DRAFT'" class="btn btn-primary btn-bill test_9efb8c5d" ng-click="commitOrder();"><%=orders_commit%></button>
+            <button ng-if="activeTab ==='COMMITED'" class="btn btn-primary btn-bill test_76a9b891" ng-click="orderAccepted();"><%=orders_accepted%></button>
+            <button ng-if="activeTab !=='DRAFT'" class="btn btn-primary btn-bill test_934790cc" ng-click="sendInform();"><%=orders_send_inform%></button>
+            <button class="btn btn-primary btn-bill test_4cd927fc" ng-click="uploadFile();"><%=orders_upload_file%></button>
+            <!--<button ng-if="activeTab ==='ACCEPT' || activeTab ==='RECEGOOD'" class="btn btn-primary btn-bill" ng-click="printOrder();"><%=orders_print%></button>-->
+			<button class="btn btn-primary btn-bill test_f4e676f4" ng-click="jumpToTest();">跳转模拟</button>
+            <button ng-if="activeTab !=='DRAFT'" class="btn btn-primary btn-bill" ng-click="pay();">支付</button>
+        </div>
+        <div class="m-orders-table test_18cff7bd">
+            <div class="table-container test_db59461c" ng-controller="tableController">
+                <table class="orders-table table-box test_b2d9eda3" cellpadding="0" cellspacing="0">
+                    <thead class="test_c7995444">
+                        <tr class="test_d7cfb570">
+                            <th class="test_1c7f17ea">
+                                <div class="checkbox checkbox-info test_dd69027c">
+                                    <input type="checkbox" ng-model="tableModel.selectFlag" ng-click="table.selectAll(tableModel);" class="test_4737080d">
+                                    <label class="test_60c81759"></label>
+                                </div>
+                            </th>
+                            <th ng-repeat="item in tableModel.tableHeader" ng-if="!(activeTab =='DRAFT' && $index == 1)" class="test_d3c585c3">{{item}}</th>
+                        </tr>
+                    </thead>
+
+                    <tbody class="test_7dd7a5e6">
+                        <tr ng-repeat="value in tableModel.tableBody" ng-init="renderFinish($last)" class="test_d460eec0">
+                            <td class="test_ff08c40c">
+                                <div class="checkbox checkbox-info test_572fef74" style="position: relative">
+                                    <img ng-show="activeTab !=='DRAFT' && value.emailStatus === 'SUCCESS'" src="/public/img/mailSuccess.svg" class="mailStatus test_147d1527">
+                                    <img ng-show="activeTab !=='DRAFT' && value.emailStatus === 'FAIL'" src="/public/img/mailFail.svg" class="mailStatus test_e8e59e8b">
+                                    <img ng-show="activeTab !=='DRAFT' && value.smsStatus === 'SUCCESS'" src="/public/img/messageSucc.svg" class="messageStatus test_137e8635">
+                                    <img ng-show="activeTab !=='DRAFT' && value.smsStatus === 'FAIL'" src="/public/img/messageFail.svg" class="messageStatus test_9411a659">
+                                    <input type="checkbox" ng-checked="value.checkbox" ng-click="table.selectOne(tableModel, value.checkboxId, $event);" class="test_39a61561">
+                                    <label class="test_47660a6d"></label>
+                                </div>
+                            </td>
+                            <td class="test_12c1efe4">{{(tableModel.pagination.currentPage-1)*tableModel.pagination.pageSize+$index+1}}</td>
+                            <td ng-if="activeTab !='DRAFT'"  title="{{value.waybillNo}}" class="test_c37fa360">
+                                <a href="javascript:;" ng-click="edit(value.orderNo,value.orderStatus)" ng-bind-html="value.waybillNo|trustHtml:orderCode" class="test_05c846e1">{{value.waybillNo}}</a>
+                            </td>
+                            <td title="{{value.externalNo}}" class="test_8f1f2483">
+                                <a ng-if="activeTab =='DRAFT'" href="javascript:;" ng-click="edit(value.orderNo,value.orderStatus)" ng-bind-html="value.externalNo|trustHtml:clientNum"></a>
+                                <span ng-if="activeTab !='DRAFT'" ng-bind-html="value.externalNo|trustHtml:clientNum"></span>
+                            </td>
+                            <td title="{{value.productName}}" class="test_513c605d">{{value.productName}}</td>
+                            <td title="{{value.customerName+ '-' + value.cusUserName}}" class="test_ad2c1389">{{value.customerName+ '-' +value.cusUserName}}</td>
+                            <td title="{{value.cargoTypeName}}" class="test_33e6842e">{{value.cargoTypeName}}</td>
+                            <td title="{{value.fromAddress.cityName+'('+value.fromAddress.countryCode+') - '+value.toAddress.cityName+'('+value.toAddress.countryCode+')'}}" class="test_ffc24d04">
+                                {{value.fromAddress.cityName+'('+value.fromAddress.countryCode+') - '+value.toAddress.cityName+'('+value.toAddress.countryCode+')'}}
+                            </td>
+                            <td title="{{value.createTime}}" class="test_c22d23ab">{{value.createTime}}</td>
+                            <td ng-if="activeTab != 'DRAFT'">{{value.payStatusName}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <hnapagination table-service="table" page-table-model="tableModel" class="test_ec24f665"></hnapagination>
+            </div>
+
+            <div ng-show="!tableModel.pagination.isVisiblePage" style="position: absolute;top:235px;bottom:0px;width:100%;" class="test_2ec0e714">
+                <img style="width:100%;height:100%;" src="/public/img/undefined.svg" class="test_aa4ec425">
+            </div>
+        </div>
+    </div>
+</section>
+
+<div ng-show="showPrompt" id="nest-countryFrom" class="prompt-modal middle-box  test_4a58ad6d">
+    <div class="prompt-wrap  test_5b17e8a8">
+        <div class="bomb-box  test_a2286177">
+            <div class="title  test_b5f9c785">发送通知</div>
+
+            <div class="prompt-content  test_03f47a50">
+                <form name="ClientContacter" novalidate="novalidate" class="test_6ff03e06">
+                    <ul class="isContainer  test_c081c108" style="height: 380px">
+                        <li style="margin-bottom: 30px" class="test_a27300fc">
+                            <div class="modalTitle test_33681ee0">短信模板详情</div>
+                            <div class="modalContent test_f94e931d">[三藏平台]您的订单状态已更新，订单号：XXX，当前状态为XXX，查看订单请登录: http://3zang.com.如有疑问请拨打XXX。   </div>
+
+                        </li>
+                        <li style="margin-bottom: 30px" class="test_1f57192b">
+                            <div class="modalTitle test_be3656bb">邮件模板详情</div>
+                            <div class="modalContent test_3150b7a0">
+                                <h4 class="test_5aa3833f">尊敬的三藏平台用户，您好！</h4>
+                                <p class="test_e60ece75">您的订单XXX，当前状态为XXX。详细信息可登录三藏平台后查看，如有问题请拨打XXX电话详询。点击进入三藏平台</a>
+                                </p>
+                            </div>
+
+                        </li>
+                        <li ng-show="orderState.sendOrderNumber != 0 && orderState.unSendOrderNumber != 0" class="test_b1ba6aac">
+                            所选订单可发送数量为{{orderState.sendOrderNumber}},因未配置不可发送订单数为{{orderState.unSendOrderNumber}},是否继续发送？
+                        </li>
+                        <li ng-show="orderState.sendOrderNumber != 0 && orderState.unSendOrderNumber == 0" class="test_b885e541">
+                            所选订单可发送数量为{{orderState.sendOrderNumber}},是否继续发送？
+                        </li>
+                        <li ng-show="orderState.sendOrderNumber == 0" class="test_3a7180ec">
+                            所选订单未配置消息通知，请先在客户管理中配置！
+
+                        </li>
+
+                    </ul>
+                </form>
+            </div>
+            <div class="operation test_a24469e3">
+                <button ng-click="showPrompt = false" name="prompt-close" class="btn btn-default  test_e6d6105c" data-event="close"><%=common_page_cancel%></button>
+                <button ng-show="orderState.sendOrderNumber != 0" ng-click="savePrompt();" name="prompt-save" class="btn btn-primary  test_7b36bd3d" data-event="close">发送</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div ng-show="showUploadFile" class="fileContent  prompt-modal test_2fd6bf95">
+    <div class="uploadFileTittle upload_file test_8ae75ab1">上传附件</div>
+    <div class="uploadFileContent upload_file test_0dbbac42" id="uploadFileContent"></div>
+    <div class="uploadFileButton upload_file test_299802fc">
+        <button class="btn btn-primary test_2cdf8f2d" ng-click="showUploadFile = false">关闭</button>
+    </div>
+</div>
+<div id="slides" class="test_2e78d2c9"></div>
+
+<!--受理错误提示信息-->
+<div ng-show="acceptedMsgBox" id="acceptedMsg" class="prompt-modal">
+    <div class="prompt-wrap">
+        <div class="bomb-box" style="background: #FCF8E3">
+            <div class="title" style="color: #8D6A32">
+                <i class="icon-Warning tip-box-icon"></i>提示
+            </div>
+            <div class="prompt-content">
+                以下订单为现结订单，尚未支付，不可受理
+                <p ng-repeat="item in acceptedMsg" ng-if="$index < 5">{{item}}</p>
+                <span title="{{acceptedMsgMore}}" ng-show="acceptedMsgMore">显示更多</span>
+            </div>
+            <div class="operation">
+                <button ng-click="acceptedMsgBox = false;" name="prompt-operation" class="btn btn-default warning" data-event="close">取消</button>
+                <button ng-click="acceptedMsgBox = false;" name="prompt-operation" class="btn btn-primary warning" data-event="submit">确定</button>
+            </div>
+        </div>
+    </div>
+</div>

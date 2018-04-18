@@ -1,0 +1,1 @@
+app.factory("cockpitView",[function(){return{}}]);

@@ -1,0 +1,265 @@
+<style class="test_7104ac40">
+    .verification .templateName{
+        padding-left: 0!important;
+        text-align: left;
+        left:0!important;
+    }
+</style>
+<section class="test_db0b2658">
+    <div class="test_b4bc2520">
+        <div style="padding-left: 15px" class="test_2ee6842d">
+            <button ng-click="goBack();" class="btn btn-default test_705536ed"><%=common_page_back%></button>
+            <button ng-click="edit();" ng-show="!isEdit&&isSelfTemplate" class="btn btn-primary test_705536ed" style="float: right">编辑</button>
+        </div>
+    </div>
+
+    <div class="title test_6738f15a">
+        <p ng-show="id == 0" class="test_d4360b57">创建合同模板</p>
+        <p ng-show="id != 0&&isSelfTemplate" class="test_8a856a7c">修改合同模板</p>
+        <p ng-show="id != 0&&!isSelfTemplate" class="test_6951a844">生成合同</p>
+    </div>
+    <form name="contractTemplate" class="test_630cf57b">
+        <div class="firstContent test_49b17a9a">
+            <div class="test_64d4fd2e">
+                <div class="search-cell test_cd5d90dd">
+                    <span class="test_a4b27aab">业务类型</span>
+                    <div class="select-box test_e777f488" style="width: 248px">
+                        <span ng-show="!isEdit" class="test_f274178f">{{serviceType}}</span>
+                        <input name="serviceType" ng-show="isEdit" id="serviceType" ng-model="serviceType" style="width: 100%;padding-left: 2px;" autocomplete="off" class="input-text test_384126e3" type="text" required>
+                        <i ng-show="isEdit" class="select-icon icon-drop-down test_169c64c2"></i>
+                    </div>
+                </div>
+                <div class="search-cell test_7922f214" style="float: right">
+                    <span class="test_11b59058">模板名称：</span>
+                    <span ng-show="!editContractTitle" class="test_5d7deb81">{{templateName}}</span>
+                    <div class="select-box test_8c1ed2c8" style="width: 248px">
+                        <input ng-trim="false" name="templateName" ng-show="editContractTitle" ng-model="templateName" placeholder="注意：模板创建成功后名称无法修改" ng-blur="checkTemplateNameUnique()" ng-focus="clearTemplateUniqueErr()" style="width: 100%;padding-left: 2px;" autocomplete="off" class="input-text test_39eb702b" type="text" maxlength="30" required validate-code="{ruleReg:'name', ruleRegMsg:'<%=common_validate_name%>', maxLength:'30'}">
+                        <div class="verification test_cd678feb">
+                            <span ng-show="showTemplateNameExist" class="errors templateName test_b5da1f53">模板名已经存在，请重新输入！</span>
+                            <span class="errors templateName test_bb8e1921" id="name-msg" ng-show="contractTemplate.templateName.$viewValue && contractTemplate.templateName.$error.defined && contractTemplate.templateName.$dirty">{{contractTemplate.templateName.errorTips}}</span>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main test_addd1897">
+
+            <div class="test_9fba2eba">
+                <div class="contractTitle test_93350d94" style="position: relative">
+                    <input ng-trim="false" ng-show="isEdit" id="contractorTitle" ng-model="contractorTitle" autocomplete="off" class="input-text contractTitle test_9cf58bc1" type="text" placeholder="请输入合同标题" name="contractorTitle" maxlength="30" required validate-code="{ruleReg:'name', ruleRegMsg:'<%=common_validate_name%>', maxLength:'30'}">
+                    <div class="verification test_cfba2852">
+                        <!--<span ng-show="showTemplateNameExist" class="errors templateName">模板名已经存在，请重新输入！</span>-->
+                        <span style="padding-left: 0!important;left: 0!important;" class="errors contractorTitleErr test_5f3e1f0d" id="name-msg" ng-show="contractTemplate.contractorTitle.$viewValue && contractTemplate.contractorTitle.$error.defined && contractTemplate.contractorTitle.$dirty">{{contractTemplate.contractorTitle.errorTips}}</span>
+                    </div>
+                </div>
+                <!--<div >-->
+                    <!--<input ng-show="isEdit" id="contractorTitle" ng-model="contractorTitle"-->
+                           <!--autocomplete="off" class="input-text contractTitle" name="contractorTitle"-->
+                           <!--type="text" placeholder="请输入合同标题" maxlength="30" required>-->
+                <!--</div>-->
+                <div ng-show="!isEdit" style="text-align: center;" class="test_90e6bb5a">
+                    <span style="font-family: PingFangSC-Medium;font-size: 20px;color: #555555;" class="test_28447f14">{{contractorTitle}}</span>
+                </div>
+                <div class="test_73d30925">
+                    <div ng-show="isEdit" class="form-control test_ef2f349f">
+                        <span class="label test_f60c7178">甲方：</span>
+                        <input ng-trim="false" ng-model="partAName" autocomplete="off" class="input-text input-width test_f1b546a5" type="text" placeholder="请输入甲方名称" name="partAName" validate-code="{ruleReg:'name', ruleRegMsg:'<%=common_validate_name%>', maxLength:'30'}">
+                        <div class="verification test_6667be21">
+                            <span class="errors test_d63c68db" id="name-msg" ng-show="contractTemplate.partAName.$viewValue && contractTemplate.partAName.$error.defined && contractTemplate.partAName.$dirty">{{contractTemplate.partAName.errorTips}}</span>
+                        </div>
+
+                    </div>
+                    <div ng-show="!isEdit" class="form-control test_ad148b4f">
+                        <span class="label test_6f1bed79">甲方：</span>
+                        <span class="test_c25b90dd">{{partAName}}</span>
+                    </div>
+                    <div ng-show="isEdit" class="form-control test_b50acb75">
+                        <span class="label test_dd6b02c0">乙方：</span>
+                        <input ng-trim="false" ng-model="partBName" autocomplete="off" class="input-text input-width test_6f06a1de" type="text" placeholder="请输入乙方名称" name="partBName" validate-code="{ruleReg:'name', ruleRegMsg:'<%=common_validate_name%>', maxLength:'30'}">
+                        <div class="verification test_a928f55e">
+                            <span class="errors test_5ef7507c" id="name-msg" ng-show="contractTemplate.partBName.$viewValue && contractTemplate.partBName.$error.defined && contractTemplate.partBName.$dirty">{{contractTemplate.partBName.errorTips}}</span>
+                        </div>
+
+                    </div>
+                    <div ng-show="!isEdit" class="form-control test_54fbcdd9">
+                        <span class="label test_9d672ff7">乙方：</span>
+                        <span class="test_9685cfe9">{{partBName}}</span>
+                    </div>
+
+
+                    <div class="form-control relative test_26c235d4">
+                        <span class="label test_d159df1d" style="    position: relative;top: -300px;">合同正文：</span>
+                        <div id="text" style="height: 400px;width: 812px;display:inline-block;" class="test_7096c320"></div>
+
+                    </div>
+
+                    <div class="relative test_1c6fd468">
+                        <div id="partA" style="width: 500px" class="test_b5450e47">
+                            <div class="form-control test_cbe776c1">
+                                <span class="label test_61e8f4dc">甲方（盖章）：</span>
+
+                            </div>
+
+                            <div ng-show="isEdit" class="form-control test_3292439d">
+                                <span class="label test_cadf7f2c">地址：</span>
+                                <input ng-model="partAAddr" autocomplete="off" class="input-text input-width test_9c1aa087" type="text" maxlength="30">
+                            </div>
+                            <div ng-show="!isEdit" class="form-control test_8ba420fb">
+                                <span class="label test_b156a04a">地址：</span>
+                                <span class="test_504f0248">{{partAAddr}}</span>
+                            </div>
+
+                            <div ng-show="isEdit" class="form-control test_91f0dcb2">
+                                <span class="label test_cc827d6e">联系方式：</span>
+                                <input ng-trim="false" ng-model="partAPhone" autocomplete="off" class="input-text input-width test_1991c1fe" type="text" maxlength="30" name="partAPhone" validate-code="{ruleReg:'phone', ruleRegMsg:'<%=common_validate_mobilephone%>', maxLength:'30'}">
+                                <div class="verification test_922f4033">
+                                <span class="errors test_aa2fdde5" id="name-msg" style="left: -30px;" ng-show="contractTemplate.partAPhone.$viewValue && contractTemplate.partAPhone.$error.defined && contractTemplate.partAPhone.$dirty">{{contractTemplate.partAPhone.errorTips}}</span>
+                                </div>
+                            </div>
+                            <div ng-show="!isEdit" class="form-control test_f86ea363">
+                                <span class="label test_75a24545">联系方式：</span>
+                                <span class="test_c044da05">{{partAPhone}}</span>
+                            </div>
+
+
+                            <div ng-show="isEdit" class="form-control test_1f949be4">
+                                <span class="label test_b2c78d6f">银行账号：</span>
+                                <input ng-trim="false" ng-model="partABankAccount" autocomplete="off" class="input-text input-width test_7a8ab072" type="text" name="partABankAccount" validate-code="{'ruleReg':'/^[0-9A-Za-z]*$/', ruleRegMsg:'请输入英文或数字', maxLength:'30'}">
+                                <div class="verification test_921b4ea4">
+                                <span class="errors test_17f11ccb" id="name-msg" style="left: -30px;" ng-show="contractTemplate.partABankAccount.$viewValue && contractTemplate.partABankAccount.$error.defined && contractTemplate.partABankAccount.$dirty">{{contractTemplate.partABankAccount.errorTips}}</span>
+                                </div>
+                            </div>
+
+                            <div ng-show="!isEdit" class="form-control test_336d65da">
+                                <span class="label test_2c05001c">银行账号：</span>
+                                <span class="test_eeef9e11">{{partABankAccount}}</span>
+                            </div>
+
+
+
+                            <div ng-show="isEdit" class="form-control test_730a4563">
+                                <span class="label test_0b81123e">开户行：</span>
+                                <input ng-trim="false" ng-model="partABankName" autocomplete="off" class="input-text input-width test_b5d29a78" type="text" name="partABankName" maxlength="30">
+                                <!--<div class="verification" >-->
+                                <!--<span class="errors" style="left: -30px;"-->
+                                      <!--id="name-msg" ng-show="contractTemplate.partABankName.$viewValue && contractTemplate.partABankName.$error.defined && contractTemplate.partABankName.$dirty">{{contractTemplate.partABankName.errorTips}}</span>-->
+                                <!--</div>-->
+                            </div>
+                            <div ng-show="!isEdit" class="form-control test_43376fee">
+                                <span class="label test_9b9b58fc">开户行：</span>
+                                <span class="test_cd21b6be">{{partABankName}}</span>
+                            </div>
+
+
+
+                            <div class="form-control test_515b1277">
+                                <span class="label test_c5e3abc0">授权代表：</span>
+                            </div>
+                            <div class="form-control test_27101f9a">
+                                <span class="label test_906f12a7">签字日期：</span>
+                            </div>
+
+                        </div>
+
+                        <div id="partB" style="position: absolute;top:-30px;right: 0;width: 500px" class="test_eeb54b0f">
+                            <div class="form-control test_78386ad0">
+                                <span class="label test_27c9d23e">乙方（盖章）：</span>
+
+                            </div>
+
+                            <div ng-show="isEdit" class="form-control test_2e0327ed">
+                                <span class="label test_1129a59b">地址：</span>
+                                <input ng-model="partBAddr" autocomplete="off" class="input-text input-width test_c3ce5f79" type="text" maxlength="30">
+                            </div>
+                            <div ng-show="!isEdit" class="form-control test_0fa49007">
+                                <span class="label test_75f25646">地址：</span>
+                                <span class="test_f98d5b53">{{partBAddr}}</span>
+                            </div>
+
+
+                            <div ng-show="isEdit" class="form-control test_d4a2dde0">
+                                <span class="label test_01379106">联系方式：</span>
+                                <input ng-trim="false" ng-model="partBPhone" autocomplete="off" class="input-text input-width test_7f96c24c" type="text" maxlength="30" name="partBPhone" validate-code="{ruleReg:'phone', ruleRegMsg:'<%=common_validate_mobilephone%>', maxLength:'30'}">
+                                <div class="verification test_61749d20">
+                                <span class="errors test_de252dac" id="name-msg" style="left: -30px;" ng-show="contractTemplate.partBPhone.$viewValue && contractTemplate.partBPhone.$error.defined && contractTemplate.partBPhone.$dirty">{{contractTemplate.partBPhone.errorTips}}</span>
+                                </div>
+
+                            </div>
+                            <div ng-show="!isEdit" class="form-control test_7e59a63d">
+                                <span class="label test_31628458">联系方式：</span>
+                                <span class="test_4b71de78">{{partBPhone}}</span>
+                            </div>
+
+
+                            <div ng-show="isEdit" class="form-control test_8bf2899e">
+                                <span class="label test_55e55b79">银行账号：</span>
+                                <input ng-trim="false" ng-model="partBBankAccount" autocomplete="off" class="input-text input-width test_9e2a6fcf" type="text" name="partBBankAccount" validate-code="{'ruleReg':'/^[0-9A-Za-z]*$/', ruleRegMsg:'请输入英文或数字', maxLength:'30'}">
+                                <div class="verification test_f29f64f5">
+                                <span class="errors test_e87bf2a3" id="name-msg" style="left: -30px;" ng-show="contractTemplate.partBBankAccount.$viewValue && contractTemplate.partBBankAccount.$error.defined && contractTemplate.partBBankAccount.$dirty">{{contractTemplate.partBBankAccount.errorTips}}</span>
+                                </div>
+                            </div>
+                            <div ng-show="!isEdit" class="form-control test_426bd359">
+                                <span class="label test_ad5af3a7">银行账号：</span>
+                                <span class="test_55af4cc1">{{partBBankAccount}}</span>
+                            </div>
+
+
+                            <div ng-show="isEdit" class="form-control test_b99f0425">
+                                <span class="label test_35523207">开户行：</span>
+                                <input ng-trim="false" ng-model="partBBankName" autocomplete="off" class="input-text input-width test_847eefea" type="text" name="partBBankName" maxlength="30">
+                                <!--<div class="verification" >-->
+                                <!--<span class="errors" style="left: -30px;"-->
+                                      <!--id="name-msg" ng-show="contractTemplate.partBBankName.$viewValue && contractTemplate.partBBankName.$error.defined && contractTemplate.partBBankName.$dirty">{{contractTemplate.partBBankName.errorTips}}</span>-->
+                                <!--</div>-->
+                            </div>
+                            <div ng-show="!isEdit" class="form-control test_f319dc17">
+                                <span class="label test_70f48c4a">开户行：</span>
+                                <span class="test_b0929ed6">{{partBBankName}}</span>
+                            </div>
+
+
+                            <div class="form-control test_b732b235">
+                                <span class="label test_983aca8d">授权代表：</span>
+                            </div>
+                            <div class="form-control test_90c42527">
+                                <span class="label test_19910846">签字日期：</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div ng-show="isEdit&&isSelfTemplate" style="text-align: center;margin-top: 50px" class="test_728bfe1e">
+                        <div class="checkbox checkbox-info test_5bf7f8a2">
+                            <input class="checkbox test_53983089" type="checkbox" ng-value="true" checked ng-click="setCheckBox($event)">
+                            <label class="test_5e74f45a"></label>
+                        </div>
+                        <span class="test_fc5dbcd1">立即以此模板新建合同</span>
+
+                        <div style="margin-top: 30px;" class="test_a9776d0d">
+                            <button ng-click="cancel();" class="btn btn-primary test_705536ed" ng-show="id">取消</button>
+                            <button ng-click="saveContractTemplate();" class="btn btn-primary test_705536ed">保存</button>
+                        </div>
+                    </div>
+
+                    <div ng-show="!isSelfTemplate" style="text-align: center;margin-top: 50px" class="test_3a80077f">
+                        <div style="margin-top: 30px;" class="test_56b05aab">
+                            <button ng-click="GenerateContract();" class="btn btn-primary test_705536ed">生成合同</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </form>
+
+
+</section>
+<script type="application/javascript" class="test_1398c308">
+    var E = window.wangEditor
+    var editor2 = new E('#text')
+    editor2.create()
+
+</script>

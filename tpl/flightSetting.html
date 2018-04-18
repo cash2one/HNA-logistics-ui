@@ -1,0 +1,415 @@
+<section class="content">
+    <div ng-hide="nestFlightSettingForm" ng-controller="tableController" class="flightSetting-table-page">
+        <div class="box-header">
+            <div class="search-box">
+                <div class="row">
+                    <span style="margin:0px 16px 0px 50px;"><%=flightSetting_page_name%></span>
+                    <input style="width:20%;"
+                           ng-enter="getTable(true);"
+                           maxlength="30"
+                           ng-model="tableModel.restData.q"
+                           type="text"
+                           class="form-control">
+                    <span style="margin:0px 2px 0px 50px;"><%=flightSetting_fly_start%></span>
+                    <input autocomplete="off"
+                           type="text" readonly
+                           style="width:20%"
+                           id="search-start"
+                           ng-model="searchStartFlight"
+                           class="form-control">
+                    <span style="margin:0px 2px 0px 50px;"><%=flightSetting_fly_end%></span>
+                    <input autocomplete="off"
+                           type="text" readonly
+                           style="width:20%"
+                           id="search-end"
+                           ng-model="searchEndFlight"
+                           class="form-control">
+                </div>
+                <div class="row">
+                    <div style="margin:0px 2px 0px 50px;">
+                        <label><%=flightSetting_fly_startTime%></label>
+                        <input type="text" readonly
+                               id="startTime"
+                               style="width:20%"
+                               ng-model="tableModel.restData.startTime">
+                        <span>~</span>
+                        <input type="text" readonly
+                               id="endTime"
+                               style="width:20%"
+                               ng-model="tableModel.restData.endTime">
+                        <div class="flightSetting-search-btn">
+                            <span style="color:#888;cursor:pointer;position:relative;right:20px" ng-click="clearData();"><%=flightSetting_page_empty%></span>
+                            <button ng-click="getTable(true);" class="btn btn-primary"><%=common_list_search_btn%></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="batch-operation">
+            <button ng-click="add();" class="btn btn-primary">
+                <%=common_page_add%>
+            </button>
+            <button ng-click="del();" class="btn btn-primary">
+                <%=common_page_delete%>
+            </button>
+        </div>
+
+        <div class="table-container">
+            <table class="flight-table-setting table-box" cellpadding="0" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>
+                        <div class="checkbox checkbox-info">
+                            <input type="checkbox" ng-model="tableModel.selectFlag" ng-click="table.selectAll(tableModel);">
+                            <label></label>
+                        </div>
+                    </th>
+                    <th ng-repeat="item in tableModel.tableHeader">{{item}}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="value in tableModel.tableBody" ng-init="renderFinish($last)">
+                    <td>
+                        <div class="checkbox checkbox-info">
+                            <input type="checkbox" ng-checked="value.checkbox" ng-click="table.selectOne(tableModel, value.checkboxId, $event);">
+                            <label></label>
+                        </div>
+                    </td>
+                    <td>{{(tableModel.pagination.currentPage-1)*tableModel.pagination.pageSize+$index+1}}</td>
+                    <td title="{{value.code}}" style="text-align: center">
+                        <a href="javascript:;" ng-click="flightSettingDetail(value.id)" ng-bind-html="value.code | trustHtml:q"></a>
+                        <span ng-if="value.isStopOver" style="color: #888;font-size: 14px;margin-left: 6px;">经停</span>
+                    </td>
+                    <td title="{{value.startName}}" style="text-align: center">{{value.startTriadCode}}</td>
+                    <td title="{{value.endName}}" style="text-align: center">{{value.endTriadCode}}</td>
+                    <td style="white-space: pre-wrap" title="{{value.flightTimes}}">{{value.flightTimes}}</td>
+                    <td title="{{value.airplaneModelName}}" style="text-align: center">{{value.airplaneModelName}}</td>
+                    <td title="{{value.carrierCompanyName}}" style="text-align: center">{{value.carrierCompanyName}}</td>
+                    <td title="{{value.typeName}}" style="text-align: center">{{value.typeName}}</td>
+                </tr>
+                </tbody>
+            </table>
+            <hnapagination table-service="table" page-table-model="tableModel"></hnapagination>
+        </div>
+
+        <div ng-show="!tableModel.pagination.isVisiblePage" style="position: absolute;top:165px;bottom:0px;width:100%;">
+            <img style="width:100%;height:100%;" src="/public/img/undefined.svg">
+        </div>
+    </div>
+    <div id="slides"></div>
+</section>
+
+<div ng-show="nestFlightSettingForm" ng-init="initSelectList();">
+    <div>
+        <div class="go-back">
+            <button ng-click="goBack();" class="btn btn-default"><%=common_page_back%></button>
+        </div>
+        <div class="operation-edit">
+            <button ng-show="editable" name="editSupplier" ng-click="editFlightSetting();" class="btn btn-primary"><%=flightSetting_edit_title%></button>
+        </div>
+    </div>
+    <div class="add-title">
+        <p ng-show="!editable && !isEdit"><%=flightSetting_add_title%></p>
+        <p ng-show="editable || isEdit"><%=flightSetting_detail_title%></p>
+    </div>
+    <div class="from-box">
+        <form name="baseInfoForm" novalidate="novalidate">
+            <div class="rows">
+                <dl class="panel">
+                    <dd>
+                        <label><b ng-hide="editable">*</b><%=flightSetting_page_name%><%=flightSetting_code%></label>
+                        <div class="content-info">
+                            <span ng-show="editable" class="text-info">{{flightCode}}</span>
+                            <input ng-hide="editable" ng-trim="false"
+                                   maxlength="30" name="flightCode" class="validate-code input-text"
+                                   ng-blur="checkFlightsCode()" ng-focus="cancelErrorCode()"
+                                   validate-code="{ruleReg:'/^[A-Za-z0-9]+$/', ruleRegMsg:'<%=flightSetting_validate_regCode%>', maxLength:'30'}"
+                                   ng-model="flightCode" type="text" required>
+                            <validatetip from-model="baseInfoForm.flightCode"></validatetip>
+                            <div class="verification">
+                                <span ng-show="validateCodeError" class="errors">
+                                    <%=flightSetting_validate_code%>
+                                </span>
+                            </div>
+                        </div>
+                    </dd>
+                    <dd>
+                        <label><b ng-hide="editable">*</b><%=flightSetting_fly_company%><%=flightSetting_code%></label>
+                        <div class="content-info">
+                            <span ng-show="editable" class="text-info">{{flightCompany}}</span>
+                            <input ng-hide="editable" readonly ng-trim="false" required
+                                   id="flightCompany" name="flightCompany" type="text"
+                                   ng-model="flightCompany" ng-value="flightCompany">
+                            <validatetip from-model="baseInfoForm.flightCompany"></validatetip>
+                        </div>
+                    </dd>
+                    <dd>
+                        <label><b ng-hide="editable">*</b><%=flightSetting_fly_type%><%=flightSetting_code%></label>
+                        <div class="content-info">
+                            <span ng-show="editable" class="text-info">{{flightType}}</span>
+                            <input ng-hide="editable" readonly ng-trim="false" required
+                                   id="flightType" name="flightType" type="text"
+                                   ng-model="flightType" ng-value="flightType">
+                            <validatetip from-model="baseInfoForm.flightType"></validatetip>
+                        </div>
+                    </dd>
+                </dl>
+                <dl class="panel">
+                    <dd>
+                        <label><b ng-hide="editable">*</b><%=flightSetting_page_airLine%><%=flightSetting_code%></label>
+                        <div class="content-info">
+                            <span ng-show="editable" class="text-info">{{flightLine}}</span>
+                            <input ng-hide="editable" readonly ng-trim="false" required
+                                   id="flightLine" name="flightLine" type="text"
+                                   ng-model="flightLine" ng-value="flightLine">
+                            <validatetip from-model="baseInfoForm.flightLine"></validatetip>
+                        </div>
+                    </dd>
+                    <dd>
+                        <label><%=flightSetting_line_Type%><%=flightSetting_code%></label>
+                        <div class="content-info">
+                            <span ng-show="editable" class="text-info">{{airportType}}</span>
+                            <div class="select-box" ng-hide="editable">
+                                <input ng-trim="false" readonly required autocomplete="off"
+                                       name="airportType" id="airportType" type="text"
+                                       ng-model="airportType" ng-value="airportType">
+                                <i class="select-icon icon-drop-down"></i>
+                            </div>
+                        </div>
+                    </dd>
+                    <dd>
+                        <label><b ng-hide="editable">*</b><%=flightSetting_is_arrive%><%=flightSetting_code%></label>
+                        <div style="padding-left: 38px;margin-top: 8px;">
+                            <div class="radio radio-single radio-primary" ng-hide="editable">
+                                <input value="false" type="radio" ng-disabled="editable"
+                                       ng-model="isStopOver" name="isStopOver"
+                                       class="ng-pristine ng-untouched ng-valid" style="left: 5px;">
+                                <label></label>
+                            </div>
+                            <span ng-hide="editable">否</span>
+                            <span ng-show="editable && isStopOver === 'false'" style="margin-left: -12px;">否</span>
+                            <span ng-show="editable && isStopOver === 'true'" style="margin-left: -12px;">是</span>
+                            <div class="radio radio-single radio-primary" ng-hide="editable" style="margin-left: 40px;">
+                                <input value="true" type="radio" ng-disabled="editable"
+                                       ng-model="isStopOver" name="isStopOver"
+                                       class="ng-pristine ng-valid ng-touched" style="left: 5px;">
+                                <label></label>
+                            </div>
+                            <span ng-hide="editable">是</span>
+                        </div>
+                    </dd>
+                </dl>
+                <div class="choosePanel">
+                    <div class="radio radio-single radio-primary" ng-hide="editable">
+                        <input value="true" type="radio" ng-disabled="editable"
+                               ng-model="isSame" name="isSame" ng-click="changeRadio('true')"
+                               class="ng-pristine ng-untouched ng-valid">
+                        <label></label>
+                    </div>
+                    <span ng-hide="editable"><%=flightSetting_page_day%></span>
+                    <span ng-show="editable&& isSame === 'true'"><%=flightSetting_page_day%></span>
+                    <div class="radio radio-single radio-primary" ng-hide="editable" style="margin-left: 40px;">
+                        <input value="false" type="radio" ng-disabled="editable"
+                               ng-model="isSame" name="isSame" ng-click="changeRadio('false')"
+                               class="ng-pristine ng-valid ng-touched">
+                        <label></label>
+                    </div>
+                    <span ng-hide="editable"><%=flightSetting_page_week%></span>
+                    <span ng-show="editable && isSame === 'false'"><%=flightSetting_page_week%></span>
+                </div>
+                <div class="tableContainer">
+                    <table class="tableFlight" ng-if="isSame === 'true'" style="width: 500px;margin: 0 44px;" >
+                        <thead>
+                            <tr>
+                                <th width="150px"></th>
+                                <th colspan="2" width="350px"><%=flightSetting_page_everyDay%></th>
+                            </tr>
+                            <tr>
+                                <th width="150px"><%=flightSetting_air_port%></th>
+                                <th width="175px"><%=flightSetting_fly_startTime%></th>
+                                <th width="175px"><%=flightSetting_fly_endTime%></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-if="airportName && isSame === 'true'">
+                                <td width="150px">
+                                    <span width="100%" title="{{airportName}}">{{airportTriadCode}}</span>
+                                </td>
+                                <td width="175px">
+                                    <div ng-hide="editable">
+                                        <input type="text" readonly width="100%"
+                                               autocomplete="off" name="startTime_day" ng-model="startTime_day"
+                                               id="startTime_day" required>
+                                    </div>
+                                    <span ng-show="editable" width="100%">{{startTime}}</span>
+                                </td>
+                                <td width="175px">
+                                    <div ng-hide="editable">
+                                        <input type="text" readonly width="100%"
+                                               autocomplete="off" name="endTime_day" ng-model="endTime_day"
+                                               id="endTime_day" required>
+                                    </div>
+                                    <span ng-show="editable" width="100%">{{arriveTime}}</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="tableFlight" ng-if="isSame === 'false'">
+                        <thead>
+                            <tr>
+                                <th width="10.4%"></th>
+                                <th colspan="2" width="12.8%"><%=flightSetting_page_Sun%></th>
+                                <th colspan="2" width="12.8%"><%=flightSetting_page_Mon%></th>
+                                <th colspan="2" width="12.8%"><%=flightSetting_page_Tue%></th>
+                                <th colspan="2" width="12.8%"><%=flightSetting_page_Wed%></th>
+                                <th colspan="2" width="12.8%"><%=flightSetting_page_Thu%></th>
+                                <th colspan="2" width="12.8%"><%=flightSetting_page_Fri%></th>
+                                <th colspan="2" width="12.8%"><%=flightSetting_page_Sat%></th>
+                            </tr>
+                            <tr>
+                                <th width="10.4%"><%=flightSetting_air_port%></th>
+                                <th width="6.4%"><%=flightSetting_fly_startTime%></th>
+                                <th width="6.4%"><%=flightSetting_fly_endTime%></th>
+                                <th width="6.4%"><%=flightSetting_fly_startTime%></th>
+                                <th width="6.4%"><%=flightSetting_fly_endTime%></th>
+                                <th width="6.4%"><%=flightSetting_fly_startTime%></th>
+                                <th width="6.4%"><%=flightSetting_fly_endTime%></th>
+                                <th width="6.4%"><%=flightSetting_fly_startTime%></th>
+                                <th width="6.4%"><%=flightSetting_fly_endTime%></th>
+                                <th width="6.4%"><%=flightSetting_fly_startTime%></th>
+                                <th width="6.4%"><%=flightSetting_fly_endTime%></th>
+                                <th width="6.4%"><%=flightSetting_fly_startTime%></th>
+                                <th width="6.4%"><%=flightSetting_fly_endTime%></th>
+                                <th width="6.4%"><%=flightSetting_fly_startTime%></th>
+                                <th width="6.4%"><%=flightSetting_fly_endTime%></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-if="airportName && isSame === 'false'">
+                                <td width="10.4%">
+                                    <span width="100%" title="{{airportName}}">{{airportTriadCode}}</span>
+                                </td>
+                                <td width="6.4%">
+                                    <div ng-hide="editable">
+                                        <input type="text" readonly width="100%"
+                                               autocomplete="off" name="startTime_Sun" ng-model="startTime_Sun"
+                                               id="startTime_Sun" required>
+                                    </div>
+                                    <span ng-show="editable" width="100%">{{sun_startTime}}</span>
+                                </td>
+                                <td width="6.4%">
+                                    <div ng-hide="editable">
+                                        <input type="text" readonly width="100%"
+                                               autocomplete="off" name="endTime_Sun" ng-model="endTime_Sun"
+                                               id="endTime_Sun" required>
+                                    </div>
+                                    <span ng-show="editable" width="100%">{{sun_arriveTime}}</span>
+                                </td>
+                                <td width="6.4%">
+                                    <div ng-hide="editable">
+                                        <input type="text" readonly width="100%"
+                                               autocomplete="off" name="startTime_Mon" ng-model="startTime_Mon"
+                                               id="startTime_Mon" required>
+                                    </div>
+                                    <span ng-show="editable" width="100%">{{mon_startTime}}</span>
+                                </td>
+                                <td width="6.4%">
+                                    <div ng-hide="editable">
+                                        <input type="text" readonly width="100%"
+                                               autocomplete="off" name="endTime_Mon" ng-model="endTime_Mon"
+                                               id="endTime_Mon" required>
+                                    </div>
+                                    <span ng-show="editable" width="100%">{{mon_arriveTime}}</span>
+                                </td>
+                                <td width="6.4%">
+                                    <div ng-hide="editable">
+                                        <input type="text" readonly width="100%"
+                                               autocomplete="off" name="startTime_Tue" ng-model="startTime_Tue"
+                                               id="startTime_Tue" required>
+                                    </div>
+                                    <span ng-show="editable" width="100%">{{tue_startTime}}</span>
+                                </td>
+                                <td width="6.4%">
+                                    <div ng-hide="editable">
+                                        <input type="text" readonly width="100%"
+                                               autocomplete="off" name="endTime_Tue" ng-model="endTime_Tue"
+                                               id="endTime_Tue" required>
+                                    </div>
+                                    <span ng-show="editable" width="100%">{{tue_arriveTime}}</span>
+                                </td>
+                                <td width="6.4%">
+                                    <div ng-hide="editable">
+                                        <input type="text" readonly width="100%"
+                                               autocomplete="off" name="startTime_Wed" ng-model="startTime_Wed"
+                                               id="startTime_Wed" required>
+                                    </div>
+                                    <span ng-show="editable" width="100%">{{wed_startTime}}</span>
+                                </td>
+                                <td width="6.4%">
+                                    <div ng-hide="editable">
+                                        <input type="text" readonly width="100%"
+                                               autocomplete="off" name="endTime_Wed" ng-model="endTime_Wed"
+                                               id="endTime_Wed" required>
+                                    </div>
+                                    <span ng-show="editable" width="100%">{{wed_arriveTime}}</span>
+                                </td>
+                                <td width="6.4%">
+                                    <div ng-hide="editable">
+                                        <input type="text" readonly width="100%"
+                                               autocomplete="off" name="startTime_Thu" ng-model="startTime_Thu"
+                                               id="startTime_Thu" required>
+                                    </div>
+                                    <span ng-show="editable" width="100%">{{thu_startTime}}</span>
+                                </td>
+                                <td width="6.4%">
+                                    <div ng-hide="editable">
+                                        <input type="text" readonly width="100%"
+                                               autocomplete="off" name="endTime_Thu" ng-model="endTime_Thu"
+                                               id="endTime_Thu" required>
+                                    </div>
+                                    <span ng-show="editable" width="100%">{{thu_arriveTime}}</span>
+                                </td>
+                                <td width="6.4%">
+                                    <div ng-hide="editable">
+                                        <input type="text" readonly width="100%"
+                                               autocomplete="off" name="startTime_Fri" ng-model="startTime_Fri"
+                                               id="startTime_Fri" required>
+                                    </div>
+                                    <span ng-show="editable" width="100%">{{fri_startTime}}</span>
+                                </td>
+                                <td width="6.4%">
+                                    <div ng-hide="editable">
+                                        <input type="text" readonly width="100%"
+                                               autocomplete="off" name="endTime_Fri" ng-model="endTime_Fri"
+                                               id="endTime_Fri" required>
+                                    </div>
+                                    <span ng-show="editable" width="100%">{{fri_arriveTime}}</span>
+                                </td>
+                                <td width="6.4%">
+                                    <div ng-hide="editable">
+                                        <input type="text" readonly width="100%"
+                                               autocomplete="off" name="startTime_Sat" ng-model="startTime_Sat"
+                                               id="startTime_Sat" required>
+                                    </div>
+                                    <span ng-show="editable" width="100%">{{sat_startTime}}</span>
+                                </td>
+                                <td width="6.4%">
+                                    <div ng-hide="editable">
+                                        <input type="text" readonly width="100%"
+                                               autocomplete="off" name="endTime_Sat" ng-model="endTime_Sat"
+                                               id="endTime_Sat" required>
+                                    </div>
+                                    <span ng-show="editable" width="100%">{{sat_arriveTime}}</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="operation-box">
+                <button ng-hide="editable" type="button" name="cancelSupplier" ng-click="cancelFightSetting();" class="btn btn-default"><%=flightSetting_page_cancel%></button>
+                <button ng-hide="editable" type="button" name="submitSupplier" ng-click="submitFightSetting();" class="btn btn-primary"><%=common_page_save%></button>
+            </div>
+        </form>
+    </div>
+</div>

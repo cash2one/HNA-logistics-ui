@@ -1,0 +1,1 @@
+easySpa.require(["widget/select"],function(){function e(e,n,a){function o(){var n=!0;["name1","name2","name3","name4","reply1","reply2"].forEach(function(a){e[a]||(e.customerForm[a].$setDirty(),n=!1)})}e.name="detail",e.descriptions=[{name:"a1"},{name:"a2"}],e.save=function(){o()}}app.controller("detail",["$scope","goodsdesService","goodsdesView",e])});

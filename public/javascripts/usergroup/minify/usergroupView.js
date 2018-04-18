@@ -1,0 +1,1 @@
+app.factory("usergroupView",["usergroupService","$rootScope",function(r,e){var o={};return o.tab=function(r,e){return $(r).tab({callback:e})},o}]);

@@ -1,0 +1,131 @@
+.c-fl{
+    float:left;
+}
+.c-fr{
+    float:right;
+}
+.g-main {
+    position: absolute;
+    bottom: 15px;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    overflow-y: auto;
+    height: auto;
+}
+.text-left{
+    text-align: left;
+}
+.text-right{
+    text-align: right;
+    white-space: nowrap;
+}
+.text-center{
+    text-align: center;
+}
+.disabled, .disabled:hover {
+    background-color: #ddd;
+    border: 1px solid #ddd;
+}
+.content-main{
+    min-height: auto!important;
+    overflow-y: auto;
+}
+.ui-datepicker{
+    z-index:100003!important;
+    background:#fff;
+}
+.u-red-dot{
+    width: 6px;
+    height: 6px;
+    display: inline-block;
+    background: #F96268;
+    border-radius: 6px;
+    margin-right: 6px;
+    vertical-align: middle;
+    margin-left:-12px;
+}
+.g-bills{
+    height: auto;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    position: absolute;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    top: 15px;
+}
+.m-bills-search{
+    padding: 0px 20px 20px 10px;
+    line-height: 34px;
+    border-bottom:1px solid #ddd;
+}
+.m-bills-search .row-list{
+    margin-top:20px;
+}
+.m-bills-btn{
+    margin:10px 15px 10px 30px;
+    position: relative;
+}
+.m-bills-btn .checkbox-info{
+    position: relative;
+    left: -15px;
+}
+.m-bills-btn button{
+    margin-right:10px;
+}
+
+.table-container{
+    background:#fff;
+    padding-bottom:50px;
+}
+.table-container .kkpage{
+    margin-top:0px;
+}
+
+.m-bills-list{
+    border:1px solid #e7e7e9;
+    margin:15px 15px 15px 50px;
+    font-size:16px;
+    position: relative;
+}
+.m-bills-list .checkbox-info{
+    position: absolute;
+    left: -35px;
+    top: 15px;
+}
+.m-bills-list .list-title{
+    background: #f7f8fa;
+    padding:15px;
+    border-bottom: 1px solid #e7e7e9;
+}
+.m-bills-list .list-content{
+    padding:25px 50px;
+}
+.u-clear-condition{
+    cursor: pointer;
+    margin-left:10px;
+    color:#888;
+}
+.u-clear-condition:hover {
+    color:#999;
+}
+
+/* 居中弹框表单样式 */
+.middle-box .bomb-box{
+    height: 430px!important;
+    min-height: 430px!important;
+    min-width: 430px!important;
+}
+.wrap-textarea{
+    position: relative;
+}
+.wrap-textarea .text-legth{
+    position: absolute;
+    bottom: 5px;
+    right: 8px;
+    color: #999;
+}
+.input-error{
+    border-color: #FA787E!important;
+}

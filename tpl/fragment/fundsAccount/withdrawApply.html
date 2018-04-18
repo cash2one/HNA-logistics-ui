@@ -1,0 +1,85 @@
+<div class="c-detail-title">
+    <div class="u-back clearfix">
+        <button ng-click="goBack('withdrawApply');" class="btn btn-default test_2874b5ed">返回</button>
+    </div>
+    <div class="u-title">
+        提现申请
+    </div>
+</div>
+
+<div class="m-withdraw-apply">
+    <form method="post" name="withdrawForm" novalidate="novalidate" ng-submit="submitWithdraw($event)" action="https://my-st1.orangebank.com.cn/corporbank/nonpartyVerify.do" target="_blank">
+        <div class="wrap-withdraw-apply">
+            <ul>
+                <li class="lists">
+                    <span class="left-text">可提现余额：</span>
+                    <span><b>{{accountInfoTotalBalance}}</b> {{accountInfo.currencyCode}}</span>
+                </li>
+                <li class="lists">
+                    <span class="left-text">提现金额：</span>
+                    <div style="display: inline-block;position: relative;">
+                        <input maxlength="9" name="withdrawAmount" ng-model="withdrawAmount" required type="text"
+                               class="input-box"  ng-blur="getFeeCheck()" ng-change="checkWithdrawAmount()"
+                               verification="{'ruleType':'floatTwo','ruleRegMsg':'请输入数字，小数点后最多2位'}">
+                        <div class="verification" style="margin: 0px;">
+                            <span style="padding: 0px;white-space: nowrap;word-break: keep-all;" class="errors"
+                                  ng-show="withdrawForm.withdrawAmount.$viewValue
+                                    && withdrawForm.withdrawAmount.$error.defined
+                                    && withdrawForm.withdrawAmount.$dirty">
+                                {{withdrawForm.withdrawAmount.errorTips}}
+                            </span>
+                        </div>
+                        <div class="verification">
+                            <span class="errors" ng-show="withdrawAmountError"
+                                  style="padding: 0px;white-space: nowrap;word-break: keep-all;">
+                                {{withdrawAmountErrorTips}}
+                            </span>
+                        </div>
+                    </div>
+                    <a href="javascript:;" ng-click="takeAll()">全部提现</a>
+                </li>
+                <li class="lists" style="margin-top:20px;">
+                    <span class="left-text">收款账户：</span>
+                    <span class="right-text">{{accountBank.cardNo + '('+ accountBank.bank +')'}}</span>
+                </li>
+                <li class="lists">
+                    <span class="left-text">手续费：</span>
+                    <span>{{feeMoney}} {{accountInfo.currencyCode}}/笔</span>
+                </li>
+                <li class="lists">
+                    <span class="left-text">到账金额：</span>
+                    <span>{{arrivedMoney}} {{accountInfo.currencyCode}}</span>
+                </li>
+                <li class="lists" style="margin-top: 15px;line-height: 23px;">
+                    <span class="left-text">备注：</span>
+                    <textarea name="note" ng-model="note" ng-trim="false" class="textarea-text" maxlength="120" style="display: inline-block;vertical-align: top;width:auto;height:100px;" required></textarea>
+                </li>
+                <li class="lists">
+                    <span class="left-text">&nbsp;</span>
+                    <span>
+                        <button style="margin-top:35px;" type="submit" class="btn btn-primary">确定</button>
+                    </span>
+                </li>
+            </ul>
+            <div class="p-box">
+                <p>温馨提示：</p>
+                <p>1. 提现一般实时到账；特殊情况以平台公告为准</p>
+                <p>2. 其他提现相关问题请联系客服：029-81325511</p>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="prompt-modal box-tip" ng-show="withdrawPrompt">
+    <div class="prompt-wrap">
+        <div class="bomb-box" style="background: #DFF0D8">
+            <div class="title" style="color: #326B31">
+                请在新开网银页面完成支付
+            </div>
+            <div class="operation">
+                <button ng-click="withdrawResult('failure')" name="prompt-operation" class="btn btn-default success" style="padding:0px;">支付失败，重新支付</button>
+                <button ng-click="withdrawResult('success')" name="prompt-operation" class="btn btn-primary success" style="padding:0px;">支付成功，查看结果</button>
+            </div>
+        </div>
+    </div>
+</div>

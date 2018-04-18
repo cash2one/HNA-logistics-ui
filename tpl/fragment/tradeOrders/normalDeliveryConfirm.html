@@ -1,0 +1,230 @@
+<style>
+    #normalDeliveryOrder .title{
+        text-align: center;
+        font-size: 22px;
+        margin-top: 35px;
+    }
+    #normalDeliveryOrder .headerInfo{
+        float: right;
+        text-align: left;
+        margin-right: 104px
+    }
+
+    #normalDeliveryOrder .headerInfo span{
+        float: right;
+    }
+    #normalDeliveryOrder .headerInfo label{
+        text-align: right;
+        width: 135px;
+        margin-right: 10px;
+    }
+    #normalDeliveryOrder .relative{
+        position: relative;
+
+    }
+
+    #assureMsg span{
+        margin-left: 0px;
+    }
+
+    .content_table {
+        margin-bottom: 1rem;
+        padding: 0;
+    }
+
+    .content_table table {
+        width: 100%;
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+
+    .content_box {
+        position: relative;
+        text-align: left;
+    }
+    .content_table th {
+        text-align: center;
+    }
+
+    .content_table td {
+        text-align: center;
+    }
+    .content_table th:first-child{
+        width: 5%;
+    }
+    .content_table th:nth-child(2){
+        width: 25%;
+    }
+    .content_table th:nth-child(3){
+        width: 25%;
+    }
+    .content_table th:nth-child(4){
+        width: 25%;
+    }
+    .content_table th:nth-child(5){
+        width: 25%;
+    }
+
+    .btn-small {
+        margin-right: 20px;
+        height: 34px;
+        width: 68px;
+        padding: 0;
+    }
+
+    .btn-group {
+        margin-top: 10px;
+        margin-right: 20px;
+    }
+
+    .detail .search-input span {
+         margin-left: 0px!important;
+    }
+
+
+</style>
+
+<div ng-controller="normalDeliveryOrderController" class="detail" id="normalDeliveryOrder">
+    <h1 class="title">收货确认</h1>
+    <button class="btn btn-default btn-bill" ng-click="goBack('fresh')">返回</button>
+    <div id="form-content" style="top:95px;padding-bottom: 0px">
+        <div class="search-order" style="border-bottom-width: 0px;">
+            <div class="search-input">
+                <form  name="normalDeliveryTemplate" id="normalDeliveryTemplate" novalidate="novalidate">
+                    <div class="headerInfo">
+                        <ul>
+                            <li >
+                                <label style="width: 60px;display: inline-block;font-weight: 500;color: #555555">订单号:</label>
+                                <span style="float: right;font-size: 16px">{{orderNo}}</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div style="clear:both"></div>
+                    <div style="width: 100%">
+                        <div class="conformOrderInfo" style="width: 1000px;margin: 0 auto;padding-top: 30px;">
+                            <div style="color: #555555; font-size: 16px;text-align: left;font-weight: 500;" id="assureMsg">
+                                <span>确认收到以下商品：</span>
+                            </div>
+
+                            <div id="productInfo">
+                                <section class="content_box content_table">
+                                    <table>
+                                        <thead>
+                                        <tr>
+                                            <th style="text-align: left;height: 40px;">
+                                                <div class="checkbox checkbox-info">
+                                                    <input type="checkbox" ng-checked="isAllchecked" ng-click="checkAll(template.orderGoods)">
+                                                    <label></label>
+                                                </div>
+                                            </th>
+                                            <th>商品名称</th>
+                                            <th>采购数量</th>
+                                            <th>单价</th>
+                                            <th>总价</th>
+                                        </tr>
+                                        </thead>
+                                        <hr style=" width: 1000px;top: 28px;position: absolute; border: 1px solid #DDDDDD;">
+                                        <tbody>
+                                        <tr ng-repeat="item in template.orderGoods">
+                                            <td style="text-align: left; padding-bottom: 20px;">
+                                                <div class="checkbox checkbox-info">
+                                                    <input type="checkbox" ng-click="checkOne(item,template.orderGoods)" ng-checked="item.checked"  />
+                                                    <label></label>
+                                                </div>
+                                            </td>
+
+                                            <td style=" padding-bottom: 20px;">
+                                                <span style="word-break: break-all;margin-left: 0px">{{item.goodsName}}</span>
+                                            </td>
+                                            <td style=" padding-bottom: 20px;text-align: left">
+                                                <b style="font-size: 16px;color: red;">*</b>
+                                                <div class="relative" style="display: inline-block;">
+                                                    <input ng-trim="false" ng-show="IsEdit" type="text" name="goodsNum{{$index}}" ng-model="item.goodsNum"
+                                                           class="input-text ng-pristine ng-untouched ng-valid ng-valid-defined ng-valid-maxlength"
+                                                           verification="{ruleType:'totalprice'}"
+                                                           maxlength="9" required style="width: 135px">&nbsp;{{item.goodsUnit}}
+                                                    <div class="verification justfiy" ng-show="IsEdit">
+                                                        <span class="errors " style="margin-left: -5px;width: 200px;"
+                                                              ng-show="normalDeliveryTemplate.goodsNum{{$index}}.$viewValue && normalDeliveryTemplate.goodsNum{{$index}}.$error.defined && normalDeliveryTemplate.goodsNum{{$index}}.$dirty">请输入数字，小数点后最多4位</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style=" padding-bottom: 20px;text-align: left">
+                                                <b style="font-size: 16px;color: red;">*</b>
+                                                <div class="relative" style="display: inline-block;">
+                                                    <input ng-trim="false" ng-show="IsEdit" type="text" name="goodsPrice{{$index}}" ng-model="item.goodsPrice"
+                                                           class="input-text ng-pristine ng-untouched ng-valid ng-valid-defined ng-valid-maxlength"
+                                                           verification="{ruleType:'price'}"
+                                                           maxlength="9" required style="width: 135px">&nbsp;{{item.goodsCurrencyType}}/{{item.goodsUnit}}
+                                                    <div class="verification justfiy" ng-show="IsEdit">
+                                                        <span class="errors " style="margin-left: -5px;width: 200px;"
+                                                              ng-show="normalDeliveryTemplate.goodsPrice{{$index}}.$viewValue && normalDeliveryTemplate.goodsPrice{{$index}}.$error.defined && normalDeliveryTemplate.goodsPrice{{$index}}.$dirty">请输入数字，小数点后最多2位</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style=" padding-bottom: 20px;">{{goodsToTal(item)}} &nbsp;{{item.goodsCurrencyType}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="5" style="text-align: left">
+                                                <div style="margin-top: 20px">
+                                                    <label>商品：</label>
+                                                    <div style="display: inline-block">
+                                                        <input ng-trim="false" name="orderGood" type="text" id="orderGood" ng-model="orderGood"
+                                                               placeholder="请输入商品" readonly="readonly" ng-click="InitGoodsSelect()">
+                                                    </div>
+
+                                                    <div class="btn-group clearfix" style="margin-left: 0px">
+                                                        <button class="btn btn-primary btn-small" type="button" ng-click="addGoods()" >添加</button>
+                                                        <button class="btn btn-primary btn-small" type="button"  ng-click="deleteGoods()" >删除</button>
+                                                    </div>
+
+                                                </div>
+
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <div style="float: right" id="priceDetail">
+                                        <div style="margin-bottom: 10px">
+                                            <span style="display: inline-block;width: 100px;">不含税总金额：</span>
+                                            <span style="display: inline-block;width: 120px;">{{totalAmountWithoutVat(template.orderGoods)}}</span>
+                                            <span style="display: inline-block;width: 100px;text-align: right;">{{template.currencyUnit}}</span>
+                                        </div>
+                                        <div style="margin-bottom: 45px;position: relative">
+                                            <span style="display: inline-block;width: 100px;">增值税：</span>
+                                            <span style="display: inline-block;width: 100px;" ng-show="!IsEdit">{{template.vat}}</span>
+                                            <input ng-trim="false" ng-show="IsEdit" type="text" name="vat" ng-model="template.vat"
+                                                class="input-text ng-pristine ng-untouched ng-valid ng-valid-defined ng-valid-maxlength"
+                                                verification="{ruleType:'price'}" style="width: 140px;"
+                                                placeholder="请输入增值税" maxlength="9" required>
+                                            <span style="text-align: right;width: 80px;display: inline-block">{{template.currencyUnit}}</span>
+                                            <div class="verification justfiy" ng-show="IsEdit">
+                                                <span class="errors "  style=" margin-left: 132px;"
+                                                      ng-show="normalDeliveryTemplate.vat.$viewValue && normalDeliveryTemplate.vat.$error.defined && normalDeliveryTemplate.vat.$dirty">{{normalDeliveryTemplate.vat.errorTips}}</span>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <span style="display: inline-block;width: 100px;">总金额：</span>
+                                            <span style="display: inline-block;width: 120px;">{{totalAmount()}}</span>
+                                            <span style="display: inline-block;width: 100px;text-align: right;">{{template.currencyUnit}}</span>
+                                        </div>
+                                    </div>
+                                    <div style="position: relative">
+                                        <hr style="position: absolute;  top: 80px;position: absolute;left: 0;width: 1000px;border: 1px solid #DDDDDD;">
+                                    </div>
+                                </section>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+                <div class="btn-group btn-group-center" style="margin-top: 200px">
+                    <button ng-if="IsEdit"class="btn btn-primary" ng-click="confirm()">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

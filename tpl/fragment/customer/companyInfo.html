@@ -1,0 +1,144 @@
+<form name="companyForm" novalidate="novalidate">
+    <button ng-click="editCompany();" class="btn btn-primary user-edit" ng-if="isEdit && showBtn">编辑</button>
+    <div class="operation-box right">
+        <button ng-show="visible" name="editCompany" ng-click="editCompany();" class="btn btn-primary"><%=common_page_edit%></button>
+    </div>
+    <div class="rows">
+        <dl class="panel">
+            <dd>
+                <div class="content-title"><b ng-show="!isEdit">*</b><%=company_fullname%>：</div>
+                <div class="content-info">
+                    <input ng-show="!isEdit" ng-trim="true" maxlength="100"
+                           name="companyFullName" ng-hide="visible" ng-model="companyFullName" type="text"  required>
+                    <span ng-show="isEdit" style="word-wrap: break-word">{{companyFullName}}</span>
+                    <!--<validatetip from-model="companyForm.companyFullName"></validatetip>-->
+                    <!--<div class="verification">-->
+                        <!--<span class="errors " style="width: 500px;" ng-show="companyForm.companyFullName.$viewValue && companyForm.companyFullName.$error.defined && companyForm.companyFullName.$dirty">{{companyForm.companyFullName.errorTips}}</span>-->
+                    <!--</div>-->
+                </div>
+            </dd>
+            <dd>
+                <div class="content-title"><b ng-show="!isEdit">*</b><%=company_address%>：</div>
+                <div class="content-info">
+                    <input style="width:49%" ng-show="!isEdit" ng-trim="true" id="country" name="country" ng-hide="visible" ng-model="country" type="text" placeholder="请选择国家" required>
+                    <input style="width:49%" ng-show="!isEdit" ng-trim="true" id="city" name="city" ng-hide="visible" ng-model="city" type="text" placeholder="请选择城市" required>
+                    <span ng-show="isEdit">{{country}}-{{city}}</span>
+                    <validatetip from-model="companyForm.country"></validatetip>
+                    <validatetip from-model="companyForm.city"></validatetip>
+                </div>
+            </dd>
+            <dd>
+                <div class="content-title"><b ng-show="!isEdit">*</b><%=company_home%>：</div>
+                <div class="content-info">
+                    <input ng-show="!isEdit" ng-trim="true" maxLength="30" name="home" ng-hide="visible" ng-model="home" type="text"  required>
+                    <span ng-show="isEdit">{{home}}</span>
+                    <validatetip from-model="companyForm.home"></validatetip>
+                </div>
+            </dd>
+            <dd>
+                <div class="content-title"><b ng-show="!isEdit">*</b><%=company_legal_person%>：</div>
+                <div class="content-info">
+                    <input ng-show="!isEdit" ng-trim="true" maxLength="30" name="legalPerson" ng-hide="visible" ng-model="legalPerson" type="text"  required>
+                    <span ng-show="isEdit">{{legalPerson}}</span>
+                    <validatetip from-model="companyForm.legalPerson"></validatetip>
+                </div>
+            </dd>
+            <dd>
+                <div class="content-title"><b ng-show="!isEdit">*</b><%=company_credit_code%>：</div>
+                <div class="content-info">
+                    <input ng-show="!isEdit" ng-trim="true" validate-code="{ruleReg:'code', ruleRegMsg:'<%=common_validate_code%>', maxLength:'30'}" name="creditCode" ng-hide="visible" ng-model="creditCode" type="text"  required>
+                    <span ng-show="isEdit">{{creditCode}}</span>
+                    <validatetip from-model="companyForm.creditCode"></validatetip>
+                </div>
+            </dd>
+            <dd>
+                <div class="content-title"><%=company_bank%>：</div>
+                <div class="content-info">
+                    <input ng-show="!isEdit" ng-trim="true" maxLength="30" name="companyBank" ng-hide="visible" ng-model="companyBank" type="text"  >
+                    <span ng-show="isEdit">{{companyBank}}</span>
+                </div>
+            </dd>
+
+            <dd>
+                <div class="content-title"><%=company_bank_id%>：</div>
+                <div class="content-info">
+                    <input ng-show="!isEdit" validate-code="{'ruleReg':'/^[0-9A-Za-z]*$/', ruleRegMsg:'<%=common_validate_code_two%>', maxLength:'30'}" ng-trim="false" maxLength="30" name="companyBankId" ng-hide="visible" ng-model="companyBankId" type="text"  >
+                    <span ng-show="isEdit">{{companyBankId}}</span>
+                    <validatetip from-model="companyForm.companyBankId"></validatetip>
+                </div>
+            </dd>
+        </dl>
+        <dl class="panel">
+            <dd>
+                <div class="content-title"><b ng-show="!isEdit">*</b><%=company_tel%>：</div>
+                <div class="content-info" id="companyTel-box">
+                    <input ng-show="!isEdit" ng-trim="true" validate-code="{ruleReg:'fix', ruleRegMsg:'<%=common_template_fix%>', maxLength:'30'}"  name="companyTel" ng-hide="visible" ng-model="companyTel" type="text"  required>
+                    <span ng-show="isEdit">{{companyTel}}</span>
+                    <validatetip from-model="companyForm.companyTel"></validatetip>
+                </div>
+            </dd>
+            <dd>
+                <div class="content-title"><b ng-show="!isEdit"></b><%=company_website%>：</div>
+                <div class="content-info">
+                    <input ng-show="!isEdit" ng-trim="true" maxLength="140" name="website" ng-hide="visible" ng-model="website" type="text" >
+                    <span ng-show="isEdit">{{website}}</span>
+                </div>
+            </dd>
+            <!--<dd>-->
+                <!--<div class="content-title"><b ng-hide="visible">*</b><%=company_level%>：</labdiv>
+                <!--<div class="content-info">-->
+                    <!--<input name="rankInfo" ng-value="rankInfo" style="display: none;" id="stars" value="0" type="number" class="rating" min="0" max="5" step="1" data-size="xs" required>-->
+                    <!--<div class="verification">-->
+                        <!--<span class="isExisted" ng-show="validateRankError"></span>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</dd>-->
+            <dd>
+                <div class="content-title"><b ng-show="!isEdit">*</b><%=company_License%>：</div>
+                <div class="img-list-box clearfix" ng-controller="pictureController">
+                    <div class="img-box" ng-mouseleave="picture.mouseleave(pictureModel, $index, $event)" ng-repeat="item in pictureModel.picture">
+                        <div title="{{item.name}}" ng-mousedown="getPictureUrl(item.picUrlID.id)" class="img-pic">
+                            <!-- <img ng-mouseover="picture.mouseover(pictureModel, $index, $event)" ng-show="item.picUrlID.type.indexOf('image') !== -1 && item.picUrlID.type.indexOf('tiff') === -1" class="imgs" ng-src="{{item.picUrlID.path}}" height="80" width="80">
+                            <div ng-mouseover="picture.mouseover(pictureModel, $index, $event)" ng-show="item.picUrlID.type.indexOf('pdf') !== -1" class="imgs" style="background-image: url('../public/img/pdf-file.svg')" height="80" width="80"></div>
+                            <div ng-mouseover="picture.mouseover(pictureModel, $index, $event)" ng-show="item.picUrlID.type.indexOf('image') !== -1 && item.picUrlID.type.indexOf('tiff') !== -1" type="image/tiff" class="imgs" style="background-image: url('../public/img/tiff-file.svg');" height="80" width="80"></div> -->
+                            <img ng-mouseover="picture.mouseover(pictureModel, $index, $event)" ng-show="item.typeImage && item.suffix!='tiff'" class="imgs" ng-src="{{item.picUrlID.path}}" height="80" width="80">
+                            <div ng-mouseover="picture.mouseover(pictureModel, $index, $event)" ng-show="item.typePdf" type="application/pdf" class="imgs" style="background-image: url('../public/img/pdf-file.svg')" height="80" width="80"></div>
+                            <div ng-mouseover="picture.mouseover(pictureModel, $index, $event)" ng-show="item.typeImage && item.suffix=='tiff'" type="image/tiff" class="imgs" style="background-image: url('../public/img/tiff-file.svg');" height="80" width="80"></div>
+                            <p class="file-name-box">{{item.name}}</p>
+                        </div>
+                        <div ng-show="item.delshow" class="img-del" ng-show="pictureModel.edit">
+                            <div ng-mousedown="getPictureUrl(item.picUrlID.id)" class="img-view"></div>
+                            <i ng-click="picture.del(pictureModel, $index)" class="icon-minus-sign icon-minus-delete"></i>
+                        </div>
+                    </div>
+
+                    <div ng-show="pictureModel.uploadShow" class="img-box img-upload-box">
+                        <input multiple="multiple" type="file" accept="image/jpeg,image/png,image/bmp,image/tiff,application/pdf" file-model="avatarFile" class="img-file">
+                        <span class="img-upload-button"></span>
+                    </div>
+                </div>
+                <div class="verification">
+                    <span class="isExisted" ng-show="validatePictureError"><%=company_placeholder_picture%></span>
+                </div>
+            </dd>
+            <dd>
+                <div class="content-title">主营：</div>
+                <!--<remark description="mainBiz"></remark>-->
+                <div class="content-info" style="height: 175px;position: relative; top: 10px;">
+                    <span ng-show="visible" class="text-info">{{mainBiz}}</span>
+                    <textarea style="height: 175px;" maxlength="140" ng-show="!isEdit" ng-trim="true" text-length name="mainBiz" ng-hide="visible" ng-model="mainBiz" type="text" ></textarea>
+                    <span ng-show="isEdit" style="position:relative;top:-10px">{{mainBiz}}</span>
+                </div>
+            </dd>
+        </dl>
+        <div class="creator" ng-if="isEdit">
+            <span style="margin-right:15px"><%=customer_creator%>: {{creator}}</span><span><%=customer_create_date%>: {{createDate}}</span>
+        </div>
+    </div>
+    <div class="save-box" style="margin-top:20px" ng-show="!isEdit">
+        <button ng-if="!isCanEdit" ng-click="cancelCustomer();" style="margin-right:40px" class="btn btn-default">取消</button>
+        <button ng-click="saveCompany();" class="btn btn-primary">保存</button>
+
+    </div>
+</form>
+<div id="slides"></div>

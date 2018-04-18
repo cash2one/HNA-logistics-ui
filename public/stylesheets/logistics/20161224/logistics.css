@@ -1,0 +1,202 @@
+
+
+
+/*
+覆盖canlander的样式
+*/
+.ui-datepicker{
+    width:390px;
+}
+.ui-datepicker td span, .ui-datepicker td a{
+    text-align: center!important;
+
+}
+.ui-datepicker td{
+    width: 14.19%;
+    display: inline-block!important;
+    float:left!important;
+}
+.ui-datepicker .ui-datepicker-title select{
+    width: 14.19%;
+    display: inline-block!important
+}
+.ui-timepicker-div dl dt{
+    font-size:100%;
+}
+.ui-timepicker-div dl dd{
+    font-size:100%;
+    margin: 6px 10px 6px 65px;
+}
+.ui-timepicker-div dl dt{
+    padding: 2%;
+}
+.ui-datepicker .ui-datepicker-title select option{
+    font-size:150%;
+}
+
+
+.logistic {
+
+}
+.logistic .lg-goBack{
+    padding-left: 15px;
+}
+.logistic .lg-title {
+    font-family: PingFangSC-Medium;
+    font-size: 22px;
+    color: #555555;
+    text-align: center;
+}
+.logistic .lg-main{
+    background: #fff;
+    border: 1px solid #ddd;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    bottom: 15px;
+    right: 15px;
+    font-family: PingFangSC-Regular;
+    font-size: 16px;
+    color: #555555;
+    overflow-y: scroll;
+}
+.logistic .lg-row{
+    clear:both;
+    height: 34px;
+    line-height: 34px;
+    padding: 20px 0;
+    width: 100%;
+    max-width:650px;
+}
+.logistic .lgPTitle{
+    font-family: PingFangSC-Medium;
+    font-size: 22px;
+    color: #555555;
+    text-align:center;
+    margin:0px;
+    margin-bottom:20px;
+}
+.logistic .left{
+    width:40%;
+    padding-right:10%;
+    clear:both;
+    display:inline-block;
+    float:left;
+    text-align:right;
+}
+.logistic .right{
+    width:60%;
+    height:100%;
+    display:inline-block;
+    float:left;
+    text-align: left;
+}
+.logistic .left b{
+    display: inline-block;
+    text-align: left;
+    color: red;
+    width: 10px;
+    margin-left: -5px;
+    font-size:14px;
+    font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif;
+}
+
+.orderNumType{
+    width: 30% !important;;
+    height:100%;
+    margin-right:10%;
+    float:left;
+}
+.orderNumNo{
+    display:inline-block;
+    width: 100%;
+    position:relative;
+}
+.verification{
+    position:relative;
+    margin:0px;
+    clear:both;
+    height:34px;
+}
+.verification .errors{
+    padding-left:0px;
+    line-height:34px;
+    display:inline-block;
+}
+.lg-action{
+    width: 100%;
+    text-align: center;
+    margin-top:60px;
+    left: 0;
+    margin-bottom:40px;
+}
+.p5{
+    padding:5px;
+}
+.w100{
+    width:100%;
+}
+
+.error {
+    border: 1px solid #FA787E !important;
+}
+#logisticsForm{
+    width:70%;
+    margin:auto;
+}
+input.ng-invalid.ng-dirty{
+    border-color:#BDBDBD;
+}
+.selectIcon{
+    position: absolute;
+    width: 24px;
+    line-height: 32px;
+    text-align: center;
+    background: #3AAFDA;
+    color: #fff;
+    z-index: 10;
+    right: 0px;
+    top: 2px;
+    pointer-events: none;
+}
+.orderNumList{
+    background: #FFFFFF;
+    border: 1px solid #BDBDBD;
+    border-radius: 2px;
+    height: 200px;
+    overflow-y: scroll;
+    padding: 10px 12px;
+    font-family: PingFangSC-Regular;
+    font-size: 16px;
+    color: #888888;
+    line-height:34px;
+}
+
+#contentP{
+    border-color: #FA787E;
+}
+
+.invalidNum{
+    color:red;
+}
+
+.orderNumNosPH{
+    position:absolute;
+    padding: 10px 12px;
+    opacity: .5;
+    pointer-events: none;
+}
+.listSpan{
+    display:inline-block;
+}
+#ui-datepicker-div{
+    z-index:100!important;
+}
+.orders-error-box{
+    color: #f00;
+    font-size: 14px;
+    line-height: 23px;
+}
+.orders-error-box b{
+    font-weight: normal;
+}

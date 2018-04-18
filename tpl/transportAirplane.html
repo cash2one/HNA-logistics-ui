@@ -1,0 +1,142 @@
+<section class="content has-sides-margin test_4cc50058">
+    <div class="m-table-page test_b91656d6" ng-controller="tableController">
+        <div class="box-header test_7218057f">
+            <div class="search-box test_8ef4e978">
+                <input maxlength="30" ng-enter="getTable(true);" ng-model="tableModel.restData.q" ng-value="q" type="text" class="form-control test_25d14fa0" placeholder="<%=transportAirplane_page_searchPlaceholder%>">
+                <i class="icon-search search-table test_70f1d7d5"></i>
+                <div class="u-search-btn test_dd425a3f">
+                    <button ng-click="getTable(true);" class="btn btn-primary test_cbf557c7"><%=common_list_search_btn%></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="batch-operation test_270d908f">
+            <button ng-click="add();" class="btn btn-primary test_37b718ed"><%=common_page_add%></button><button ng-click="del();" class="btn btn-primary test_b58a3c66"><%=common_page_delete%></button><button ng-click="international();" class="btn btn-primary test_ef04f184"><%=transportAirplane_page_international%></button>
+        </div>
+
+        <div class="table-container test_157c955e">
+            <table class="transport-table table-box test_71b702c9" cellpadding="0" cellspacing="0">
+                <thead class="test_b304f859">
+                    <tr class="test_8ff9a5e0">
+                        <th class="test_a885d8bb">
+                            <div class="checkbox checkbox-info test_f24fc865">
+                                <input type="checkbox" ng-model="tableModel.selectFlag" ng-click="table.selectAll(tableModel);" class="test_5c9dc218">
+                                <label class="test_69d55284"></label>
+                            </div>
+                        </th>
+                        <th ng-repeat="item in tableModel.tableHeader" class="test_d6efeed2">{{item}}</th>
+                    </tr>
+                </thead>
+
+                <tbody class="test_5b3ec957">
+                    <tr ng-repeat="value in tableModel.tableBody" class="test_42841555" ng-init="renderFinish($last)">
+                        <td class="test_45ad70a8">
+                            <div class="checkbox checkbox-info test_0a373f20">
+                                <input type="checkbox" ng-checked="value.checkbox" ng-click="table.selectOne(tableModel, value.checkboxId, $event);" class="test_750cc94b">
+                                <label class="test_ba2cf926"></label>
+                            </div>
+                        </td>
+                        <td class="test_56ba8cd8">{{(tableModel.pagination.currentPage-1)*tableModel.pagination.pageSize+$index+1}}</td>
+                        <td class="test_5eda8a75" title="{{value.name}}">
+                            <a href="javascript:;" ng-click="edit(value.id)" ng-bind-html="value.name | trustHtml:q" class="test_f322c17b"></a>
+                        </td>
+                        <td title="{{value.iata}}" ng-bind-html="value.iata | trustHtml:q" class="test_096592a3"></td>
+                        <td title="{{value.icao}}" ng-bind-html="value.icao | trustHtml:q" class="test_608b2a42"></td>
+                        <td title="{{value.payload}}" class="test_fd9421d9">{{value.payload}}</td>
+                        <td title="{{value.description}}" class="test_ff4b9081">{{value.description}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <hnapagination table-service="table" page-table-model="tableModel" class="test_580a66ce"></hnapagination>
+        </div>
+
+        <div ng-show="!tableModel.pagination.isVisiblePage" style="position: absolute;top:165px;bottom:0px;width:100%;" class="test_0006af42">
+            <img style="width:100%;height:100%;" src="/public/img/undefined.svg" class="test_a9162fb0">
+        </div>
+    </div>
+    <div id="slides" class="test_58a13f04"></div>
+</section>
+
+
+<div style="display: none;" ng-show="nestTransportForm" id="nest-TransportFrom" class="prompt-modal middle-box test_9659cd43">
+    <div class="prompt-wrap test_522011e5">
+        <div class="bomb-box test_e767734c">
+            <div class="title test_830c4200"><%=transportAirplane_page_add%></div>
+            <div class="prompt-content test_85bfdacf">
+                <form name="TransportForm" novalidate="novalidate" class="test_398207eb">
+                    <div id="TransportForm" class="test_39a88695">
+                        <div ng-click="" class="label-text test_7431b3da"><%=transportAirplane_page_baseInfo%><i style="transform:rotate(0deg);" class="icon-more-down icon-angle-down test_639bd663"></i></div>
+                        <ul class="isContainer switch-list test_799dc195">
+                            <li class="test_0d44fd3a">
+                                <label class="test_db575eb3"><b class="test_c773af64">*</b><%=transportAirplane_page_name%>：</label>
+                                <input ng-trim="false" class="input-text test_2ab58319" verification="{'ruleType':'name'}" maxlength="{{TransportForm.transportName.maxLength}}" name="transportName" ng-model="transportName" type="text" required>
+                                <div class="verification test_899cac6f">
+                                    <span class="errors test_211dbe0b" ng-show="TransportForm.transportName.$viewValue && TransportForm.transportName.$error.defined && TransportForm.transportName.$dirty">{{TransportForm.transportName.errorTips}}</span>
+                                </div>
+                            </li>
+                            <li class="test_d5dc4199">
+                                <label class="test_144762aa"><b class="test_44e2e739">*</b><%=transportAirplane_page_iata%>：</label>
+                                <input ng-trim="false" style="text-transform: uppercase;" ng-blur="checkIata()" class="check-iata input-text test_67cbc739" verification="{'ruleReg':'/^[A-Za-z0-9]{3}$/', 'ruleRegMsg':'<%=transportAirplane_page_iataRegMsg%>', 'maxLength':'3'}" maxlength="{{TransportForm.transportIata.maxLength}}" name="transportIata" ng-model="transportIata" type="text" autocomplete="off" required>
+                                <div class="verification test_836099ec">
+                                    <span id="code-msg" class="errors test_d26fac7e" ng-show="TransportForm.transportIata.$viewValue && TransportForm.transportIata.$error.defined && TransportForm.transportIata.$dirty">{{TransportForm.transportIata.errorTips}}</span>
+                                </div>
+                            </li>
+                            <li class="test_158ffccc">
+                                <label class="test_45ab0ef2"><b class="test_e5cb6f58">*</b><%=transportAirplane_page_icao%>：</label>
+                                <input ng-trim="false" style="text-transform: uppercase;" class="input-text test_0cae3a71" verification="{'ruleReg':'/^[\\\w_\\\-]{4}$/', 'ruleRegMsg':'<%=transportAirplane_page_icaoRegMsg%>', 'maxLength':'4'}" maxlength="{{TransportForm.transportIcao.maxLength}}" name="transportIcao" ng-model="transportIcao" type="text" autocomplete="off" required>
+                                <div class="verification test_2c6a617a">
+                                    <span class="errors test_5c504d36" ng-show="TransportForm.transportIcao.$viewValue && TransportForm.transportIcao.$error.defined && TransportForm.transportIcao.$dirty">{{TransportForm.transportIcao.errorTips}}</span>
+                                </div>
+                            </li>
+                            <li class="test_07b10bdd">
+                                <label class="test_4dcbdf84"><%=transportAirplane_code_maxPlayLoad%>：</label>
+                                <input verification="{'ruleType':'payload','maxLength':'10','ruleRegMsg':'<%=transportAirplane_page_payloadRegMsg%>'}" maxlength="{{TransportForm.transportPayload.maxLength}}" ng-trim="false" class="input-text test_6558efed" name="transportPayload" ng-model="transportPayload" type="text">
+                                <div class="verification test_2c6a617a">
+                                    <span class="errors test_5c504d36" ng-show="TransportForm.transportPayload.$viewValue && TransportForm.transportPayload.$error.defined && TransportForm.transportPayload.$dirty">{{TransportForm.transportPayload.errorTips}}</span>
+                                </div>
+                            </li>
+                            <li class="test_8aeec996">
+                                <label class="test_48a43f15"><%=transportAirplane_page_picture%>：</label>
+                                <div class="img-list-box clearfix test_f2c60259" ng-controller="pictureController">
+                                    <div class="img-box test_2d2adf9f" ng-mouseleave="picture.mouseleave(pictureModel, $index, $event)" ng-repeat="item in pictureModel.picture">
+                                        <div title="{{item.name}}" ng-click="getPictureUrl(item.picUrlID.id)" ng-mouseover="picture.mouseover(pictureModel, $index, $event)" class="img-pic test_bec0c295">
+                                            <img ng-if="item.typeImage && item.suffix!='tiff'" class="imgs test_de734bc0" ng-src="{{item.picUrl}}" width="80" height="80">
+                                            <div ng-if="item.typePdf" type="application/pdf" class="imgs test_5e90ca9c" style="background-image: url('../public/img/pdf-file.svg');" height="80" width="80"></div>
+                                            <div ng-if="item.typeImage && item.suffix=='tiff'" type="image/tiff" class="imgs test_42b02f6a" style="background-image: url('../public/img/tiff-file.svg');" height="80" width="80"></div>
+                                        </div>
+                                        <div ng-show="item.delshow" ng-click="picture.del(pictureModel, $index)" class="img-del test_2a43c8f1" ng-if="pictureModel.edit">
+                                            <i ng-click="picture.del(pictureModel, $index)" class="icon-minus-sign icon-minus-delete test_8a09f2a3"></i>
+                                        </div>
+                                    </div>
+
+                                    <div ng-if="pictureModel.uploadShow" class="img-box img-upload-box test_b7cda477">
+                                        <input multiple="multiple" type="file" accept="image/jpeg,image/png,image/bmp,image/tiff,application/pdf" file-model="avatarFile" class="img-file test_828140f1">
+                                        <span class="img-upload-button test_e0971b9b"></span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="test_846b115a">
+                                <label class="test_8f1be645"><%=common_page_remarks%>：</label>
+                                <div class="remark-info test_4defd165">
+                                    <textarea style="height:92px;" ng-change="showTextNumber();" maxlength="140" ng-trim="false" rows="5" ng-model="remark" class="form-control textarea-text test_e86bcdf9"></textarea>
+                                    <div class="show-string-length test_f95c22dd"><span class="test_e1b32dcc">{{textareaNumber}}</span>字</div>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="label-text test_2f1d1357"><%=transportAirplane_page_interName%><i style="transform:rotate(0deg);" class="icon-more-down icon-angle-right test_7ebc2b93"></i></div>
+                        <ul class="isContainer switch-list test_3f27db00" id="globalization">
+                            <li ng-repeat="item in language" class="test_b44b1f89">
+                                <label class="test_eecebf5c">{{item.localName}}：</label>
+                                <input maxlength="30" data-localname="{{item.localName}}" data-id="{{item.id}}" data-code="{{item.code}}" class="input-text test_ff5155d3" type="text">
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+            <div class="operation test_2f67a5ee">
+                <button ng-click="cancel();" name="prompt-close" class="btn btn-default test_72110f4c" data-event="close"><%=common_page_cancel%></button>
+                <button ng-click="save();" name="prompt-save" class="btn btn-primary test_b5eb5f44" data-event="close"><%=common_page_save%></button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,71 @@
+<section class="content test_27e771d8">
+    <!-- 组织机构树 -->
+    <div class="col-md-4 tree-container test_5578ad52">
+        <div class="box-header with-border tree test_3c3e1065">
+            <div class="seach-tree test_ecc0f91f">
+                <input type="text" name="organization" maxlength="30" class="form-control test_5fc94ed8" placeholder="<%=common_tree_searchGroup%>">
+            </div>
+        </div>
+        <div class="tree-scroll-box test_f85f890d">
+            <div id="tree" class="layout-container test_965d0270"></div>
+        </div>
+    </div>
+    <!-- 组织机构详情 -->
+    <div class="col-md-8 group-detail-box right-panel-box test_c5b6783c">
+        <div class="org-dtails layout-right test_3e89b257">
+            <form name="form" novalidate="novalidate" class="test_470ad6c4">
+                <input ng-model="organizationId" name="newOrganizationId" data-value="" type="hidden" class="test_b207a4ad">
+                <input ng-model="parentId" type="hidden" class="test_e9b4ad65">
+                <div class="box-header with-border tree-detail-box test_adec84bc">
+                    <button ng-click="editOrg();" ng-hide="show" name="edit-org" class="btn btn-primary test_384f756c"><%=common_page_edit%></button>
+                </div>
+                <dl class="group-from test_292222cd" data-orgid="{{orgId}}">
+                    <dd class="test_81ee4727">
+                        <label class="test_5cbaf9c5"><b ng-show="visible" class="test_00fae469">*</b><span class="test_1cc33a25"><%=group_page_orgName%></span></label>
+                        <span id="orgName" class="group-info test_02ae71bf" ng-hide="visible">{{orgName}}</span>
+                        <input ng-trim="false" validate-code="{ruleReg:'name', ruleRegMsg:'<%=common_validate_name%>', maxLength:'30'}" ng-show="visible" ng-model="orgNameInfo" name="orgNameInfo" ng-blur="validateOrgName();" ng-focus="focusOrgName();" type="text" class="form-control test_184b01dd" required>
+                        <div class="verification test_9f58e175" ng-show="visible">
+                            <span class="isExisted test_6249aecd" ng-show="validateOrgError"><%=group_validate_groupName%></span>
+                            <span class="errors test_efb5466d" ng-show="form.orgNameInfo.$viewValue && form.orgNameInfo.$error.defined && form.orgNameInfo.$dirty">
+                            {{form.orgNameInfo.errorTips}}
+                            </span>
+                        </div>
+                    </dd>
+                    <dd class="test_fa621590">
+                        <label class="test_f95102b0"><b ng-show="visible" class="test_f5ae767e">*</b><span class="test_cd0c3112"><%=group_page_orgShortName%></span></label>
+                        <span id="orgShortName" class="group-info test_ecffc507" ng-hide="visible">{{orgShortName}}</span>
+                        <input ng-trim="false" validate-code="{ruleReg:'name', ruleRegMsg:'<%=common_validate_name%>', maxLength:'30'}" ng-show="visible" ng-model="orgShortNameInfo" name="orgShortNameInfo" ng-blur="validateOrgShortName();" ng-focus="focusOrgShortName();" type="text" class="form-control test_3394c207" required>
+                        <div class="verification test_2f586e76" ng-show="visible">
+                            <span class="isExisted test_31dd73e2" ng-show="validateOrgShortError"><%=group_validate_orgShortName%></span>
+                            <span class="errors test_4ca22836" ng-show="form.orgShortNameInfo.$viewValue && form.orgShortNameInfo.$error.defined && form.orgShortNameInfo.$dirty">
+                            {{form.orgShortNameInfo.errorTips}}
+                            </span>
+                        </div>
+                    </dd>
+                    <dd class="test_6bcc833c">
+                        <label class="test_264f7cd7"><b ng-show="visible" class="test_338c9a84">*</b><span class="test_46a1ae2e"><%=group_page_orgCode%></span></label>
+                        <span id="orgCode" class="group-info test_aa541752" ng-hide="visible">{{orgCode}}</span>
+                        <input ng-trim="false" validate-code="{ruleReg:'code', ruleRegMsg:'<%=common_validate_code%>', maxLength:'15'}" ng-show="visible" ng-model="orgCodeInfo" name="orgCodeInfo" ng-blur="validateOrgCode();" ng-focus="focusOrgCode();" type="text" class="form-control test_13d5998c" required>
+                        <div class="verification test_3127b626" ng-show="visible">
+                            <span class="isExisted test_ff1595a3" ng-show="validateCodeError"><%=group_validate_orgCode%></span>
+                            <span class="errors test_896f1af9" ng-show="form.orgCodeInfo.$viewValue && form.orgCodeInfo.$error.defined && form.orgCodeInfo.$dirty">
+                            {{form.orgCodeInfo.errorTips}}
+                            </span>
+                        </div>
+                    </dd>
+                    <dd class="test_2332588c" style="height: 125px;">
+                        <label class="test_99b2c405"><%=group_page_description%></label>
+                        <span id="description" class="group-info test_a10b201b" ng-hide="visible">{{description}}</span>
+                        <textarea style="height: 93px;" ng-trim="false" ng-show="visible" ng-focus="visibleTextNumber();" ng-blur="hiddenTextNumber();" ng-change="showTextNumber();" ng-model="descriptionInfo" name="descriptionInfo" type="text" maxlength="140" class="form-control test_485d4dfa">
+                        </textarea>
+                        <div ng-show="textCountVisible" class="show-string-length test_d651b438"><span class="test_a36ba73c">{{textNumber}}</span>字</div>
+                    </dd>
+                </dl>
+                <div class="box-header with-border tree-detail-box center test_8cd45f6f">
+                    <button ng-click="cancelOrg();" ng-show="show" name="cancel-org" class="btn btn-default test_1d098116"><%=common_page_cancel%></button>
+                    <button ng-click="saveOrgInfo();" ng-show="show" name="save-org" ng-disabled="" class="btn btn-primary test_b59bd7e1"><%=common_page_save%></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

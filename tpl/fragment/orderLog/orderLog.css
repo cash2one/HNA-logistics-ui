@@ -1,0 +1,165 @@
+/*tab切换*/
+.bill-tabs {
+    position: absolute;
+    top: 95px;
+    left: 15px;
+    height:50px;
+    z-index: 2;
+}
+.bill-tabs li{
+    width: 160px;
+    height: 50px;
+    float: left;
+    background: #F6F6F6;
+    border: 1px solid #DDDDDD;
+    color: #555;
+    font-size: 18px;
+    text-align: center;
+    line-height: 50px;
+    cursor: pointer;
+}
+
+.bill-tabs li:nth-child(1).active{
+    border-right: 1px solid #fff;
+}
+
+.bill-tabs li:nth-child(2).active{
+    border-left: 1px solid #fff;
+}
+
+.bill-tabs li.active{
+    background-color: #fff;
+    border-bottom-color: #fff;
+    cursor: default;
+}
+
+
+/*操作日志*/
+.operation-log{
+    padding:79px 95px;
+    overflow-y: auto;
+}
+
+.log-table{
+    border-left: 1px solid #dbdbdb;
+    border-right: 1px solid #dbdbdb;
+}
+
+.log-table td{
+    text-align: center;
+}
+
+.log-table th:nth-child(1), .log-table td:nth-child(1){
+    width: 6%;
+}
+
+.log-table th:nth-child(2), .log-table td:nth-child(2){
+    width: 18%;
+}
+
+.log-table th:nth-child(3), .log-table td:nth-child(3){
+    width: 19%;
+}
+
+.log-table th:nth-child(4), .log-table td:nth-child(4){
+    width: 15%;
+}
+
+.log-table th:nth-child(5), .log-table td:nth-child(5){
+    width: 12%;
+}
+
+.log-table th:nth-child(6), .log-table td:nth-child(6){
+    width: 15%;
+}
+
+.log-table th:nth-child(7), .log-table td:nth-child(7){
+    width: 15%;
+}
+
+.log-table .modify-type{
+    color: #3BAFDA;
+    cursor: pointer;
+}
+
+.log-detail-modal .bomb-box{
+    width: 1080px;
+    min-height: auto;
+    background-color: #fff;
+}
+
+.log-detail-modal .title{
+    height: 60px;
+    line-height: 60px;
+    background-color: #3BAFDA;
+    padding: 0;
+    color: #fff;
+    font-size: 22px;
+}
+
+.log-detail-modal .prompt-content{
+    width: 900px;
+    margin: 50px auto 0;
+    padding: 0;
+}
+
+.log-detail-modal table{
+    border-left: 1px solid #dbdbdb;
+    border-right: 1px solid #dbdbdb;
+}
+
+.log-detail-modal .operation{
+    width: 120px;
+    height: 34px;
+    line-height: 34px;
+    background-color: #3BAFDA;
+    font-size: 16px;
+    color: #fff;
+    padding: 0;
+    margin:48px auto 30px;
+    cursor: pointer;
+}
+
+.log-detail-modal .table-box td{
+    white-space: normal;
+    line-height: 28px;
+}
+
+.log-detail-modal .table th:nth-child(1){
+    width: 10%;
+}
+
+.log-detail-modal .table th:nth-child(2){
+    width: 90%;
+}
+
+.log-detail-modal .table td:nth-child(1){
+    width: 10%;
+}
+
+.log-detail-modal .table td:nth-child(2){
+    width: 90%;
+}
+
+.log-detail-modal .table-box .record-txt-detail{
+    text-align: left;
+    padding-left: 15px;
+}
+
+.log-detail-modal .record-detail{
+    overflow: hidden;
+    text-align: left;
+}
+
+
+.log-detail-modal .record-detail span{
+    float: left;
+    width:10%;
+    text-align: right;
+}
+
+.log-detail-modal .record-detail p{
+    float: right;
+    width:90%;
+}
+

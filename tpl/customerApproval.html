@@ -1,0 +1,138 @@
+<style>
+    ul.nav-tabs li {
+        width: auto;
+    }
+    @media (min-width: 1600px) {
+        ul.nav-tabs li {
+            width: 160px;
+        }
+    }
+    @media (min-width: 1200px) and (max-width: 1600px) {
+        ul.nav-tabs li {
+            width: 130px;
+        }
+    }
+    @media (min-width: 900px) and (max-width: 1200px) {
+        ul.nav-tabs li {
+            width: 110px;
+        }
+    }
+</style>
+<section class="content type-filter-layout test_6aefeced">
+    <!-- =========服务listTable列表======== -->
+    <div class="only-list test_8e972574" ng-hide="main" ng-controller="tableController">
+        <!-- ****类型列表检索* -->
+        <div class="add-search-box test_3f6f0edc">
+            <!-- 检索框 -->
+            <div class="list-search-box test_8bdbe3b5">
+                <input maxlength="30" ng-enter="retrievalCustomerList();" ng-model="tableModel.restData.q" ng-value="q" type="text" class="form-control test_ac059b81" placeholder="<%=customer_search_condition%>">
+                <i class="icon-search search-table test_bfff96a3"></i>
+                <div class="senior-seach has-senior test_54681aa8">
+                    <button ng-click="retrievalCustomerList();" class="btn btn-primary test_48e0df86"><%=common_list_search_btn%></button>
+                    <button ng-click="seniorFilter();" class="btn btn-transparent test_0de06deb">{{seniorText}}</button>
+                </div>
+            </div>
+            <!-- 高级筛选 -->
+            <div ng-init="initSelectList();" class="senior-box senior-rows test_6d2a090a" ng-show="showSenior">
+
+                <div ng-show="userType == 1" class="senior-panel test_6906ac07">
+                    <label class="senior-label test_826f3d77">价格套餐：</label>
+                    <div class="select-box test_82b91afe">
+                        <input style="width:180px" class="select-input test_e1ec28fc" readonly="readonly" maxlength="15" type="text" ng-click="selectCustomerCombos();" id="combos" ng-model="combosName" ng-value="combosId">
+                        <i class="select-icon icon-drop-down test_f1ae0d4d"></i>
+                    </div>
+                </div>
+                <div class="senior-panel test_5b009e65">
+                    <label class="senior-label test_36ffbb2f">客户等级：</label>
+                    <div class="select-box test_d4f8aa95" style="margin-right: 5px;">
+                        <input style="width:180px" class="select-input test_1afff5eb" readonly="readonly" maxlength="15" type="text" ng-click="selectCustomerEvaluateLeval();" id="evaluateLeval" ng-model="evaluateLevalName" ng-value="evaluateLevalId">
+                        <i class="select-icon icon-drop-down test_09d5e953"></i>
+                    </div>
+                    <div class="checkbox checkbox-info checkbox-filter test_666fd342">
+                        <input type="checkbox" ng-click="checkEvaluateLeval($event);" ng-checked="seniorChecked" class="check test_f2a21af9">
+                        <label class="test_64703ca4"></label>
+                    </div>
+                    <span class="test_757a5e39" style="vertical-align:middle">及以上</span>
+                </div>
+                <div class="senior-panel test_5b009e65">
+                    <label class="senior-label test_36ffbb2f">审核状态：</label>
+                    <div class="select-box test_82b91afe">
+                        <input style="width:180px" class="select-input test_e1ec28fc" readonly="readonly" maxlength="15" type="text" ng-click="selectAuditState();" id="auditState" ng-model="auditStateName" ng-value="auditStateId">
+                        <i class="select-icon icon-drop-down test_f1ae0d4d"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ****类型列表List* -->
+        <div class="white-background test_60e00507">
+
+            <div class="table-container test_098caf24">
+                <div include="tpl/fragment/customer/mainTable.html" class="test_bdef6d33"></div>
+            </div>
+            <div ng-show="!tableModel.pagination.isVisiblePage" style="position: absolute;top:165px;bottom:0px;width:100%;" class="test_eac06961">
+                <img style="width:100%;height:100%;" src="/public/img/undefined.svg" class="test_eedf8eec">
+            </div>
+        </div>
+    </div>
+
+    <!-- =========添加客户======== -->
+    <div ng-show="main" class="test_f9739e5c">
+        <div class="go-back test_6eda9c5b">
+            <button ng-click="goBackCustomer();" class="btn btn-default test_63370382"><%=customer_goback%></button>
+        </div>
+
+        <div class="audit_fail" ng-if="auidtMessage">
+            <div class="audit_fail_img">
+                <img src="/public/img/warning.svg" style="width: 40px">
+            </div>
+            <div class="audit_fail_reason">
+                <span>未通过原因:</span>
+                <pre class="fail_reason">{{auidtMessage}}</pre>
+            </div>
+        </div>
+
+        <div class="add-title test_37e0652e">
+            <p class="test_71493624">
+                <%=customer_audit_customer%>
+            </p>
+        </div>
+
+        <div class="from-box test_62d4748b">
+            <div class="m-tab test_3e82ecaf" id="m-tab">
+                <ul class="nav nav-tabs clearfix test_dcc13498">
+                    <li class="active test_e6288791">
+                        <a href="javascript:void(0);" class="test_915322ce">
+                            <%=customer_user_info%>
+                        </a>
+                    </li>
+                    <li class="test_9d8deced">
+                        <a href="javascript:void(0);" class="test_a324fd92">
+                            <%=customer_company_info%>
+                        </a>
+                    </li>
+                    <li class="test_3f760530">
+                        <a href="javascript:void(0);" class="test_c9ebcf73">
+                            <%=customer_account%>
+                        </a>
+                    </li>
+
+                </ul>
+                <div class="tab-content test_34693d04">
+                    <!-- 账户信息 -->
+                    <div class="table-pane active test_02c07b26">
+                        <div include="tpl/fragment/customer/userInfo.html" class="test_e0468e25" id="userInfo"></div>
+                    </div>
+                    <!-- 公司信息 -->
+                    <div class="table-pane test_990b1261">
+                        <div include="tpl/fragment/customer/companyInfo.html" class="test_fbbe1d90" ng-controller="companyCtr"></div>
+                    </div>
+                    <!-- 账号 -->
+                    <div class="table-pane test_0f0c4d35">
+                        <div include="tpl/fragment/customer/account.html" class="test_779a33c0" ng-controller="accountCtr"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

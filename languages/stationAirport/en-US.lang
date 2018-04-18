@@ -1,0 +1,43 @@
+{
+    "airport_title_detail": "Essential information",
+    "airport_title_international": "Internationalization",
+
+    "airport_label_name": "Airport name：",
+    "airport_label_country": "Country：",
+    "airport_label_city": "City：",
+    "airport_label_triadCode": "TriadCode：",
+    "airport_label_tetradCode": "TetradCode：",
+    "airport_label_remark": "Remark：",
+
+    "airport_label_cn": "English：",
+    "airport_label_hk": "chinese traditional：",
+
+    "airport_validate_name": "Airport name already exists",
+    "airport_validate_triadCode": "The three code already exists",
+    "airport_validate_tetradCode": "The four code already exists",
+
+    "airport_placeholder_name": "Please enter airport name",
+    "airport_placeholder_country": "Please enter country name",
+    "airport_placeholder_city": "Please enter city name",
+    "airport_placeholder_triadCode": "Please enter the code three",
+    "airport_placeholder_tetradCode": "Please enter the code four",
+    "airport_placeholder_remark": "Please enter a note",
+
+    "airport_search_list": "Please enter a name, country, city, three word or four word",
+
+    "airport_table_name": "Airport name",
+    "airport_table_country": "Country",
+    "airport_table_city": "City",
+    "airport_table_triadCode": "TriadCode",
+    "airport_table_tetradCode": "TetradCode",
+    "airport_table_remark": "Remark",
+
+    "airport_prompt_new": "Add Airport",
+    "airport_prompt_edit": "Airport details",
+
+    "airport_prompt_delete": "Delete selected Airport？",
+
+    "airport_input_three_code_limit" : "Please input three English letters",
+    "airport_input_four_code_limit" : "Please input four English letters",
+    "airport_prompt_delay_tip" : "Please select Data"
+}

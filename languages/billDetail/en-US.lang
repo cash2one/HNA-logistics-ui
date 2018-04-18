@@ -1,0 +1,21 @@
+{
+    "order_number": "order number",
+    "order_number_placer": "Please enter the order number",
+    "billing_time": "Billing time",
+    "account_name": "account name",
+    "account_name_placer": "Please enter the account name",
+    "product_name": "product name",
+    "product_name_placer": "Please enter the product name",
+    "clear_search_data": "Clear the search criteria",
+    "count": "total",
+    "audit_opinion": "Audit opinion",
+    "to_draft": "Back draft",
+    "audit_passed": "examination passed",
+    "audit_tips": "Please select an audit opinion first",
+    "comments": "Comments",
+    "comments_placer": "Please enter a comment",
+    "submit_opinion": "Submit an opinion",
+    "account_detail": "Billing details",
+    "product_names": "product name",
+    "price_detail": "Price Detail"
+}

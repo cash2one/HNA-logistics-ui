@@ -1,0 +1,259 @@
+<section ng-show="!block" class="content test_9dc04e6d">
+    <div class="g-bills test_6ae2f7be">
+        <div class="m-bills-search test_2f9c6619">
+            <div class="row row-list clearfix test_09c084fe">
+                <div ng-class="{'text-right':true,'col-md-4':true}" class="test_ff4c1fb2">
+                    <div class="row clearfix test_53ab1948">
+                        <div class="text-right col-md-3 test_65446fde">
+                            <%=account_number%>
+                        </div>
+                        <div class="text-left col-md-9 test_0fe13090" style="padding:0px;">
+                            <input ng-model="billNum" ng-enter="search()" type="text" maxlength="30" autocomplete="off" class="test_ec56932c">
+                        </div>
+                    </div>
+                </div>
+                <div ng-class="{'text-right':true,'col-md-4':true}" class="test_fc008c12">
+                    <div class="row clearfix test_cd685391">
+                        <div class="text-right col-md-3 test_44d8f35c">{{ module == 'trade' ? '订单号' : '运单号' }}</div>
+                        <div class="text-left col-md-9 test_f254ba0b" style="padding-left:0px;"> 
+                            <input ng-model="orderNum" ng-enter="search()" type="text" maxlength="30" autocomplete="off" class="test_30b5b7ba">
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="submodule == 'receive'" ng-class="{'text-right':true,'col-md-4':true}" class="test_9e795fe2">
+                    <div class="row clearfix test_32e56e14">
+                        <div class="text-right col-md-3 test_a1850469">
+                            <%=client%>
+                        </div>
+                        <div class="text-left col-md-9 test_21a5c6a2" style="padding-left:0px;">
+                            <input id="select-customer" ng-click="getCustomer();" ng-model="$parent.customerName" ng-value="customerValue" type="text" class="test_5ab28b3d">
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="submodule == 'pay'" ng-class="{'text-right':true,'col-md-4':true}" class="test_ce69d000">
+                    <div class="row clearfix test_f964272e">
+                        <div class="text-right col-md-3 test_0b34288b">
+                            供应商
+                        </div>
+                        <div class="text-left col-md-9 test_58ff73fc" style="padding-left:0px;">
+                            <input id="select-supplier" ng-click="getSupplier();" ng-model="customerName" ng-value="customerValue" type="text" class="test_33320cbe">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row row-list clearfix test_7a9df0b1">
+                <div ng-show="module == 'trade'" class="text-right col-md-4 test_47782bf1">
+                    <div class="row clearfix test_98d488f5">
+                        <div class="text-right col-md-3 test_637eabbe" style="padding-left:0px;">
+                            平台实体
+                        </div>
+                        <div class="select-box text-left col-md-9 test_0ae76e52" style="padding-left:0px;">
+                            <input readonly="readonly" id="select-platform" ng-click="getPlatform();" ng-model="platform" ng-value="platformValue" type="text" class="test_7c73bc74">
+                            <i class="select-icon icon-drop-down test_fd281abd" style="right: 15px;"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-right col-md-5 test_a1168fae">
+                    <div class="row clearfix test_84c05bd0">
+                        <div class="text-right col-md-2 test_33c2b9a8" style="margin-left: 15px;">
+                            <%=bill_cycle%>
+                        </div>
+                        <div class="text-left col-md-4 test_4a8684b1" style="padding-left:0px;padding-right:0px;">
+                            <input id="begin-time" ng-model="startTime" type="text" maxlength="30" autocomplete="off" class="test_111d7ba4">
+                        </div>
+                        <div class="text-center col-md-1 test_fcb8174e" style="padding:0px;">
+                            ~
+                        </div>
+                        <div class="text-left col-md-4 test_1a6631fd" style="padding-left:0px;padding-right:0px;">
+                            <input id="end-time" ng-model="endTime" type="text" maxlength="30" autocomplete="off" class="test_53350d94">
+                        </div>
+                    </div>
+                </div>
+                <div class="text-right col-md-2 test_2cb81854">
+                    <div class="row clearfix test_e74113e4">
+                        <div class="text-right col-md-4 test_0e8c7fbc">
+                            <%=status%>
+                        </div>
+                        <div class="text-left col-md-8 test_df37797b" style="padding-left:0px;">
+                            <div class="select-box test_cb529ae4">
+                                <input ng-model="status" ng-value="statusValue" ng-click="showStatus();" id="select-status" readonly="readonly" type="text" maxlength="30" autocomplete="off" placeholder="<%=common_all_tips%>" class="test_2b09f948">
+                                <i class="select-icon icon-drop-down test_5c7f7bfb"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="module == 'logistics'" class="text-right col-md-3">
+                    <div class="row clearfix">
+                        <div class="text-right col-md-4">
+                            结算方式
+                        </div>
+                        <div class="text-left col-md-8" style="padding-left:0px;">
+                            <div class="select-box">
+                                <input ng-model="payWay" ng-click="showPayWay();" id="select-payWay" readonly="readonly" type="text" maxlength="30" autocomplete="off" placeholder="<%=common_all_tips%>">
+                                <i class="select-icon icon-drop-down"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="module == 'logistics'" class="col-md-2 test_bab31087" style="white-space: nowrap;text-align: right">
+                    <span class="u-clear-condition test_1242bbbe" ng-click="clearCondition();" style="margin:0px 10px;">重置</span>
+                    <button class="btn btn-primary test_f9ccf06c" ng-click="search();"><%=common_page_search%></button>
+                </div>
+            </div>
+            <div ng-if="module == 'trade'" class="row row-list clearfix test_e314ab18">
+              <div class=" col-md-4 test_d7805e33" style="float:right;white-space: nowrap;text-align: right">
+                  <span class="u-clear-condition test_c6228868" ng-click="clearCondition();" style="margin:0px 10px;">重置</span>
+                  <button class="btn btn-primary test_96815cb4" ng-click="search();"><%=common_page_search%></button>
+              </div>
+            </div>
+        </div>
+        <div ng-controller="tableController" class="test_a0248114">
+            <div ng-show="tableModel.pagination.isVisiblePage" class="m-bills-btn test_4dd1f4d5">
+                <div class="checkbox checkbox-info test_710455a5">
+                    <input type="checkbox" ng-model="tableModel.selectFlag" ng-click="table.selectAll(tableModel);" class="test_9638912e">
+                    <label class="test_9916628b"></label>
+                </div>
+                <button ng-disabled="draftDisabled" ng-class="{'btn':true,'btn-primary':true,'disabled':draftDisabled}" ng-click="draft();" class="test_ca55bc93"><%=to_draft%></button>
+                <button ng-disabled="passedDisabled" ng-class="{'btn':true,'btn-primary':true,'disabled':passedDisabled}" class="btn btn-primary test_2519ef1b" ng-click="passed();"><%=aduit_passed%></button>
+                <button ng-hide="module == 'trade' && submodule == 'pay'" ng-disabled="paidDisabled" ng-class="{'btn':true,'btn-primary':true,'disabled':paidDisabled}" ng-click="paid();" class="test_62c27b64"><%=payed%></button>
+                <button ng-disabled="exportDisabled" ng-class="{'btn':true,'btn-primary':true,'disabled':exportDisabled}" ng-click="exportExcel();" class="test_60604f80"><%=exported%></button>
+            </div>
+            <div class="table-container test_9854ace8">
+                <div class="m-bills-list test_817b66d4" ng-repeat="value in tableModel.tableBody">
+                    <div class="checkbox checkbox-info test_49c81726">
+                        <input type="checkbox" ng-checked="value.checkbox" ng-click="table.selectOne(tableModel, value.checkboxId, $event);" class="test_6abb1512">
+                        <label class="test_28741d19"></label>
+                    </div>
+                    <div class="list-title clearfix test_4f078b75">
+                        <div ng-if="module != 'trade'" class="c-fl test_7444659d"><%=account_number%>：<a ng-click="billsDetail(value.billNo, value.customerId, value.status, value.currencyType);" href="javascript:;" class="test_90a07475">{{value.billNo}}</a></div>
+                        <div ng-if="module == 'trade'" class="c-fl test_a77d5b1f"><%=account_number%>：<a ng-click="billsDetail(value.billNo, value.bizCompanyId, value.status, value.currencyType);" href="javascript:;" class="test_cae74856">{{value.billNo}}</a></div>
+                        <div class="c-fr test_4437384c"><%=create_time%>：{{value.releaseTime}}</div>
+                    </div>
+                    <div class="list-content test_c6433233">
+                        <div class="row clearfix test_36aac25b">
+                            <div class="col-md-6 test_2ed1f091">
+                                <p ng-if="module == 'logistics' && submodule == 'receive'" class="test_fadebba9"><%=customer_name%> ： {{value.customerName}} ({{value.customerCode}})</p>
+                                <p ng-if="module == 'logistics' && submodule == 'pay'">供应商: {{value.customerName}}({{value.customerCode}})</p>
+
+                                <p ng-if="module == 'trade' && submodule == 'receive'" class="test_19cdd98b"><%=customer_name%>(付款方)： {{value.bizCompanyName}}({{value.bizCompanyCode}})</p>
+                                <p ng-if="module == 'trade' && submodule == 'receive'" class="test_cbf02b97">平台实体(收款方)： {{value.platformName}}</p>
+
+                                <p ng-if="module == 'trade' && submodule == 'pay'" class="test_5c11282b"><%=customer_name%>(收款方)： {{value.bizCompanyName}}({{value.bizCompanyCode}})</p>
+                                <p ng-if="module == 'trade' && submodule == 'pay'" class="test_7d902cab">平台实体(付款方)： {{value.platformName}}</p>
+
+                                <p class="test_cac91218"><%=bill_cycle%>： {{value.startEffectTime}} ~ {{value.endEffectTime}}</p>
+                                <p ng-if="module == 'logistics'">结算方式： {{value.settlement}}</p>
+                                <p ng-if="module == 'logistics' && submodule == 'receive'"><%=recive_totals%>：
+                                    {{value.actualTotal}}({{value.currencyType}})
+                                </p>
+                                <p ng-if="module != 'logistics' || submodule != 'receive'" class="test_7e449b22"><%=recive_totals%>：
+                                    {{value.total}}({{value.currencyType}})
+                                </p>
+                                <p ng-show="value.adjustmentRemark" class="test_0c4ab18e"><%=price_adjust%>：{{value.adjustment}}</p>
+                                <p ng-if="module == 'logistics' && submodule == 'receive'"><%=real_tatals%>：
+                                    <span ng-class="{'red':((value.actualTotal)<0)}" class="test_0a4ad3e5">
+                                        {{value.paidOrderTotal}}
+                                    </span>(CNY)
+                                </p>
+                                <p ng-if="module != 'logistics' || submodule != 'receive'" class="test_1633f061"><%=real_tatals%>：
+                                    <span ng-class="{'red':((value.actualTotal)<0)}" class="test_0a4ad3e5">
+                                        {{value.actualTotal}}
+                                    </span>({{value.currencyType}})
+                                </p>
+                                <button ng-if="value.status == 'AUDITING'" ng-click="adjust(value.billNo, value.adjustmentTypeCode, value.adjustmentValue, value.adjustmentUnit, value.adjustmentRemark,value.total,value.currencyType);" class="btn btn-primary test_c9b53103" style="margin-top: 15px;margin-right:10px;"><%=price_change%></button>
+                                <button ng-click="payment(value)" ng-if="module == 'trade' && submodule == 'pay' && value.status == 'CHARGEOFF'" class="btn btn-primary" style="margin-top: 15px;">付款</button>
+                            </div>
+                            <div class="col-md-4 test_bb9eed2f">
+                                <div ng-show="value.adjustmentRemark" class="row clearfix test_57f98870">
+                                    <div class="col-md-4 test_d28c473f" style="padding-right:0px;text-align: right;">
+                                        调整说明：
+                                    </div>
+                                    <div class="col-md-8 test_6159d547" style="padding-left:0px;margin-top: 2px;word-break: break-word;white-space: pre-line;">{{value.adjustmentRemark}}</div>
+                                </div>
+                            </div>
+                            <div class="col-md-2 text-center test_30bdb19a" style="padding: 0px">
+                                <p class="test_e863413d">{{value.statusName}}</p>
+                                <a ng-click="flowProcess(value.billNo);" href="javascript:;" class="test_189428cc">
+                                    <span ng-if="value.rejected" class="u-red-dot test_c2683455" title="{{value.statusName}}"></span>
+                                    <%=view_process%>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <hnapagination table-service="table" page-table-model="tableModel" class="test_e2b528c1"></hnapagination>
+            </div>
+        </div>
+        <div ng-show="!tableModel.pagination.isVisiblePage" style="position: absolute;top:185px;bottom:0px;width:100%;" class="test_ba4f3697">
+            <img style="width:100%;height:100%;" src="/public/img/undefined.svg" class="test_e64584a3">
+        </div>
+    </div>
+    <div class="download-file-box test_70f4924f" style="display:none;"></div>
+    <iframe name="download-iframe" style="display:none;" class="test_cbfb75b3"></iframe>
+</section>
+
+<!--打回草稿、审核通过、已付款弹出框-->
+<div ng-show="popBox" id="pop-box" class="prompt-modal middle-box test_72f0397f" style="display: none;">
+        <div class="prompt-wrap test_53bc0f83">
+            <div class="bomb-box test_3757bbca" style="height: 600px;">
+
+                <form name="submitForm" novalidate="" class="test_d7757acb">
+                <div class="title test_cff05f37">{{popTitle}}</div>
+                <div ng-if="module == 'logistics' && submodule == 'receive' && adjustInfoShow" style="margin: 25px 34px;font-size: 16px;text-align: left;">
+                    <p>原始账单金额：{{adjustTotal}}({{adjustCurrencyType}})</p>
+                </div>
+                <div class="prompt-content test_0e745442" style="height: 436px; overflow: auto;">
+                    <div ng-style="{margin:(popType == 'ADJUST')? '30px 0px': '60px 20px','position':'relative'}" class="test_9aa0e922">
+                        <div ng-if="popType == 'ADJUST'" class="u-adjust-price test_a8091f64" style="margin-bottom: 40px;">
+                            <div class="row clearfix test_fb070dab">
+                                <div class="col-md-4 test_fabc09bb" style="padding-right:0px;">
+                                    <div class="select-box test_d564b9c3">
+                                        <input ng-click="showAdjustType();" required ng-model="adjustType" name="adjustType" ng-value="adjustTypeValue" type="text" id="adjust-type" readonly="readonly" placeholder="<%=common_select_tips%>" class="test_546739e2">
+                                        <i class="select-icon icon-drop-down test_1b1d9731"></i>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 test_405a4036" ng-if="adjustUnitValue == 1">
+                                    <input ng-class="{'input-error':$parent.$parent.adjustValError}" ng-change="ngChange()" maxlength="5" required type="text" autocomplete="off" ng-model="$parent.$parent.adjustVal" class="test_2e9d6811">
+                                </div>
+                                <div class="col-md-4 test_e21c5e4c" ng-if="adjustUnitValue == 2">
+                                    <input ng-class="{'input-error':$parent.$parent.adjustValError}" ng-change="ngChange()" maxlength="10" required type="text" autocomplete="off" ng-model="$parent.$parent.adjustVal" class="test_9a6dfae6">
+                                </div>
+                                <div class="col-md-4 test_ae34240f" style="padding-left:0px;">
+                                    <div class="select-box test_ff788719">
+                                        <input ng-click="showAdjustUnit();" ng-trim="false" required ng-model="adjustUnit" name="adjustUnit" ng-value="adjustUnitValue" type="text" id="adjust-unit" readonly="readonly" placeholder="<%=common_select_tips%>" class="test_2cfacae1">
+                                        <i class="select-icon icon-drop-down test_9b6e0353"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="verification test_e179ea26" ng-if="$parent.adjustValError">
+                                <span style="padding-left:0px;" class="errors test_722a1721">请输入数字和小数点，可精确到小数点后3位</span>
+                            </div>
+                        </div>
+                        <div class="wrap-textarea test_db700fc7">
+                            <textarea name="remark" required text-length="" style="height:92px;" ng-trim="false" rows="5" ng-model="remark" class="form-control textarea-text test_74160f40" maxlength="140" placeholder="<%=textarea_placer%>"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="operation test_c7e5bbae">
+                    <button ng-click="popBox = !popBox" name="prompt-operation" class="btn btn-default test_898c7864" data-event="close"><%=common_page_cancel%></button>
+                    <span class="other-btn test_39bb6171">
+                        <button ng-click="submit();" name="prompt-operation" class="btn btn-primary test_3a0acef1" data-event="submit">确定</button>
+                    </span>
+                </div>
+                </form>
+            </div>
+        </div>
+</div>
+
+<!--支付页面-->
+<div ng-show="block == 'payment'" class="g-main clearfix" include="tpl/fragment/fundsAccount/payment.html" ng-controller="paymentCtr"></div>
+
+<!--支付结果页面-->
+<div ng-show="block == 'paymentResult'" class="g-main clearfix" include="tpl/fragment/fundsAccount/paymentResult.html" ng-controller="paymentResultCtr"></div>
+
+<!--充值页面-->
+<div ng-show="block == 'recharge'" class="g-main clearfix" include="tpl/fragment/fundsAccount/recharge.html" ng-controller="rechargeCtr"></div>
+
+<!--充值结果页面-->
+<div ng-show="block == 'rechargeResult'" class="g-main clearfix" include="tpl/fragment/fundsAccount/rechargeResult.html" ng-controller="rechargeResultCtr"></div>

@@ -1,0 +1,1 @@
+app.factory("customerMessageService",["easyHttp",function(t){var s={};return s.getCustomerFullNameList=function(s){return t.get("logistics.searchAllCustomerList",s)},s.delCustomerMsg=function(s,e){t.post("logistics.delCustomerMsg",{urlParams:s},e)},s}]);

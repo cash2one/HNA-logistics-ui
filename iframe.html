@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+</head>
+<style>
+    html,body {
+        overflow:hidden;
+        background-color:transparent!important;
+    }
+</style>
+<link id="combin-css" rel="stylesheet" data-href="loadAssets.php?urls=public/lib/font-awesome.css,public/lib/checkbox.css,public/lib/fonts-hna.css,public/common/minify/global.css,public/common/minify/common.css"/>
+<body ng-app='app' class="hold-transition skin-blue sidebar-mini language-swich fixed">
+    <script id="container" type="text/html">
+        <div class="content-main">
+            <div ng-view></div>
+        </div>
+    </script>
+    <script src="public/lib/jquery.js"></script>
+    <script src="loadAssets.php?urls=public/common/cacheConfig.js"></script>
+    <script id="combin-js" data-src="loadAssets.php?urls=public/lib/promise.min.js,public/lib/rx.js,public/common/interface.js,public/lib/art-template-min.js,public/lib/md5.js,public/lib/angular-min.js,public/lib/angular-route.js,public/common/minify/lang.js,public/common/easyspa.js,public/common/route.js,public/common/filters.js,public/common/directives.js,public/common/minify/reactive.js"></script>
+    <script>
+        var headEle = $("head");
+        function getJsOrCss(url) {
+            return $.ajax({
+                url: url,
+                dataType: "html",
+                type: "GET",
+                async: false,
+                cache: isUseCache,
+            }).responseText;
+        }
+        var combinJsEle = $("#combin-js");
+        var scriptHtml = getJsOrCss(combinJsEle.attr("data-src") + "&timestamp=" + cacheTime);
+        eval(scriptHtml);
+        var combinCssEle = $("#combin-css");
+        var cssHtml = getJsOrCss(combinCssEle.attr("data-href") + "&timestamp=" + cacheTime);
+        var styleEle = document.createElement("style");
+        styleEle.innerHTML = cssHtml;
+        headEle.append(styleEle);
+    </script>
+    <script>
+        (function(){
+            if($('body', parent.document).hasClass('sidebar-collapse')) {
+                $("body").addClass('sidebar-collapse');
+            }else{
+                $("body").removeClass('sidebar-collapse');
+            }
+        })();
+
+        $(document).on("click", function() {
+            top.hideDropDownList();
+        });
+        function changeZindex(cls) {
+            var promptEles = $(cls);
+            var isReset = true;
+            for(var index = 0; index < promptEles.length; index++) {
+                var display = $(promptEles[index]).css("display");
+                if(display && display != "none") {
+                    top.setIframeLayerMostHigh();
+                    isReset = false;
+                    break;
+                }
+            }
+            if(isReset) {
+                top.resetIframeLayerZindex();
+            }
+        }
+        setInterval(function() {
+            changeZindex(".prompt-modal");
+        }, 0);
+        window.onhashchange = function() {
+            var url = window.location.href;
+            url = url.replaceAll("iframe.html", "");
+            url = easySpa.delQueStr(url, "t");
+            top.location.href = url;
+        }
+    </script>
+</body>
+</html>

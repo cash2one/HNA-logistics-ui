@@ -1,0 +1,1 @@
+app.controller("serviceInfoCtrl",["$scope","confirmOrderService",function(e,r){e.getServiceInfo=function(o,n,c){if("DRAFT"!=c&&"COMMITED"!=c){var i={seatParams:{orderNo:n}};r.getServiceInfo(i,function(r){0===r.errorCode&&(e.serviceInfoList=[],angular.forEach(r.data,function(r,o){r.serviceCode&&e.serviceInfoList.push(r)}))})}},e.$on("serviceInfoEvent",e.getServiceInfo)}]);

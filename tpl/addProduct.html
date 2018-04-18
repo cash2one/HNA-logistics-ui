@@ -1,0 +1,47 @@
+<section class="content type-filter-layout test_f0c35d67">
+    <!-- =========添加客户======== -->
+    <div class="test_32902d8f">
+        <div class="go-back test_b577f2eb">
+            <button ng-click="goBackProduct();" class="btn btn-default test_310edf1a"><%=product_goback%></button>
+
+        </div>
+        <div class="operate-box test_1cbad87c">
+            
+            <button style="padding:0 30px;margin-left:15px" ng-if="!isAudit && isPreview" ng-disabled="isEdit || productInfo.status != 1" ng-class="{'btn-disable' : isEdit || productInfo.status != 1 }" ng-click="submitVerify();" class="btn btn-primary test_2ee4d9df"><%=product_submit_verify%></button>
+             <button ng-click="productEnable();" ng-disabled="isEdit" ng-if="isAudit && productInfo.status == 3 && !productInfo.isOnline " class="btn btn-primary test_0edc63a7"><%=product_enable%></button>
+            <button ng-click="productDisable();" ng-if="isAudit && productInfo.status == 3 && productInfo.isOnline" class="btn btn-primary test_2a49e3c8"><%=product_disable%></button>
+        </div>
+        <div class="add-title test_b4e97ba4">
+            <p class="test_1eac9216">{{productTitle}}</p>
+        </div>
+        <div class="from-box test_2482f1b9">
+            <div class="m-tab test_dcd8da0a" id="m-tab">
+                <ul class="nav nav-tabs clearfix test_cb178ad8">
+                    <li class="active test_8d4fc9e8"><a href="javascript:void(0);" class="test_51fd3d32"><%=product_base_info%></a></li>
+                    <li class="test_70aa07a8"><a href="javascript:void(0);" class="test_16c4039d"><%=product_weight_regular%></a></li>
+                    <li class="test_cf127b06"><a href="javascript:void(0);" class="test_b58cebe5">服务配置</a></li>
+                    <li class="test_26045927"><a href="javascript:void(0);" class="test_635bf7a3"><%=product_range%></a></li>
+                </ul>
+                <div class="tab-content test_0c372301">
+                    <!-- 基本信息 -->
+                    <div class="table-pane active test_cc7f3dbd">
+                        <div include="tpl/fragment/addProduct/baseInfo.html" ng-controller="baseInfoCtr" class="test_a4c92bf3"></div>
+                    </div>
+                    <!-- 计重规则 -->
+                    <div class="table-pane test_c6fd7007">
+                        <div include="tpl/fragment/addProduct/weightRegular.html" ng-controller="weightRegularCtr" class="test_0ea52e1d"></div>
+                    </div>
+                    <!-- 服务 -->
+                    <div class="table-pane test_829a7ec6">
+                        <div include="tpl/fragment/addProduct/service.html" ng-controller="productServeCtr" class="test_d4a54de2"></div>
+                    </div>
+                    <!-- 产品范围 -->
+                    <div class="table-pane test_7cd21c5c">
+                        <div include="tpl/fragment/addProduct/productRange.html" ng-controller="productRangeCtr" class="test_544db1ec"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

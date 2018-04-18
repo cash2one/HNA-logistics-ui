@@ -1,0 +1,19 @@
+{
+    "login_code_userNameTips": "請輸入用護名",
+    "login_code_passWordTips": "請輸入密碼",
+    "login_code_login": "登錄",
+    "login_code_backtrack": "返回登錄",
+    "login_code_sliderTips": "按住左邊滑塊，拖動完成上方拼圖",
+    "login_data_110000": "用戶名或密碼錯誤",
+    "login_data_110001": "嘗試次數過多，剩余次數：",
+    "login_data_110002": "賬戶已鎖定",
+    "login_data_110003": "嘗試次數過多，剩余次數：",
+    "login_data_110004": "用戶名或密碼錯誤",
+    "login_data_110005": "驗證碼錯誤",
+    "login_page_forget": "忘記密碼？",
+    "login_page_phone": "電話",
+    "login_page_email": "郵箱",
+    "login_page_connect": "忘記密碼？請聯系管理員",
+    "login_page_locked": "您的賬號已被鎖定！請聯系管理員",
+    "login_out_time": "會話超時, 請重新登錄"
+}

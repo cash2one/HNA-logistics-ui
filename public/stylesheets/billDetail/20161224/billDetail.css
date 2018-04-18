@@ -1,0 +1,166 @@
+.c-fl{
+    float:left;
+}
+.c-fr{
+    float:right;
+}
+.text-left{
+    text-align: left;
+}
+.text-right{
+    text-align: right;
+    white-space: nowrap;
+}
+.text-center{
+    text-align: center;
+}
+.u-must-red{
+    color: red;
+}
+.u-clear-condition{
+    cursor: pointer;
+    margin-right:20px;
+}
+.content-main {
+    min-height: auto!important;
+    overflow-y: auto;
+}
+.ui-datepicker{
+    z-index:100003!important;
+    background:#fff;
+}
+.ui-datepicker td{
+    width:30px;
+}
+
+.g-main {
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    top: 15px;
+    height: auto;
+    position: absolute;
+    min-height: 445px;
+}
+.m-title{
+    margin: 10px 0px;
+    text-align: center;
+    font-size: 22px;
+}
+.m-content-box{
+    background: #fff;
+    padding: 20px 0px;
+    border: 1px solid #ddd;
+    position: absolute;
+    bottom: 0px;
+    top: 80px;
+    left: 0px;
+    right: 0px;
+}
+.m-bills-search{
+    line-height: 34px;
+    border-bottom:1px solid #ddd;
+    padding: 0px 10px;
+}
+.m-bills-search .row-list{
+    margin-bottom:20px;
+}
+
+.table-container {
+    text-align: center;
+    position: relative;
+}
+.bills-table th:nth-child(1), .bills-table td:nth-child(1){
+    width: 6%;
+}
+.bills-table th:nth-child(2), .bills-table td:nth-child(2){
+    width: 12%;
+}
+.bills-table th:nth-child(3), .bills-table td:nth-child(3){
+    width: 12%;
+}
+.bills-table th:nth-child(4), .bills-table td:nth-child(4){
+    width: 12%;
+}
+.bills-table th:nth-child(5), .bills-table td:nth-child(5){
+    width: 14%;
+}
+.bills-table th:nth-child(6), .bills-table td:nth-child(6){
+    width: 11%;
+}
+.bills-table th:nth-child(7), .bills-table td:nth-child(7){
+    width: 11%;
+}
+.bills-table th:nth-child(8), .bills-table td:nth-child(8){
+    width: 14%;
+}
+.bills-table th:nth-child(9), .bills-table td:nth-child(9){
+    width: 8%;
+}
+
+
+.trade-table th:nth-child(1), .trade-table td:nth-child(1){
+    width: 7%;
+}
+.trade-table th:nth-child(2), .trade-table td:nth-child(2){
+    width: 15%;
+}
+.trade-table th:nth-child(3), .trade-table td:nth-child(3){
+    width: 15%;
+}
+.trade-table th:nth-child(4), .trade-table td:nth-child(4){
+    width: 15%;
+}
+.trade-table th:nth-child(5), .trade-table td:nth-child(5){
+    width: 10%;
+}
+.trade-table th:nth-child(6), .trade-table td:nth-child(6){
+    width: 10%;
+}
+.trade-table th:nth-child(7), .trade-table td:nth-child(7){
+    width: 15%;
+}
+.trade-table th:nth-child(8), .trade-table td:nth-child(8){
+    width: 13%;
+}
+
+
+.kkpage{
+    margin-top:10px!important;
+}
+.m-table-ul {
+    text-align: left;
+}
+.m-table-ul li {
+    line-height: 25px;
+    padding-right: 25px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position: relative;
+}
+
+.m-audit-box{
+    position: absolute;
+    bottom: -285px;
+    background: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    margin-bottom: 15px;
+    width: 100%;
+    font-size: 16px;
+}
+.m-audit-box .row-list{
+    padding:15px 0px;
+}
+.wrap-textarea{
+    position: relative;
+}
+.wrap-textarea .text-legth{
+    position: absolute;
+    bottom: 5px;
+    right: 8px;
+}
+td,
+td>ul>li {
+  text-align: center !important;
+}

@@ -1,0 +1,96 @@
+<div class="c-detail-title">
+    <div class="u-back clearfix">
+        <button ng-click="goBack();" class="btn btn-default test_2874b5ed">返回</button>
+    </div>
+    <div class="u-title">
+        提现结果
+    </div>
+</div>
+
+<div class="m-recharge-result">
+    <div class="wrap-recharge-result">
+        <i ng-class="{'recharge-result-icon':true, 'recharge-failure':!isSuccess, 'recharge-success': isSuccess}"></i>
+        <p class="recharge-result-msg">
+            {{reChargeResult.status == 0 ? '提现成功' : '提现失败'}}
+        </p>
+        <ul>
+            <li class="lists">
+                <span class="left-text">提现金额：</span>
+                <b class="dark-yellow">{{rechargeDataTranAmount}}</b> {{accountInfo.currencyCode}}
+            </li>
+            <li class="lists">
+                <span class="left-text">交易单号：</span>
+                {{reChargeResult.logNo}}
+            </li>
+            <li ng-show="isSuccess" class="lists">
+                <span class="left-text">当前状态：</span>
+                {{reChargeResult.statusValue}}
+            </li>
+            <li ng-show="isSuccess" class="lists">
+                <span class="left-text">提现时间：</span>
+                {{reChargeResult.time}}
+            </li>
+            <br/>
+            <li ng-show="isSuccess" class="lists">
+                <span class="left-text">提现银行：</span>
+                {{reChargeResult.outAcctIdName}}
+            </li>
+            <li ng-show="isSuccess" class="lists">
+                <span class="left-text">提现账户：</span>
+                {{reChargeResult.outAcctId}}
+            </li>
+        </ul>
+        <button ng-show="reChargeResult.status !== 0" ng-click="reCharge()" class="btn btn-primary"
+                style="display: block;margin:0px auto;margin-top:20px;">重新提现
+        </button>
+    </div>
+</div>
+
+<style type="text/css">
+    .m-recharge-result {
+        background: #fff;
+        padding: 45px 30px;
+        border: 1px solid #ddd;
+        min-height: 100%;
+    }
+
+    .wrap-recharge-result {
+        width: 400px;
+        margin: 0px auto;
+    }
+
+    .wrap-recharge-result ul li.lists {
+        line-height: 30px;
+    }
+
+    .wrap-recharge-result ul li.lists .dark-yellow {
+        color: #F7A42C;
+    }
+
+    .wrap-recharge-result li.lists .left-text {
+        display: inline-block;
+        width: 90px;
+    }
+
+    .wrap-recharge-result .recharge-result-icon {
+        display: block;
+        width: 96px;
+        height: 96px;
+        margin: 0px auto;
+    }
+
+    .wrap-recharge-result .recharge-success {
+        background: url('/public/img/pay-success.svg') center center no-repeat;
+    }
+
+    .wrap-recharge-result .recharge-failure {
+        background: url('/public/img/pay-failure.svg') center center no-repeat;
+    }
+
+    .wrap-recharge-result .recharge-result-msg {
+        text-align: center;
+        font-size: 18px;
+        margin-bottom: 40px;
+        margin-top: 10px;
+    }
+</style>

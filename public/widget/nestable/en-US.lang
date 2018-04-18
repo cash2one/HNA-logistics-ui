@@ -1,0 +1,5 @@
+{
+    "nestable_prompt_tip": "The organization name already exists, please modify the name after the move！",
+    "nestable_prompt_add_tip": "Current organization supports only add to level fifth！",
+    "nestable_prompt_seat_tip": "New organization"
+}

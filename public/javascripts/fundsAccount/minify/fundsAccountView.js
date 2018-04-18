@@ -1,0 +1,1 @@
+app.factory("fundsAccountView",[function(){var n={};return n.initCalander=function(){Calander.init({ele:["#begin-time","#end-time"],isClear:!0,showTime:!1,showSecond:!1,showMinute:!1,showHour:!1})},n}]);

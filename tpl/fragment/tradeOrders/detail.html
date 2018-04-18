@@ -1,0 +1,127 @@
+<div ng-controller="detail" class="detail">
+	<h4 class="title">{{orderNo?orderNo:'添加订单'}}</h4>
+	<button class="btn btn-default btn-bill" ng-click="goComfirmBack()" >返回</button>
+	<div id="orderDetail">
+		<ul class="order-ul">
+			<li>
+			<h4 id="baseInfo">基本信息</h4>
+			<div class="good-detail clearfix">
+				<form name="form1" novalidate="novalidate">
+					<ul>
+					    <li class="good-li">
+						    <label><i>*</i>{{firstSelectName}}</label>
+						    <div class="content-info ng-select" id="sellerId">
+						        <input ng-disabled="orderChannel == 1" ng-trim="false" name="sellerId" ng-model="sellerId" type="text" required readonly="readonly" />
+						        <i class="select-icon icon-drop-down"></i>
+						    </div>
+					    </li>
+					    <li class="good-li">
+						    <label><i>*</i>{{secondSelectName}}</label>
+						    <div class="content-info required">
+						        <input ng-disabled="orderChannel == 1" ng-trim="false" name="purchaserId" id="purchaserId" ng-click="initPurchaserId()" ng-model="purchaserId" type="text" required>
+						        <i class="select-icon icon-drop-down"></i>
+						    </div>
+					    </li>
+					    <li class="good-li">
+						    <label><i>*</i>项目</label>
+						    <div class="content-info required">
+						        <input ng-disabled="orderChannel == 1" ng-trim="false" name="projectId" type="text" id="projectId2"  ng-model="projectId" ng-click="initProjectShort2()" readonly="readonly" required ng-disabled="projectIdStatus">
+						    </div>
+					    </li>
+						<li class="good-li">
+						    <label>业务单号</label>
+						    <div class="content-info required">
+						        <input maxlength="30" ng-trim="false" name="businessNo" type="text" ng-model="businessNo" />
+						    </div>
+					    </li>
+				    </ul>
+					</form>
+				</div>
+			</li>
+			<li>
+				<h4 id="goodsInfo">商品信息</h4>
+				<div class="good-detail clearfix">
+					<form name="form2" novalidate="novalidate">
+						<ul class="clearfix">
+					    <li class="good-li">
+						    <label>商品</label>
+						    <div class="content-info required">
+						        <input ng-trim="false" name="orderGood" type="text" id="orderGood" ng-model="orderGood" ng-click="initOrderGood()" readonly="readonly" required ng-disabled="orderGoodStatus">
+						    </div>
+					    </li>
+					    </ul>
+					</form>
+					<div class="btn-group clearfix">
+						<button class="btn btn-primary btn-bill" ng-click="addGoods()" >添加</button>
+						<button class="btn btn-primary btn-bill" ng-click="deleteGoods()" >删除</button>
+					</div>
+					<div class="table-box-div">
+					<form name="form3" novalidate="novalidate">
+					<table class="goods-table" cellpadding="0" cellspacing="0" style="table-layout: fixed">
+					    <thead>
+					    	<tr>
+					    		<th width="10%">
+					    			<div class="checkbox checkbox-info">
+				                        <input type="checkbox" ng-checked="isAllchecked" ng-click="checkAll(data.orderGoods)">
+				                        <label></label>
+				                    </div>
+					    		</th>
+					    		<th width="20%">名称</th>
+					    		<th width="40%">采购数量</th>
+					    		<th width="30%">单价</th>
+					    	</tr>
+					    </thead>
+					    <tbody>
+					    	<tr ng-repeat="item in data.orderGoods">
+					    		<td>
+					    			<div class="checkbox checkbox-info">
+				                        <input type="checkbox" ng-click="checkOne(item,data.orderGoods)" ng-checked="item.checked"  />
+				                        <label></label>
+				                    </div>
+					    		</td>
+					    		<td><p title="{{item.goodsName}}">{{item.goodsName}}</p></td>
+					    		<td style="text-align:left;">
+						    		<input style="width: 40%" type="text" name="{{item.name + 'minLimit'}}" ng-model="item.minLimit"
+						    		ng-change="validateGoodnum(item, 'min')" maxlength="9"/> -
+									<input style="width: 40%" type="text" name="{{item.name + 'maxLimit'}}" ng-model="item.maxLimit"
+						    		ng-change="validateGoodnum(item, 'max')" maxlength="9" > {{item.goodsUnit}}
+						    		 <p ng-show="!!item.showError" class="item-error">{{item.showError}}</p>
+					    		</td>
+					    		<td>
+									<input style="width: 80%" type="text" name="{{item.name + '_price'}}" ng-model="item.goodsPrice"
+						    		ng-change="validateGoodPrice(item)" maxlength="9" required > {{item.goodsCurrencyType}}
+									<p ng-show="!!item.showPriceError" class="item-error">{{item.showPriceError}}</p>
+								</td>
+					    	</tr>
+					    </tbody>
+					    </table>
+					    </form>
+					    </div>
+				</div>
+			</li>
+			<li>
+				<h4>附件信息</h4>
+				<div class="detailFileContent" id="detailFileContent" style="margin: 15px 0;"></div>
+			</li>
+			<li>
+				<h4>客户留言</h4>
+				<div class="order-item">
+					<div class="textarea-div">
+						<!-- <textarea ng-model="data.customerNote" maxlength="140" ng-change="countLength()"></textarea>
+						<span>{{countLen}}</span> -->
+						<textarea text-length="" ng-trim="false" ng-hide="visible" ng-model="data.customerNote" maxlength="140" rows="4"></textarea>
+					</div>
+				</div>
+			</li>
+		</ul>
+
+		<div ng-if="!data.orderStatusCode || data.orderStatusCode == '1'" class="btn-group btn-group-center mtb-60" style="margin-top: 20px;">
+			<button class="btn btn-default btn-bill" ng-click="save()" >保存草稿</button>
+			<button class="btn btn-primary btn-bill" ng-click="save('CONFIRMING')" >提交订单</button>
+		</div>
+		<div ng-if="data.orderStatusCode && data.orderStatusCode != '1'" class="btn-group btn-group-center mtb-60" style="margin-top: 20px;">
+			<button class="btn btn-default btn-bill" ng-click="cancel()" >取消</button>
+			<button class="btn btn-primary btn-bill" ng-click="save(data.orderStatus)" >保存</button>
+		</div>
+	</div>
+</div>

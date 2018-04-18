@@ -1,0 +1,41 @@
+{
+    "company_title_detail": "基本信息",
+
+    "company_label_name": "名称：",
+    "company_label_country": "国家：",
+    "company_label_triadCode": "二字码：",
+    "company_label_tetradCode": "三字码：",
+    "company_label_remark": "备注：",
+
+    "company_placeholder_name": "请输入航空公司",
+    "company_placeholder_country": "请输入国家名称",
+    "company_placeholder_triadCode": "请输入二字码",
+    "company_placeholder_tetradCode": "请输入三字码",
+    "company_placeholder_remark": "请输入备注",
+
+    "company_validate_name": "名称已存在",
+    "company_validate_triadCode": "二字码已存在",
+    "company_validate_tetradCode": "三字码已存在",
+
+    "company_title_international": "国际化",
+
+    "company_label_cn": "英文：",
+    "company_label_hk": "中文繁体：",
+
+    "company_placeholder_search": "请输入名称，国家，二字码或三字码",
+
+    "company_table_name": "名称",
+    "company_table_country": "国家",
+    "company_table_triadCode": "二字码",
+    "company_table_tetradCode": "三字码",
+    "company_table_remark": "备注",
+
+    "company_prompt_new": "添加航空公司",
+    "company_prompt_edit": "航空公司详情",
+    "company_prompt_delete": "确定删除已选航空公司？",
+
+    "company_input_two_code_limit": "请输入两位英文字母",
+    "company_input_three_code_limit": "请输入三位英文字母",
+    "company_prompt_delay_tip": "请先选择数据！"
+
+}

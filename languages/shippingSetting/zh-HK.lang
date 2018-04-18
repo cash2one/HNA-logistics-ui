@@ -1,0 +1,16 @@
+{
+    "shippingSetting_vessel_voyage": "航次",
+    "shippingSerring_vessel_name": "船名",
+    "shippingSerring_vessel_company": "船公司",
+    "shippingSetting_vessel_departure": "起運港",
+    "shippingSetting_vessel_arrival": "目的港",
+    "shippingSetting_vessel_startTime": "出發時間",
+    "shippingSetting_vessel_reset": "重置",
+    "shippingSetting_vessel_search": "蒐索",
+    "shippingSetting_vessel_add": "新增",
+    "shippingSetting_vessel_del": "删除",
+    "shippingSerring_vessel_num": "航次號",
+    "shippingSerring_vessel_departureTime": "起運時間",
+    "shippingSerring_vessel_arrivalTime": "到港時間",
+    "shippingSerring_vessel_totalTime": "全程時長"
+}

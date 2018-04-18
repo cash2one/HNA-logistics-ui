@@ -1,0 +1,1 @@
+app.factory("logisticsService",["easyHttp",function(i){var t={};return t.getType=function(t,s){i.get("logistics.getType",t,s)},t.isOrderNumExist=function(t,s){i.get("logistics.isOrderNumExist",t,s)},t.getLogisticsInfoType=function(t,s){i.get("logistics.getLogisticsInfoType",t,s)},t.addLogisticsInfo=function(t,s){i.post("logistics.addLogisticsInfo",t,s)},t}]);

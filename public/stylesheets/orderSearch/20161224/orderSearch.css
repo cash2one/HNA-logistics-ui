@@ -1,0 +1,88 @@
+.g-orders{
+    height: auto;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    position: absolute;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    top: 15px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.m-orders-top{
+    padding: 0px 50px 20px 50px;
+    line-height: 34px;
+    /*border-bottom:1px solid #ddd;*/
+}
+.m-orders-top .row-list{
+    margin-top:20px;
+}
+.m-orders-btn{
+    margin:10px 15px;
+}
+.m-orders-btn button{
+    margin-right:10px;
+}
+
+.btn-bill {
+    padding: 0;
+    width: 98px;
+    height: 34px;
+    margin-right: 7px;
+}
+
+.table-container {
+    text-align: center;
+    position: relative;
+}
+
+
+.orders-table th:nth-child(1), .orders-table td:nth-child(1){
+    width: 5%;
+    -ms-text-overflow: inherit!important;
+    text-overflow: inherit!important;
+}
+.orders-table th:nth-child(2), .orders-table td:nth-child(2){
+    width: 15%;
+}
+.orders-table th:nth-child(3), .orders-table td:nth-child(3){
+    width: 10%;
+}
+.orders-table th:nth-child(4), .orders-table td:nth-child(4){
+    width: 10%;
+}
+.orders-table th:nth-child(5), .orders-table td:nth-child(5){
+    width: 10%;
+}
+.orders-table th:nth-child(6), .orders-table td:nth-child(6){
+    width: 12%;
+}
+.orders-table th:nth-child(7), .orders-table td:nth-child(7){
+    width: 7%;
+}
+.orders-table th:nth-child(8), .orders-table td:nth-child(8){
+    width: 16%;
+}
+.orders-table th:nth-child(9), .orders-table td:nth-child(9){
+    width: 15%;
+}
+
+.ui-datepicker{
+    z-index:100003!important;
+    background:#fff;
+}
+.ui-datepicker td{
+    width:30px;
+}
+.u-clear-condition{
+    cursor: pointer;
+    margin-right:10px;
+}
+body .canlander {
+    width:19%!important;
+}
+
+td {
+  text-align: center !important;
+}

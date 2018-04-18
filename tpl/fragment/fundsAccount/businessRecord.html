@@ -1,0 +1,66 @@
+<div class="c-detail-title">
+    <div class="u-back clearfix">
+        <button ng-click="goBack('businessRecord');" class="btn btn-default test_2874b5ed">返回</button>
+    </div>
+    <div class="u-title">
+        交易记录详情
+    </div>
+</div>
+
+<div class="m-record-box">
+    <div class="wrap-record-box">
+        <h3>交易信息</h3>
+        <ul>
+            <li class="lists">
+                <span class="left-text">交易单号：</span>
+                <span class="right-text">{{record.id}}</span>
+            </li>
+            <li class="lists">
+                <span class="left-text">交易类型：</span>
+                <span class="right-text">{{record.tranType}}</span>
+            </li>
+            <li class="lists">
+                <span class="left-text">交易金额：</span>
+                <span class="right-text" style="color:#f8b655;font-weight: bold;">{{recordTranAmount}} {{currencyCode}}</span>
+            </li>
+            <li class="lists">
+                <span class="left-text">交易状态：</span>
+                <span class="right-text">{{info.tranStatus === 0 ? '成功' : '失败'}}</span>
+            </li>
+            <li class="lists">
+                <span class="left-text">交易时间：</span>
+                <span class="right-text">{{record.tranTime}}</span>
+            </li>
+            <li ng-if="record.tranTypeCode == '2'" class="lists">
+                <span class="left-text">账单号：</span>
+                <span class="right-text">{{record.billNo}}</span>
+            </li>
+        </ul>
+
+        <!--充值和提现-->
+        <h3 ng-if="record.tranTypeCode != '2'">{{record.tranType}}信息</h3>
+        <ul ng-if="record.tranTypeCode != '2'">
+            <li class="lists">
+                <span class="left-text">{{record.tranType}}银行：</span>
+                {{$parent.info.bankName}} <span ng-if="info.bankCarNo">(尾号{{$parent.info.bankCarNo.slice(-4)}})</span>
+            </li>
+            <li class="lists">
+                <span class="left-text">账户号：</span>
+                <span class="right-text">{{$parent.info.accountId}}</span>
+            </li>
+        </ul>
+
+        <!--支付-->
+        <h3 ng-if="record.tranTypeCode == '2'">收款方信息</h3>
+        <ul ng-if="record.tranTypeCode == '2'">
+            <li class="lists">
+                <span class="left-text">账户：</span>
+                <span class="right-text">{{$parent.info.accountName}}</span>
+            </li>
+            <li class="lists">
+                <span class="left-text">账户号：</span>
+                <span class="right-text">{{$parent.info.accountId}}</span>
+            </li>
+        </ul>
+    </div>
+</div>

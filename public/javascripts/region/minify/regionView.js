@@ -1,0 +1,1 @@
+app.factory("regionView",[function(){var a={};return a.tab=function(a,n){return $(a).tab({callback:n})},a}]);

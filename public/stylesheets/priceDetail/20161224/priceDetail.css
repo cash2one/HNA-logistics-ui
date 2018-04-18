@@ -1,0 +1,468 @@
+.text-left{
+    text-align:left;
+}
+.text-right{
+    text-align:right;
+}
+.text-center{
+    text-align: center;
+}
+.u-must-red{
+    color: red;
+}
+.m-base-info .verification{
+    position: relative;
+}
+.m-base-info .verification .errors{
+    position: absolute;
+    left: 0px;
+    padding-left: 0px;
+}
+.content-main{
+    min-height: auto!important;
+    overflow-y: auto;
+}
+
+.g-main{
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    top: 15px;
+    height: auto;
+    position: absolute;
+    min-height:445px;
+}
+.u-title{
+    margin: 10px 0px;
+    text-align: center;
+    font-size: 22px;
+}
+.m-content-box{
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    top: 95px;
+}
+.m-content-box .tab-content{
+    position: absolute;
+    top: 50px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    overflow-y: auto!important;
+    overflow-x: hidden!important;
+}
+
+.m-base-info{
+    padding:20px 0px 50px 0px;
+}
+.m-base-info .u-edit-box, .m-base-price .u-edit-box{
+    margin-right:30px;
+    height:34px;
+    position: relative;
+    z-index: 1;
+}
+.m-base-info .u-edit-box .btn, .m-base-price .u-edit-box .btn{
+    cursor: pointer;
+}
+.m-base-info .row-list{
+    padding:15px 0px;
+}
+.m-base-info .text-right label{
+    height:34px;
+    line-height: 34px;
+    display: block;
+    font-size:16px;
+}
+.m-base-info .text-left span.span-value{
+    line-height: 34px;
+    font-size:16px;
+}
+.m-base-info .text-right{
+    padding-right:0px;
+}
+.m-base-info .wrap-textarea{
+    position: relative;
+}
+.m-base-info .wrap-textarea textarea{
+    min-width:inherit;
+}
+.m-base-info .btn-groups{
+    margin-top:20px;
+    margin-right:10px;
+}
+.m-base-info .btn-groups .btn+.btn, .m-base-price .btn-groups .btn+.btn{
+    margin-left: 40px;
+}
+.wrap-textarea .text-legth{
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    color: #999;
+}
+.ui-datepicker{
+    z-index:100003!important;
+    background:#fff;
+}
+.ui-datepicker td{
+    width:30px;
+}
+
+
+.m-base-price{
+    padding: 10px 0px 0px 0px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+}
+.m-base-price .price-detail-top{
+    z-index: 101;
+}
+.m-base-price .price-detail-top>ul:first-child {
+    margin:  15px;
+    border-bottom: 1px solid #ddd;
+}
+.m-base-price .price-detail-top>ul:first-child li{
+    display: inline-block;
+    position: relative;
+    bottom: -1px;
+    text-align: center;
+}
+.m-base-price .price-detail-top>ul:first-child li:hover,
+.m-base-price .price-detail-top>ul:first-child li.active{
+    border-bottom: 1px solid #3BAFDA;
+}
+.m-base-price .price-detail-top>ul:first-child li a {
+    display: block;
+    min-width: 100px;
+    height: 34px;
+    line-height: 34px;
+    font-size: 14px;
+    cursor: pointer;
+    padding:0px 10px;
+    color: #555555;
+}
+.m-base-price .price-detail-top>ul:first-child li:hover a,
+.m-base-price .price-detail-top>ul:first-child li.active a {
+    border-bottom: 1px solid #3BAFDA;
+}
+.m-base-price .price-detail-top>ul:last-child {
+    padding: 10px 20px;
+}
+.m-base-price .price-detail-top>ul:last-child li {
+    display: inline-block;    
+}
+.m-base-price .price-detail-top>ul:last-child li a {
+    display: block;
+    padding: 3px 20px;
+    margin-right: 15px;
+    border-radius: 5px;
+    color: #555555;
+}
+.m-base-price .price-detail-top>ul:last-child li:hover a,
+.m-base-price .price-detail-top>ul:last-child li.active a {
+    background-color: #3BAFDA;
+    color: #fff;
+}
+.m-base-price .price-detail-search{
+    height: 100px;
+    z-index: 100;
+    line-height: 34px;
+    text-align: left;
+}
+.price-detail-search .row.row-list {
+    margin: 0 0 10px 0;
+}
+.price-detail-search .copy-btn {
+    margin-right: 15px;
+}
+.m-base-price .lock-table-box{
+    margin-bottom: 30px;
+}
+.m-base-price .w-lock-table{
+    width: 100%!important;
+    height:100%!important;
+}
+.m-base-price .m-isedit-price{
+
+}
+.m-base-price .u-save-price{
+    width: 100%;
+    margin-bottom: 30px;
+}
+.select-list-box li {
+    text-align: left;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.m-audit-box{
+    position: absolute;
+    bottom: -285px;
+    background: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    margin-bottom: 15px;
+    width: 100%;
+    font-size: 16px;
+}
+.m-audit-box .row-list{
+    padding:15px 0px;
+}
+
+#w-lock-table{
+    display: -webkit-flex;
+    display: flex;
+    flex-wrap: nowrap;
+    -webkit-flex-wrap: nowrap;
+}
+
+.m-lock-right{
+    -webkit-flex: 1;
+    flex: 1;
+}
+
+
+/* 居中弹框表单样式 */
+.middle-box .bomb-box{
+    height: 430px!important;
+    min-height: 430px!important;
+    min-width: 430px!important;
+}
+.middle-box .prompt-content dd{
+    position: relative;
+    padding-left: 95px;
+    width: 100%;
+    margin: 0px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.middle-box .prompt-content .content-info{
+    position: relative;
+    height:33px;
+    line-height:33px;
+}
+.middle-box .prompt-content label{
+    position: absolute;
+    left: 0px;
+    line-height: 34px;
+    height: 34px;
+    text-align: right;
+    width: 85px;
+}
+.prompt-content label b{
+    display: inline-block;
+    width: 12px;
+    text-align: left;
+    color: red;
+}
+.middle-box .prompt-content input{
+    width: 100%;
+}
+.prompt-content .verification{
+    position: absolute;
+}
+.prompt-content .verification .errors{
+    padding-left: 0px;
+}
+.content-info textarea{
+    min-width: 200px;
+    padding-top: 8px;
+    padding-bottom: 5px;
+    padding-left: 12px;
+    padding-right: 10px;
+}
+.wrap-textarea{
+    position: relative;
+}
+.wrap-textarea .text-legth{
+    position: absolute;
+    bottom: 5px;
+    right: 8px;
+}
+.middle-box .prompt-content li.item-post{
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.middle-box .prompt-content input.u-post-start{
+    width:40%;
+}
+.middle-box .prompt-content input.u-post-end{
+    width:40%;
+}
+.middle-box .prompt-content span.u-post-split{
+    color:#979797;
+    width: 8%;
+    display: inline-block;
+    text-align: center;
+}
+.middle-box .prompt-content .icon-minus-sign{
+    position: absolute;
+    right: 0px;
+    top: 3px;
+    font-size: 22px;
+    color: #F96268;
+    cursor: pointer;
+}
+.middle-box .prompt-content .add-post{
+    margin-top: 10px;
+}
+.middle-box .prompt-content .add-post a{
+    color:#555;
+}
+.middle-box .prompt-content .add-node{
+    font-size: 20px;
+    color: #3BAFDA;
+    vertical-align: text-top;
+    margin-right: 8px;
+}
+input.post-error, input.post-error:focus{
+    border-color: #FA787E;
+}
+.middle-box .prompt-content .u-dd-padding{
+    padding-top:0px;
+    padding-bottom:0px;
+}
+.middle-box .prompt-content .u-dd-hasprice{
+    padding-top:30px;
+    padding-bottom: 30px;
+}
+
+
+/** 左侧弹框样式 */
+.area-box{
+    margin:0px 15px;
+}
+.area-box .input-box {
+    width: 100%;
+    height: 34px;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    margin-bottom: 30px;
+}
+.area-box .select-icon{
+    right: 1px;
+    top: 1px;
+    line-height: 32px;
+}
+.area-box .select-disabled input{
+    border-color:#CFCFCF;
+    color:#CFCFCF;
+}
+.area-box .select-disabled .select-icon{
+    background: #CFCFCF;
+}
+#serviceZone .m-tab .tab-content{
+    border:none;
+}
+.u-little-tips {
+    padding: 15px;
+    color: #888;
+}
+ul.nav-tabs.nav-justified li{
+    border:none;
+}
+.btn.disabled, .btn[disabled], fieldset[disabled] .btn {
+    background: #CFCFCF;
+    border: 1px solid #CFCFCF;
+    color: #fff;
+}
+.kkpage button.btn.disabled, .kkpage button.btn[disabled]{
+    border-color:#3BAFDA;
+    background-color: #3BAFDA;
+}
+.kkpage button.btn.disabled:hover, .kkpage button.btn[disabled]:hover{
+    background-color: #60C6EA;
+    border-color: #60C6EA;
+}
+.w-lock-table .table-content td .u-edit-error,
+.w-lock-table .table-content td .u-edit-error:hover,
+.w-lock-table .table-content td .u-edit-error.active{
+    border:1px solid #f00!important;
+}
+.w-lock-table .table-content td .u-edit-warn{
+    border: 1px solid #80D6C6;
+    border-left-width: 6px;
+}
+
+/*详情页面*/
+.m-detail-content{
+    position: absolute;
+    top: 95px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    background: #fff;
+    border: 1px solid #ddd;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 20px 0px;
+}
+.m-weight-list{
+    font-size:16px;
+    line-height:34px;
+}
+.m-search{
+    text-align: center;
+    padding: 15px;
+}
+.m-search .list-search-box{
+    width: 50%;
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    margin-left:-108px;
+}
+.m-search .u-search{
+    padding-left:30px;
+}
+.m-search .u-icon-search{
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #ccc;
+    padding: 10px;
+}
+.m-search .u-search-btn{
+    cursor: pointer;
+    top: 0px;
+    right: -108px;
+    position: absolute;
+    line-height: 34px;
+    color: #fff;
+    width: auto;
+    padding: 0px;
+}
+.m-search .u-search-btn button {
+    width: 98px;
+    padding: 0px;
+}
+.m-table th:nth-child(1), .m-table td:nth-child(1){
+    width: 8%;
+}
+.m-table th:nth-child(2), .m-table td:nth-child(2){
+    width: 15%;
+}
+.m-table th:nth-child(3), .m-table td:nth-child(3){
+    width: 15%;
+}
+.m-table th:nth-child(4), .m-table td:nth-child(4){
+    width: 10%;
+}
+.m-table th:nth-child(5), .m-table td:nth-child(5){
+    width: 35%;
+}
+.m-table th:nth-child(6), .m-table td:nth-child(6){
+    width: 17%;
+}
+.copy-detail-box {
+    padding-left: 50px;
+}
+.copy-detail-box input {
+    margin-left: -16px;
+}

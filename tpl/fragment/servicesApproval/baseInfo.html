@@ -1,0 +1,188 @@
+<form name="serviceForm" novalidate="novalidate" class="test_ca16d07d clearfix">
+    <div class="operation-box right test_369e8f31">
+        <button type="button" ng-show="isOffline && !isVisible" name="editService" ng-click="editService();" class="btn btn-primary test_c59ef2e2"><%=common_page_edit%></button>
+    </div>
+    <div class="rows test_9c7b96b9">
+        <dl class="panel test_39a1bd33">
+            <dd class="test_cfc7f699">
+                <label class="test_eed1b19e"><b ng-hide="visible" class="test_ab940fcd">*</b><%=servicesApproval_title_name%></label>
+                <div class="content-info test_dfc17faa">
+                    <span ng-show="visible" class="text-info test_885c40a6">{{name}}</span>
+                    <input ng-keydown="preventEvent($event);" ng-trim="false" validate-code="{ruleReg:'name', ruleRegMsg:'<%=common_validate_name%>', maxLength:'30'}"
+                        name="nameInfo" ng-hide="visible" ng-model="nameInfo" type="text" required class="test_b0da8373">
+                    <validatetip from-model="serviceForm.nameInfo" class="test_a4032111"></validatetip>
+                </div>
+            </dd>
+            <dd class="test_a1c36851">
+                <label class="test_83c04350"><b ng-hide="visible" class="test_689a8392">*</b><%=servicesApproval_label_code%></label>
+                <div class="content-info test_95805468">
+                    <span ng-show="visible" class="text-info test_d34f0a2e">{{code}}</span>
+                    <input ng-keydown="preventEvent($event);" ng-trim="false" ng-blur="validateCode()" ng-focus="removeValidateCode()" validate-code="{ruleReg:'code', ruleRegMsg:'<%=common_validate_code%>', maxLength:'15'}"
+                        name="codeInfo" ng-hide="visible" ng-model="codeInfo" type="text" required class="test_cd9bf383">
+                    <validatetip from-model="serviceForm.codeInfo" class="test_f9fdee53"></validatetip>
+                    <div class="verification test_44d3b9f5">
+                        <span ng-show="validateCodeError" class="errors test_07252d82"><%=servicesApproval_validate_code%></span>
+                    </div>
+                </div>
+            </dd>
+            <!-- <dd ng-init="selectServiceTypes()" class="test_fe4c7d1f">
+                <label class="test_ae15fd0f"><b ng-hide="visible" class="test_f733d141">*</b><%=servicesApproval_label_type%></label>
+                <div class="content-info test_2de63588">
+                    <span ng-show="visible" class="text-info test_c0baad40">{{serviceTypeName}}</span>
+                    <div class="select-box test_d39df5b0">
+                        <input ng-keydown="preventEvent($event);" readonly="readonly" autocomplete="off" name="serviceTypeName" id="serviceType"
+                            ng-trim="false" ng-hide="visible" ng-model="serviceTypeName" ng-value="serviceTypeIds" type="text"
+                            required class="test_2ce89d1c">
+                        <i ng-hide="visible" class="select-icon icon-drop-down test_a004d473"></i>
+                    </div>
+                </div>
+            </dd> -->
+            <dd ng-init="selectServiceTypes()">
+                <label>
+                    <b ng-hide="visible">*</b>
+                    <%=servicesApproval_label_type%>
+                </label>
+                <div class="content-info">
+                    <span ng-show="visible" ng-if="serviceTypeIds.indexOf('ST004') !== -1" class="text-info">{{serviceTypeName}} / {{ subServiceTypeName }}</span>
+                    <span ng-show="visible" ng-if="serviceTypeIds.indexOf('ST004') === -1" class="text-info">{{serviceTypeName}}</span>
+                    <div class="row clearfix" ng-hide="visible">
+                        <div class="col-md-7">
+                            <div class="content-info" style="padding-left:0">
+                                <div class="select-box" ng-hide="visible">
+                                    <input ng-keydown="preventEvent($event);" readonly="readonly" autocomplete="off" name="serviceTypeName" id="serviceType"
+                                        ng-trim="false" ng-model="serviceTypeName" ng-value="serviceTypeIds" type="text"
+                                        required>
+                                    <i class="select-icon icon-drop-down"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="content-info" ng-show="serviceTypeIds.indexOf('ST004') !== -1">
+                                <div class="select-box">
+                                    <input readonly="readonly" name="subServiceTypeName" id="initLineType" ng-model="subServiceTypeName" ng-value="subServiceTypeCode" type="text" ng-click="initLineType()" ng-required="serviceTypeIds.indexOf('ST004') !== -1">
+                                    <i ng-hide="visible" class="select-icon icon-drop-down"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </dd>
+            <dd ng-init="selectTimeTypes()">
+                <label><b ng-hide="visible" class="test_f733d141"></b>预估时效：</label>
+                <div class="content-info">
+                    <span ng-show="visible" class="text-info">{{estimatedTime}} {{estimatedUnitValue}}</span>
+                    <div class="row clearfix" ng-hide="visible">
+                        <div class="col-md-7">
+                            <div class="content-info test_95805468" style="padding-left:0">
+                                <input validate-code="{ruleReg:'number', ruleRegMsg:'请输入数字，保留三位小数', maxLength:'5'}" name="estimatedTime" ng-model="estimatedTime"
+                                    type="text" ng-required="estimatedUnitValue" class="test_cd9bf383">
+                                <validatetip class="test_f9fdee53"></validatetip>
+                                <div class="verification test_44d3b9f5">
+                                    <span ng-show="validateCodeError" class="errors test_07252d82">请输入数字，保留三位小数</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+
+                            <div class="content-info test_2de63588">
+
+                                <div class="select-box test_d39df5b0">
+                                    <input id="intenTimeType" readonly="readonly" autocomplete="off" name="estimatedUnit" ng-trim="false" ng-hide="visible" ng-value="estimatedUnit"
+                                        ng-model="estimatedUnitValue" type="text" placeholder="请选择" ng-required="estimatedTime" class="test_2ce89d1c">
+                                    <i ng-hide="visible" class="select-icon icon-drop-down test_a004d473"></i>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </dd>
+            <dd class="test_aa9aa079">
+                <label class="test_c10a112c"><b ng-hide="visible" class="test_c1856b00">*</b><%=servicesApproval_label_content%></label>
+                <div class="content-info test_fdd43715" style="height: 120px;">
+                    <span ng-show="visible" class="text-info test_aeb3e84d">{{serviceContent}}</span>
+                    <textarea ng-trim="false" ng-change="removeSpace()" name="serviceContentInfo" style="height: 120px;" text-length="" ng-hide="visible"
+                        ng-model="serviceContentInfo" maxlength="140" required class="test_73b804ba"></textarea>
+                </div>
+            </dd>
+        </dl>
+        <dl class="panel test_94695ba6">
+            <!--<dd ng-controller="areaController" class="test_bbfd9aaa">
+                <label class="test_83585869"><b ng-hide="visible" class="test_962ec4fe">*</b><%=services_label_area%></label>
+                <div class="content-info test_12891fef">
+                    <span ng-show="visible" class="text-info test_e2dfe862">{{regionZone}}</span>
+                    <input ng-keydown="preventEvent($event);" ng-hide="visible" ng-click="selectRegion()" readonly="readonly" ng-trim="false" name="regionZone" ng-model="regionZone" type="text" placeholder="<%=services_placeholder_area%>" required class="test_41758604">
+                    <div class="verification test_d7d62ca4">
+                        <span ng-show="regionZoneError" class="errors test_00cd3fa1"></span>
+                    </div>
+                </div>
+            </dd>-->
+
+            <dd>
+                <label><b ng-hide="visible" class="test_f733d141"></b>重量限制：</label>
+                <div class="content-info">
+                    <span ng-show="visible" class="text-info">{{weightLimitMin}}  -- {{weightLimitMax}} kg</span>
+                    <div class="row clearfix" ng-show="!visible">
+                        <div class="col-md-4">
+                            <div class="content-info" style="padding-left:0">
+                                <input ng-hide="visible" ng-trim="false" validate-code="{ruleReg:'floatThree', ruleRegMsg:'请输入数字，保留三位小数', maxLength:'10'}" name="weightLimitMin" valiate-weight="min" ng-model="weightLimitMin" placeholder="下限" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="content-info" style="padding-left:0;">
+                                <input ng-hide="visible" ng-trim="false" validate-code="{ruleReg:'floatThree', ruleRegMsg:'请输入数字，保留三位小数', maxLength:'10'}" name="weightLimitMax" valiate-weight="max" ng-model="weightLimitMax" placeholder="上限" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="content-info">kg</div>
+                        </div>
+                    </div>
+                    <span ng-show="weightLimitMsg && !visible" style="color: #f00">{{weightLimitMsg}}</span>
+                    <validatetip from-model="serviceForm.weightLimitMin"></validatetip>
+                    <validatetip from-model="serviceForm.weightLimitMax"></validatetip>
+                </div>
+            </dd>
+
+
+            <dd class="test_e1629a59">
+                <label class="test_dfdfdfc7"><b ng-hide="visible" class="test_a65ca64f">*</b><%=servicesApproval_label_goods_type%></label>
+                <div class="content-info test_452e0e8f">
+                    <span ng-show="visible" class="text-info test_8f896b35">{{goodsTypeIdsInfo}}</span>
+                    <input ng-keydown="preventEvent($event);" ng-hide="visible" ng-click="selectGoodTypes()" name="goodsTypeIdsInfo" ng-model="goodsTypeIdsInfo"
+                        ng-value="listGoodsTypeIds" type="text" readonly="readonly" required class="test_24f7a46c">
+                </div>
+            </dd>
+            <dd class="test_35fb26a3">
+                <label class="test_711cbbe9"><b ng-hide="visible" class="test_9af082be">*</b><%=servicesApproval_label_supplier%></label>
+                <div class="content-info test_253a5da4">
+                    <a href="javascript:void(0)" ng-click="getSupplier(supplierId)" ng-show="visible" class="text-info test_9ef97ec1">{{supplierName}}</a>
+                    <input ng-click="getSupplierList();" ng-keydown="preventEvent($event);" readonly="readonly" name="supplierName" id="supplier"
+                        ng-trim="false" ng-hide="visible" ng-model="supplierName" ng-value="supplierId" type="text" required
+                        class="test_ef406a5a">
+                </div>
+            </dd>
+            <dd class="test_1e8e2e62">
+                <label class="test_50938b1c"><%=servicesApproval_label_remark%></label>
+                <div class="content-info test_cdce58a3" style="height: 120px;">
+                    <span ng-show="visible" class="text-info test_44bdb2bd">{{description}}</span>
+                    <textarea style="height: 120px;" ng-trim="false" ng-change="removeRemarkSpace()" text-length="" ng-hide="visible" ng-model="descriptionInfo"
+                        maxlength="140" class="test_2feb67c6"></textarea>
+                </div>
+            </dd>
+        </dl>
+    </div>
+    <div class="operation-box test_860bdf8a">
+        <button type="button" ng-show="isOffline && isVisible" ng-click="cancelService();" class="btn btn-default test_7d7be21c"><%=common_page_cancel%></button>
+        <button type="button" ng-show="isOffline && isVisible" ng-click="submitService();" name="saveService" class="btn btn-primary test_b2b4d3cb"><%=common_page_save%></button>
+    </div>
+    <div ng-show="userName && visible" class="rows author-rows test_7337e9c4">
+        <div class="author test_d762cb54">
+            <label class="test_fad0de47">创建时间：</label>
+            <span class="test_9eb8651b">{{createTime}}</span>
+        </div>
+        <div class="author test_f59434e9">
+            <label class="test_cf1aedc9">创建者：</label>
+            <span class="test_4d5086cd">{{userName}}</span>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,683 @@
+.left-width-fixed .m-left{
+    width:142px;
+}
+.left-width-fixed .m-right{
+    left: 172px;
+}
+
+.content-index .m-left{
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    bottom: 15px;
+    background: #fff;
+    border: 1px solid #ddd;
+    overflow: hidden;
+}
+.content-index .m-right{
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+    top: 15px;
+    overflow: hidden;
+}
+.content-index .m-left .m-type-list li{
+    height:60px;
+    line-height: 60px;
+    color: #888;
+    font-size: 16px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+}
+.content-index .m-left .m-type-list li.active {
+    color: #3BAFDA;
+}
+.content-index .tab-content{
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 50px;
+    bottom: 0px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.content-index .tab-content .box-header{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+.content-index .tab-content .search-box{
+    width: 40%;
+    display: inline-block;
+    position: relative;
+    margin-left: -150px;
+}
+.content-index .tab-content .search-has-pre{
+    margin-left: 20px;
+}
+.content-index .tab-content .search-has-pre .search-pre{
+    top: 0px;
+    left: -200px;
+    position: absolute;
+    line-height: 34px;
+    width: auto;
+    padding: 0px;
+}
+.content-index .tab-content .search-pre .select-box{
+    display: inline-block;
+    width: 120px;
+    text-align: left;
+}
+.content-index .tab-content .search-box input.form-control {
+    padding-left: 35px;
+    width: 100%;
+}
+.content-index .tab-content .search-box .u-search-icon{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: #ccc;
+}
+.content-index .tab-content .search-box .u-search-btn {
+    cursor: pointer;
+    top: 0px;
+    right: -110px;
+    position: absolute;
+    line-height: 34px;
+    color: #fff;
+    width: auto;
+    padding: 0px;
+}
+.content-index .m-btn-group {
+    position: relative;
+    text-align: left;
+    padding: 15px;
+}
+.content-index .m-btn-group button {
+    position: relative;
+    line-height: 10px;
+    padding: 0;
+    width: 98px;
+    margin-right: 8px;
+}
+
+.servicesApproval-table th:nth-child(1),.servicesApproval-table td:nth-child(1){
+    width: 5%;
+}
+.servicesApproval-table th:nth-child(2),.servicesApproval-table td:nth-child(2){
+    width: 20%;
+}
+.servicesApproval-table th:nth-child(3),.servicesApproval-table td:nth-child(3){
+    width: 10%;
+}
+.servicesApproval-table th:nth-child(4),.servicesApproval-table td:nth-child(4){
+    width: 15%;
+}
+.servicesApproval-table th:nth-child(5),.servicesApproval-table td:nth-child(5){
+    width: 15%;
+}
+.servicesApproval-table th:nth-child(6),.servicesApproval-table td:nth-child(6){
+    width: 20%;
+}
+.servicesApproval-table th:nth-child(7),.servicesApproval-table td:nth-child(7){
+    width: 15%;
+}
+.table-box td:nth-child(2) {
+    text-align: left;
+}
+
+
+/** 添加的layout */
+.go-back{
+    padding-left: 15px;
+}
+.add-title{
+    padding-top: 10px;
+    padding-bottom: 30px;
+    text-align: center;
+}
+.add-title p {
+    font-size: 22px;
+    font-weight: bold;
+}
+.form-box{
+    position: absolute;
+    top: 116px;
+    left: 15px;
+    bottom: 15px;
+    right: 15px;
+    /*background: #fff;*/
+    /*border: 1px solid #ddd;*/
+    /*overflow: auto;*/
+}
+.form-box .form-container{
+    float: left;
+    width: 100%;
+}
+.go-back .btn-right{
+    float: right;
+}
+.go-back .btn{
+    width: 120px;
+    padding: 0px;
+}
+
+.form-box .panel{
+    position: relative;
+    padding-left: 135px;
+    float: left;
+    width: 50%;
+}
+.form-box div.panel{
+    width: 100%;
+}
+.form-box .rows{
+    float: left;
+    position: relative;
+    width: 100%;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+.form-box .panel dd{
+    padding: 25px;
+    padding-left: 0px;
+    margin: 0;
+    text-align: center;
+}
+.form-box .panel label b{
+    display: inline-block;
+    text-align: left;
+    color: red;
+    width: 10px;
+    margin-left: -5px;
+}
+.form-box .panel label .subsidiary{
+    position: absolute;
+    display: inherit;
+    right: 6px;
+    top: 19px;
+}
+.form-box .panel dd > label {
+    position: absolute;
+    width: 135px;
+    left: 0;
+    line-height: 34px;
+    text-align: right;
+}
+.form-box .panel .content-info{
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    text-align: left;
+    height: auto;
+    padding-left: 13px;
+    line-height: 32px;
+}
+.form-box .panel .content-info.business{
+    height: 172px;
+}
+.form-box .panel .content-info span.text-info,a.text-info{
+    display: inline-block;
+    height: 34px;
+    line-height: 34px;
+    padding-left: 13px;
+    white-space: pre-line;
+    word-break:break-all;
+    width: 100%;
+}
+.operation-box{
+    float: left;
+    text-align: center;
+    width:100%;
+    margin-top: 80px;
+    margin-bottom: 20px;
+}
+.operation-box.right{
+    text-align: right;
+    height: 34px;
+    padding-right: 0px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.operation-box button{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.form-box .verification{
+    position: absolute;
+}
+.form-box .verification .errors{
+    padding-left: 3px;
+}
+
+/** 备注字符长度 */
+.content-info .text-legth{
+    position: absolute;
+    bottom: 0px;
+    right: 8px;
+    color: #999;
+}
+
+/** 类型选择 */
+.select-type{
+    position: absolute;
+    top:0;
+    left: 40px;
+    right: 40px;
+    bottom: 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 22px 15px;
+}
+.select-type ul li{
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+.select-type ul li:first-child{
+    padding-top: 0;
+}
+.select-type ul li .checkbox{
+    margin-right: 15px;
+}
+
+/** 左侧弹框样式 */
+.area-box{
+    margin:0px 15px;
+}
+.area-box .input-box {
+    width: 100%;
+    height: 34px;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    margin-bottom: 30px;
+}
+.area-box .select-icon{
+    right: 1px;
+    top: 1px;
+    line-height: 32px;
+}
+.area-box .select-disabled input{
+    border-color:#CFCFCF;
+    color:#CFCFCF;
+}
+.area-box .select-disabled .select-icon{
+    background: #CFCFCF;
+}
+#serviceZone .m-tab .tab-content{
+    border:none;
+}
+.u-little-tips {
+    padding: 15px;
+    color: #888;
+}
+
+/* 供应商样式 */
+.form-box.supplier-box{
+    background: transparent;
+    border: none;
+    overflow: hidden;
+}
+.form-box .tab-content {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+    padding-bottom: 30px;
+}
+
+.bd-table th:nth-child(1),.bd-table td:nth-child(1){
+    width: 5%;
+}
+.bd-table th:nth-child(2),.bd-table td:nth-child(2){
+    width: 5%;
+}
+.bd-table th:nth-child(3),.bd-table td:nth-child(3){
+    width: 15%;
+}
+.bd-table th:nth-child(4),.bd-table td:nth-child(4){
+    width: 15%;
+}
+.bd-table th:nth-child(5),.bd-table td:nth-child(5){
+    width: 10%;
+}
+.bd-table th:nth-child(6),.bd-table td:nth-child(6){
+    width: 10%;
+}
+.bd-table th:nth-child(7),.bd-table td:nth-child(7){
+    width: 10%;
+}
+.bd-table th:nth-child(8),.bd-table td:nth-child(8){
+    width: 10%;
+}
+.bd-table th:nth-child(9),.bd-table td:nth-child(9){
+    width: 10%;
+}
+.bd-table th:nth-child(10),.bd-table td:nth-child(10){
+    width: 10%;
+}
+
+.contacts-table th:nth-child(1),.contacts-table td:nth-child(1){
+    width: 5%;
+}
+.contacts-table th:nth-child(2),.contacts-table td:nth-child(2){
+    width: 5%;
+}
+.contacts-table th:nth-child(3),.contacts-table td:nth-child(3){
+    width: 15%;
+}
+.contacts-table th:nth-child(4),.contacts-table td:nth-child(4){
+    width: 15%;
+}
+.contacts-table th:nth-child(5),.contacts-table td:nth-child(5){
+    width: 10%;
+}
+.contacts-table th:nth-child(6),.contacts-table td:nth-child(6){
+    width: 10%;
+}
+.contacts-table th:nth-child(7),.contacts-table td:nth-child(7){
+    width: 15%;
+}
+.contacts-table th:nth-child(8),.contacts-table td:nth-child(8){
+    width: 15%;
+}
+.contacts-table th:nth-child(9),.contacts-table td:nth-child(9){
+    width: 10%;
+}
+
+.batch-operation.box{
+    padding: 15px;
+    padding-top: 0px;
+    height: 20px;
+}
+
+
+/*组图*/
+.img-list-box{
+    margin-left: 0;
+    margin-top: -23px;
+    margin-bottom: -23px;
+    width: 100%;
+}
+.img-list-box .img-box{
+    float: left;
+    margin: 0px 26px 30px 0px;
+    position: relative;
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+}
+.img-list-box .img-box .img-pic{
+    height: 80px;
+    width: 80px;
+}
+.img-list-box .img-box .img-pic .imgs{
+    height: 80px;
+    width: 80px;
+    background: #e0dfe0;
+}
+.img-list-box .img-box .img-pic div.imgs{
+    background-position: center;
+    background-size: 60%;
+    background-repeat: no-repeat;
+}
+.img-list-box .img-box .img-pic .file-name-box{
+    position: absolute;
+    bottom: -30px;
+    line-height: 30px;
+    font-size: 10px;
+    width: 80px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    -icab-text-overflow: ellipsis;
+    -khtml-text-overflow: ellipsis;
+    -moz-text-overflow: ellipsis;
+    -webkit-text-overflow: ellipsis;
+}
+
+.rows.author-rows{
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+}
+.rows .author{
+    float: right;
+    width: auto;
+    text-align: right;
+    padding-right: 20px;
+}
+
+.text-left{
+    text-align:left;
+}
+.text-right{
+    text-align:right;
+}
+.text-center{
+    text-align: center;
+}
+.u-must-red{
+    color: red;
+}
+.content-main {
+    min-height: auto!important;
+    overflow-y: hidden;
+}
+.wrap-textarea{
+    position: relative;
+}
+.wrap-textarea .text-legth{
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    color: #999;
+}
+.m-audit-box{
+    background: #fff;
+    padding: 20px;
+    border-top: 1px solid #ddd;
+    font-size: 16px;
+}
+.m-audit-box .row-list{
+    padding:15px 0px;
+}
+
+.u-red-dot{
+    width: 6px;
+    height: 6px;
+    display: inline-block;
+    background: #F96268;
+    border-radius: 6px;
+    margin-right: 6px;
+    vertical-align: middle;
+    margin-left:-12px;
+}
+
+
+.stream-box {
+    position:absolute;
+    top:15px;
+    left:15px;
+    right:15px;
+    bottom:15px;
+    padding:40px;
+    overflow-y:auto;
+    background:#fff;
+    border: 1px solid #ddd;
+}
+.title-stream {
+    margin: 10px 0px;
+    text-align: center;
+    font-size: 22px;
+}
+.stream-list {
+    list-style-type: none;
+    padding-left:24px;
+    margin-top:60px;
+    width:636px;
+    margin-left:auto;
+    margin-right:auto;
+}
+.stream-list li {
+    height:150px;
+    overflow:visible;
+    border:none;
+    border-left:1px solid #D8D8D8;
+    margin-bottom:18px;
+    position:relative;
+    padding-left:26px;
+}
+.stream-list li:last-child {
+    border-left: none;
+}
+.stream-list li.active .circle, .stream-list li .circle {
+    height:15px;
+    width:15px;
+    position:absolute;
+    border-radius:25px;
+    background-color:#3BAFDA;
+    left: -6.5px;
+    top: -16px;
+    border:2px solid #BCEDFE;
+}
+.stream-list li .title {
+    font-weight:bold;
+}
+.stream-list li.active p {
+    color:#3BAFDA;
+    font-size:16px;
+    margin-bottom: 5px;
+}
+.stream-list li p {
+    margin-bottom: 5px;
+    font-size:16px;
+}
+.stream-list li p span {
+    margin-right:5px;
+}
+.stream-list li .circle {
+    height:13px;
+    width:13px;
+    background-color:#D8D8D8;
+    border:none;
+}
+.stream-content {
+    position: relative;
+    top: -21px;
+}
+.deal-detail {
+    display: inline-block;
+    width: 500px;
+    font-size: 16px;
+    vertical-align: top;
+    line-height: 24px;
+    word-break: break-all;
+}
+
+.m-range .top-btn-group{
+  margin:15px;
+}
+.table-container {
+    text-align: center;
+    position: relative;
+}
+
+#service-range {
+    padding-top: 15px;
+}
+
+#service-range th,
+#service-range td {
+    text-align: center;
+}
+
+#service-range th:nth-child(1), #service-range td:nth-child(1){
+    width: 5%;
+    -ms-text-overflow: inherit!important;
+    text-overflow: inherit!important;
+}
+#service-range th:nth-child(2), #service-range td:nth-child(2){
+    width: 5%;
+}
+#service-range th:nth-child(3), #service-range td:nth-child(3){
+    width: 15%;
+}
+#service-range th:nth-child(4), #service-range td:nth-child(4){
+    width: 15%;
+}
+#service-range th:nth-child(5), #service-range td:nth-child(5){
+    width: 15%;
+}
+#service-range th:nth-child(6), #service-range td:nth-child(6){
+    width: 15%;
+}
+#service-range th:nth-child(7), #service-range td:nth-child(7){
+    width: 15%;
+}
+#service-range th:nth-child(8), #service-range td:nth-child(8){
+    width: 15%;
+}
+
+#regionDetail [type=radio] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-top: 0;
+}
+
+/* 居中弹框表单样式 */
+.middle-box .prompt-content dd{
+    position: relative;
+    padding-left: 95px;
+    width: 100%;
+    margin: 0px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.middle-box .prompt-content .content-info{
+    position: relative;
+}
+.middle-box .prompt-content label.label-tip{
+    position: absolute;
+    left: 0px;
+    line-height: 34px;
+    height: 34px;
+    text-align: right;
+    width: 85px;
+}
+.prompt-content label b{
+    display: inline-block;
+    width: 12px;
+    text-align: left;
+    color: red;
+}
+.middle-box .prompt-content input{
+    width: 100%!important;
+}
+.prompt-content .verification{
+    position: absolute;
+}
+.prompt-content .verification .errors{
+    padding-left: 0px;
+}
+.middle-box .prompt-content .ready-panel{
+    display: table;
+    height: 34px;
+    line-height: 34px;
+}
+.middle-box .prompt-content dd.isHref-box{
+    text-align: center;
+    padding: 0px;
+    position: absolute;
+    bottom: 10px;
+    right: 0px;
+}
+td {
+  text-align: center !important;
+}

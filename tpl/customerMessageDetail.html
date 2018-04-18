@@ -1,0 +1,156 @@
+<style class="test_346f2dd6">
+
+
+    .btn-up{
+        margin-left: 15px;
+    }
+    .u-title {
+        margin: 10px 0px;
+        text-align: center;
+        font-size: 18px;
+    }
+    /*.wrap-textarea{*/
+        /*position: absolute;*/
+        /*top:399px;*/
+    /*}*/
+    .text-areaMsg{
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-left: 10px;
+        padding-right: 10px;
+        width: 100%;
+        height: 120px;
+        border-left-width: 0px;
+        border-right-width: 0px;
+        border-bottom-width: 0px;
+    }
+    .text-legth{
+        position: absolute;
+        right: 5px;
+        top: 60px;
+
+    }
+    .btn-summit{
+        position: absolute;
+        right: 5px;
+        top: 80px;
+    }
+
+    .spinner {
+        margin: 100px auto;
+        width: 50px;
+        height: 60px;
+        text-align: center;
+        font-size: 10px;
+    }
+
+    .spinner > div {
+        background-color: #67CF22;
+        height: 100%;
+        width: 6px;
+        display: inline-block;
+
+        -webkit-animation: stretchdelay 1.2s infinite ease-in-out;
+        animation: stretchdelay 1.2s infinite ease-in-out;
+    }
+
+    .spinner .rect2 {
+        -webkit-animation-delay: -1.1s;
+        animation-delay: -1.1s;
+    }
+
+    .spinner .rect3 {
+        -webkit-animation-delay: -1.0s;
+        animation-delay: -1.0s;
+    }
+
+    .spinner .rect4 {
+        -webkit-animation-delay: -0.9s;
+        animation-delay: -0.9s;
+    }
+
+    .spinner .rect5 {
+        -webkit-animation-delay: -0.8s;
+        animation-delay: -0.8s;
+    }
+
+    @-webkit-keyframes stretchdelay {
+        0%, 40%, 100% { -webkit-transform: scaleY(0.4) }
+        20% { -webkit-transform: scaleY(1.0) }
+    }
+
+    @keyframes stretchdelay {
+        0%, 40%, 100% {
+            transform: scaleY(0.4);
+            -webkit-transform: scaleY(0.4);
+        }  20% {
+               transform: scaleY(1.0);
+               -webkit-transform: scaleY(1.0);
+           }
+    }
+
+
+</style>
+
+
+<div style="display: flex;flex-flow:row nowrap" class="test_474f3c10">
+    <div style="flex: 1" class="test_294cee7d">
+        <button class="btn btn-default btn-up test_3906f87a" ng-click="goBack()">返回</button>
+    </div>
+    <div ng-show="!isJustShow" style="flex: 1" class="test_7d8cdd89">
+        <button class="btn btn-primary  test_c9b60464" style="flex: 1;float: right;margin-right: 10px;" ng-click="Solved()" ng-disabled="!showDialog" ng-class="{'btn-disable': !showDialog}">已解决</button>
+    </div>
+    <div ng-show="!isJustShow" class="test_d0657e7f">
+        <button class="btn btn-primary  test_7bcee50b" style="flex: 1" ng-click="CreatOrder()">创建工单</button>
+    </div>
+
+</div>
+
+
+<div class="u-title test_3568e5db">{{userName}}</div>
+
+
+<section class="only-list test_455f35b2" style="top:90px;width: 80%">
+    <div class="spinner test_f573adc8" ng-show="showLoding">
+        <div class="rect1 test_b6b37b7a"></div>
+        <div class="rect2 test_7039e24d"></div>
+        <div class="rect3 test_f2d98932"></div>
+        <div class="rect4 test_46d82ce1"></div>
+        <div class="rect5 test_9348e3de"></div>
+    </div>
+
+
+    <div class="main test_f6e92052" id="main" style="height: 399px">
+        <div class="main_inner clearfix test_38e195c2">
+            <div class="panel test_d760e742"></div>
+            <div id="chatArea" class="box chat test_01d947d6" style="overflow-y: auto">
+                <div class="box_hd test_e7710ee2"></div>
+                <div class="box_bd test_8f951575" id="messageList">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div ng-show="showDialog" style="position: relative" class="test_5b8c609d">
+        <textarea text-length="" name="auditRemark" ng-keyup="inputKeyUp($event)" ng-model="message" ng-trim="false" rows="5" type="text" maxlength="140" placeholder="请输入留言" class="text-areaMsg test_8abe9d06">
+        </textarea>
+        <button class="btn btn-primary btn-summit test_9448dc9b" ng-click="summit()">发送</button>
+
+    </div>
+</section>
+<section class="only-list test_a4fa1ebc" style="height: 520px;left: 82%;top:90px;padding: 10px">
+    <div style="font-size: 18px;text-align: center;padding-bottom: 10px;color: #333;" class="test_ef7851e0">客户信息</div>
+    <div ng-show="customerType=='anony'" style="word-wrap: break-word;
+    word-break: break-all;" class="test_904a33b8">
+        <div class="test_f9c75f6e">姓名:{{anonymity}}</div>
+        <div class="test_d51e9536">移动电话:{{anonyTel}}</div>
+    </div>
+    <div ng-show="customerType=='login'" style="word-wrap: break-word;
+    word-break: break-all;" class="test_4b401f46">
+        <div class="test_a6a9fe2f">用户名:{{loginCustomerInfo.userName}}</div>
+        <div class="test_613209c5">姓名:{{loginCustomerInfo.fullName}}</div>
+        <div class="test_2d7dcc5e">工作邮箱:{{loginCustomerInfo.email}}</div>
+        <div class="test_af5bcbbf">移动电话:{{loginCustomerInfo.mobilePhone}}</div>
+        <div class="test_53751c41">账号类型:{{loginCustomerInfo.isSystem| serviceType}}</div>
+    </div>
+</section>

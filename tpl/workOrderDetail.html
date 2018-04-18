@@ -1,0 +1,354 @@
+<section ng-if="!workOrderDetailModel.workOrderCode" name="confirmOrder" class="test_2d9da941">
+    <div class="test_6001e665">
+        <div class="wod-goBack test_4b69e846">
+            <button ng-click="goBack();" class="btn btn-default test_705536ed"><%=common_page_back%></button>
+        </div>
+
+        <div class="wod-addTitle test_3eec6ad6">
+            <p class="test_c364e286"><%=workOrderDetail_title%></p>
+        </div>
+    </div>
+    <div class="wod-main test_e901d653">
+        <form id="workOrderDetail" class="test_b8e70e76" novalidate="false">
+             <!--问题类型-->
+             <div class="wod-row test_7a1bdd69">
+                 <div class="left test_37ef2697">
+                     <span class="test_8c6866ae"> <b class="test_70355897">*</b><%=workOrderDetail_label_problemType %>:</span>
+                 </div>
+                 <div class="right test_858516b9" style="position:relative;">
+                     <div style="width:32%;display:inline-block;position:relative;float: left;" class="test_826831e2">
+                         <input type="text" name="orderNumType" id="type" class="test_416f50de" ng-model="workOrderDetailModel.typeName" required>
+                         <i class="workOrderIcon icon-drop-down test_30698209"></i>
+                     </div>
+
+                     <input type="text" ng-if="workOrderDetailModel.type == 1 || workOrderDetailModel.type == 0"
+                            ng-trim="true" name="orderNum" id="refAskBoardId" placeholder="请输入留言编码"
+                            ng-blur="checkWorkOrder()" class="refAskBoardId test_170a4833" ng-model="workOrderDetailModel.refAskBoardId" required>
+                     <div ng-if="refAskBoardIdInvalidTip" class="verification test_38f193ee" >
+                            <span class="errors test_9d42e8b1" style="margin-left: -55px">
+                                  {{refAskBoardIdInvalidTip}}
+                            </span>
+                     </div>
+
+                     <div ng-if="workOrderDetailModel.type == 2" class="checkboxBlockOrder">
+                         <div class="checkbox checkbox-info">
+                             <input type="checkbox" ng-checked="blockOrder" ng-click="changeBlockOrder()">
+                             <label ></label>
+                         </div>
+                         <span class="block-order"><%=workOrderDetail_block_order%></span>
+                     </div>
+
+                     <input type="text" ng-if="workOrderDetailModel.type == 2" ng-trim="true" name="orderNum" id="orderNo" placeholder="请输入运单号" ng-blur="checkWorkOrder()" class="orderNumClass test_7267268e" ng-model="workOrderDetailModel.waybillNo" required>
+                     <div ng-if="orderNoInvalidTip" class="verification ml10 test_38f193ee">
+                            <span class="errors test_9d42e8b1" style="margin-left: 16px;">
+                                  {{orderNoInvalidTip}}
+                            </span>
+                     </div>
+                 </div>
+             </div>
+            <!--客户姓名-->
+            <div class="wod-row test_b432d7fc">
+                <div class="left test_dae698ab">
+                    <span class="test_c7c30522"><%=workOrderDetail_label_customerName %>:</span>
+                </div>
+                <div class="right test_8ef680f6">
+                    <input ng-if="workOrderDetailModel.type==2||workOrderDetailModel.type==3||!workOrderDetailModel.type" type="text" id="anonymity" maxlength="30" name="anonymity" class="test_666245ec" ng-model="workOrderDetailModel.anonymity">
+                    <input ng-if="workOrderDetailModel.type==0||workOrderDetailModel.type==1" type="text" name="anonymity" class="test_317d0678" maxlength="30" id="anonymity" ng-model="workOrderDetailModel.anonymity">
+                    <div ng-show="anonymityErrorTips" class="test_7ae4cc12">
+                        <span class="errorTips test_6a49c9bf">{{anonymityErrorTips}}</span>
+                    </div>
+                </div>
+            </div>
+            <!--联系电话-->
+            <div class="wod-row test_777c384b">
+                <div class="left test_f4f3a533">
+                    <span class="test_80a5e0f9"><%=workOrderDetail_label_phone %>:</span>
+                </div>
+                <div class="right test_06623306">
+                    <input ng-if="workOrderDetailModel.type==2||workOrderDetailModel.type==3||!workOrderDetailModel.type" type="text" id="anonyTel" name="anonyTel" maxlength="30" class="anonyTel test_6374fd83" ng-model="workOrderDetailModel.anonyTel">
+                    <input ng-if="workOrderDetailModel.type==0||workOrderDetailModel.type==1" type="text" maxlength="30" name="anonyTel" class="anonyTel test_c293def7" id="anonyTel" ng-model="workOrderDetailModel.anonyTel">
+                    <div ng-show="anonyTelErrorTips" class="test_b7d85980">
+                        <span class="errorTips test_a3273446">{{anonyTelErrorTips}}</span>
+                    </div>
+                </div>
+            </div>
+            <!--标题-->
+            <div class="wod-row test_01e1fa31">
+                <div class="left test_dfb7137e">
+                    <span class="test_3c70cab1"> <b class="test_70355897">*</b><%=workOrderDetail_label_title %>:</span>
+                </div>
+                <div class="right test_2298f967">
+                    <input type="text" name="title" class="test_b894dc26" id="title" ng-model="workOrderDetailModel.title" required>
+                </div>
+            </div>
+            <!--问题描述-->
+            <div class="wod-row test_c5042364" style="height:auto">
+                <div class="left test_050fd611">
+                    <span class="test_403173b6"> <b class="test_70355897">*</b><%=workOrderDetail_label_problemDescription %>:</span>
+                </div>
+                <div class="right test_c4808de7" style="position:relative">
+
+                   <textarea name="content" id="content" rows="5" class="test_11b9bde0" maxlength="1000" ;="" ng-change="resetRemainWords(1000,1)" ng-model="workOrderDetailModel.content" required></textarea>
+                    <div class="show-string-length leaveMsg_maxWord test_c7641b9f"><span class="test_de5e5a37 ng-binding">{{contentRemainWords}}</span>字
+                    </div>
+                </div>
+            </div>
+            <!--附件-->
+            <div class="wod-row test_090fee66" style="height:auto">
+                <div class="left test_67bfce71">
+                    <span class="test_97a2fb8d"><%=workOrderDetail_label_attachment %>:</span>
+                </div>
+                <div class="right img-list-box clearfix test_1473b858" ng-controller="pictureController">
+                    <div class="img-box test_28c03c62" ng-mouseleave="picture.mouseleave(pictureModel, $index, $event)" ng-repeat="item in pictureModel.picture">
+                        <div title="{{item.name}}" ng-mousedown="getPictureUrl(item.picUrlID.id)" class="img-pic test_9f135fab">
+                            <img ng-mouseover="picture.mouseover(pictureModel, $index, $event)" ng-show="item.typeImage && item.suffix!='tiff'" class="imgs test_1d010ff3" ng-src="{{item.picUrlID.path}}" height="80" width="80">
+                            <div ng-mouseover="picture.mouseover(pictureModel, $index, $event)" ng-show="item.typePdf" type="application/pdf" class="imgs test_44af7d35" style="background-image: url('../public/img/pdf-file.svg')" height="80" width="80"></div>
+                            <div ng-mouseover="picture.mouseover(pictureModel, $index, $event)" ng-show="item.typeImage && item.suffix=='tiff'" type="image/tiff" class="imgs test_0d85badc" style="background-image: url('../public/img/tiff-file.svg');" height="80" width="80"></div>
+
+                            <p class="file-name-box test_f8dcd14d">{{item.name}}</p>
+                        </div>
+                        <div ng-show="item.delshow" class="img-del test_6911730f">
+                            <div ng-mousedown="getPictureUrl(item.picUrlID.id)" class="img-view test_ccb38693"></div>
+                            <i ng-click="picture.del(pictureModel, $index)" class="icon-minus-sign icon-minus-delete test_f13b73e4"></i>
+                        </div>
+                    </div>
+                    <div ng-show="pictureModel.uploadShow" class="img-box img-upload-box test_b89b40e4" ng-class="{true:'mt20',false:''}[pictureModel.picture.length && pictureModel.picture.length % 3 == 0]">
+                        <input multiple="multiple" type="file" accept="image/jpeg,image/png,image/bmp,image/tiff" file-model="avatarFile" class="img-file test_8d4910d8">
+                        <span class="img-upload-button test_afaee461"></span>
+                    </div>
+                </div>
+            </div>
+            <!--信息类型-->
+            <div class="wod-row test_eb9a9e63">
+                <div class="left test_a7a620d3">
+                    <span class="test_5bdb0d59"> <b class="test_70355897">*</b><%=workOrderDetail_label_infoType %>:</span>
+                </div>
+                <div class="right test_ac586aa9" style="position: relative;">
+                    <input type="radio" name="infoType" class="test_3f710d73" ng-value="2" ng-model="workOrderDetailModel.priority" required>
+                    <span class="test_8811a299"><%=workOrderDetail_label_veryUrgent%></span>
+                    <input type="radio" name="infoType" class="test_7752c79e" ng-value="1" ng-model="workOrderDetailModel.priority" required>
+                    <span class="test_a665cdf5"><%=workOrderDetail_label_urgent%></span>
+                    <input type="radio" name="infoType" class="test_13f5fd15" ng-value="0" ng-model="workOrderDetailModel.priority" required>
+                    <span class="test_087bca7e"><%=workOrderDetail_label_normal%></span>
+
+                    <div style="bottom:0px;" ng-if="(workOrderDetailModel.priority !=2 && workOrderDetailModel.priority!=1 && workOrderDetailModel.priority != 0) && priorityError" class="verification">
+                        <span class="errors">请选择优先级</span>
+                    </div>
+                </div>
+            </div>
+            <!--处理人-->
+            <div class="wod-row test_45e02b47">
+                <div class="left test_e0200a51">
+                    <span class="test_38a62a25"> <b class="test_70355897">*</b><%=workOrderDetail_label_handlePerson %>:</span>
+                </div>
+                <div class="right test_a30260f7" style="position:relative">
+                    <div style="display:inline-block;position:relative;width:100%" class="test_7fa61128">
+                        <input type="text" name="transactor" class="w100 test_65228ebc" id="transactor" ng-click="initStaffSelect()" ng-model="workOrderDetailModel.transactorName" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="wod-row tc test_99850172">
+                <button class="btn btn-primary test_e27f7c72" ng-click="createWorkOrder()">
+                    <%=workOrderDetail_button_update%>
+                </button>
+            </div>
+        </form>
+    </div>
+</section>
+
+<section ng-if="workOrderDetailModel.workOrderCode" name="confirmOrder" class="test_4ec2e1cb">
+    <div class="test_6001e665">
+        <div class="wod-goBack test_4b69e846">
+            <button ng-click="goBack();" class="btn btn-default test_705536ed"><%=common_page_back%></button>
+            <button ng-if="workOrderDetailModel.workOrderStauts==4" class="btn btn-disabled btnClose test_705536ed" style="float:right;"><%=workOrderDetail_btn_closed%></button>
+        </div>
+        <div class="wod-addTitle test_3eec6ad6">
+            <p class="test_c364e286">{{workOrderDetailModel.workOrderCode}}<%=workOrderDetail_title_detail%></p>
+        </div>
+    </div>
+    <div class="wod-main test_e901d653">
+        <form id="workOrderDetail" class="test_1b075ee7" novalidate="false">
+            <!--问题类型-->
+            <div class="wod-row test_eb720548">
+                <div class="left test_e4ce383b">
+                    <span class="test_0051f744"><%=workOrderDetail_label_problemType %>:</span>
+                </div>
+                <div class="right test_744e2edd">
+                    <span class="w40 test_0e70422d" style="float:left;">{{workOrderDetailModel.typeName}}</span>
+                    <span class="w50 ml10 jumpSpan test_9d412c3c" ng-click="jumpTo(1)" ng-if="workOrderDetailModel.refAskBoardId">{{workOrderDetailModel.askBoardCode}}</span>
+                    <span class="w50 ml10 jumpSpan test_87ea404a" ng-click="jumpTo(2)" ng-if="workOrderDetailModel.waybillNo">{{workOrderDetailModel.waybillNo}}</span>
+                </div>
+            </div>
+            <!--客户姓名-->
+            <div class="wod-row test_aa8dace6">
+                <div class="left test_b4cc5282">
+                    <span class="test_1371e848"><%=workOrderDetail_label_customerName %>:</span>
+                </div>
+                <div class="right test_85b966bf">
+                    <span class="test_968661bb">{{workOrderDetailModel.anonymity}}</span>
+                </div>
+            </div>
+            <!--联系电话-->
+            <div class="wod-row test_0a71891b">
+                <div class="left test_61c35e29">
+                    <span class="test_80a1a8a9"><%=workOrderDetail_label_phone %>:</span>
+                </div>
+                <div class="right test_c7f0f874">
+                    <span class="test_a35b06e8">{{workOrderDetailModel.anonyTel}}</span>
+                </div>
+            </div>
+            <!--标题-->
+            <div class="wod-row test_0e02c5d7">
+                <div class="left test_05a18d0b">
+                    <span class="test_d9fbaef0"> <%=workOrderDetail_label_title %>:</span>
+                </div>
+                <div class="right test_9ce06959">
+                    <span class="test_30261e91">{{workOrderDetailModel.title}}</span>
+                </div>
+            </div>
+            <!--问题描述-->
+            <div class="wod-row test_2871fd80" style="height:auto">
+                <div class="left test_d1f308f7">
+                    <span class="test_139aab98"><%=workOrderDetail_label_problemDescription %>:</span>
+                </div>
+                <div class="right test_a9e8bc2a">
+                    <span class="test_c243ce82">{{workOrderDetailModel.content}}</span>
+                </div>
+            </div>
+            <!--附件-->
+            <div class="wod-row test_873217f2" style="height:auto" ng-if="workOrderDetailModel.files.length > 0">
+                <div class="left test_175bc1dc">
+                    <span class="test_73e046fc"><%=workOrderDetail_label_attachment %>:</span>
+                </div>
+                <div class="right test_a910a160" style="position:relative">
+                    <div class="attachList test_ef6e6c4c" ng-repeat="file in workOrderDetailModel.files">
+                        <img class="attachmentImage test_22e91fa8" ng-src="{{file.path}}">
+                        <span class="attachmentSpan test_c5c8a712" title="{{file.name}}">{{file.name}}</span>
+                    </div>
+                </div>
+            </div>
+            <!--信息类型-->
+            <div class="wod-row test_e217e2e8">
+                <div class="left test_0edd45e1">
+                    <span class="test_277f3149"><%=workOrderDetail_label_infoType %>:</span>
+                </div>
+                <div class="right test_101d8b61">
+                    <span class="test_2f4d2d50">{{workOrderPriority[workOrderDetailModel.priority]}}</span>
+                </div>
+            </div>
+
+            <div class="wod-row tc test_3d91ee2d" ng-if="workOrderDetailModel.editStatus && workOrderDetailModel.workOrderStauts%5==0">
+                <button class="btn btn-primary test_e6f3e089" ng-click="handleWorkOrder()">
+                    <%=workOrderDetail_button_startHandle%>
+                </button>
+            </div>
+            <div ng-show="workOrderDetailModel.editStatus &&(workOrderDetailModel.workOrderStauts==2||workOrderDetailModel.workOrderStauts==3)" class="test_6e15bf74">
+                <!--处理意见  已解决 || 转交处理-->
+                <div class="wod-row test_74716a41">
+                    <div class="left test_f8affc09">
+                        <span class="test_c422f75d"> <b class="test_70355897">*</b><%=workOrderDetail_msg_handleSuggess %>:</span>
+                    </div>
+                    <div class="right test_b6cbd2f2" ng-if="workOrderDetailModel.workOrderStauts==2">
+                        <input type="radio" name="infoType" id="infoType" class="test_d2c4e9ff" ng-value="3" ng-change="closeOrDispatch()" ng-model="workOrderDetailModel.action" required>
+                        <span class="test_0c2965e7"><%=workOrderDetail_msg_resolveWorkOrder%></span>
+                        <input type="radio" name="infoType" class="test_e20abb16" id="infoType" ng-value="0" ng-change="closeOrDispatch()" ng-model="workOrderDetailModel.action" required>
+                        <span class="test_bf508b31"><%=workOrderDetail_msg_dispatchHandle%></span>
+                        <div style="bottom:0px;" class="verification" ng-if="(workOrderDetailModel.action != 3 && workOrderDetailModel.action != 0) && actionError">
+                            <span class="errors">
+                                请选择处理意见
+                            </span>
+                        </div>
+                    </div>
+                    <div class="right test_c04e77fc" ng-if="workOrderDetailModel.workOrderStauts==3">
+                        <input type="radio" name="infoType" id="infoType" class="test_d2a5bc6d" ng-value="4" ng-change="closeOrDispatch()" ng-model="workOrderDetailModel.action" required>
+                        <span class="test_74941f53"><%=workOrderDetail_msg_closeWorkOrder%></span>
+                        <input type="radio" name="infoType" class="infoType test_f426e4bb" id="" ng-value="0" ng-change="closeOrDispatch()" ng-model="workOrderDetailModel.action" required>
+                        <span class="test_c00dc063"><%=workOrderDetail_msg_dispatchHandle%></span>
+                        <div style="bottom:0px;" class="verification" ng-if="(workOrderDetailModel.action != 4 && workOrderDetailModel.action != 0) && actionError">
+                            <span class="errors">
+                                请选择处理意见
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <!--处理意见-->
+                <div class="wod-row test_c045e491" style="height:auto;">
+                    <div class="left test_3eec2f97">
+                        <span class="test_618b2dbe"> <b class="test_70355897">*</b><%=workOrderDetail_msg_handleSuggessDiscription %>:</span>
+                    </div>
+                    <div class="right test_8f5fd36d" style="position:relative">
+
+                    <textarea name="content" id="content" rows="5" class="test_32331362" maxlength="140" ng-change="resetRemainWords(140,2)" placeholder="<%=workOrderDetail_textarea_problemDescription_PH%>" ng-model="workOrderDetailModel.suggest" required></textarea>
+                        <div class="show-string-length leaveMsg_maxWord test_f1c4223d"><span class="test_de5e5a37 ng-binding">{{suggestRemainWords}}</span>字
+                        </div>
+                    </div>
+                </div>
+                <!--附件-->
+                <div class="wod-row test_28e61999" style="height:auto">
+                    <div class="left test_42248f67">
+                        <span class="test_03b76df3"><%=workOrderDetail_label_attachment %>:</span>
+                    </div>
+                    <div class="right img-list-box clearfix test_3a33f54a" ng-controller="pictureController">
+                        <div class="img-box test_d2d64a56" ng-mouseleave="picture.mouseleave(pictureModel, $index, $event)" ng-repeat="item in pictureModel.picture">
+                            <div title="{{item.name}}" ng-mousedown="getPictureUrl(item.picUrlID.id)" class="img-pic test_e83bdad8">
+                                <img ng-mouseover="picture.mouseover(pictureModel, $index, $event)" ng-show="item.typeImage && item.suffix!='tiff'" class="imgs test_c4b94dc9" ng-src="{{item.picUrlID.path}}" height="80" width="80">
+                                <div ng-mouseover="picture.mouseover(pictureModel, $index, $event)" ng-show="item.typePdf" type="application/pdf" class="imgs test_3d6bdc51" style="background-image: url('../public/img/pdf-file.svg')" height="80" width="80"></div>
+                                <div ng-mouseover="picture.mouseover(pictureModel, $index, $event)" ng-show="item.typeImage && item.suffix=='tiff'" type="image/tiff" class="imgs test_f77cea4b" style="background-image: url('../public/img/tiff-file.svg');" height="80" width="80"></div>
+
+                                <p class="file-name-box test_7751e317">{{item.name}}</p>
+                            </div>
+                            <div ng-show="item.delshow" class="img-del test_1309dd28">
+                                <div ng-mousedown="getPictureUrl(item.picUrlID.id)" class="img-view test_50caedf4"></div>
+                                <i ng-click="picture.del(pictureModel, $index)" class="icon-minus-sign icon-minus-delete test_d9a4bc37"></i>
+                            </div>
+                        </div>
+                        <div ng-show="pictureModel.uploadShow" class="img-box img-upload-box test_6090cd00" ng-class="{true:'mt20',false:''}[pictureModel.picture.length && pictureModel.picture.length % 3 == 0]">
+                            <input multiple="multiple" type="file" accept="image/jpeg,image/png,image/bmp,image/tiff,application/pdf" file-model="avatarFile" class="img-file test_b33ea22d">
+                            <span class="img-upload-button test_c3c53f93"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!--处理人-->
+                <div class="wod-row test_c43c59dc" ng-show="workOrderDetailModel.action != 4">
+                    <div class="left test_46870e56">
+                        <span class="test_01515018"> <b class="test_70355897">*</b><%=workOrderDetail_label_handlePerson %>:</span>
+                    </div>
+                    <div class="right test_30086a57" style="position:relative">
+                        <input type="text" ng-show="workOrderDetailModel.action != 3" name="transactor" class="test_858743ef" id="transactor" ng-click="initStaffSelect()" ng-model="workOrderDetailModel.transactorName" required>
+                        <input type="text" ng-show="workOrderDetailModel.action == 3" name="transactor" class="test_f2b26bb1" ng-model="workOrderDetailModel.transactorName" disabled>
+                    </div>
+                </div>
+
+                <div class="wod-row tc test_b17bbffd" ng-if="workOrderDetailModel.editStatus">
+                    <button class="btn btn-primary test_c4e33e16" ng-click="handleWorkOrder()">
+                        <%=workOrderDetail_button_submitSuggestion%>
+                    </button>
+                </div>
+            </div>
+
+            <div class="wod-row test_1b75c73c" style="height:auto;margin-top: 20px;padding-left:13%">
+                <span class="flowNote test_3767a658"><%= workOrderDetail_span_flow%>:</span>
+                <div class="flowItem test_339ff173" ng-repeat="flow in workOrderDetailModel.flowList track by $index" ng-class="{true:'currentFLow',false:''}[!$index]">
+                    <span ng-if="!$index" class="beforeCircle test_4fbee2d7"></span>
+                    <span ng-if="$index == workOrderDetailModel.flowList.length" class="beforeCircle1 test_79e66c3b"></span>
+                    <span class="circle wod-active test_00d7084b" ng-class="{true:'currentFLowCircle',false:''}[!$index]"></span>
+                    <span class="flowStatus test_8fd1c168" ng-class="{true:'currentFlowStatus',false:''}[!$index]">[{{flowMenu[flow.action]}}]</span>
+                    <div class="flowStatusDetail test_7a975fcc">
+                        <div class="flowItemDetail test_37028d8c">
+                            <span class="test_488f66fc">{{flow.transactorFullName}}</span>
+                            <span class="test_431e8d24">{{flow.createTime}}</span>
+                            <span ng-repeat="file in flow.files" style="display:inline-block;" class="test_2ccdbca9"><a target="_blank" href="{{file.path}}" class="test_97317db2">{{file.name}}</a></span>
+                        </div>
+                        <div class="flowItemDetail2 test_7899bd12">
+                            <span class="flowItemDetail2_label test_01862639"><%=workOrderDetail_msg_handleSuggessDiscription %>:</span>
+                            <span class="flowItemDetail2_detail test_b72e554c">{{flow.suggest}}</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</section>

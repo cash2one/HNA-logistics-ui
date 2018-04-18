@@ -1,0 +1,168 @@
+<div ng-controller="billList" class="bills">
+	<div style="margin:8px 0px;" class="row clearfix">
+		<div class="col-md-4">
+			<div class="row clearfix">
+				<div class="text-right col-md-3">
+					{{lang.bill_number}}
+				</div>
+				<div style="padding-left: 0px;padding-right: 0px;" class="text-left col-md-9">
+					<input type="text" ng-model="search.billNo" maxlength="30" />
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="row clearfix">
+				<div class="text-right col-md-3">{{ module == 'trade' ? '订单号' : '运单号' }}</div>
+				<div style="padding-left: 0px;" class="text-left col-md-9">
+					<input ng-show="module == 'trade'" type="text" ng-model="search.orderNo" maxlength="30" />
+					<input ng-hide="module == 'trade'" type="text" ng-model="search.waybillNo" maxlength="30" />
+				</div>
+			</div>
+		</div>
+		<div ng-if="submodule == 'receive'" class="col-md-4">
+			<div class="row clearfix">
+				<div class="text-right col-md-3">
+					{{lang.customer_name}}
+				</div>
+				<div style="padding-left: 0px;" class="text-left col-md-9">
+					<input class="customerName" type="text" ng-model="customerIds" ng-mouseover="initUserList()" id="userList2_{{num}}" ng-click="resetUserList()" readonly="true" />
+				</div>
+			</div>
+		</div>
+		<div ng-if="submodule == 'pay'" class="col-md-4">
+			<div class="row clearfix">
+				<div class="text-right col-md-3">
+					供应商
+				</div>
+				<div style="padding-left: 0px;" class="text-left col-md-9">
+					<input readonly="readonly" type="text" ng-model="customerName" ng-value="customerValue" ng-click="getSupplier()" id="select-supplier" readonly="true" />
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div style="margin:8px 0px;" class="row clearfix">
+		<div ng-if="module == 'trade'" class="col-md-4">
+			<div class="row clearfix">
+				<div class="text-right col-md-3">
+					平台实体
+				</div>
+				<div class="col-md-9" style="padding-left:0px;">
+					<div class="select-box">
+						<input id="select-platform" ng-model="platform" ng-value="platformValue" ng-click="getPlatform();" readonly="readonly" type="text"/>
+						<i class="select-icon icon-drop-down"></i>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-5">
+			<div class="row clearfix">
+				<div class="text-right col-md-2" style="margin-left: 15px;">
+					{{lang.bill_time}}
+				</div>
+				<div class="col-md-4" style="padding:0px;">
+					<input type="text" id="begin-time" ng-value="search.startEffectTime" ng-model="search.startEffectTime" />
+				</div>
+				<div class="col-md-1" style="line-height: 34px;text-align: center;">~</div>
+				<div class="col-md-4" style="padding:0px;">
+					<input type="text" id="finish-time" ng-value="search.endEffectTime" ng-model="search.endEffectTime" />
+				</div>
+			</div>
+		</div>
+		<div class="col-md-2">
+			<div class="row clearfix">
+				<div class="text-right col-md-3">
+					{{lang.status}}
+				</div>
+				<div style="padding-left:0px;" class="text-right col-md-9">
+					<div class="select-box">
+						<input type="text" id="billingStatus_{{num}}"  ng-model="statusName" ng-mouseover="initBillingStatus()" placeholder="全部" />
+						<i class="select-icon icon-drop-down"></i>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div ng-if="module == 'logistics'" class="text-right col-md-3">
+			<div class="row clearfix">
+				<div class="text-right col-md-4">
+					结算方式
+				</div>
+				<div class="text-left col-md-8" style="padding-left:10px;">
+					<div class="select-box">
+						<input ng-model="payWay" ng-click="showPayWay();" id="select-payWay" readonly="readonly" type="text" maxlength="30" autocomplete="off" placeholder="全部">
+						<i class="select-icon icon-drop-down"></i>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div ng-show="module != 'trade'" class="col-md-2" style="white-space: nowrap;text-align: right">
+			<span ng-click="clearSearch();" style="cursor: pointer;color: #888;margin:0px 10px;">重置</span>
+			<button ng-click="loadListData();" class="btn btn-primary">{{lang.search}}</button>
+		</div>
+	</div>
+
+	<div ng-show="module == 'trade'" class="bill-btn-line  clearfix">
+		<div class="bill-btn bill-btn-r">
+			<span class="grey clear-search" ng-click="clearSearch()" style="margin:0px 10px;">重置</span>
+			<button class="btn btn-primary" ng-click="loadListData()">{{lang.search}}</button>
+		</div>
+	</div>
+	<div class="bill-list" ng-controller="tableController" style="height: calc( 100% - 280px );">
+		<div class="bill-line" ng-show="tableModel.pagination.isVisiblePage">
+			<div class="hna-checkbox">
+				<input type="checkbox" id="hna-checkbox" ng-model="tableModel.selectFlag" ng-click="table.selectAll(tableModel);">
+				<label for="hna-checkbox"></label>
+			</div>
+			<div class="btn-group">
+				<button class="btn btn-primary" ng-click="deleteBillByNumber()" ng-disabled="canHanle('DRAFT')">{{lang.delete}}</button>
+				<button class="btn btn-primary" ng-click="submitBillInBilllist()" ng-disabled="canHanle('DRAFT')">{{lang.submit_check}}</button>
+			</div>
+		</div>
+		<div class="bill-line-wrap" style="height: 100%;overflow: auto;">
+			<div class="bill-line" ng-repeat="value in tableModel.tableBody" ng-init="renderFinish($last)">
+				<div class="hna-checkbox">
+					<input type="checkbox" id="hna-checkbox_{{$index}}" ng-checked="value.checkbox" ng-click="table.selectOne(tableModel, value.checkboxId, $event);">
+					<label for="hna-checkbox_{{$index}}"></label>
+				</div>
+				<div class="bill-line-h clearfix">
+					<span  ng-if="module != 'trade'">{{lang.bill_number}}: <i ng-click="billsDetail(value.billNo,value.customerId,value.status,value.currencyType)">{{value.billNo}}</i></span>
+					<span  ng-if="module == 'trade'">{{lang.bill_number}}: <i ng-click="billsDetail(value.billNo,value.bizCompanyId,value.status,value.currencyType)">{{value.billNo}}</i></span>
+					<span>{{lang.release_time}}: {{value.releaseTime}}</span>
+				</div>
+				<div class="bill-line-body clearfix">
+					<ul>
+						<li ng-if="module == 'logistics' && submodule == 'receive'">{{lang.customer_names}}: {{value.customerName}}({{value.customerCode}})</li>
+						<li ng-if="module == 'logistics' && submodule == 'pay'">供应商: {{value.customerName}}({{value.customerCode}})</li>
+
+						<li ng-if="module == 'trade' && submodule == 'receive'">{{lang.customer_names}}(付款方)： {{value.bizCompanyName}}({{value.bizCompanyCode}})</p></li>
+						<li ng-if="module == 'trade' && submodule == 'receive'">平台实体(收款方)： {{value.platformName}}</p></li>
+
+						<li ng-if="module == 'trade' && submodule == 'pay'">{{lang.customer_names}}(收款方)： {{value.bizCompanyName}}({{value.bizCompanyCode}})</p></li>
+						<li ng-if="module == 'trade' && submodule == 'pay'">平台实体(付款方)： {{value.platformName}}</p></li>
+
+						<li>{{lang.bill_time}}: {{value.startEffectTime}} ~ {{value.endEffectTime}}</li>
+						<li ng-if="module == 'logistics'">结算方式: {{value.settlement}}</li>
+						<li ng-if="module == 'logistics' && submodule == 'receive'">{{lang.total}}: {{value.actualTotal}}({{value.currencyType}})</li>
+						<li ng-if="module != 'logistics' || submodule != 'receive'">{{lang.total}}: {{value.total}}({{value.currencyType}})</li>
+						<li ng-if="value.adjustmentTypeCode">调整: {{value.adjustment}}</li>
+						<li ng-if="module == 'logistics' && submodule == 'receive'">{{lang.actual_total}}: {{(value.paidOrderTotal || value.paidOrderTotal == 0) ? value.paidOrderTotal : value.actualTotal}}(CNY)</li>
+						<li ng-if="module != 'logistics' || submodule != 'receive'">{{lang.actual_total}}: {{(value.actualTotal || value.actualTotal == 0) ? value.actualTotal : value.total}}({{value.currencyType}})</li>
+					</ul>
+
+					<ol>
+						<li>{{value.statusName}}</li>
+						<li><a href="javascript:void(0)" ng-class="{rejected : value.rejected}" ng-click="flowProcess(value.billNo)">{{lang.flow_process}}</a></li>
+					</ol>
+					<p class="adjustment" ng-if="value.adjustmentRemark">
+						<span>调整说明:</span>
+						{{value.adjustmentRemark}}
+					</p>
+				</div>
+			</div>
+		</div>
+		<hnapagination table-service="table" page-table-model="tableModel"></hnapagination>
+		<div ng-show="!tableModel.pagination.isVisiblePage" class="undefinedsvg" style="top: 0px">
+			<img src="/public/img/undefined.svg">
+		</div>
+	</div>
+</div>

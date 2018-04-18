@@ -1,0 +1,17 @@
+<style type="text/css">
+    .m-pay-info{
+        padding:30px;
+    }
+    .m-pay-info div{
+        margin-right:20px;
+        display: inline-block;
+    }
+</style>
+<div class="m-pay-info">
+    <div>预估费用：<span ng-if="estimateFee">{{estimateFee}}({{estimateCurrencyCode}})</span></div>
+    <div>实际费用：
+        <span ng-if="actualFee">{{actualFee}}({{actualCurrencyCode}})</span>
+        <span ng-if="!actualFee">尚未生成</span>
+    </div>
+    <div>支付状态：{{payStatusName}}</div>
+</div>

@@ -1,0 +1,194 @@
+<form name="customerForm" novalidate="novalidate" id="baseInfo">
+
+    <div class="operate-box" style="z-index:1" ng-show="canEditBase || $parent.isNew">
+        <button ng-click="editBaseInfo();" class="btn btn-primary"><%=product_edit%></button>
+    </div>
+
+    <div class="rows">
+        <dl class="panel">
+            <dd>
+                <div class="content-title"><b ng-show="isEdit">*</b><%=product_name%>：</div>
+                <div class="content-info">
+                    <input ng-show="isEdit" ng-trim="false" validate-code="{ruleReg:'name', ruleRegMsg:'<%=common_validate_name%>', maxLength:'30'}" name="name" ng-model="name" type="text" ng-value="name" required>
+                    <span ng-show="!isEdit">{{name}}</span>
+                    <validatetip from-model="customerForm.name"></validatetip>
+                </div>
+            </dd>
+            <dd>
+                <div class="content-title"><b ng-show="isEdit">*</b><%=product_code%>：</div>
+                <div class="content-info">
+                    <span ng-show="visible" class="text-info">{{code}}</span>
+                    <input ng-show="isEdit" ng-focus="checkCode(1)" ng-blur="checkCode()" ng-trim="false" validate-code="{ruleReg:'code', ruleRegMsg:'<%=common_validate_code%>', maxLength:'15'}" name="code" ng-model="code" class="product_code" type="text" required>
+                    <span ng-show="customerForm.code.$dirty && isEdit" style="color: #f00">{{codeErrorMsg}}</span>
+                    <span ng-show="!isEdit">{{code}}</span>
+                    <validatetip id="code-error-box"></validatetip>
+                    <validatetip from-model="customerForm.code"></validatetip>
+                </div>
+            </dd>
+            <dd>
+                <div class="content-title"><b ng-show="isEdit">*</b><%=product_group%>：</div>
+                <div class="content-info-wrap clearfix">
+                    <div class="content-info" ng-show="!isEdit">
+                        <span>{{productGroupFirst}}</span> -
+                        <span>{{productGroupLeaf}}</span>
+                    </div>
+                    <div class="content-info" ng-show="isEdit">
+                        <span ng-show="visible" class="text-info"></span>
+                        <input ng-trim="false" id="product-group-first" name="productGroupFirst" ng-model="productGroupFirst" placeholder="请选择" ng-value="productGroupFirst" type="text" placeholder="<%=common_select_account_tips%>" required>
+                        <i ng-show="isEdit" class="select-icon icon-drop-down"></i>
+                        <validatetip from-model="productGroupFirst"></validatetip>
+                    </div>
+                    <div class="content-info" ng-show="isEdit">
+                        <span ng-show="visible" class="text-info"></span>
+                        <input ng-trim="false" id="product-group-leaf" name="productGroupLeaf" ng-model="productGroupLeaf" placeholder="请选择" ng-value="productGroupLeaf" type="text" placeholder="<%=common_select_account_tips%>" required>
+                        <i ng-show="isEdit" class="select-icon icon-drop-down"></i>
+                    </div>
+                </div>
+            </dd>
+            <dd>
+                <div class="content-title">是否公开：</div>
+                <div class="content-info" ng-show="isEdit">
+                    <label for="isPublic"><input ng-trim="false" name="isPublic" ng-disabled="!productGroupPublic" ng-value="true" ng-model="isPublic" type="radio" required>是</label>
+                    <label for="isPublic"><input ng-trim="false" name="isPublic" ng-disabled="!productGroupPublic" ng-value="false" ng-model="isPublic" type="radio" required>否</label>
+                </div>
+                <div class="content-info" ng-show="!isEdit">
+                    <label for="isPublic" ng-show="isPublic">是</label>
+                    <label for="isPublic" ng-show="!isPublic">否</label>
+                </div>
+            </dd>
+            <dd>
+                <div class="content-title title-pic">上传图片：</div>
+                <div ng-show="hasUpload && isEdit" class="uploaded-img-box" ng-mouseover="delshow = true" ng-mouseleave="delshow = false">
+                    <img class="imgs" ng-src="{{imgUrl}}" height="80" width="80" />
+                    <div ng-show="delshow" class="img-del">
+                        <i ng-click="delPic()" class="icon-minus-sign icon-minus-delete"></i>
+                    </div>
+                </div>
+                <div class="content-info" ng-if="isEdit && !hasUpload" ng-controller="pictureController">
+                    <div class="img-box img-upload-box">
+                        <input multiple="multiple" type="file" accept="image/jpeg,image/png,image/bmp,image/tiff" file-model="avatarFile" class="img-file">
+                        <span class="img-upload-button"></span>
+                    </div>
+                </div>
+                <div class="content-info" ng-show="hasUpload && !isEdit">
+                    <div class="uploaded-img-box">
+                        <img class="imgs" ng-src="{{imgUrl}}" height="80" width="80" />
+                    </div>
+                </div>
+            </dd>
+            <dd>
+                <div class="content-title"><b ng-show="isEdit">*</b><%=product_introduce%>：</div>
+                <div class="content-info" style="{{isEdit ? 'position:relative; top:10px;': 'height:175px; position:relative; top:10px;'}}">
+                    <textarea maxLength="140" ng-show="isEdit" style="height: 175px;width:92%" ng-trim text-length name="introduction" ng-model="introduction" type="text" required></textarea>
+                    <validatetip from-model="customerForm.introduction"></validatetip>
+                    <span ng-show="!isEdit" style="position:relative;top:-9px">{{introduction}}</span>
+                </div>
+            </dd>
+        </dl>
+        <dl class="panel">
+            <dd>
+                <div class="content-title"><%=product_ok_time%>：</div>
+                <div class="content-info">
+                    <input style="width:49%" ng-show="isEdit" ng-trim="false" validate-code="{ruleReg:'number', ruleRegMsg:'请输入数字，保留三位小数', maxLength:'5'}" name="estimatedTime" ng-model="estimatedTime" ng-required="estimatedUnitName" type="text">
+                    <span ng-show="!isEdit">{{estimatedTime}}</span>
+                    <div class="content-info" style="width:49%;display:inline-block">
+                        <input ng-show="isEdit" ng-trim="false" id="estimated-unit-name" placeholder="请选择" name="estimatedUnitName" ng-model="estimatedUnitName" ng-value="estimatedUnitName" type="text" ng-required="estimatedTime">
+                        <i ng-show="isEdit" class="select-icon icon-drop-down"></i>
+                        <span ng-show="!isEdit">{{estimatedUnitName}}</span>
+
+                    </div>
+                    <validatetip from-model="customerForm.estimatedTime"></validatetip>
+                </div>
+            </dd>
+            <dd>
+                <div class="content-title"><b ng-show="isEdit">*</b><%=product_good_type%>：</div>
+                <div class="content-info">
+                    <input ng-show="isEdit" ng-click="selectGoodTypes()" readonly id="good-type" ng-trim="false" name="cargoTypeCodeName" ng-model="cargoTypeCodeName" type="text" required>
+                    <span ng-show="!isEdit">{{cargoTypeCodeName}}</span>
+                </div>
+                <div id="getUnGoodTypes" class="test_fcf79284" style="display: none">
+                    <ng-include src="'./tpl/fragment/common/selectTypes.html'" class="test_e4dd077c"></ng-include>
+                </div>
+            </dd>
+            <dd style="margin-top:4px">
+                <div class="content-title"><%=product_weight_limit%>：</div>
+                <div class="content-info">
+                    <span ng-show="!isEdit && (weightLimitMin || weightLimitMin == '0') && weightLimitMax" class="text-info">{{weightLimitMin}}  -- {{weightLimitMax}} kg</span>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <input ng-show="isEdit" ng-trim="false" name="weightLimitMin" valiate-weight="min" ng-model="weightLimitMin" placeholder="<%=product_down_limit%>" type="text">
+                        </div>
+                        <div class="col-md-4">
+                            <input ng-show="isEdit" ng-trim="false" name="weightLimitMax" valiate-weight="max" ng-model="weightLimitMax" placeholder="<%=product_up_limit%>" type="text">
+                        </div>
+                        <div class="col-md-4">
+                            <span ng-show="isEdit">kg</span>
+                        </div>
+                        <span style="display:inline-block;padding-left:15px;width:100%;color:#f33" ng-show="weightLimitMsg && isEdit">{{weightLimitMsg}}</span>
+                    </div>
+                </div>
+            </dd>
+            <dd>
+                <div class="content-title">受理方式：</div>
+                <div class="content-info" ng-show="isEdit">
+                    <label for="acceptType"><input ng-trim="false" ng-value="1" name="acceptType" ng-model="acceptType" type="radio" required>人工</label>
+                    <label for="acceptType"><input ng-trim="false" ng-value="0" name="acceptType" ng-model="acceptType" type="radio" required>自动</label>
+                </div>
+                <div class="content-info" ng-show="!isEdit">
+                    <label for="acceptType" ng-show="acceptType">人工</label>
+                    <label for="acceptType" ng-show="!acceptType">自动</label>
+                </div>
+            </dd>
+            <dd>
+                <div class="content-title"></div>
+                <div class="content-info" style="height: 75px;">
+                </div>
+            </dd>
+            <dd>
+                <div class="content-title"><%=product_remark%>：</div>
+                <div class="content-info" style="{{isEdit ? 'position:relative; top:10px;': 'height:175px; position:relative; top:10px;'}}">
+                    <span ng-show="visible" class="text-info">{{remarks}}</span>
+                    <textarea maxLength="140" ng-show="isEdit" style="height: 175px;width:92%" ng-trim="false" text-length name="remarks" ng-model="remarks" type="text"></textarea>
+                    <span ng-show="!isEdit" style="position:relative;top:-9px">{{remarks}}</span>
+                </div>
+            </dd>
+        </dl>
+        <div class="creator" ng-if="!isEdit" style="clear:both; width:100%; text-align:right">
+            <span style="margin-right:15px"><%=customer_creator%>{{creator}}</span><span><%=customer_create_time%>{{createTime}}</span>
+        </div>
+    </div>
+    <div class="save-box" ng-show="(isEdit && (!status || status == 1)) || (isEdit && isOffline)">
+        <button ng-show="(isEdit && uid) || isOffline" ng-click="cancel();" class="btn btn-default" style="padding:0 30px;margin-right:40px;"><%=product_cancel%></button>
+        <button ng-click="saveCustomer();" class="btn btn-primary" style="padding:0 30px">{{isOffline || status == 1 ? '保存' : '保存草稿'}}</button>
+    </div>
+    <div style="height:15px;width:100%;background-color:#f2f2f2;float:left;margin-top:20px;border-top:1px solid #ddd;border-bottom:1px solid #ddd"></div>
+    <div style="height:279px;width:100%;float:left" ng-show="status == 2 && isAudit" class="m-audit-box">
+        <form name="auditForm" novalidate="novalidate" class="ng-pristine ng-invalid ng-invalid-required ng-valid-maxlength">
+            <div class="row row-list clearfix">
+                <div class="text-right col-md-2">
+                    <label><b class="u-must-red">*</b>审核意见：</label>
+                </div>
+                <div class="text-left col-md-10">
+
+                    <label><input name="auditStatus" value="rejections" type="radio" ng-model="auditStatus" > 打回草稿</label>
+                    <label style="margin-left:10px"><input name="auditStatus" value="audit" type="radio" ng-model="auditStatus"> 审核通过</label>
+
+                    <p ng-show="customerForm.auditStatus.$dirty && !auditStatus" class="warning-abs">请先选择审核意见</p>
+                </div>
+            </div>
+            <div class="row row-list clearfix">
+                <div class="text-right col-md-2">
+                    <label><b class="u-must-red">*</b>意见说明：</label>
+                </div>
+                <div class="text-left col-md-10">
+                    <div class="wrap-textarea">
+                        <textarea text-length="" name="auditRemark" ng-model="auditRemark" ng-trim="false" rows="5" type="text" maxlength="140" placeholder="请输入意见说明" class="test_fec7e9ff ng-pristine ng-untouched ng-invalid ng-invalid-required ng-valid-maxlength" required></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <button ng-disabled="viewButton.submitDisabled" class="btn btn-primary" ng-click="submitAudit();">提交意见</button>
+            </div>
+        </form>
+    </div>
+</form>

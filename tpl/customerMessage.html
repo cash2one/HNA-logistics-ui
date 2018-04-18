@@ -1,0 +1,142 @@
+<style class="test_8c7d3d0d">
+    .select-box {
+        position: relative;
+        width: 73%;
+        display: inline-block;
+        vertical-align: middle;
+        background: #fff;
+    }
+    .search-cell {
+        position: relative;
+        width: 23%!important;
+        display: inline-block;
+        height: 34px;
+        text-align: left;
+        margin-right: 1%;
+        margin-bottom: 15px;
+    }
+    .search-container{
+        border-bottom: 1px solid #DDDDDD;
+        /*margin-bottom: 15px;*/
+        padding-left: 38px;
+        padding-top: 15px;
+    }
+    .search-cell span {
+        display: inline-block;
+        width: 60px;
+        text-align: right;
+        margin-right: 6px;
+    }
+    .canlander {
+        width: 207px!important;
+    }
+
+</style>
+<div class="country-box test_5406b841">
+    <!--tableController start-->
+    <div class="master-table test_77506c18" style="left: 0;right: 0">
+         <div class="search-container test_0b1ce827">
+                <div class="search-box  test_c3e20e93">
+                    <div class="search-cell  test_c7b8a484" style="width:20%">
+                        <span class="test_30060289">用户姓名</span>
+                        <div class="select-box  test_e9fc63bb">
+                            <input ng-model="userName" name="userName" maxlength="30" autocomplete="off" type="text" class="input-text  test_8f505546">
+                        </div>
+                    </div>
+
+                    <div class="search-cell test_9ef6bb60" style="width:20%">
+                        <span class="test_c81495fa">更新时间</span>
+                        <div class="select-box test_c774cf8e">
+                            <input id="start-time" readonly="readonly" ng-model="startTime" type="text" maxlength="30" autocomplete="off" style="width:100%;padding-left:2px" class="test_4b49274f">
+                        </div>
+                    </div>
+
+                    <div class="search-cell test_9ef6bb60" style="width:20%;margin-left: -20px;">
+                        <label class="test_c81495fa">~</label>
+                        <div class="select-box test_c774cf8e">
+                            <input id="end-time" readonly="readonly" ng-model="endTime" type="text" maxlength="30" autocomplete="off" style="width:100%;padding-left:2px" class="test_8cf790bc">
+                        </div>
+                    </div>
+                    <div class="search-cell test_c3719ab2" style="width:20%">
+                        <span class="test_c0ab7771">留言内容</span>
+                        <div class="select-box test_bfd36182">
+                            <input ng-model="messageContent" maxlength="30" autocomplete="off" class="input-text test_8edc5904 ng-pristine ng-untouched ng-valid" type="text">
+                        </div>
+                    </div>
+                    <div class="search-cell test_c3719ab2" style="width:20%">
+                        <span class="test_c0ab7771">状态</span>
+                        <div class="select-box test_bfd36182">
+                            <input ng-model="stateName" id="state" autocomplete="off" class="input-text test_8edc5904 ng-pristine ng-untouched ng-valid" type="text">
+                            <i class="select-icon icon-drop-down test_a9d6f78d" style="z-index: 1"></i>
+                        </div>
+                    </div>
+
+                    <div style="text-align: right;width:69.5%!important;margin-left:0px" class="test_c018a33a search-cell">
+                        <span style="color:#888;cursor:pointer;position:relative;left:20px;top:2px;width:80px;text-align:center" ng-click="resetData()" class="test_6b2feace">重置</span>
+                        <button ng-click="search();" class="btn btn-primary test_e777d328" style="padding:0 30px;position:relative;top:2px">搜索</button>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <button ng-disabled="disableDelBtn" ng-class="{'btn':true,'btn-primary':true,'btn-disable':disableDelBtn}" style="margin: 15px" ng-click="deleteMsg()" class="test_2578d560">删除</button>
+
+            <div class="table-container  test_584e32dd" ng-controller="tableController">
+                <table class="customer-table table-box test_f2912469" cellpadding="0" cellspacing="0">
+                    <thead class="test_ecfd3946">
+                    <tr class="test_b54cd405">
+                        <th class="test_fdcb9546" style="width: 5%">
+                            <div class="checkbox checkbox-info test_e81a66c5">
+                                <input type="checkbox" ng-model="tableModel.selectFlag" ng-click="table.selectAll(tableModel);" class="test_4cd25f8a">
+                                <label class="test_ab9872b4"></label>
+                            </div>
+                        </th>
+                        <th style="width:{{tableModel.tableHeaderSize[$index]}}" ng-repeat="item in tableModel.tableHeader" class="test_c5a75423">{{item}}</th>
+                    </tr>
+                    </thead>
+
+
+                    <tbody class="test_d7f612cc">
+                    <tr ng-repeat="value in tableModel.tableBody" ng-init="renderFinish($last)" class="test_db59ff86">
+                        <td class="test_b034707d">
+                            <div class="checkbox checkbox-info test_10e22bd0">
+                                <input type="checkbox" ng-checked="value.checkbox" ng-click="table.selectOne(tableModel, value.checkboxId, $event);" class="test_c6c66536">
+                                <label class="test_3b793999"></label>
+                                <span class="state-code test_62e3775b" style="display: none;">{{value.status}}</span>
+                            </div>
+                        </td>
+                        <td class="test_a6bf605c">{{(tableModel.pagination.currentPage-1)*tableModel.pagination.pageSize+$index+1}}</td>
+
+                        <td class="memberName  test_01277331" title="{{value.code}}">
+                            <a href="javascript:;" style="cursor:pointer;display:block" ng-click="jumpToCustomMesDetail(value)" class="test_fdc37dac">
+                                {{value.code}}
+                            </a>
+                        </td>
+                        <!--<td class="memberName  test_01277331" title="{{value.code}}">-->
+                        <!--<a href="javascript:;" style="cursor:pointer;display:block" ng-click="jumpToCustomMesDetail(value)" class="test_fdc37dac" ng-bind-html="value.name | trustHtml:q">-->
+                        <!--{{value.code}}-->
+                        <!--</a>-->
+                        <!--</td>-->
+                        <!--<td title="{{value.code}}" class="test_e37040c2" >{{value.code}}</td>-->
+
+
+                        <td title="{{value.customerFullName}}" class="test_e37040c2" ng-bind-html="value.customerFullName | trustHtml:filterUser">{{value.customerFullName}}</td>
+
+                        <td title="{{value.content}}" class="test_7b1a1782">{{value.content}}</td>
+                        <td title="{{value.updateTime ? value.updateTime : value.createTime}}" class="test_7b1a1782">{{value.updateTime ? value.updateTime : value.createTime}}</td>
+                        <td title="{{value.status| messageState}}" class="test_9225a323">{{value.status | messageState}}</td>
+
+                    </tr>
+                    </tbody>
+                </table>
+                <div ng-show="!tableModel.pagination.isVisiblePage" style="position: absolute;top:165px;bottom:0px;width:100%;" class="test_6fdcbb1e">
+                    <img style="width:100%;height:100%;" src="/public/img/undefined.svg" class="test_09657d1d">
+                </div>
+                <hnapagination table-service="table" page-table-model="tableModel" class="test_db87c767"></hnapagination>
+            </div>
+        </div>
+
+    </div>
+    <!--tableController end-->
+

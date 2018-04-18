@@ -1,0 +1,84 @@
+<section class="test_73981be2">
+    <div class="master-table test_30429c84" style="left: 15px;right: 15px;">
+        <div class="add-search-box test_c04fe0f2">
+            <div class="list-search-box test_2b1baf2f" style="width:100%">
+                <div class="search-cell test_722d2ad9">
+                    <span class="test_317db7af">业务类型</span>
+                    <div class="select-box test_feca0f51">
+                        <input id="serviceType" ng-model="serviceType" style="width: 100%;padding-left: 2px;" autocomplete="off" class="input-text test_a8439947" type="text">
+                        <i class="select-icon icon-drop-down test_2387807b"></i>
+                    </div>
+                </div>
+                <div class="search-cell test_c7d3579b">
+                    <span class="test_e7a94cde">模板名称</span>
+                    <div class="select-box test_6dfd0eaf">
+                        <input ng-model="templateName" style="width: 100%;padding-left: 2px;" autocomplete="off" class="input-text test_e9ad8f63" type="text" maxlength="30">
+
+                    </div>
+                </div>
+                <div class="search-cell test_3fbcfddf">
+                    <span class="test_b22fc1e9">创建人</span>
+                    <div class="select-box test_8e0a1d0c">
+                        <input ng-model="creater" style="width: 100%;padding-left: 2px;;padding-left:2px" autocomplete="off" class="input-text test_8ca7b535" type="text" maxlength="30">
+
+                    </div>
+                </div>
+                <div class="search-cell test_f99b2452">
+                    <span class="test_9b32cf87">创建时间</span>
+                    <input type="text" id="begin-time" style="width:248px;padding-left:2px" autocomplete="off" class="test_4747cea2">
+                    <span class="test_4e27788d">～</span>
+                    <input type="text" id="finish-time" style="width:248px;padding-left:2px" autocomplete="off" class="test_47c8ccac">
+                </div>
+                <div class="search-cell test_9722f1ce" style="float: right;">
+                    <span style="color:#888;margin-right:10px;cursor:pointer;position:relative;" ng-click="clearData()" class="test_628bc773"><%=common_clear_data%></span>
+                    <button ng-click="search();" class="btn btn-primary test_686cfaeb"><%=common_list_search_btn%></button>
+
+                </div>
+            </div>
+        </div>
+        <div ng-controller="tableController" class="test_5a42eb32">
+            <div class="batch-operation test_939fa1bf">
+                <button ng-click="createContractTemplate();" class="btn btn-primary test_5b676c10">添加</button>
+                <button id="delete" ng-click="deleteContractTemplate();" class="btn btn-primary test_2d35c6d8">删除</button>
+            </div>
+            <div class="table-container test_a30f6986">
+                <table class="table-box test_83409108" cellpadding="0" cellspacing="0">
+                    <thead class="test_06e8ff93">
+                    <th style="width:5%" class="test_a71b171d">
+                        <div class="checkbox checkbox-info test_2e1d21ce">
+                            <input type="checkbox" id="select-all" ng-model="tableModel.selectFlag" ng-click="table.selectAll(tableModel);" class="test_144faf9f">
+                            <label class="test_3e1df749"></label>
+                        </div>
+                    </th>
+                    <th style="width:{{tableModel.tableHeaderSize[$index]}}" ng-repeat="item in tableModel.tableHeader" class="test_9b4b2d48">
+                        {{item}}
+                        <p ng-if="$index==1" style="position:relative;color:#555;top:-12px;color:#555;font-size:10px;line-height:15px" class="test_65cf85a4"></p>
+                    </th>
+                    </thead>
+                    <tbody class="tbody test_7a14645d">
+                    <tr ng-repeat="value in tableModel.tableBody" ng-init="renderFinish($last)" class="test_4dab6b9e">
+                        <td class="test_3b679b9d">
+                            <div class="checkbox checkbox-info test_41cec8b1">
+                                <input class="checkbox test_5fe7d4e2" type="checkbox" ng-disabled="userId!={{value.createUserId}}" data-status="{{value.statusName}}" ng-value="{{value.id}}" ng-checked="value.checkbox" ng-click="table.selectOne(tableModel, value.checkboxId);">
+                                <label class="test_38c58884"></label>
+                            </div>
+                        </td>
+                        <td class="test_7217dce1">{{(tableModel.pagination.currentPage-1)*tableModel.pagination.pageSize+$index+1}}</td>
+                        <td title="{{value.serviceTypeName}}" ng-bind-html="value.serviceTypeName | trustHtml:serviceTypeName" class="test_bcd16dfc">{{value.serviceTypeName}}</td>
+                        <td title="{{value.name}}" class="test_9ed4cda1"><a ng-click="test(value.id)" href="javascript:;" ng-bind-html="value.name | trustHtml:templateName" class="test_1f154f31">{{value.name}}</a></td>
+                        <!--<td title="{{value.name}}" class="test_9ed4cda1"><a href="#/contractTemplateDetail?id={{value.id}}" ng-bind-html="value.name | trustHtml:templateName" class="test_1f154f31">{{value.name}}</a></td>-->
+                        <td title="{{value.createUserName}}" ng-bind-html="value.createUserName | trustHtml:creater" class="test_c0832a04">{{value.createUserName}}</td>
+                        <td title="{{value.createTime}}" class="test_6ec0304e">{{value.createTime}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <hnapagination table-service="table" page-table-model="tableModel" class="test_db6d3bc7"></hnapagination>
+                <div ng-show="!tableModel.pagination.isVisiblePage" style="position: absolute;top:165px;bottom:0px;width:100%;" class="test_fcd77a19">
+                    <img style="width:100%;height:100%;" src="/public/img/undefined.svg" class="test_9e1afcef">
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</section>

@@ -1,0 +1,345 @@
+<section class="content content-index left-width-fixed test_46301420">
+
+    <!-- =========服务listTable列表======== -->
+    <div ng-show="mainBlock == 'list'" class="test_da21ea29">
+        <div class="m-left test_97b1b55d">
+            <ul class="m-type-list type-filter test_8ca4caaa">
+                <li ng-repeat="item in types" ng-class="{'active':item.code == typeId}" ng-click="getTypeTable(item.code, $event)" class="test_b3c34178">{{item.name}}</li>
+            </ul>
+        </div>
+        <div class="m-right test_9d93b6e1">
+            <div class="m-tab test_3515fdc3" id="m-tab-index">
+                <ul class="nav nav-tabs test_8e3cb25f">
+                    <li class="active test_7d6a2d9a">
+                        <a href="javascript:void(0);" class="test_a3cfa1fe"><%=servicesApproval_to_check_service%></a>
+                    </li>
+                    <li class="test_9fa13e43">
+                        <a href="javascript:void(0);" class="test_da56d681"><%=servicesApproval_checked_service%></a>
+                    </li>
+                </ul>
+                <div class="tab-content test_213b2eac">
+                    <div ng-controller="tableController" class="table-pane active test_6c9f5940">
+                        <div class="box-header test_008eb3f1">
+                            <div class="search-box test_05c8c994">
+                                <input maxlength="30" ng-enter="getUnCheckServiceLists();" ng-model="tableUnCheckModel.restData.q" ng-value="qUnCheck" type="text" class="form-control test_d441a02a" placeholder="<%=servicesApproval_placeholder_search%>" value="">
+                                <i class="icon-search u-search-icon test_c7b248e8"></i>
+                                <div class="u-search-btn test_e7aaed7f">
+                                    <button ng-click="getUnCheckServiceLists();" class="btn-search test_1e90c9ad"><%=common_page_search%></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="white-background test_78cadb8e">
+                            <div class="table-container test_16a6a8b4">
+                                <table class="servicesApproval-table table-box test_b7e68512" cellpadding="0" cellspacing="0">
+                                    <thead class="test_55c52db6">
+                                    <tr class="test_653514f2">
+                                        <th ng-repeat="item in tableUnCheckModel.tableHeader" class="test_5742a27f">{{item}}</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody class="test_f489a953">
+                                    <tr ng-repeat="value in tableUnCheckModel.tableBody" ng-init="renderFinish($last)" class="test_a2e57d4c">
+                                        <td class="test_6cd8658e">{{(tableUnCheckModel.pagination.currentPage-1)*tableUnCheckModel.pagination.pageSize+$index+1}}</td>
+                                        <td title="{{value.name}}" class="test_3935722a">
+                                            <a href="javascript:;" ng-click="editUnCheckServiceDetail(value.uid)" ng-bind-html="value.name | trustHtml:qUnCheck" class="test_34f81713"></a>
+                                        </td>
+                                        <td title="{{value.code}}" ng-bind-html="value.code | trustHtml:qUnCheck" class="test_74db3cc3"></td>
+                                        <td title="{{value.serviceContent}}" ng-bind-html="value.serviceContent | trustHtml:qUnCheck" class="test_5b102a8a"></td>
+                                        <td title="{{value.serviceTypeName}}" class="test_caa9bdfb">{{value.serviceTypeName}}</td>
+                                        <!-- <td title="{{value.serviceArea}}" class="test_a081bd18">{{value.serviceArea}}</td> -->
+                                        <td title="{{value.statusName}}" style="text-align:center;" class="test_f3f5a5f3">
+                                            <p style="line-height:20px;" class="test_0bed6314">{{value.statusName}}</p>
+                                            <a href="javascript:;" ng-click="showFlowProcess(value.uid, value.name)" style="display:block;line-height:20px" class="test_bc885536">
+                                                <span ng-if="value.isRejected" class="u-red-dot test_4952ace7" title="待处理"></span>查看流转
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <hnapagination table-service="table" page-table-model="tableUnCheckModel" class="test_a211283a"></hnapagination>
+                            </div>
+                        </div>
+
+                        <div ng-show="!tableUnCheckModel.pagination.isVisiblePage" style="position: absolute;top:165px;bottom:0px;width:100%;" class="test_525a45cc">
+                            <img style="width:100%;height:100%;" src="/public/img/undefined.svg" class="test_b7990dad">
+                        </div>
+
+                    </div>
+
+                    <div ng-controller="tableController" class="table-pane test_a02cf69d">
+                        <div class="box-header test_2d91b59c">
+                            <div class="search-box search-has-pre test_b86fedff">
+                                <div class="search-pre test_dc8f6fcf">
+                                    <%=servicesApproval_select_online%>
+                                    <div class="select-box test_d9fdd7ad" ng-init="initOnLineSelectList()">
+                                        <input ng-model="onlineStatusName" ng-value="onlineStatusValue" readonly="readonly" ng-trim="false" type="text" id="onlineSelect" class="test_a5ae130c">
+                                        <i class="select-icon icon-drop-down test_0ca9b1ef"></i>
+                                    </div>
+                                </div>
+                                <input maxlength="30" ng-enter="getCheckDoneServiceLists();" ng-model="tableCheckDoneModel.restData.q" ng-value="qCheckDone" type="text" class="form-control test_b1121fee" placeholder="<%=servicesApproval_placeholder_search%>" value="">
+                                <i class="icon-search u-search-icon test_e020d46a"></i>
+                                <div class="u-search-btn test_72418520">
+                                    <button ng-click="getCheckDoneServiceLists();" class="btn btn-primary test_aad931f0"><%=common_page_search%></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="white-background test_ef832415">
+                            <div class="table-container test_9770a595">
+                                <table class="servicesApproval-table table-box test_d4e8438e" cellpadding="0" cellspacing="0">
+                                    <thead class="test_b55db86a">
+                                    <tr class="test_4a8ed5d0">
+                                        <th ng-repeat="item in tableCheckDoneModel.tableHeader" class="test_226bc464">{{item}}</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody class="test_109f864e">
+                                    <tr ng-repeat="value in tableCheckDoneModel.tableBody" ng-init="renderFinish($last)" class="test_4e90d318">
+                                        <td class="test_97fe3e08">{{(tableCheckDoneModel.pagination.currentPage-1)*tableCheckDoneModel.pagination.pageSize+$index+1}}</td>
+                                        <td title="{{value.name}}" class="test_24331034">
+                                            <a href="javascript:;" ng-click="editUnCheckedDetail(value.uid)" ng-bind-html="value.name | trustHtml:qCheckDone" class="test_ea435edf"></a>
+                                        </td>
+                                        <td title="{{value.code}}" ng-bind-html="value.code | trustHtml:qCheckDone" class="test_3f2c2440"></td>
+                                        <td title="{{value.serviceContent}}" ng-bind-html="value.serviceContent | trustHtml:qCheckDone" class="test_114d216e"></td>
+                                        <td title="{{value.serviceTypeName}}" class="test_99e36db2">{{value.serviceTypeName}}</td>
+                                        <!-- <td title="{{value.serviceArea}}" class="test_6891fc7d">{{value.serviceArea}}</td> -->
+                                        <td title="{{value.statusName}}" style="text-align:center;" class="test_a1b57cf6">
+                                            <p style="line-height:20px;" class="test_31a72cd4">{{value.statusName}}</p>
+                                            <a href="javascript:;" ng-click="showFlowProcess(value.uid, value.name)" style="display:block;line-height:20px" class="test_7cd294df">
+                                                <span ng-if="value.isRejected" class="u-red-dot test_3c36f759" title="待处理"></span>查看流转
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <hnapagination table-service="table" page-table-model="tableCheckDoneModel" class="test_640dc3c7"></hnapagination>
+                            </div>
+                        </div>
+
+                        <div ng-show="!tableCheckDoneModel.pagination.isVisiblePage" style="position: absolute;top:165px;bottom:0px;width:100%;" class="test_0ed1c525">
+                            <img style="width:100%;height:100%;" src="/public/img/undefined.svg" class="test_e811b826">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========添加服务页面======== -->
+    <div ng-show="mainBlock == 'detail'" class="test_d82263e9">
+        <div class="go-back test_7c0c6112">
+            <button ng-click="goBack();" class="btn btn-default test_54210ba2"><%=common_page_back%></button>
+            <button ng-hide="isAudit" ng-disabled="!visible" ng-click="enabled(enableValue);" class="btn-right btn btn-primary test_65d33a61">{{enableName}}</button>
+        </div>
+        <div class="add-title test_2987698e">
+            <p class="test_55883af7">{{serviceTitle}}</p>
+        </div>
+        <div class="form-box test_ad57df4d">
+            <div class="m-tab m-info-tab test_62eca56c" id="detail-tab">
+                <ul class="nav nav-tabs clearfix test_9a4fbd22">
+                    <li class="active test_7ac16191"><a href="javascript:void(0);" class="test_2e5be53f">基本信息</a></li>
+                    <li><a href="javascript:void(0);">计重规则</a></li>
+                    <li class="test_0bfe470f"><a href="javascript:void(0);" class="test_715b097d">服务范围</a></li>
+                </ul>
+                <div class="tab-content test_32c42248">
+                    <!-- 基本信息 -->
+                    <div class="table-pane active test_f83cf426 clearfix">
+                        <div include="tpl/fragment/servicesApproval/baseInfo.html" class="test_6d7deb12 clearfix"></div>
+
+                        <div id="getUnGoodTypes" style="display: none;" class="test_fcf79284">
+                            <div include="tpl/fragment/common/selectTypes.html" class="test_e4dd077c"></div>
+                        </div>
+                        <div style="height:15px;width:100%;background-color:#f2f2f2;float:left;border-top:1px solid #ddd;border-bottom:1px solid #ddd"></div>
+                        <div class="m-audit-box test_537eb1d8" ng-show="isAudit">
+                            <form name="auditForm" novalidate="novalidate" class="test_5d111c9a">
+                                <div class="row row-list clearfix test_b1f46099">
+                                    <div class="text-right col-md-2 test_21cde0f3">
+                                        <label class="test_d303dda3"><b class="u-must-red test_40845054">*</b><%=servicesApproval_page_auditSuggest%>：</label>
+                                    </div>
+                                    <div class="text-left col-md-10 test_68157147" style="position: relative;">
+                                        <div class="radio radio-single radio-primary test_0756d13c">
+                                            <input name="auditStatus" value="1" type="radio" ng-model="auditStatus" class="test_ec3eeaa5">
+                                            <label class="test_569c358e"></label>
+                                        </div>
+                                        <span class="test_2d83c588"><%=servicesApproval_btn_to_draft%></span>
+
+                                        <div class="radio radio-single radio-primary test_ab2a84e3" style="margin-left: 15px;">
+                                            <input name="auditStatus" value="2" type="radio" ng-model="auditStatus" class="test_e7301937">
+                                            <label class="test_bce7b9a8"></label>
+                                        </div>
+                                        <span class="test_6ee193bf"><%=servicesApproval_audit_passed%></span>
+
+                                        <span ng-show="!auditStatus && auditSubmitStatus" class="u-must-red test_b376d529" style="position: absolute;left: 15px;top: 25px;font-size: 14px;">请先选择审核意见</span>
+                                    </div>
+                                </div>
+                                <div class="row row-list clearfix test_d8864446">
+                                    <div class="text-right col-md-2 test_91bafda9">
+                                        <label class="test_ac69b94c"><b class="u-must-red test_fe233a1f">*</b><%=servicesApproval_page_auditRemark%>：</label>
+                                    </div>
+                                    <div class="text-left col-md-10 test_2fc493db">
+                                        <div class="wrap-textarea test_9008118d">
+                                            <textarea required="required" text-length="" name="auditRemark" ng-model="auditRemark" ng-trim="false" rows="5" type="text" maxlength="140" placeholder="<%=priceDetail_page_auditRemarkPlacer%>" class="test_bdb3c417"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-center test_74b99d02">
+                                    <button class="btn btn-primary test_629f9e8f" ng-click="submitAudit();"><%=servicesApproval_page_submitSuggest%></button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- 计重规则 -->
+                    <div class="table-pane m-rule">
+                        <form name="ruleForm" novalidate="novalidate">
+                            <div class="operation-box right" ng-show="showEdit">
+                                <button type="button" ng-click="editWeightRule();" class="btn btn-primary">
+                                    <%=common_page_edit%>
+                                </button>
+                            </div>
+                            <div class="rows">
+                                <dl class="panel">
+                                    <dd>
+                                        <label><b ng-hide="!isEdit">*</b>是否计体积：</label>
+                                        <div class="content-info">
+                                            <span ng-show="!isEdit" class="text-info">{{isremarkVolume}}</span>
+                                            <div ng-show="isEdit" style="margin-left: 20px; " class=" radio-box ">
+                                                <div class="radio radio-single radio-primary ">
+                                                    <input value="true" ng-click="SetIsConsiderVolume($event);" type="radio" ng-model="isVolume" name="volume">
+                                                    <label>  </label>
+                                                </div>
+                                                <span>是</span>
+                                                <div class="radio radio-single radio-primary " style="margin-left: 40px;">
+                                                    <input value="false" ng-click="SetIsConsiderVolume($event);" type="radio" ng-model="isVolume" name="volume">
+                                                    <label> </label>
+                                                </div>
+                                                <span>否</span>
+                                            </div>
+                                        </div>
+                                    </dd>
+                                    <div ng-show="showVolumeDetail">
+                                        <dd>
+                                            <label><b ng-hide="!isEdit">*</b>体积系数：</label>
+                                            <div class="content-info">
+                                                <span ng-show="!isEdit">{{volumeFactor}}</span>
+                                                <div ng-show="isEdit">
+                                                    <input ng-trim="false" validate-code="{'ruleReg':'/^[0-9]*$/', ruleRegMsg:'请输入数字', maxLength:'5'}" name="volumeFactor" ng-model="volumeFactor" type="text" required class="ng-pristine ng-untouched ng-valid-defined ng-invalid-required" maxlength="30">
+                                                    <div class="verification" style="position: relative;">
+                                                        <span class="errors" id="name-msg" ng-show="ruleForm.volumeFactor.$viewValue && ruleForm.volumeFactor.$error.defined && ruleForm.volumeFactor.$dirty">请输入数字</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </dd>
+                                        <dd>
+                                            <label><b ng-hide="!isEdit">*</b>取值方式：</label>
+                                            <div class="content-info select-box ">
+                                                <span ng-show="!isEdit">{{weightValueName}}</span>
+                                                <div ng-show="isEdit">
+                                                    <input ng-trim="false" required ng-model="weightValueName" name="valueMode" type="text" id="type-select-input" readonly="readonly">
+                                                    <i class="select-icon icon-drop-down "></i>
+                                                </div>
+                                            </div>
+                                        </dd>
+                                    </div>
+                                </dl>
+                            </div>
+                            <div class="operation-box">
+                                <button type="button" ng-show="isEdit" ng-click="cancelWeight();" class="btn btn-default">
+                                    <%=common_page_cancel%>
+                                </button>
+                                <button type="button" ng-show="isEdit" ng-click="submitWeight();" name="saveService" class="btn btn-primary">
+                                    <%=common_page_save%>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- 服务范围 -->
+                    <div class="table-pane m-range test_71b9b775">
+                        <div include="tpl/fragment/servicesApproval/serviceRange.html" class="test_a565d722"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 添加分区方案 -->
+    <div style="display: none;" id="regionDetail" class="test_c0b751fc">
+        <form name="regionForm" novalidate="novalidate" class="test_eeca0a76">
+            <dd class="test_a1ef2324">
+                <label class="label-tip test_f38fd2d4"><b class="test_3668e475">*</b>范围类型：</label>
+                <div class="content-info test_2c44d848" style="line-height: 32px;">
+                    <div class="radio radio-single radio-primary test_f85d0e77">
+                        <input ng-disabled="startDisabled" style="margin-left:0px;" value="s" ng-checked="rangeRadio == 's'" type="radio" ng-model="rangeRadio" class="test_f72a653c">
+                        <label class="test_273b6875"></label>
+                    </div>
+                    <span style="margin-right: 20px;vertical-align: middle;" class="test_517c08d9">起点范围</span>
+
+                    <div class="radio radio-single radio-primary test_e47e758f">
+                        <input ng-disabled="endDisabled" style="margin-left:0px;" value="e" ng-checked="rangeRadio == 'e'" type="radio" ng-model="rangeRadio" class="test_b756bd58">
+                        <label class="test_abdaaa35"></label>
+                    </div>
+                    <span style="vertical-align: middle;" class="test_81484403">终点范围</span>
+                </div>
+            </dd>
+            <dd ng-if="showCode" class="test_e4bb3c24">
+                <label class="label-tip test_ba977f81"><b class="test_a45afd4d">*</b>编码：</label>
+                <div class="content-info test_5341b3e3">
+                    <input disabled="disabled" ng-trim="false" ng-blur="checkCode()" verification="{'ruleType':'code','tipsType':'two'}" maxlength="15" name="code" ng-model="code" type="text" placeholder="请输入编码" required="required" autocomplete="off" class="test_7dba83f4">
+                    <div class="verification test_0d5a362e">
+                        <span id="code-msg" class="errors test_988753eb" ng-show="regionForm.code.$viewValue && regionForm.code.$error.defined && regionForm.code.$dirty">{{regionForm.code.errorTips}}</span>
+                    </div>
+                </div>
+            </dd>
+            <dd class="test_e982ea63">
+                <label class="label-tip test_d3e126f9">备注：</label>
+                <div class="content-info test_50f367df" style="height: 92px;">
+                    <textarea text-length="" ng-trim="false" maxlength="140" rows="5" name="description" ng-model="description" type="text" class="test_6da31398"></textarea>
+                </div>
+            </dd>
+            <dd ng-hide="isDetailCheck" class="isHref-box test_b543ba5e">
+                <div class="checkbox checkbox-info test_39e9f196">
+                    <input type="checkbox" ng-model="isSaveNext" ng-checked="isSaveNext" class="test_a7236714">
+                    <label class="test_8c0494ac"></label>
+                </div>
+                <span class="isHref-tip test_19c9efce">保存并跳转到详情页</span>
+            </dd>
+        </form>
+    </div>
+
+    <!-- =========供应商详情======== -->
+    <div ng-show="mainBlock == 'suppler'" class="test_11bc15e0">
+        <div class="go-back test_f244d3f6">
+            <button ng-click="goSupplerBack();" class="btn btn-default test_5b4d003c"><%=common_page_back%></button>
+        </div>
+        <div class="add-title test_d7f3729c">
+            <p class="test_71412fbc"><%=servicesApproval_title_supplier%></p>
+        </div>
+        <div class="form-box supplier-box test_7742bd02">
+            <div include="tpl/fragment/common/supplierDetail.html" class="test_ad53c341"></div>
+        </div>
+    </div>
+
+    <!--流转过程-->
+    <div ng-show="mainBlock == 'process'" class="test_26647727">
+        <div class="stream-box test_9ed85965">
+            <input type="button" class="btn btn-default test_4fc62794" value="<%=common_page_back%>" ng-click="goBack()">
+            <h3 class="title-stream test_a51023a1">
+                {{processTitle}}的流转过程
+            </h3>
+            <ul class="stream-list test_53078b96">
+                <li ng-repeat="value in streamList" class="{{$index == 0 ? 'active':''}} test_c1576c66">
+                    <div class="circle test_dd88e3e0" style="{{$index == 0 ? 'top:-17px;left:-7.5px': ''}}"></div>
+                    <div class="stream-content test_a8da8596">
+                        <p class="title test_5c84c48c">[{{value.action}}]</p>
+                        <p class="test_9ece5e48">{{value.operator}}&nbsp;&nbsp;&nbsp;&nbsp;{{value.approvalTime}}</p>
+                        <p ng-if="value.opinion" class="test_386178cc"><span class="test_4eaca043">处理意见:</span><span class="deal-detail test_4ac23dcd">{{value.opinion}}</span></p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!--服务范围点击弹出框-->
+<div include="tpl/fragment/common/selectArea.html" class="test_4886c915"></div>

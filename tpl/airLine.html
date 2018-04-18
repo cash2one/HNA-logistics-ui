@@ -1,0 +1,242 @@
+<section class="content has-sides-margin">
+    <div class="airline-table-page" ng-controller="tableController">
+        <div class="box-header">
+            <div class="search-box">
+                <div class="row">
+                    <span style="margin:0px 2px 0px 50px;"><%=airLine_page_keyword%></span>
+                    <input style="width:20%;"
+                           ng-enter="getTable(true);"
+                           ng-model="tableModel.restData.q"
+                           placeholder="<%=airLine_page_searchPlaceholder%>"
+                           ng-value="q"
+                           type="text"
+                           maxlength="30"
+                           class="form-control">
+                    <span style="margin:0px 2px 0px 50px;"><%=airLine_page_start%></span>
+                    <input placeholder="国家"
+                           autocomplete="off"
+                           type="text"
+                           style="width:20%;margin:0px 10px 0px 2px;"
+                           id="countryStartSearch"
+                           ng-model="countryStartSearch"
+                           class="form-control"/>
+                    <input ng-click='resetAirportData("airportStartSearch")'
+                       placeholder="机场"
+                       autocomplete="off"
+                       type="text"
+                       style="width:20%;"
+                       id="airportStartSearch"
+                       ng-model="airportStartSearch"
+                       class="form-control"
+                       />
+                </div>
+                <div class="row">
+                    <span style="margin:0px 2px 0px 50px;"><%=airLine_page_end%></span>
+                    <input placeholder="国家"
+                           autocomplete="off"
+                           type="text"
+                           style="width:20%;margin:0px 10px 0px 2px;"
+                           id="countryEndSearch"
+                           ng-model="countryEndSearch"
+                           class="form-control"/>
+                    <input ng-click='resetAirportData("airportEndSearch")'
+                           placeholder="机场"
+                           autocomplete="off"
+                           type="text"
+                           style="width:20%;"
+                           id="airportEndSearch"
+                           ng-model="airportEndSearch"
+                           class="form-control"/>
+                    <div class="airline-search-btn">
+                        <span style="color:#888;cursor:pointer;position:relative;right:20px" ng-click="clearData();"><%=airLine_page_empty%></span>
+                        <button ng-click="getTable(true);" class="btn btn-primary"><%=common_list_search_btn%></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="batch-operation test_ce492a01">
+            <button ng-click="add();" class="btn btn-primary test_72de5d76">
+                <%=common_page_add%>
+            </button>
+            <button ng-click="del();" class="btn btn-primary test_98883541">
+                <%=common_page_delete%>
+            </button>
+        </div>
+
+        <div class="table-container test_27c985da">
+            <table class="line-table-air table-box test_e62bf4fe" cellpadding="0" cellspacing="0">
+                <thead class="test_6127696c">
+                <tr class="test_883bcf90">
+                    <th class="test_ad673b4f">
+                        <div class="checkbox checkbox-info test_a5a3211c">
+                            <input type="checkbox" ng-model="tableModel.selectFlag" ng-click="table.selectAll(tableModel);" class="test_c33e3a2f">
+                            <label class="test_0a52a415"></label>
+                        </div>
+                    </th>
+                    <th ng-repeat="item in tableModel.tableHeader" class="test_49721fa6">{{item}}</th>
+                </tr>
+                </thead>
+                <tbody class="test_ba31ca85">
+                <tr ng-repeat="value in tableModel.tableBody" ng-init="renderFinish($last)" class="test_79795243">
+                    <td class="test_69ffefac">
+                        <div class="checkbox checkbox-info test_0c411f66">
+                            <input type="checkbox" ng-checked="value.checkbox" ng-click="table.selectOne(tableModel, value.checkboxId, $event);" class="test_548e1d6a">
+                            <label class="test_3db015f2"></label>
+                        </div>
+                    </td>
+                    <td class="test_bfdf6268">{{(tableModel.pagination.currentPage-1)*tableModel.pagination.pageSize+$index+1}}</td>
+                    <td title="{{value.name}}" class="test_db3271b0">
+                        <a href="javascript:;" ng-click="edit(value.id)" ng-bind-html="value.name | trustHtml:q" class="test_f3baa200"></a>
+                    </td>
+                    <td title="{{value.code}}" ng-bind-html="value.code | trustHtml:q" class="test_85dd4b57"></td>
+                    <td title="{{value.typeName}}" class="test_bb8aa6cd">{{value.typeName}}</td>
+                    <td title="{{value.startName}}" class="test_10e2c2b6">{{value.startTriadCode}}</td>
+                    <!--<td title="{{value.stopOverName}}" class="test_d7890cef">{{value.stopOverTriadCode}}</td>-->
+                    <td title="{{value.endName}}" class="test_65acb307">{{value.endTriadCode}}</td>
+                    <td title="{{value.description}}" class="test_9ed36ce4">{{value.description}}</td>
+                </tr>
+                </tbody>
+            </table>
+            <hnapagination table-service="table" page-table-model="tableModel" class="test_71b03145"></hnapagination>
+        </div>
+
+        <div ng-show="!tableModel.pagination.isVisiblePage" style="position: absolute;top:165px;bottom:0px;width:100%;" class="test_ef7c21ca">
+            <img style="width:100%;height:100%;" src="/public/img/undefined.svg" class="test_94401c41">
+        </div>
+    </div>
+    <div id="slides" class="test_8d618dc1"></div>
+</section>
+
+<div style="display: none;"
+     ng-show="nestAirLineForm"
+     ng-init="initSelectList();"
+     id="nest-airLineForm"
+     class="prompt-modal middle-box">
+    <div class="prompt-wrap">
+        <div class="bomb-box">
+            <div class="title"><%=airLine_page_add%></div>
+            <div class="prompt-content">
+                <form name="airLineForm" novalidate="novalidate" >
+                    <div id="airLineForm">
+                        <div ng-click="" class="label-text">
+                            <%=airLine_page_baseInfo%>
+                            <i style="transform:rotate(0deg);" class="icon-more-down icon-angle-down test_1844061a"></i>
+                        </div>
+                        <ul class="isContainer switch-list">
+                            <li>
+                                <label><b >*</b><%=airLine_page_name%>：</label>
+                                <input ng-trim="true"
+                                       class="input-text"
+                                       maxlength="30"
+                                       name="airLineName"
+                                       ng-model="airLineName"
+                                       verification="{ruleType:'onlyname',maxLength:'30'}"
+                                       type="text"
+                                       required >
+                                <div class="verification">
+                                    <span id="code-msg"
+                                          class="errors"
+                                          ng-show="airLineForm.airLineName.$viewValue &&
+                                              airLineForm.airLineName.$error.defined &&
+                                              airLineForm.airLineName.$dirty">
+                                        {{airLineForm.airLineName.errorTips}}
+                                    </span>
+                                </div>
+                            </li>
+                            <li>
+                                <label><b >*</b><%=airLine_page_code%>：</label>
+                                <input ng-trim="true"
+                                       class="validate-code input-text"
+                                       maxlength="30"
+                                       name="airLineCode"
+                                       ng-model="airLineCode"
+                                       ng-blur="checkAirLineCode();"
+                                       verification="{ruleType:'codewithblank',maxLength:'30'}"
+                                       type="text"
+                                       required >
+                                <div class="verification">
+                                    <span id="code-msg-code"
+                                          class="errors"
+                                          maxlength="30"
+                                          ng-show="airLineForm.airLineCode.$viewValue &&
+                                              airLineForm.airLineCode.$error.defined &&
+                                              airLineForm.airLineCode.$dirty">
+                                        {{airLineForm.airLineCode.errorTips}}
+                                    </span>
+                                </div>
+                            </li>
+                            <li >
+                                <label><b >*</b><%=airLine_page_type%>：</label>
+                                <div class="input-text radio-box" style="text-align: left;">
+                                    <div class="radio radio-single radio-primary">
+                                        <input value="INTERNAL" type="radio" ng-model="addAirLineType" name="addAirLineType" class="ng-pristine ng-valid ng-touched">
+                                        <label></label>
+                                    </div>
+                                    <span>国内</span>
+                                    <div class="radio radio-single radio-primary " style="margin-left: 40px;">
+                                        <input value="INTERNATIONAL" type="radio" ng-model="addAirLineType" name="addAirLineType" class="ng-pristine ng-untouched ng-valid">
+                                        <label></label>
+                                    </div>
+                                    <span>国际</span>
+                                </div>
+                            </li>
+                            <li>
+                                <label><b >*</b><%=airLine_page_startAirport%>：</label>
+                                <div class="select-box input-text">
+                                    <input ng-trim="false"
+                                           id="add-startAirport"
+                                           name="addStartAirport"
+                                           autocomplete="off"
+                                           ng-model="addStartAirport"
+                                           type="text"
+                                           required>
+                                </div>
+                            </li>
+                            <!--<li>-->
+                                <!--<label><%=airLine_page_stopoverAirport%>：</label>-->
+                                <!--<div class="select-box input-text">-->
+                                    <!--<input ng-trim="false"-->
+                                           <!--id="add-stopoverAirport"-->
+                                           <!--name="addStopoverAirport"-->
+                                           <!--autocomplete="off"-->
+                                           <!--ng-model="addStopoverAirport"-->
+                                           <!--type="text">-->
+                                <!--</div>-->
+                            <!--</li>-->
+                            <li >
+                                <label><b >*</b><%=airLine_page_endAirport%>：</label>
+                                <div class="select-box input-text">
+                                    <input ng-trim="false"
+                                           id="add-endAirport"
+                                           name="addEndAirport"
+                                           autocomplete="off"
+                                           ng-model="addEndAirport"
+                                           type="text"
+                                           required>
+                                </div>
+                            </li>
+                            <li >
+                                <label><%=common_page_remarks%>：</label>
+                                <div class="remark-info">
+                                    <textarea style="height:92px;"
+                                              ng-change="showTextNumber();"
+                                              maxlength="140"
+                                              ng-trim="false"
+                                              rows="5"
+                                              ng-model="remark"
+                                              class="form-control textarea-text" >
+                                    </textarea>
+                                    <div class="show-string-length test_096bbd8f"><span class="test_cad7156b">{{textareaNumber}}</span>字</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+            <div class="operation test_c4e339cc">
+                <button ng-click="cancel();" name="prompt-close" class="btn btn-default  test_0a48debb" data-event="close"><%=common_page_cancel%></button>
+                <button ng-click="save();" name="prompt-save" class="btn btn-primary test_94d6c52e" data-event="close"><%=common_page_save%></button>
+            </div>
+        </div>
+    </div>
+</div>

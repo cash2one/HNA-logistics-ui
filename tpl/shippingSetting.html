@@ -1,0 +1,100 @@
+<section class="content" ng-show="!showDetail" id="list" ng-init="initSelectList();">
+    <div ng-hide="nestShippingSettingForm" ng-controller="tableController" class="shippingSetting-table-page">
+        <div class="box-header">
+            <div class="search-box">
+                <div class="row">
+                    <span style="margin: 0 16px 0 50px;"><%=shippingSetting_vessel_num%></span>
+                    <input style="width: 20%;" class="form-control" ng-enter="getTable(true)" maxlength="30" ng-model="tableModel.restData.q" type="text">
+                    <span style="margin:0px 2px 0px 50px;"><%=shippingSetting_vessel_departurePort%></span>
+                    <input autocomplete="off" type="text" readonly style="width:20%" id="search-start" ng-model="searchStartShip" class="form-control">
+                    <span style="margin:0px 2px 0px 50px;"><%=shippingSetting_vessel_arrivalPort%></span>
+                    <input autocomplete="off" type="text" readonly style="width:20%" id="search-end" ng-model="searchEndShip" class="form-control">
+                </div>
+                <div class="row">
+                    <div style="margin:0px 2px 0px 50px;">
+                        <label><%=shippingSetting_vessel_departureTime%></label>
+                        <input type="text" id="startTime" style="width:20%" ng-blur="checkStartTime()" ng-model="tableModel.restData.startTime">
+                        <span>~</span>
+                        <input type="text" id="endTime" style="width:20%"  ng-blur="checkEndTime()" ng-model="tableModel.restData.endTime">
+                        <div class="shippingSetting-search-btn">
+                            <span style="color:#888;cursor:pointer;position:relative;right:20px" ng-click="clearData();"><%=shippingSetting_vessel_reset%></span>
+                            <button ng-click="getTable(true);" class="btn btn-primary"><%=shippingSetting_vessel_search%></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="batch-operation">
+            <button ng-click="add();" class="btn btn-primary">
+                <%=common_page_add%>
+            </button>
+            <button ng-click="del();" class="btn btn-primary">
+                <%=common_page_delete%>
+            </button>
+        </div>
+        <div class="table-container">
+            <table class="table-box ship-table-setting" cellspacing="0" cellpadding="0">
+                <thead>
+                    <tr>
+                        <th>
+                            <div class="checkbox checkbox-info">
+                                <input type="checkbox" ng-model="tableModel.selectFlag" ng-click="table.selectAll(tableModel)">
+                                <label></label>
+                            </div>
+                        </th>
+                        <th ng-repeat="item in tableModel.tableHeader">{{item}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="value in tableModel.tableBody" ng-init="renderFinish($last)">
+                        <td>
+                            <div class="checkbox checkbox-info">
+                                <input type="checkbox" ng-checked="value.checkbox" ng-click="table.selectOne(tableModel, value.checkboxId, $event)">
+                                <label></label>
+                            </div>
+                        </td>
+                        <td>{{(tableModel.pagination.currentPage-1)*tableModel.pagination.pageSize+$index+1}}</td>
+                        <td title="{{value.code}}">
+                            <a href="javascript:;" ng-click="editShipSettingDetail(value.id)" ng-bind-html="value.code | trustHtml:q">{{value.code}}</a>
+                        </td>
+                        <td title="{{value.startEnglishName}}">{{value.startName}}</td>
+                        <td title="{{value.endEnglishName}}">{{value.endName}}</td>
+                        <td title="{{value.etd}}">{{value.etdStr}}</td>
+                        <td title="{{value.eta}}">{{value.etaStr}}</td>
+                        <td title="{{value.shipEnglishName}}">{{value.shipEnglishName}}</td>
+                        <td title="{{value.shippingCompanyName}}">{{value.shippingCompanyName}}</td>
+                        <td title="{{value.days}}">{{value.days}}天</td>
+                    </tr>
+                </tbody>
+            </table>
+            <hnapagination table-service="table" page-table-model="tableModel"></hnapagination>
+        </div>
+
+        <div ng-show="!tableModel.pagination.isVisiblePage" style="position: absolute;top:165px;bottom:0px;width:100%;">
+            <img style="width:100%;height:100%;" src="/public/img/undefined.svg">
+        </div>
+    </div>
+    <div id="slides"></div>
+</section>
+
+
+<div class="shipping-detail test_33bfb325" ng-show="showDetail">
+    <div include="tpl/fragment/shippingSetting/shippingSettingDetail.html" ng-controller="shippingSettingDetailCtrl" class="test_316fc83d"></div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

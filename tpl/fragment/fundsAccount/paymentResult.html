@@ -1,0 +1,92 @@
+<div class="c-detail-title">
+    <div class="u-back clearfix">
+        <button ng-click="goBack();" class="btn btn-default">返回</button>
+    </div>
+    <div class="u-title">
+        支付结果
+    </div>
+</div>
+<div class="m-payment-result">
+    <div class="wrap-payment-result">
+        <i ng-class="{'payment-result-icon':true, 'payment-failure':!isSuccess, 'payment-success': isSuccess}"></i>
+        <p class="payment-result-msg">
+            {{isSuccess ? '支付完成' : '支付未完成'}}
+        </p>
+        <ul>
+            <li class="lists">
+                <span class="left-text">付款金额：</span>
+                <b class="dark-yellow">{{paymentDataTranAmount}}</b>{{paymentData.ccyCode}}
+            </li>
+            <li class="lists">
+                <span class="left-text">交易单号：</span>
+                {{paymentResult.tranNo}}
+            </li>
+            <li ng-show="isSuccess" class="lists">
+                <span class="left-text">当前状态：</span>
+                {{paymentResult.statusValue}}
+            </li>
+            <li class="lists">
+                <span class="left-text">账单号  ：</span>
+                {{paymentData.thirdHtId}}
+            </li>
+            <li class="lists">
+                <span class="left-text">收款方  ：</span>
+                {{billInfo.bizCompanyName}}
+            </li>
+            <li ng-show="isSuccess" class="lists">
+                <span class="left-text">支付时间：</span>
+                {{paymentResult.tranDate}}
+            </li>
+        </ul>
+        <button ng-show="!isSuccess" ng-click="rePay()" class="btn btn-primary" style="display: block;margin:0px auto;margin-top:20px;">重新付款</button>
+    </div>
+</div>
+
+<style type="text/css">
+    .m-payment-result {
+        background: #fff;
+        padding: 45px 30px;
+        border: 1px solid #ddd;
+        min-height: 100%;
+    }
+
+    .wrap-payment-result {
+        width: 400px;
+        margin: 0px auto;
+    }
+
+    .wrap-payment-result ul li.lists {
+        line-height: 30px;
+    }
+
+    .wrap-payment-result li.lists .left-text {
+        display: inline-block;
+        width: 90px;
+    }
+
+    .wrap-payment-result ul li.lists .dark-yellow {
+        color: #F7A42C;
+    }
+
+    .wrap-payment-result .payment-result-icon {
+        display: block;
+        width: 96px;
+        height: 96px;
+        margin: 0px auto;
+    }
+
+    .wrap-payment-result .payment-success {
+        background: url('/public/img/pay-success.svg') center center no-repeat;
+    }
+
+    .wrap-payment-result .payment-failure {
+        background: url('/public/img/pay-failure.svg') center center no-repeat;
+    }
+
+    .wrap-payment-result .payment-result-msg {
+        text-align: center;
+        font-size: 18px;
+        margin-bottom: 40px;
+        margin-top: 10px;
+    }
+</style>

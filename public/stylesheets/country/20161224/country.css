@@ -1,0 +1,43 @@
+.area-box {
+  width:1000px;
+  margin-top:3.5%;
+  position:relative;
+  margin-left:auto;
+  margin-right:auto;
+}
+.master-table td {
+    text-align:center !important;
+}
+.name {
+    cursor:pointer;
+}
+.international-btn {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    word-break: normal;
+}
+.table-box td+td {
+    height:40px;
+}
+
+#countryFrom .verification{
+    position: absolute;
+    right: 0px;
+    text-align: left;
+    width: 295px;
+}
+#countryFrom .verification .errors{
+    position: relative;
+    padding-left: 0px;
+}
+.middle-box .prompt-content {
+    overflow:visible!important;
+}
+.add-search-box .list-search-box {
+    vertical-align:middle;
+}
+.btn-primary {
+    vertical-align:middle;
+    margin-left:10px;
+    padding: 0 30px;
+}

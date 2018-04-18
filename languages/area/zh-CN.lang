@@ -1,0 +1,17 @@
+{
+    "area_countryName": "中国",
+    "area_otherCountry": "其他",
+    "area_search_country_condition": "请输入名称、邮编或二字码",
+    "area_province": "省",
+    "area_city": "市",
+    "area_area": "区/县",
+    "area_street": "街道",
+    "area_code_start": "邮编起点",
+    "area_code_end": "邮编终点",
+    "area_code_parentId": "二字码",
+    "area_country_id": "序号",
+    "area_country_name": "名称",
+    "area_city_name": "城市名称",
+    "area_no_result_tips": "无搜索结果",
+    "area_select_tips": "请选择"
+}

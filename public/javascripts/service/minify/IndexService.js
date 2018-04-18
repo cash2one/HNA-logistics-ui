@@ -1,0 +1,1 @@
+!function(){"use strict";app.factory("IndexService",["easyHttp",function(e){var n={};return n.getMenu=function(){return e.get("/api/v1/u/usertree")},n.getPersonConf=function(){return e.get("/api/v1/u/userconfig")},n.setPersonConf=function(n){return e.post("/api/v1/u/userconfig",n)},n.getUserProfile=function(){return e.get("/api/v1/u/profile")},n}])}();

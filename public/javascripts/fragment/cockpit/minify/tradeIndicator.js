@@ -1,0 +1,1 @@
+app.controller("tradeIndicatorCtrl",["$scope","$route","cockpitService",function(o,r,t){function n(){t.getTradeKeyIndicator(function(r){0===r.errorCode&&(o.data=r.data)})}o.$on("changeToIndicator",function(o,r){n()}),r.current.params&&n()}]);

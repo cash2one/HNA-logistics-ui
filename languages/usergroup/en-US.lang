@@ -1,0 +1,32 @@
+{
+    "usergroup_page_orgName": "Group name：",
+    "usergroup_page_orgShortName": "User group：",
+    "usergroup_page_orgCode": "Group code：",
+    "usergroup_page_description": "Remarks：",
+
+    "usergroup_page_orgNameInfo": "Please enter a user group name",
+    "usergroup_page_orgShortNameInfo": "Please enter the user group",
+    "usergroup_page_orgCodeInfo": "Please enter a user group code",
+    "usergroup_page_descriptionInfo": "Please enter remarks",
+
+    "usergroup_validate_orgName": "User group name already exists",
+    "usergroup_validate_orgShortName": "User group referred to as already exists",
+    "usergroup_validate_orgCode": "User group code already exists",
+
+    "usergroup_tab_title": "User",
+    "usergroup_move_title_all": "All user",
+    "usergroup_move_title_unselect": "To be selected users",
+    "usergroup_move_title_selected": "Selected users",
+    "usergroup_move_select_all": "Select",
+
+    "usergroup_move_search": "Please enter a user name or work number",
+
+    "usergroup_tree_search": "No search results for this user group",
+    "usergroup_prompt_delete_tip": "Sure to delete this user group? When the user group is deleted, the user group and the user affiliation are deleted.",
+    "usergroup_prompt_add_text_first": "add to",
+    "usergroup_prompt_add_text_last": "user group",
+    "usergroup_prompt_remove_tip": "Identify the selected user？",
+
+    "usergroup_nestable_add_tip": "The current user group only supports adding to level fifth！",
+    "usergroup_nestable_seat_tip": "Add user group"
+}

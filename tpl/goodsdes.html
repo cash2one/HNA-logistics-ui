@@ -1,0 +1,73 @@
+<div ng-controller="goodsdesCtrl" class="bills test_cb398280">
+	<div class="bill-btn-line clearfix test_b7be7181">
+		<div class="bill-line clearfix test_4cf86632">
+			<div class="bill-input bill-status test_c2b0d25c">
+				<label class="test_4e1fc45c">业务类型</label>
+				<p class="test_7761c192">
+					<input type="text" class="test_9279cff1">
+					<i class="select-icon icon-drop-down test_ce259fea"></i>
+				</p>
+			</div>
+			<div class="bill-input bill-status test_ac833d10">
+				<label class="test_f8210b7e">品名</label>
+				<p class="test_c9da1ebf">
+					<input type="text" placeholder="请输入品名或代码" class="test_1e7b5d81">
+				</p>
+			</div>
+			<div class="bill-input bill-status test_d48d9378">
+				<label class="test_0aad5315">供应商</label>
+				<p class="test_c226073a">
+					<input type="text" placeholder="请输入企业名称" class="test_a22e34be">
+				</p>
+			</div>
+			<div class="bill-input bill-status test_f097b020">
+				<label class="test_8f4f45ba">状态</label>
+				<p class="test_59b197f8">
+					<input type="text" class="test_4767c9a0">
+					<i class="select-icon icon-drop-down test_49a2025f"></i>
+				</p>
+			</div>
+			
+		</div>
+		<div class="bill-btn test_bf276f20">
+			<button class="btn btn-primary btn-bill test_8372a278" ng-click="searchTaskList()">搜索</button>
+			<span class="clear-search test_d1f104a4" ng-click="clearSearch()">重置</span>
+		</div>
+	</div>
+
+	<div class="btn-group test_18b160e1">
+		<button class="btn btn-primary btn-bill test_64c686ba" ng-click="getDetail()">添加</button>
+	</div>
+
+	<div class="table-container test_8f7df034" ng-controller="tableController">
+		<div class="table-wrap test_26010d31">
+            <table class="customer-table table-box test_a7703e8e" cellpadding="0" cellspacing="0">
+                <thead class="test_13c33b78">
+                <tr class="test_c47d980d">
+                <th style="width:{{tableModel.tableHeaderSize[$index]}}" ng-repeat="item in tableModel.tableHeader" class="test_1f86628e">{{item}}</th>
+                </tr>
+                </thead>
+
+                <tbody class="test_e68a8d55">
+                <tr ng-repeat="value in tableModel.tableBody" ng-init="renderFinish($last)" class="test_34024c2b">
+                    <td class="test_8f33eb37"></td>
+                    <td class="test_1e4ac2e5"></td>
+                    <td class="test_32380603"></td>
+                    <td class="test_6c98440f"></td>
+                    <td class="test_61554fae"></td>                   
+                </tr>
+                </tbody>
+            </table>
+        </div>
+            <hnapagination table-service="table" page-table-model="tableModel" class="test_53beefca"></hnapagination>
+            <div ng-show="!tableModel.pagination.isVisiblePage" class="undefinedsvg test_3385dc61">
+            	<img src="/public/img/undefined.svg" class="test_b4640fbb">
+        	</div>
+        </div>
+    </div>
+    <div id="detail" class="test_1e05679e"></div>
+
+
+
+
+

@@ -1,0 +1,50 @@
+<div class="uploadFile">
+    <div class="batch-operation addButton">
+        <span class="btn btn-primary clickBtn" id="clickBtn">添加附件</span>
+    </div>
+    <div class="tableContainer" id="tableContainerId">
+        <table class="tableFile">
+            <thead>
+                <tr>
+                    <th>名称</th>
+                    <th>类型</th>
+                    <th>描述</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr id="addDataTr">
+                    <td >
+                        <div>
+                            <input type="text" id="fileNameInp" name="fileNameInp" value="" maxlength="30">
+                        </div>
+                    </td>
+                    <td>
+                        <input maxlength="30" name="fileType" id="upload_fileType" value="" readonly type="text" required>
+                    </td>
+                    <td >
+                        <div>
+                            <input maxlength="30" type="text" id="fileDescribeInp" name="fileDescribeInp" value="">
+                        </div>
+                    </td>
+                    <td >
+                        <div class="uploadBtn">
+                            上传附件
+                            <input type="file"
+                                   accept=".doc,.docx,.dot,.dotx,.xls,.xlsx,.xlt,.xltx,application/msword,image/jpeg,image/png,image/bmp,image/tiff,application/pdf"
+                                   id="projectFile"
+                                   name="projectFile">
+                        </div>
+                        <div class="proDiv">
+                            <div id="progress" style="font-size: 12px"></div >
+                            <progress class="mypro"></progress>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="inputNameError">
+            <input type="text" readonly class="inputNameErrorVal" id="inputNameErrorVal" name="inputNameErrorVal" value="">
+        </div>
+    </div>
+</div>

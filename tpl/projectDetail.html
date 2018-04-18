@@ -1,0 +1,489 @@
+<section class="content test_a51539d2">
+  <div class="project-top test_5ae3fef5" ng-if="!isFirstCheck">
+    <div class="row test_ecf78d22">
+      <button type="button" class="btn btn-default test_59641f5c" ng-click="$parent.goBack()">返回</button>
+    </div>
+    <div class="project-top-header test_4962f45d">
+      <h1 class="test_fcd384f8">{{ projectId ? '项目详情' : '添加项目' }}</h1>
+      <span class="test_5d55f00f">当前状态: {{ projectStatus | projectStatus }}</span>
+    </div>
+  </div>
+  <div class="project-top test_805b1b75" ng-if="isFirstCheck">
+    <div class="row test_de75cdff">
+      <button type="button" class="btn btn-default test_5aedb748" ng-click="$parent.hideFirstReport()">返回</button>
+    </div>
+    <div class="project-top-header test_b7c5dbbc">
+      <h1 class="test_a68685b7">初审报告</h1>
+    </div>
+  </div>
+  <div class="project-detail test_14b2ac73" ng-style="{ 'top': isFirstCheck ? '' : '120px' }">
+    <!-- 添加干系企业弹框 begin -->
+    <div ng-show="choseEnterprise" id="addEnterprise" class="prompt-modal middle-box test_5541a65e">
+      <div class="prompt-wrap test_ecc5b3e1">
+        <div class="bomb-box test_8d1f21e9" style="height: 360px;min-height: 320px;">
+          <div class="title test_7ff884b2">添加企业</div>
+          <div class="prompt-content test_c88a8f7d">
+            <form name="enterprise" novalidate="novalidate" class="test_5683d1e6">
+              <div id="enterprise" class="test_f760be3e">
+                <div class="form-group test_08873fa5">
+                  <label class="test_3a579cad"><b class="test_437f3e55">*</b>企业角色</label>
+                  <input id="enterpriseRole" class="input-text test_c299ad19" name="companyRole" ng-model="companySelected.companyRole" format-ent="" ng-value="company.type" type="text" required>
+                  <i class="select-icon icon-drop-down test_a91f1a62"></i>
+                </div>
+                <div class="form-group test_c3426470">
+                  <label class="test_28574547"><b class="test_fa22c666">*</b>企业名称</label>
+                  <input id="enterpriseName" class="input-text test_91159573" name="companyName" ng-model="companySelected.companyName" ng-value="company.companyId" type="text" ng-style="{ borderColor: companyCodeRepeat ? '#FA787E' : '' }" required>
+                  <div class="verification test_2cbe2267">
+                    <span class="errors test_22d5b189" ng-show="enterprise.companyName.$viewValue && enterprise.companyName.$error.defined && enterprise.companyName.$dirty">
+                          {{enterprise.companyName.errorTips}}
+                      </span>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="operation test_02221b3c">
+            <button type="button" ng-click="closePrompt(1);" name="prompt-close" class="btn btn-default test_7ba9e371" data-event="close"><%=common_page_cancel%></button>
+            <button type="button" ng-click="savePrompt(1);" name="prompt-save" class="btn btn-primary test_a4a2f083" data-event="close"><%=common_page_save%></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 添加干系企业弹框 end -->
+    <!-- 终审意见弹框 begin -->
+    <div ng-show="addFinalCheck" id="addFinalCheck" class="prompt-modal middle-box test_9525f91f">
+      <div class="prompt-wrap test_a22d06f9">
+        <div class="bomb-box test_bc2fa1f6">
+          <div class="title test_c0fe023e">终审结果</div>
+          <div class="prompt-content test_b2a03acc">
+            <form name="FinalCheck" novalidate="novalidate" class="test_0c84692c">
+              <div class="form-group test_76cbf9fe">
+                <label class="required test_2befff1d">终审结果：</label>
+                <div class="form-control test_4efcf931">
+                  <label class="test_4336410e"><input type="radio" name="finalResult" ng-model="finalResult" value="true" required class="test_95174073">通过</label>
+                  <label class="test_b10bd1b9"><input type="radio" name="finalResult" ng-model="finalResult" value="false" required class="test_ead0f3ef">拒绝</label>
+                </div>
+              </div>
+              <div class="form-group mulitple test_601fa6f9">
+                <label class="required test_5ea0c9c9">终审意见：</label>
+                <textarea name="finalResultContent" cols="30" rows="20" maxlength="1000" ng-model="finalResultContent" required class="test_31f7997d"></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="operation test_c178a87a">
+            <button type="button" ng-click="closePrompt(3);" name="prompt-close" class="btn btn-default test_00866c09" data-event="close"><%=common_page_cancel%></button>
+            <button type="button" ng-click="savePrompt(3);" name="prompt-save" class="btn btn-primary test_1efbc6b5" data-event="close"><%=common_page_save%></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 终审意见弹框 end -->
+    <div class="m-tab test_26952d55" id="m-tab">
+      <ul class="nav nav-tabs test_d6964d14" ng-show="!isFirstCheck">
+        <li class="active test_a55b0436">
+          <a href="javascript:void(0);" class="test_717c7fb5">基本信息</a>
+        </li>
+        <li class="test_026204cf">
+          <a href="javascript:void(0);" class="test_f23591fb">审核信息<i class="badge test_bdf8d068" ng-if="projectInfo.isReject"></i></a>
+        </li>
+        <li class="test_6dc6ad84">
+          <a href="javascript:void(0);" class="test_05ba1b06">合同信息</a>
+        </li>
+      </ul>
+      <div class="tab-content test_906be1b2">
+        <div class="table-pane active test_4a864dcf">
+          <div class="project-basic test_9c69c539" ng-disabled="isFirstCheck">
+            <form name="projectBasic" novalidate="novalidate" class="test_3bf3778b">
+              <!-- 状态不为草稿，不可编辑 -->
+              <div ng-disabled="projectStatus > 1" class="test_5b57bae4">
+                <div class="row test_bf1f9f2e">
+                  <div class="col-md-4 test_77b0032b">
+                    <div class="form-group test_67cc32ea">
+                      <label class="required test_473e4fe7"><%=projectDetail_business_type%></label>
+                      <input type="text" class="form-control test_2217ebe9" id="businessType" ng-disabled="legacyBusinessType" ng-model="bizTypeName" ng-value="projectInfo.bizTypeCode" placeholder="<%=projectDetail_project_chose%>">
+                    </div>
+                  </div>
+                  <div class="col-md-4 pull-right test_abd95107">
+                    <div class="form-group test_8a91ef34">
+                      <label class="required test_0e51fe1a"><%=projectDetail_project_name%></label>
+                      <input type="text" class="form-control test_b2f2e277" name="projectName" maxlength="30" ng-model="projectInfo.name" ng-trim="false" validate-code="{ruleReg:'name', ruleRegMsg:'<%=common_validate_name%>', maxLength:'30'}" placeholder="<%=projectDetail_project_input%>" required>
+                      <div class="verification test_967d8869">
+                        <span class="errors test_d3ddadb5" ng-show="projectBasic.projectName.$viewValue && projectBasic.projectName.$error.defined && projectBasic.projectName.$dirty">
+                              {{projectBasic.projectName.errorTips}}
+                          </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row test_c63226c2">
+                  <div class="col-md-4 test_eab69f1d">
+                    <div class="form-group test_2a6fb66e">
+                      <label class="required test_587d08a3"><%=projectDetail_project_code%></label>
+                      <input type="text" class="form-control test_c2b70a56" name="projectCode" ng-model="projectInfo.code" ng-disabled="projectId" maxlength="15" ng-trim="false" validate-code="{ruleReg:'code', ruleRegMsg:'<%=common_validate_code%>', maxLength:'15'}" ng-blur="checkProjectCode(projectInfo.code)" ng-style="{ borderColor: projectCodeRepeat ? '#FA787E' : '' }" placeholder="<%=projectDetail_project_input%>" required>
+                      <div class="verification test_63f960eb">
+                        <span class="errors test_42a17f85" ng-show="projectBasic.projectCode.$viewValue && projectBasic.projectCode.$error.defined && projectBasic.projectCode.$dirty">
+                              {{projectBasic.projectCode.errorTips}}
+                          </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row test_50474fc8">
+                <div class="col-md-12 test_1ed3ff23">
+                  <label class="required test_1879fca1" ng-disabled="projectStatus > 1"><%=projectDetail_relationship_enterprise%></label>
+                  <button type="button"class="btn btn-primary test_a04e0151" tabindex="-1" ng-if="projectStatus < 2" ng-click="$parent.showPrompt(1)">添加企业</button>
+                </div>
+                <div class="col-md-11 test_04f49793">
+                  <table class="table table-sm table-bordered test_5bbe33f2" ng-disabled="projectStatus > 1">
+                    <tr class="test_5f2abbab">
+                      <th class="test_d898f347">序号</th>
+                      <th class="test_1e810919">企业角色</th>
+                      <th class="test_0af8893e">企业名称</th>
+                      <th ng-if="projectStatus < 2" class="test_3dfb2b50">操作</th>
+                    </tr>
+                    <tr ng-repeat="item in companyTxt" class="test_12ea08da">
+                      <td class="test_85e01d36">{{ $index+1 }}</td>
+                      <td class="test_c5e6fea1">{{ item.companyRole | entType }}</td>
+                      <td class="test_c5b8f9e5">{{ item.companyName }}</td>
+                      <td ng-if="projectStatus < 2" class="test_6af598be">
+                        <span ng-if="item.companyRole == 4" ng-click="goSeeSupplier(item.companyId)" class="test_aa474119">查看</span>
+                        <span class="text-error test_9dd1abb9" ng-click="$parent.delCompany($index)">删除</span>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+              <div ng-disabled="projectStatus > 1" class="test_a2cd0377">
+                <div class="row test_e1a8a18f">
+                  <div class="col-md-4 test_055346a4">
+                    <div class="form-group test_4fb34ba6">
+                      <label class="required test_a48228ef"><%=projectDetail_project_charge%></label>
+                      <input type="text" class="form-control test_c0cfd125" name="projectOrg" ng-model="orgName" ng-click="moveUserGroup()" ng-style="{ borderColor: orgNameError ? '#FA787E' : '' }" id="orgName" placeholder="<%=projectDetail_project_chose%>">
+                      <i ng-if="projectStatus < 2" class="select-icon icon-drop-down test_fcefdc98"></i>
+                      <div id="userSelectGroupBox" class="user-prompt-box test_080477cd">
+                        <div id="userSelectGroup" class="test_0bae9f0a"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div ng-disabled="projectStatus > 1" class="test_ee7c41c3">
+                <div class="row test_8b395172">
+                  <div class="col-md-12 test_2a5408ae">
+                    <label for="" class="required test_3686b5f2"><%=projectDetail_project_description%></label>
+                    <textarea cols="30" rows="5" maxlength="1000" name="projectProfile" ng-show="projectStatus == 1" ng-model="projectInfo.profile" required class="test_437c0c69"></textarea>
+                    <div ng-if="projectStatus != 1" class="result-text test_6f6b91b4">{{ projectInfo.profile }}</div>
+                  </div>
+                </div>
+                <div class="row test_386ec276">
+                  <div class="col-md-12 test_2ba118fd">
+                    <label for="" class="required test_6a74c632"><%=projectDetail_project_value%></label>
+                    <textarea cols="30" rows="5" maxlength="1000" name="projectValue" ng-show="projectStatus == 1" ng-model="projectInfo.value" required class="test_dcd658f2"></textarea>
+                    <div ng-if="projectStatus > 1" class="result-text test_fa16829b">{{ projectInfo.value }}</div>
+                  </div>
+                </div>
+                <div class="row test_2ec3f46f">
+                  <div class="col-md-12 test_96359fe1">
+                    <label for="" class="required test_c96440c0"><%=projectDetail_project_risk%></label>
+                    <textarea cols="30" rows="5" maxlength="1000" name="projectRisk" ng-show="projectStatus == 1" ng-model="projectInfo.risk" required class="test_975389d0"></textarea>
+                    <div ng-if="projectStatus > 1" class="result-text test_50feac39">{{ projectInfo.risk }}</div>
+                  </div>
+                </div>
+              </div>
+              <div ng-if="projectAction == 1 && (projectStatus == 4 || projectStatus == 5) && !isFirstCheck" ng-disabled="projectStatus == 5" class="test_cc5aa62e">
+                <div class="row test_9005779b">
+                  <div class="col-md-12 test_aa97e8d8">
+                    <label for="" class="required test_e5175272"><%=projectDetail_project_summary%></label>
+                    <textarea cols="30" rows="5" maxlength="2000" name="projectSummary" ng-show="projectStatus == 4" ng-model="$parent.projectInfo.summary" required class="test_fab3051e"></textarea>
+                    <div ng-if="projectStatus == 5" class="result-text test_0df85d3a">{{ projectInfo.summary }}</div>
+                  </div>
+                </div>
+              </div>
+              
+            </form>
+          </div>
+          <div class="row test_887012f4" ng-controller="pictureController">
+            <div class="col-md-12 test_c57e4794">
+              <label class="required test_fe58925b"><%=projectDetail_project_file%></label>
+              <button type="button"class="btn btn-primary test_58d67094" ng-if="projectAction == 1 && (projectStatus == 1 || projectStatus == 4) && !isFirstCheck" ng-disabled="addProjectFile == 1" ng-click="$parent.showUploadFile(1)">添加文件</button>
+            </div>
+            <div class="col-md-11 test_b60392ad">
+              <table class="table table-sm table-bordered test_06a23df9">
+                <tr class="test_b9792ff8">
+                  <th class="test_5ddd9250">
+                    <%=common_thead_number%>
+                  </th>
+                  <th class="test_d373fdc8">
+                    <%=common_page_filename%>
+                  </th>
+                  <th class="test_7c5750d9">
+                    <%=common_page_filedescribe%>
+                  </th>
+                  <th class="test_fafd0a93">
+                    <%=common_page_action%>
+                  </th>
+                </tr>
+                <tr ng-repeat="item in projectInfo.files" class="test_ad74b0c4">
+                  <td class="test_431eb5b6">{{ $index+1 }}</td>
+                  <td class="test_f9dda989">{{ item.name }}</td>
+                  <td class="test_6d7c8fbe">{{ item.remark }}</td>
+                  <td class="test_b7196cf5">
+                    <img ng-src="{{ item.filePath }}" width="50" ng-if="item.contentType.includes('image') && !item.contentType.includes('tiff')" ng-click="getPictureUrl(item.fileId)" class="test_bd12cb34">
+                    <img src="../public/img/tiff-file.svg" width="50" ng-if="item.contentType.includes('tiff')" class="test_efe39642">
+                    <img src="../public/img/pdf-file.svg" width="50" ng-if="item.contentType.includes('pdf')" ng-click="getPictureUrl(item.fileId)" class="test_66ef0779">
+                    <img src="../public/img/word.svg" width="50" ng-if="item.contentType.includes('msword')" class="test_1cf8b818">
+                    <img src="../public/img/excel.svg" width="50" ng-if="item.contentType.includes('vnd')" class="test_83f6089e">
+                    <p class="test_ab29b24b">
+                      <span class="text-primary test_2db7dbf6" ng-click="getPictureUrl(item.fileId)"><%=common_page_preview%></span>
+                      <span class="text-error test_43776e64" ng-if="projectStatus == 1 || item.status == 'new'" ng-click="delFile($index, 1)"><%=common_page_delete%></span>
+                      <a ng-href="{{ item.thumbnailPath }}" download="" class="test_1cb2324c">
+                        <%=common_page_download%>
+                      </a>
+                    </p>
+                  </td>
+                </tr>
+                <tr ng-if="addProjectFile == 1" class="test_0685e387">
+                  <td class="test_b22e4734">&nbsp;</td>
+                  <td class="test_4f9237a1">
+                    <div class="form-group test_6fed2208">
+                      <label for="" class="test_1b51ecd3">文件名: </label>
+                      <input type="text" ng-trim="false" maxlength="30" ng-style="{ borderColor: projectFileNameError ? '#FA787E' : '' }" ng-model="$parent.singleprojectFile.name" ng-change="checkFileName('project')" class="test_894e5c99">
+                    </div>
+                    <span ng-if="projectFileNameError" class="test_5fef46a9">请输入中英文、数字和符号“-”、“_”</span>
+                  </td>
+                  <td class="test_bd4474be">
+                    <div class="form-group test_18525025">
+                      <label for="" class="test_7720a190">文件描述: </label>
+                      <input type="text" ng-trim="false" maxlength="30" ng-style="{ borderColor: projectFileRemarkError ? '#FA787E' : '' }" ng-model="$parent.singleprojectFile.remark" ng-change="checkFileRemark($event, 'project')" class="test_8118f259">
+                    </div>
+                  </td>
+                  <td class="test_f5943427">
+                    <div class="btn btn-primary upload test_fecb34cb" ng-disabled="uploadDisabled">
+                        <%=projectDetail_project_upload%>
+                      <input type="file" accept=".doc,.docx,.xls,.xlsx,application/msword,image/jpeg,image/png,image/bmp,image/tiff,application/pdf" id="projectFile" file-model="projectFile" ng-disabled="projectFileNameError || projectFileRemarkError" ng-click="checkFileRemark($event, 'project')" class="test_bc33ba71">
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div ng-show="projectAction == 1 && (projectStatus == 1 || projectStatus == 4) && !isFirstCheck" class="test_2d8c2048">
+            <div class="row test_46c91bfa">
+              <div class="col-md-12 form-footer text-center test_87df74cf">
+                <button type="button" class="btn btn-default test_cc49dba2" ng-show="projectStatus == 1" ng-click="saveProjectInfo('false')"><%=projectDetail_project_save%></button>
+                <button type="button" class="btn btn-primary test_08621912" ng-click="saveProjectInfo('true')">{{ projectStatus == 4 ? '结束项目' : '提交审核' }}</button>
+              </div>
+            </div>
+          </div>
+          <div class="first-opinion test_1341ea8a" ng-if="isFirstCheck" ng-disabled="approvalInfo.firstAuditMsg">
+            <div class="row test_0492f55b">
+              <div class="col-md-12 test_f380704a">
+                <label for="" class="required test_2d616e2e">项目初审意见汇总</label>
+                <textarea cols="30" rows="5" maxlength="1000" ng-show="projectStatus == 2" ng-model="$parent.firstResultContent" ng-style="{ borderColor: firstCheckError ? '#FA787E' : '' }" required class="test_b7004c9d"></textarea>
+                <div ng-if="projectStatus > 2" class="result-text test_29d3c84c">{{ firstResultContent }}</div>
+              </div>
+              <div class="col-md-12 form-footer text-center test_e9a86c20" ng-show="(projectStatus == 2 && !approvalInfo.firstAuditMsg)">
+                <button type="button" class="btn btn-primary test_90a60807" ng-click="$parent.postFirstApproval()">提交终审</button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="row test_64426aaf" ng-if="projectId || projectStatus == 2 || projectStatus == 5">
+            <p class="project-basic-time test_429c5270">
+              <%=projectDetail_project_creator%>: {{ projectInfo.creator }} 创建时间：{{ projectInfo.createTime }}
+            </p>
+          </div>
+        </div>
+        <div class="table-pane test_01efc0ff">
+          <div class="project-approval test_6d6de92b">
+            <div class="approval-progress-img test_4fbfd415">
+              <ul ng-if="projectStatus == 6" class="test_da39d626">
+                <li ng-class="{ active: projectStatus >= 1 ? true : false }" class="test_1683f855"><img ng-src="/public/img/icon-project-draft{{ projectStatus >= 1 ? '-a' : '' }}.svg" alt="" class="test_19aa52e7">
+                  <p class="test_319848d5">草稿</p>
+                </li>
+                <li ng-class="{ active: projectStatus >= 2 ? true : false }" class="test_fd7f87cc">&bullet;&emsp;&bullet;&emsp;&bullet;&emsp;&bullet;&emsp;&bullet;
+                  <p class="test_005d3378">&nbsp;</p>
+                </li>
+                <li ng-class="{ active: projectStatus >= 2 ? true : false }" class="test_e22097fa"><img ng-src="/public/img/icon-project-start{{ projectStatus >= 2 ? '-a' : '' }}.svg" alt="" class="test_0b7f1804">
+                  <p class="test_3b5cfda2">待初审</p>
+                </li>
+                <li ng-class="{ active: projectStatus >= 3 ? true : false }" class="test_e143031b">&bullet;&emsp;&bullet;&emsp;&bullet;&emsp;&bullet;&emsp;&bullet;
+                  <p class="test_9caacb75">&nbsp;</p>
+                </li>
+                <li ng-class="{ active: projectStatus >= 3 ? true : false }" class="test_2a3b2aad"><img ng-src="/public/img/icon-project-final{{ projectStatus >= 3 ? '-a' : '' }}.svg" alt="" class="test_96b106d5">
+                  <p class="test_4e97fc4e">待终审</p>
+                </li>
+                <li ng-class="{ active: projectStatus >= 4 ? true : false }" class="test_bd1b4fe2">&bullet;&emsp;&bullet;&emsp;&bullet;&emsp;&bullet;&emsp;&bullet;
+                  <p class="test_cfce9efc">&nbsp;</p>
+                </li>
+                <li ng-class="{ active: projectStatus == 6 ? true : false }" class="test_10df2402"><img src="/public/img/icon-project-close.svg" alt="" class="test_9b31e446">
+                  <p class="test_f7a52d96">已关闭</p>
+                </li>
+              </ul>
+              <ul ng-if="projectStatus != 6" class="test_906fd620">
+                <li ng-class="{ active: projectStatus >= 1 ? true : false }" class="test_e8d96ef5"><img ng-src="/public/img/icon-project-draft{{ projectStatus >= 1 ? '-a' : '' }}.svg" alt="" class="test_c0ffd351">
+                  <p class="test_585cd712">草稿</p>
+                </li>
+                <li ng-class="{ active: projectStatus >= 2 ? true : false }" class="test_7a03d3e9">&bullet;&emsp;&bullet;&emsp;&bullet;&emsp;&bullet;&emsp;&bullet;
+                  <p class="test_6302a979">&nbsp;</p>
+                </li>
+                <li ng-class="{ active: projectStatus >= 2 ? true : false }" class="test_69b95b2e"><img ng-src="/public/img/icon-project-start{{ projectStatus >= 2 ? '-a' : '' }}.svg" alt="" class="test_0bb4cf1b">
+                  <p class="test_34b712b6">待初审</p>
+                </li>
+                <li ng-class="{ active: projectStatus >= 3 ? true : false }" class="test_f1c4335a">&bullet;&emsp;&bullet;&emsp;&bullet;&emsp;&bullet;&emsp;&bullet;
+                  <p class="test_40e96857">&nbsp;</p>
+                </li>
+                <li ng-class="{ active: projectStatus >= 3 ? true : false }" class="test_37b0a41a"><img ng-src="/public/img/icon-project-final{{ projectStatus >= 3 ? '-a' : '' }}.svg" alt="" class="test_57011b1d">
+                  <p class="test_2a993acb">待终审</p>
+                </li>
+                <li ng-class="{ active: projectStatus >= 4 ? true : false }" class="test_c4937080">&bullet;&emsp;&bullet;&emsp;&bullet;&emsp;&bullet;&emsp;&bullet;
+                  <p class="test_9110f044">&nbsp;</p>
+                </li>
+                <li ng-class="{ active: projectStatus >= 4 ? true : false }" class="test_f8383888"><img ng-src="/public/img/icon-project-setup{{ projectStatus >= 4 ? '-a' : '' }}.svg" alt="" class="test_18916120">
+                  <p class="test_78c8f41a">已立项</p>
+                </li>
+                <li ng-class="{ active: projectStatus >= 5 ? true : false }" class="test_fa322d6c">&bullet;&emsp;&bullet;&emsp;&bullet;&emsp;&bullet;&emsp;&bullet;
+                  <p class="test_f44e4aba">&nbsp;</p>
+                </li>
+                <li ng-class="{ active: projectStatus == 5 ? true : false }" class="test_515dffc7"><img ng-src="/public/img/icon-project-end{{ projectStatus == 5 ? '-a' : '' }}.svg" alt="" class="test_b5bd80c5">
+                  <p class="test_720ce6b0">已结项</p>
+                </li>
+              </ul>
+            </div>
+            <div class="approval-progress-txt test_0f14a8c4">
+              <h2 class="test_ff37ca0e">初审</h2>
+              <dl ng-click="jumpTo('#/projectCheck', 1, approvalInfo.projectAuditInfoDtos[0].projectQuestionDtoList.length, approvalInfo.projectAuditInfoDtos[0].isPass, approvalInfo.projectAuditInfoDtos[0].auditorId)" class="test_e1846097">
+                <dt class="test_12b4120d">风控审核<span ng-if="approvalInfo.projectAuditInfoDtos[0].auditorId" class="test_3592e447">审核时间: {{ approvalInfo.projectAuditInfoDtos[0].createTime }}</span></dt>
+                <div ng-if="approvalInfo.projectAuditInfoDtos[0].auditorId" class="test_48d53eba">
+                  <dd class="test_bc6de56f">审核结果: {{ approvalInfo.projectAuditInfoDtos[0].isPass ? '通过' : '未通过' }}</dd>
+                  <dd class="test_77735218">审核人: {{ approvalInfo.projectAuditInfoDtos[0].auditorName }}</dd>
+                  <dd class="test_8784dd55">审核意见: {{ approvalInfo.projectAuditInfoDtos[0].msg }}</dd>
+                </div>
+                <div ng-if="projectStatus == 1" class="test_7451cb77">
+                  <span ng-if="approvalInfo.projectAuditInfoDtos[0].isPass" class="test_98e9d1c7">当前为草稿状态, 请先提交审核</span>
+                  <span ng-if="!approvalInfo.projectAuditInfoDtos[0].isPass" class="test_af148f95">审核未通过，请修改后重新提交</span>
+                </div>
+                <div ng-if="approvalInfo.projectAuditInfoDtos[0].projectQuestionDtoList.length && !approvalInfo.projectAuditInfoDtos[0].auditorId" class="test_2268468e">审核中, 点击查看详情</div>
+                <div ng-if="approvalInfo.status > 1 && !approvalInfo.projectAuditInfoDtos[0].projectQuestionDtoList.length && !approvalInfo.projectAuditInfoDtos[0].auditorId" class="test_3414aaa4">正在等待审核</div>
+              </dl>
+              <dl ng-click="jumpTo('#/projectCheck', 2, approvalInfo.projectAuditInfoDtos[1].projectQuestionDtoList.length, approvalInfo.projectAuditInfoDtos[1].isPass, approvalInfo.projectAuditInfoDtos[1].auditorId)" class="test_c1deebf6">
+                <dt class="test_fff8f347">财务审核<span ng-if="approvalInfo.projectAuditInfoDtos[1].auditorId" class="test_16f6f226">审核时间: {{ approvalInfo.projectAuditInfoDtos[1].createTime }}</span></dt>
+                <div ng-if="approvalInfo.projectAuditInfoDtos[1].auditorId" class="test_c56c82ae">
+                  <dd class="test_933bded3">审核结果: {{ approvalInfo.projectAuditInfoDtos[1].isPass ? '通过' : '未通过' }}</dd>
+                  <dd class="test_0463f05b">审核人: {{ approvalInfo.projectAuditInfoDtos[1].auditorName }}</dd>
+                  <dd class="test_b4f9c84e">审核意见: {{ approvalInfo.projectAuditInfoDtos[1].msg }}</dd>
+                </div>
+                <div ng-if="projectStatus == 1" class="test_558df91f">
+                  <span ng-if="approvalInfo.projectAuditInfoDtos[1].isPass" class="test_71ef6f44">当前为草稿状态, 请先提交审核</span>
+                  <span ng-if="!approvalInfo.projectAuditInfoDtos[1].isPass" class="test_8cc27a42">审核未通过，请修改后重新提交</span>
+                </div>
+                <div ng-if="approvalInfo.projectAuditInfoDtos[1].projectQuestionDtoList.length && !approvalInfo.projectAuditInfoDtos[1].auditorId" class="test_682ce784">审核中, 点击查看详情</div>
+                <div ng-if="approvalInfo.status > 1 && !approvalInfo.projectAuditInfoDtos[1].projectQuestionDtoList.length && !approvalInfo.projectAuditInfoDtos[1].auditorId" class="test_8e569db6">正在等待审核</div>
+              </dl>
+              <dl ng-click="jumpTo('#/projectCheck', 3, approvalInfo.projectAuditInfoDtos[2].projectQuestionDtoList.length, approvalInfo.projectAuditInfoDtos[2].isPass, approvalInfo.projectAuditInfoDtos[2].auditorId)" class="test_41e64333">
+                <dt class="test_5f8d268c">运营审核<span ng-if="approvalInfo.projectAuditInfoDtos[2].auditorId" class="test_41a165ae">审核时间: {{ approvalInfo.projectAuditInfoDtos[2].createTime }}</span></dt>
+                <div ng-if="approvalInfo.projectAuditInfoDtos[2].auditorId" class="test_b89d52ca">
+                  <dd class="test_4b489571">审核结果: {{ approvalInfo.projectAuditInfoDtos[2].isPass ? '通过' : '未通过' }}</dd>
+                  <dd class="test_8ce2ff3e">审核人: {{ approvalInfo.projectAuditInfoDtos[2].auditorName }}</dd>
+                  <dd class="test_780d6d63">审核意见: {{ approvalInfo.projectAuditInfoDtos[2].msg }}</dd>
+                </div>
+                <div ng-if="projectStatus == 1" class="test_0ad804b5">
+                  <span ng-if="approvalInfo.projectAuditInfoDtos[1].isPass" class="test_d8f00939">当前为草稿状态, 请先提交审核</span>
+                  <span ng-if="!approvalInfo.projectAuditInfoDtos[1].isPass" class="test_be4957ee">审核未通过，请修改后重新提交</span>
+                </div>
+                <div ng-if="approvalInfo.projectAuditInfoDtos[2].projectQuestionDtoList.length && !approvalInfo.projectAuditInfoDtos[2].auditorId" class="test_c72a6be3">审核中, 点击查看详情</div>
+                <div ng-if="approvalInfo.status > 1 && !approvalInfo.projectAuditInfoDtos[2].projectQuestionDtoList.length && !approvalInfo.projectAuditInfoDtos[2].auditorId" class="test_444cc214">正在等待审核</div>
+              </dl>
+              <dl ng-click="showFirstReport()" ng-show="identity.includes(1) && projectAction == 2 && approvalInfo.projectAuditInfoDtos[0].isPass && approvalInfo.projectAuditInfoDtos[1].isPass && approvalInfo.projectAuditInfoDtos[2].isPass && !approvalInfo.firstAuditMsg" class="test_902c60d1">
+                <dt class="test_e1ba5b31">初审报告</dt>
+                <div ng-if="identity.includes(1) && approvalInfo.status <= 2" class="test_472a1038">三方审核已完成，等待填写初审报告</div>
+              </dl>
+              <button type="button" class="btn btn-primary test_dc22c5e5" ng-show="approvalInfo.firstAuditMsg" ng-click="showFirstReport()">初审报告</button>
+            </div>
+            <div class="approval-progress-txt test_8215090f" ng-if="approvalInfo.status > 2 && approvalInfo.status <= 6">
+              <h2 class="test_1b19f113">终审</h2>
+              <dl ng-click="$parent.showPrompt(3)" class="test_82589f6c">
+                <dt class="test_8c7fa174">最终审核<span ng-if="approvalInfo.finalAuditTime" class="test_68af12d2">审核时间: {{ approvalInfo.finalAuditTime }}</span></dt>
+                <div ng-if="approvalInfo.finalManId" class="test_3278d5ea">
+                  <dd class="test_d6e6c023">审核结果: {{ (approvalInfo.status == 4 || approvalInfo.status == 5) ? '通过' : '未通过' }}</dd>
+                  <dd class="test_eddf0a53">审核人: {{ approvalInfo.finalManName }}</dd>
+                  <dd class="test_65a2a807">审核意见: {{ approvalInfo.finalAuditMsg }}</dd>
+                </div>
+                <div ng-if="!approvalInfo.finalManId" class="test_a0b4f0df">初审已通过，等待终审</div>
+              </dl>
+            </div>
+          </div>
+        </div>
+        <div class="table-pane test_e5e05a6a">
+          <div class="project-paper test_b94e02c4">
+            <div class="row test_5024f638" ng-controller="pictureController">
+              <div class="col-md-12 test_09f16bde">
+                <label class="required test_6afb9abb"><%=projectDetail_project_file%></label>
+                <button type="button" class="btn btn-primary test_d438fc08" ng-if="projectAction == 1 && (projectStatus == 1 || projectStatus == 4)" ng-disabled="addProjectFile == 3" ng-click="$parent.showUploadFile(3)">添加文件</button>
+              </div>
+              <div class="col-md-12 test_fd4c60ac">
+                <table class="table table-sm table-bordered test_0374b4eb">
+                  <tr class="test_ef63ef77">
+                    <th class="test_b57d82c4">
+                      <%=common_thead_number%>
+                    </th>
+                    <th class="test_8ac92a8a">
+                      <%=common_page_filename%>
+                    </th>
+                    <th class="test_41a8fd97">
+                      <%=common_page_filedescribe%>
+                    </th>
+                    <th class="test_60706f2c">
+                      <%=common_page_action%>
+                    </th>
+                  </tr>
+                  <tr ng-repeat="item in contractFiles" class="test_2a9fd104">
+                    <td class="test_af687314">{{ $index+1 }}</td>
+                    <td class="test_941e0960">{{ item.name }}</td>
+                    <td class="test_780778f2">{{ item.remark }}</td>
+                    <td class="test_f2c195e7">
+                      <p class="test_64166af3">
+                        <img ng-src="{{ item.filePath }}" width="50" ng-if="item.contentType.includes('image') && !item.contentType.includes('tiff')" ng-click="getPictureUrl(item.fileId)" class="test_513569ba">
+                        <img src="../public/img/tiff-file.svg" width="50" ng-if="item.contentType.includes('tiff')" class="test_5ed72e7d">
+                        <img src="../public/img/pdf-file.svg" width="50" ng-if="item.contentType.includes('pdf')" ng-click="getPictureUrl(item.fileId)" class="test_40e6c3c8">
+                      </p>
+                      <span class="text-primary test_1aed576d" ng-click="getPictureUrl(item.fileId)"><%=common_page_preview%></span>
+                      <span class="text-error test_6cb97887" ng-if="projectStatus != 5" ng-click="delFile($index, 3)"><%=common_page_delete%></span>
+                      <a ng-href="{{ item.thumbnailPath+'?filename='+item.filename }}" download="" class="test_ac7bac4e">
+                        <%=common_page_download%>
+                      </a>
+                    </td>
+                  </tr>
+                  <tr ng-if="addProjectFile == 3" class="test_56b06a22">
+                    <td class="test_cba045d4">&nbsp;</td>
+                    <td class="test_1c51ca07">
+                      <div class="form-group test_48b5586f">
+                        <label for="" class="test_8889d407">文件名: </label>
+                        <input type="text" ng-trim="false" maxlength="30" ng-style="{ borderColor: contractFileNameError ? '#FA787E' : '' }" ng-model="$parent.singlecontractFile.name" ng-change="checkFileName('contract')" class="test_5612d64d">
+                      </div>
+                      <span ng-if="contractFileNameError" class="test_6ddcfb99">请输入中英文、数字和符号“-”、“_”</span>
+                    </td>
+                    <td class="test_6d9623cb">
+                      <div class="form-group test_bc0c40e4">
+                        <label for="" class="test_d82ff45d">文件描述: </label>
+                        <input type="text" ng-trim="false" maxlength="30" ng-style="{ borderColor: contractFileRemarkError ? '#FA787E' : '' }" ng-model="$parent.singlecontractFile.remark" ng-change="checkFileRemark($event, 'contract')" class="test_b57ca62e">
+                      </div>
+                    </td>
+                    <td class="test_d8161c32">
+                      <div class="btn btn-primary upload test_88cc45cd" ng-disabled="uploadDisabled">
+                        <%=projectDetail_project_upload%>
+                        <input type="file" accept=".doc,.docx,.xls,.xlsx,application/msword,image/jpeg,image/png,image/bmp,image/tiff,application/pdf" id="contractFile" file-model="contractFile" ng-disabled="contractFileNameError || contractFileRemarkError" ng-click="checkFileRemark($event, 'contract')" class="test_4b30b792">
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="slides" class="test_32e64829"></div>
+</section>

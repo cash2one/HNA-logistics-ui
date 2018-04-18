@@ -1,0 +1,22 @@
+<section class="content">
+    <!--资金账户管理-->
+    <div ng-show="block == 'accountManager'" class="g-main m-account-manager clearfix" include="tpl/fragment/fundsAccount/accountManager.html" ng-controller="accountManagerCtr"></div>
+
+    <!--资金账户详情-->
+    <div ng-show="block == 'accountDetail'" class="g-main m-account-detail clearfix" include="tpl/fragment/fundsAccount/accountDetail.html" ng-controller="accountDetailCtr"></div>
+
+    <!--银行账户管理-->
+    <div ng-show="block == 'bankManager'" class="g-main m-bank-manager clearfix" include="tpl/fragment/fundsAccount/bankManager.html" ng-controller="bankManagerCtr"></div>
+
+    <!--提现申请-->
+    <div ng-show="block == 'withdrawApply'" class="g-main m-withdraw-apply clearfix" include="tpl/fragment/fundsAccount/withdrawApply.html" ng-controller="withdrawApplyCtr"></div>
+
+    <!--充值-->
+    <div ng-show="block == 'recharge'" class="g-main m-withdraw-apply clearfix" include="tpl/fragment/fundsAccount/recharge.html" ng-controller="rechargeCtr"></div>
+
+    <!--充值结果页面-->
+    <div ng-show="block == 'rechargeResult'" class="g-main clearfix" include="tpl/fragment/fundsAccount/rechargeResult.html" ng-controller="rechargeResultCtr"></div>
+
+    <!--交易记录详情-->
+    <div ng-show="block == 'businessRecord'" class="g-main m-business-record clearfix" include="tpl/fragment/fundsAccount/businessRecord.html" ng-controller="businessRecordCtr"></div>
+</section>

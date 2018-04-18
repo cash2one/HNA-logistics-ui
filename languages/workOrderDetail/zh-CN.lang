@@ -1,0 +1,53 @@
+{
+    "workOrderDetail_title":"创建工单",
+    "workOrderDetail_title_detail":"详情",
+    "workOrderDetail_label_problemType":"问题类型",
+    "workOrderDetail_select_problemType_PH":"请选择问题类型",
+    "workOrderDetail_input_messageBoard_PH":"请输入留言板CODE",
+    "workOrderDetail_input_problemNum_PH":"请输入订单号",
+    "workOrderDetail_label_customerName":"客户姓名",
+    "workOrderDetail_input_customerName_PH":"请输入客户姓名",
+    "workOrderDetail_label_phone":"联系电话",
+    "workOrderDetail_input_phone_PH":"请输入联系电话",
+    "workOrderDetail_label_title":"标题",
+    "workOrderDetail_input_title_PH":"请输入标题",
+    "workOrderDetail_label_problemDescription":"问题描述",
+    "workOrderDetail_textarea_problemDescription_PH":"请输入问题描述",
+    "workOrderDetail_label_attachment":"附件",
+    "workOrderDetail_label_infoType":"优先级",
+    "workOrderDetail_toast_infoType_null":"请选择优先级",
+    "workOrderDetail_toast_suggesstionType_null":"请选择处理意见",
+    "workOrderDetail_label_veryUrgent":"非常紧急",
+    "workOrderDetail_label_urgent":"紧急",
+    "workOrderDetail_label_normal":"一般",
+    "workOrderDetail_label_handlePerson":"处理人",
+    "workOrderDetail_input_handlePerson":"请输入处理人姓名或工号",
+    "workOrderDetail_button_update":"保存",
+    "workOrderDetail_button_startHandle":"开始处理",
+    "workOrderDetail_button_submitSuggestion":"提交意见",
+
+    "workOrderDetail_msg_createOk":"创建工单成功.",
+    "workOrderDetail_msg_HandleOk":"处理工单成功.",
+
+    "workOrderDetail_msg_handleSuggess":"处理意见",
+    "workOrderDetail_msg_resolveWorkOrder":"已解决",
+    "workOrderDetail_msg_dispatchHandle":"转交处理",
+
+    "workOrderDetail_msg_closeWorkOrder":"关闭工单",
+
+    "workOrderDetail_msg_handleSuggessDiscription":"意见说明",
+    "workOrderDetail_msg_handleSuggessDiscription_PH":"请输入意见说明",
+    "workOrderDetail_btn_closed":"已关闭",
+    "workOrderDetail_span_flow":"流转记录",
+
+    "supplier_prompt_tip_picture_one": "最多支持上传",
+    "supplier_prompt_tip_picture_two": "张图片！",
+
+    "workOrderDetail_flow_0":"转交",
+    "workOrderDetail_flow_1":"提交建议",
+    "workOrderDetail_flow_2":"接受处理",
+    "workOrderDetail_flow_3":"完结",
+    "workOrderDetail_flow_4":"关闭",
+    "workOrderDetail_block_order": "阻塞订单",
+    "workOrderDetail_flow_5":"创建并转交"
+}

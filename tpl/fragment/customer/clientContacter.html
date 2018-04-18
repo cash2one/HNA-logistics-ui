@@ -1,0 +1,157 @@
+<style>
+    .wrap{
+        padding: 15px;
+    }
+
+    .show-remark {
+        position: absolute;
+        bottom: -38px;
+        right: 5px;
+        color: #999;
+        line-height: 15px;
+    }
+
+</style>
+
+<div ng-show="showPrompt" id="nest-countryFrom" class="prompt-modal middle-box " >
+    <div class="prompt-wrap ">
+        <div class="bomb-box ">
+            <div class="title " ng-if="!IsEdit"><%=customer_add_client_contacter%></div>
+            <div class="title " ng-if="IsEdit"><%=customer_client_contacter_detail %></div>
+
+            <div class="prompt-content ">
+                <form name="ClientContacter" novalidate="novalidate" >
+                    <ul class="isContainer switch-list client-contacter-switch-list" style="height: 380px">
+                        <li class="test_4e12c504">
+                            <label class="labelWithComb"><b class="test_933e132d">*</b><%=common_table_full_name%></label>
+                            <div class="select-box input-text test_b0eb3f43">
+                                <input ng-trim="false" id="clientUser" name="clientUser" autocomplete="off"
+                                       ng-model="data.name" maxlength="30" type="text" required class="country-list test_0feb3f81" validate-code="{ruleReg:'surname', ruleRegMsg:'<%=common_template_surname%>', maxLength:'30'}"   >
+                                <div class="verification">
+                                    <span class="errors" id="name-msg" ng-show="ClientContacter.clientUser.$viewValue && ClientContacter.clientUser.$error.defined && ClientContacter.clientUser.$dirty">{{ClientContacter.clientUser.errorTips}}</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="test_4e12c504">
+                            <label class="labelWithComb"><b class="test_933e132d">*</b><%=common_table_department%></label>
+                            <div class="select-box input-text test_b0eb3f43">
+                                <input ng-trim="false" id="department" name="department" autocomplete="off"
+                                       ng-model="data.department" maxlength="30" type="text" required class="country-list test_0feb3f81"   >
+
+                            </div>
+                        </li>
+                        <li class="test_4e12c504">
+                            <label class="labelWithComb"><b class="test_933e132d">*</b><%=common_table_position%></label>
+                            <div class="select-box input-text test_b0eb3f43">
+                                <input ng-trim="false" id="function" name="function" autocomplete="off"
+                                       ng-model="data.function" maxlength="30" type="text" required   class="country-list test_0feb3f81"  >
+
+                            </div>
+                        </li>
+                        <li class="test_4e12c504">
+                            <label class="labelWithComb"><b class="test_933e132d">*</b><%=common_table_mobile_phone%></label>
+                            <div class="select-box input-text test_b0eb3f43">
+                                <input ng-trim="false" id="mobilePhone" name="mobilePhone" autocomplete="off"
+                                       ng-model="data.mobilePhone" maxlength="30" type="text" validate-code="{ruleReg:'fix', ruleRegMsg:'<%=common_template_fix%>'}"  required class="country-list test_0feb3f81"  >
+                                <div class="verification">
+                                    <span class="errors" style="padding-left:0" id="tel-msg" ng-show="ClientContacter.mobilePhone.$viewValue && ClientContacter.mobilePhone.$error.defined && ClientContacter.mobilePhone.$dirty">{{ClientContacter.mobilePhone.errorTips}} </span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="test_4e12c504">
+                            <label class="labelWithComb"><%=common_table_telephone%></label>
+                            <div class="select-box input-text test_b0eb3f43">
+                                <input ng-trim="false" id="phone" name="phone" autocomplete="off" validate-code="{ruleReg:'fix', ruleRegMsg:'<%=common_template_fix%>'}"
+                                       ng-model="data.phone" maxlength="30" type="text"  class="country-list test_0feb3f81"  >
+                                <div class="verification">
+                                    <span class="errors" id="tel-msg" ng-show="ClientContacter.phone.$viewValue && ClientContacter.phone.$error.defined && ClientContacter.phone.$dirty">{{ClientContacter.phone.errorTips}}</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="test_4e12c504">
+                            <label class="labelWithComb"><b class="test_933e132d">*</b><%=common_table_responsibility%></label>
+                            <div class="select-box input-text test_b0eb3f43">
+                                <input ng-trim="false" id="duty" name="duty" autocomplete="off"
+                                       ng-model="data.duty" maxlength="30" type="text" required   class="country-list test_0feb3f81"  >
+                            </div>
+                        </li>
+                        <li >
+                            <label class="labelWithComb"><%=common_page_remarks%></label>
+                            <div class="remark-info  test_4defd165">
+                                    <textarea style="height:92px;" ng-change="showTextNumber();" maxlength="140" ng-trim="false" rows="5" ng-model="data.description"
+                                              class="form-control textarea-text test_e86bcdf9 ng-pristine ng-untouched ng-valid ng-valid-maxlength" ></textarea>
+                                <div class="show-remark  test_f95c22dd"><span class="test_e1b32dcc ">{{textareaNumber}}</span><%=common_page_remark_number%></div>
+                            </div>
+                        </li>
+
+                        <!--<li class="test_ee0051fb">-->
+                            <!--<label class="test_3c296a28"><%=common_page_remarks%></label>-->
+                            <!--<div class="remark-info test_fd71851a">-->
+                                <!--<textarea ng-trim="false" class="input-text test_3c359324" ng-change="showTextNumber();" ng-model="data.description" rows="5" maxlength="140" placeholder="<%=common_page_remark%>"></textarea>-->
+                                <!--<div class="show-string-length test_e126f059"><span class="test_de5e5a37">{{textNumber}}</span>字</div>-->
+                            <!--</div>-->
+                        <!--</li>-->
+                    </ul>
+                </form>
+            </div>
+            <div class="operation test_a24469e3">
+                <button ng-click="closePrompt();" name="prompt-close" class="btn btn-default " data-event="close"><%=common_page_cancel%></button>
+                <button ng-click="savePrompt();" name="prompt-save" class="btn btn-primary " data-event="close"><%=common_page_save%></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="wrap ">
+    <div class="batch-operation ">
+        <button ng-click="addContactPerson();" class="btn btn-primary"><%=common_page_add%></button>
+        <button ng-click="deleteContactPerson();" class="btn btn-primary"><%=common_page_delete%></button>
+    </div>
+</div>
+
+<div class="table-container " ng-controller="tableController">
+    <table class="customer-table table-box" cellpadding="0" cellspacing="0">
+        <thead>
+        <tr>
+            <th style="width:5%">
+                <div class="checkbox checkbox-info">
+                    <input type="checkbox" ng-model="tableModel.selectFlag" ng-click="table.selectAll(tableModel);">
+                    <label></label>
+                </div>
+            </th>
+            <th style="width:{{tableModel.tableHeaderSize[$index]}}" ng-repeat="item in tableModel.tableHeader">{{item}}</th>
+        </tr>
+        </thead>
+
+
+        <tbody>
+        <tr ng-repeat="value in tableModel.tableBody" ng-init="renderFinish($last)">
+            <td>
+                <div class="checkbox checkbox-info">
+                    <input type="checkbox" ng-checked="value.checkbox" ng-click="table.selectOne(tableModel, value.checkboxId, $event);">
+                    <label></label>
+                    <span class="state-code" style="display: none;">{{value.status}}</span>
+                </div>
+            </td>
+            <td>{{(tableModel.pagination.currentPage-1)*tableModel.pagination.pageSize+$index+1}}</td>
+            <td class="name " title="{{value.name}}">
+                <a href="javascript:;" style="cursor:pointer;display:block;height:35px;line-height:35px" ng-click="editClientUser(value)" >
+                    {{value.name}}
+                </a>
+            </td>
+
+            <!--<td title="{{value.name}}">{{value.name}}</td>-->
+            <td title="{{value.department}}">{{value.department}}</td>
+            <td title="{{value.function}}">{{value.function}}</td>
+            <td title="{{value.mobilePhone}}">{{value.mobilePhone}}</td>
+            <td title="{{value.phone}}">{{value.phone}}</td>
+            <td title="{{value.duty}}">{{value.duty}}</td>
+            <td title="{{value.description}}">{{value.description}}</td>
+
+        </tr>
+        </tbody>
+    </table>
+    <hnapagination table-service="table" page-table-model="tableModel"></hnapagination>
+</div>
+
+

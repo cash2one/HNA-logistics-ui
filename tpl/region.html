@@ -1,0 +1,176 @@
+<section class="content test_e37486f4">
+    <div class="m-tab test_858f68ba" id="m-tab">
+        <ul class="nav nav-tabs clearfix test_30ec3852">
+            <li class="active test_390cf553"><a href="javascript:void(0);" class="test_e8ce6a1e"><%=region_tab_title_one%></a></li>
+            <li class="test_53724290"><a href="javascript:void(0);" class="test_42903e8c"><%=region_tab_title_two%></a></li>
+        </ul>
+        <div class="tab-content test_c6bdc098">
+
+            <!-- 计费分区 -->
+            <div class="table-pane active test_f2ee348f">
+                <div ng-controller="tableController" class="test_73b0e6f6">
+                    <div class="add-search-box test_0dc8cee1">
+                        <div class="list-search-box test_9b09460f">
+                            <input ng-enter="retrievalChargingRegion();" ng-model="tableModel.restData.q" ng-value="q" type="text" maxlength="30" class="form-control test_3613ee4e" placeholder="<%=region_search_placeholder%>">
+                            <i class="icon-search search-table test_0304675f"></i>
+                            <div class="senior-seach test_a8529148">
+                                <button ng-click="retrievalChargingRegion();" class="btn btn-primary test_1d284e48"><%=common_list_search_btn%></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="batch-operation test_991084b6">
+                        <button ng-click="addChargingRegion();" class="btn btn-primary test_d8c1daed"><%=common_page_add%></button>
+                        <button ng-click="deleteChargingRegion();" class="btn btn-primary test_29116a8a"><%=common_page_delete%></button>
+                    </div>
+
+                    <div class="table-container test_0c341be2">
+                        <input type="hidden" ng-model="clickTrId" class="test_4d02fbaf">
+                        <table class="region-table table-box test_c0424885" cellpadding="0" cellspacing="0">
+                            <thead class="test_af7640ac">
+                            <tr class="test_c18298bf">
+                                <th class="test_d818cff6">
+                                    <div class="checkbox checkbox-info test_80c152c1">
+                                        <input type="checkbox" ng-model="tableModel.selectFlag" ng-click="table.selectAll(tableModel);" class="test_83622bfc">
+                                        <label class="test_2cae4f98"></label>
+                                    </div>
+                                </th>
+                                <th ng-repeat="item in tableModel.tableHeader" class="test_ab5e3779">{{item}}</th>
+                            </tr>
+                            </thead>
+                            <tbody class="test_28fde9f0">
+                            <tr ng-repeat="value in tableModel.tableBody" data-id="{{value.id}}" ng-init="renderFinish($last)" class="test_9c4aee85">
+                                <td class="test_22d6ce8a">
+                                    <div class="checkbox checkbox-info test_4aa1f887">
+                                        <input type="checkbox" ng-value="{{value.userId}}" ng-checked="value.checkbox" ng-click="table.selectOne(tableModel, value.checkboxId, 0);" class="test_231ec503">
+                                        <label class="test_1b6880fc"></label>
+                                    </div>
+                                </td>
+                                <td class="test_d6e39480">{{(tableModel.pagination.currentPage-1)*tableModel.pagination.pageSize+$index+1}}</td>
+                                <td title="{{value.name}}" class="test_f86544d3"><a ng-bind-html="value.name | trustHtml:q" href="javascript:void(0)" ng-click="editChargingRegionDetail(value.id)" class="test_bf0d1929"></a></td>
+                                <td title="{{value.code}}" ng-bind-html="value.code | trustHtml:q" class="test_4ae916c5"></td>
+                                <td title="{{value.creator}}" class="test_12255658"><span class="test_a3a1b31d">{{value.creator}}</span><span style="padding-left: 5px;" class="test_e7b26bcf">{{value.creatorCode}}</span></td>
+                                <td title="{{value.createTime}}" class="test_7f1bbd29">{{value.createTime}}</td>
+                                <td title="点击查看" class="test_f486003e"><a href="javascript:void(0)" ng-click="getChargingRegionDetail(value.uid, value.name)" class="test_fdc36334"><%=region_href_details%></a></td>
+                                <td title="{{value.description}}" class="test_dab259c1">{{value.description}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <hnapagination table-service="table" page-table-model="tableModel" class="test_915b6d47"></hnapagination>
+                    </div>
+                    <div ng-show="!tableModel.pagination.isVisiblePage" style="position: absolute;top:165px;bottom:0px;width:100%;" class="test_a5fccd19">
+                        <img style="width:100%;height:100%;" src="/public/img/undefined.svg" class="test_0248d71e">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 派送分区 -->
+            <div class="table-pane test_7c1cce4c">
+                <div ng-controller="tableController" class="test_e2e884ad">
+                    <div class="add-search-box test_3c7c83b0">
+                        <div class="list-search-box test_47d0ed23">
+                            <input ng-enter="retrievalDeliveryRegion();" ng-model="tableDeliveryModel.restData.q" ng-value="q" type="text" class="form-control test_3aefe127" placeholder="<%=region_search_placeholder%>">
+                            <i class="icon-search search-table test_adaa1276"></i>
+                            <div class="senior-seach test_837edee5">
+                                <button ng-click="retrievalDeliveryRegion();" class="btn btn-primary test_1d284e48"><%=common_list_search_btn%></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="batch-operation test_c1d8650f">
+                        <button ng-click="addDeliveryRegion();" class="btn btn-primary test_4ac4bf38"><%=common_page_add%></button>
+                        <button ng-click="deleteDeliveryRegion();" class="btn btn-primary test_c4fb58a6"><%=common_page_delete%></button>
+                    </div>
+
+                    <div class="table-container test_bb6bed0a">
+                        <input type="hidden" ng-model="clickTrId" class="test_89c07d14">
+                        <table class="region-table table-box test_52f586b2" cellpadding="0" cellspacing="0">
+                            <thead class="test_c9643609">
+                            <tr class="test_c6e1fd6f">
+                                <th class="test_624574f6">
+                                    <div class="checkbox checkbox-info test_bd105928">
+                                        <input type="checkbox" ng-model="tableDeliveryModel.selectFlag" ng-click="table.selectAll(tableDeliveryModel);" class="test_ef08d254">
+                                        <label class="test_5913142e"></label>
+                                    </div>
+                                </th>
+                                <th ng-repeat="item in tableDeliveryModel.tableHeader" class="test_3cb122ef">{{item}}</th>
+                            </tr>
+                            </thead>
+                            <tbody class="test_99ee9b91">
+                            <tr ng-repeat="value in tableDeliveryModel.tableBody" data-id="{{value.id}}" ng-init="renderFinish($last)" class="test_13abf0af">
+                                <td class="test_c0c46d7a">
+                                    <div class="checkbox checkbox-info test_fff3679a">
+                                        <input type="checkbox" ng-value="{{value.userId}}" ng-checked="value.checkbox" ng-click="table.selectOne(tableDeliveryModel, value.checkboxId);" class="test_7b8b8ce3">
+                                        <label class="test_d9060915"></label>
+                                    </div>
+                                </td>
+                                <td class="test_6f1fd418">{{(tableDeliveryModel.pagination.currentPage-1)*tableDeliveryModel.pagination.pageSize+$index+1}}</td>
+                                <td title="{{value.name}}" class="test_ff236a3f"><a ng-bind-html="value.name | trustHtml:q" href="javascript:void(0)" ng-click="editDeliveryRegionDetail(value.id)" class="test_1e14f9f5"></a></td>
+                                <td title="{{value.code}}" ng-bind-html="value.code | trustHtml:q" class="test_391025cb"></td>
+                                <td title="{{value.creator}}" class="test_96306aa1"><span class="test_87658daa">{{value.creator}}</span><span style="padding-left: 5px;" class="test_5e15b160">{{value.creatorCode}}</span></td>
+                                <td title="{{value.createTime}}" class="test_f5ee38c4">{{value.createTime}}</td>
+                                <td title="点击查看" class="test_aecfe57e"><a href="javascript:void(0)" ng-click="getDeliveryRegionDetail(value.uid, value.name, 1)" class="test_43de6b2b"><%=region_href_details%></a></td>
+                                <td title="{{value.description}}" class="test_ff8e3d43">{{value.description}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <hnapagination table-service="table" page-table-model="tableDeliveryModel" class="test_d3db28c8"></hnapagination>
+                    </div>
+                    <div ng-show="!tableDeliveryModel.pagination.isVisiblePage" style="position: absolute;top:165px;bottom:0px;width:100%;" class="test_41ffd6b4">
+                        <img style="width:100%;height:100%;" src="/public/img/undefined.svg" class="test_6fd2d1e9">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</section>
+
+<!-- 分区方案 -->
+<div style="display: none;" id="chargingRegionDetail" class="test_4538dc9f">
+    <form name="chargingRegionForm" novalidate="novalidate" class="test_17b56d26">
+        <dd class="test_7024abce">
+            <label class="label-tip test_bca7d6c6"><b class="test_71e074c0">*</b><%=region_prompt_name%></label>
+            <div class="content-info test_f9c7dd83">
+                <input ng-trim="false" validate-code="{ruleReg:'name', ruleRegMsg:'<%=common_validate_name%>', maxLength:'30'}" name="nameInfo" ng-model="nameInfo" type="text" required class="test_43a45e41">
+                <validatetip from-model="chargingRegionForm.nameInfo" class="test_74f16c1f"></validatetip>
+            </div>
+        </dd>
+        <dd class="test_8aa830fa">
+            <label class="label-tip test_779d002d"><b class="test_04c5b764">*</b><%=region_prompt_code%></label>
+            <div class="content-info test_147ebbd4">
+                <input ng-trim="false" ng-blur="validateCode()" ng-focus="removeValidateCode()" validate-code="{ruleReg:'code', ruleRegMsg:'<%=common_validate_code%>', maxLength:'15'}" name="codeInfo" ng-model="codeInfo" type="text" required class="validate-codes test_52d9d7fd">
+                <validatetip from-model="chargingRegionForm.codeInfo" class="test_9e0bf1d5"></validatetip>
+                <div class="verification test_43ec4e07">
+                    <span class="isExisted test_7d6e1faa" ng-show="validateCodeError"><%=region_validate_code%></span>
+                </div>
+            </div>
+        </dd>
+        <dd ng-show="isDetailCheck" class="test_59e74c0f">
+            <label class="label-tip test_0fd96e8b"><%=region_prompt_creator%></label>
+            <div class="content-info test_9b09440f">
+                <span class="ready-panel test_b97f88d3">{{createName}}</span>
+            </div>
+        </dd>
+        <dd ng-show="isDetailCheck" class="test_ce776ceb">
+            <label class="label-tip test_fe600e3a"><%=region_prompt_created_time%></label>
+            <div class="content-info test_5f06ead1">
+                <span class="ready-panel test_cc83ed9a">{{createTime}}</span>
+            </div>
+        </dd>
+        <dd class="test_e468a678">
+            <label class="label-tip test_5e7c585a"><%=region_prompt_remark%></label>
+            <div class="content-info test_484021d8" style="height: 92px;">
+                <textarea text-length="" ng-trim="false" maxlength="140" rows="5" name="descriptionInfo" ng-model="descriptionInfo" type="text" class="test_ad2fb502">
+            </textarea></div>
+        </dd>
+        <dd ng-hide="isDetailCheck" class="isHref-box test_797e1944">
+            <div class="checkbox checkbox-info test_f9ba4c08">
+                <input type="checkbox" ng-checked="isHref" ng-click="isHrefDetail()" class="test_2fdeb7f5">
+                <label class="test_92a3e405"></label>
+            </div>
+            <span class="isHref-tip test_3649e521"><%=region_href_tip%></span>
+        </dd>
+    </form>
+</div>

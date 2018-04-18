@@ -1,0 +1,16 @@
+{
+    "shippingSetting_vessel_voyage": "voyage number",
+    "shippingSerring_vessel_name": "the name of the ship",
+    "shippingSerring_vessel_company": "shipping company",
+    "shippingSetting_vessel_departure": "port of shipment",
+    "shippingSetting_vessel_arrival": "port of destination",
+    "shippingSetting_vessel_startTime": "departure time",
+    "shippingSetting_vessel_reset": "reset",
+    "shippingSetting_vessel_search": "search",
+    "shippingSetting_vessel_add": "increase",
+    "shippingSetting_vessel_del": "delete",
+    "shippingSerring_vessel_num": "voyage no",
+    "shippingSerring_vessel_departureTime": "time of shipment",
+    "shippingSerring_vessel_arrivalTime": "arrival time",
+    "shippingSerring_vessel_totalTime": "length of whole journey"
+}

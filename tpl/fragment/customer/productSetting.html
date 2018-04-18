@@ -1,0 +1,115 @@
+<div class="product-setting">
+    <div class="rows">
+        <button class="btn btn-primary" ng-show="!editSetting" ng-click="editSetting = true" style="position: absolute;z-index: 9;right: 30px;top: 30px;">编辑</button>
+    </div>
+    <div class="rows">
+        <dl class="panel">
+            <div class="content-title" style="width: 150px;"><b>*</b>公共产品/组是否可见：</div>
+            <div class="content-info" style="padding-left:30px;" ng-show="editSetting">
+                <label for="isPublic"><input ng-trim="false" name="isPublic" ng-value="true" ng-model="isPublic" type="radio" required>是</label>
+                <label for="isPublic"><input ng-trim="false" name="isPublic" ng-value="false" ng-model="isPublic" type="radio" required>否</label>
+            </div>
+            <div class="content-info" style="padding-left:30px;" ng-show="!editSetting">
+                <label ng-if="isPublic">是</label>
+                <label ng-if="!isPublic">否</label>
+            </div>
+        </dl>
+    </div>
+    <div class="rows">
+        <dl class="panel">
+            <div class="content-title" style="width: 150px;">可见范围：</div>
+            <div class="content-info" style="padding-left:30px;" ng-show="editSetting">
+                <input type="text" ng-click="showProductLayer()" ng-value="selectedItemStr" readonly>
+                <i class="select-icon icon-drop-down"></i>
+            </div>
+            <div class="content-info" style="padding-left:30px;" ng-show="!editSetting">{{ selectedItemStr }}</div>
+        </dl>
+    </div>
+    <div class="rows rows-last" ng-show="editSetting">
+        <button class="btn btn-default" ng-click="cancelVisiblity()">取消</button>
+        <button class="btn btn-primary" ng-click="submitVisiblity()">保存</button>
+    </div>
+    <div class="select__layer" id="productLayer" style="display:none;">
+        <div class="layer__content">
+            <ul>
+                <li>
+                    <h4>所有范围</h4>
+                    <div class="content__box">
+                        <div class="box__tab">
+                            <ul class="tab__title">
+                                <li ng-class="{ active: tabActive === 1 }" ng-click="toggleData(1)">产品组</li>
+                                <li ng-class="{ active: tabActive === 2 }" ng-click="toggleData(2)">产品</li>
+                            </ul>
+                            <div class="tab__content">
+                                <div class="tab__panel">
+                                    <div class="tree__box">
+                                        <ul class="tree__parent">
+                                            <li ng-repeat="item in productGroupData">
+                                                <dl>
+                                                    <dt ng-class="{ active: selectedItemId === item.id }" ng-style="{ backgroundColor: tabActive === 1 && item.isPublic ? '#f6f6f6' : '' }" ng-click="selectAction(item)">{{ item.name }}</dt>
+                                                    <dd ng-class="{ active: selectedItem === subject }" ng-click="selectAction(subject)" ng-if="item.children.length" ng-repeat="subject in item.children track by $index">{{ subject.name }}</dd>
+                                                </dl>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <h4>待选范围</h4>
+                    <div class="content__box">
+                        <div class="search__box">
+                            <input type="text" placeholder="请输入产品组或产品名" maxlength="30" ng-model="searchSelecting" ng-change="searchLocale(1)">
+                            <div class="select__all">
+                                <div class="checkbox checkbox-info">
+                                    <input type="checkbox" ng-model="checkedAllSelecting">
+                                    <label></label>
+                                </div>
+                                全选
+                            </div>
+                        </div>
+                        <ul class="select__box">
+                            <li ng-repeat="item in productSelecting track by $index">
+                                <div class="checkbox checkbox-info">
+                                    <input type="checkbox" ng-value="{{ item.id }}" ng-disabled="item.disabled" ng-model="item.checked">
+                                    <label></label>
+                                </div>
+                                {{ item.name }}
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="layer__content--action">
+                    <button class="btn__arrow" ng-click="moveRight()">&gt;</button>
+                    <button class="btn__arrow" ng-click="moveLeft()">&lt;</button>
+                </li>
+                <li>
+                    <h4>已选范围</h4>
+                    <div class="content__box">
+                        <div class="search__box">
+                            <input type="text" placeholder="请输入产品组或产品名" maxlength="30" ng-model="searchSelected" ng-change="searchLocale(2)">
+                            <div class="select__all">
+                                <div class="checkbox checkbox-info">
+                                    <input type="checkbox" ng-model="checkedAllSelected">
+                                    <label></label>
+                                </div>
+                                全选
+                            </div>
+                        </div>
+                        <ul class="select__box">
+                            <li ng-repeat="item in productSelected track by $index">
+                                <div class="checkbox checkbox-info">
+                                    <input type="checkbox" ng-value="{{ item.id }}" ng-model="item.checked">
+                                    <label></label>
+                                </div>
+                                {{ item.name }}
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+{
+    "airLine_page_keyword": "关键字",
+    "airLine_page_empty": "重置",
+    "airLine_page_name": "名称",
+    "airLine_page_code": "编码",
+    "airLine_page_type": "航线类型",
+    "airLine_page_start": "始发地",
+    "airLine_page_end": "目的地",
+    "airLine_page_airCompany": "航空公司",
+    "airLine_page_startAirport": "起运机场",
+    "airLine_page_stopoverAirport": "中转机场",
+    "airLine_page_endAirport": "目的机场",
+    "airLine_code_modelDelTips": "确定删除已选航空航线？",
+    "airLine_page_searchPlaceholder": "请输入名称或编码",
+    "airLine_page_add": "添加空运航线",
+    "airLine_code_modelDetail": "修改空运航线",
+    "airLine_page_baseInfo": "基本信息"
+}

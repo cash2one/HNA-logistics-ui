@@ -1,0 +1,63 @@
+
+<div class="statics-rank clearfix">
+    <h3 class="title">排行榜</h3>
+    <div class="select-box">
+        <input ng-model="rankStateName" id="rankState" autocomplete="off" class="input-text ng-pristine ng-untouched ng-valid" type="text">
+        <i class="select-icon icon-drop-down" style="z-index: 1"></i>
+    </div>
+    <ul class="rank-lists-switcher clearfix">
+        <li ng-class="{active : rankTabActive === 'amount'}" ng-click="changeRankTab('amount')">交易额</li>
+        <li ng-class="{active : rankTabActive === 'order'}" ng-click="changeRankTab('order')">订单量</li>
+        <li ng-class="{active : rankTabActive === 'volume'}" ng-click="changeRankTab('volume')">货量</li>
+    </ul>
+    <!-- 排行榜 -->
+    <div class="rank-list-container clearfix">
+        <div class="rank-list" ng-repeat="item in rankLists">
+            <!--产品销量排行-->
+            <div class="title">{{item.typeName}}{{item.periodType}}排行<span class="more" ng-click="showRankItem(item.type)"></span></div>
+            <div class="list-container" ng-hide="item.data.length === 0">
+                <dl class="clearfix" ng-repeat="val in item.data">
+                    <dt>{{$index !== 0 ? $index+1+'.':''}}</dt>
+                    <dd>
+                        <span class="name" title="{{val.name}}">{{val.name}}</span>
+                        <span class="nums" title="{{val.value}}{{val.unit}}">{{val.value}}{{val.unit}}</span>
+                        <span class="lens" ng-style="{width:val._width+'%'}"></span>
+                    </dd>
+                </dl>
+            </div>
+            <div ng-show="item.data.length === 0">
+                <p class="rank-empty"></p>
+                <p class="rank-empty-msg">没有数据哦～</p>
+            </div>
+            <div class="rank-item-mask" ng-show="item.isShowRankItem">
+                <ul>
+                    <li ng-click="getStaticsRankData(rankTabActive, item.type, 'year')">年排行</li>
+                    <li ng-click="getStaticsRankData(rankTabActive, item.type, 'quarter')">季排行</li>
+                    <li ng-click="getStaticsRankData(rankTabActive, item.type, 'month')">月排行</li>
+                    <li ng-click="getStaticsRankData(rankTabActive, item.type, 'week')">周排行</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!--  热点图 -->
+    <div class="map-container">
+        <div class="map-wrap" id="myMap" style="width: 1100px; height: 620px;"></div>
+        <div class="map-switch-wrap">
+           <div ng-class="['map-switch-container', {'city': mapData.cityMap}]" ng-click="toggleMap()">
+               <em class="country-icon">国家</em>
+               <em class="city-icon">城市</em>
+               <span ng-class="['toggle-btn', {'city': mapData.cityMap}]"></span>
+           </div>
+        </div>
+        <span class="more" ng-click="showRankItem('map')"></span>
+        <div class="rank-item-mask" ng-show="mapData.isShowRankItem">
+            <ul>
+                <li ng-click="getStaticsRankData(rankTabActive, 'region', 'year')">年排行</li>
+                <li ng-click="getStaticsRankData(rankTabActive, 'region', 'quarter')">季排行</li>
+                <li ng-click="getStaticsRankData(rankTabActive, 'region', 'month')">月排行</li>
+                <li ng-click="getStaticsRankData(rankTabActive, 'region', 'week')">周排行</li>
+            </ul>
+        </div>
+    </div>
+</div>

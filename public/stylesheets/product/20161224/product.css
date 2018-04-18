@@ -1,0 +1,100 @@
+.area-box {
+    width:1000px;
+    margin-top:3.5%;
+    position:relative;
+    margin-left:auto;
+    margin-right:auto;
+}
+.tab-list {
+    overflow:hidden;
+    height:50px;
+    width:324px;
+    position:absolute;
+    z-index:1000;
+    top:16px;
+}
+.tab-list a {
+    display:inline-block;
+    height:50px;
+    line-height:50px;
+    text-align:center;
+    width:160px;
+    backgorund-color:#f6f6f6;
+    border:1px solid #ddd;
+    border-bottom:none;
+    font-size:16px;
+    color:#555;
+    position:relative;
+    cursor:pointer;
+}
+.tab-list a.tab-active {
+    background-color:#fff;
+}
+.content-main {
+    overflow-y:auto;
+    min-height:800px;
+}
+.master-table {
+    left:0px;
+    right:0px;
+    top:0px;
+}
+.add-search-box {
+    padding-left:0;
+    padding-right:0;
+    padding-top:20px;
+}
+.search-cell {
+    position:relative;
+    width:16%!important;
+    display:inline-block;
+    height:34px;
+    text-align:left;
+    margin-right:1%;
+    margin-bottom:15px;
+}
+.search-cell span {
+    display:inline-block;
+    width:60px;
+    text-align:right;
+    margin-right:6px;
+}
+.verification {
+    text-align:left;
+}
+.select-box {
+    position:relative;
+    width:64%;
+    display:inline-block;
+    vertical-align:middle;
+}
+.select-box input {
+    display:inline-block!important;
+}
+.content-main {
+    min-height: auto!important;
+}
+.switch-list {
+    overflow:visible!important;
+}
+.add-search-box {
+    border-bottom:none!important;
+    text-align: left;
+}
+.add-search-box .list-search-box {
+    margin-bottom: 20px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+.add-search-box .list-search-box-reset {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+.disabled, .disabled:hover{
+    background-color: #ddd;
+    border: 1px solid #ddd;
+}
+.table-box td {
+    text-align: center!important;
+}

@@ -1,0 +1,96 @@
+<div class="area-box test_884d3760" ng-init="initSelectList()">
+    <div class="m-tab test_982915f3" id="m-tab">
+        <ul class="nav nav-tabs test_5da16664">
+            <li class="active test_62c3a055">
+                <a href="javascript:void(0)" class="test_94d3f64a">中国</a>
+            </li>
+            <li class="test_da2a7d11">
+                <a href="javascript:void(0)" class="test_3305c5c3"><%=area_otherCountry%></a>
+            </li>
+        </ul>
+        <div class="tab-content test_497aee35">
+             <div class="table-pane active test_4cc8b56a">
+                 <div class="area-input-box test_11f9e035" style="margin-top: 30px">
+                    <div class="select-box test_92bd1907" style="margin-left: 26px">
+                        <div class="input-box test_9dfb8968">
+                            <input placeholder="<%=area_select_tips%>" type="text" id="province" readonly="readonly" class="test_392fc792">
+                            <i class="select-icon icon-drop-down test_30698209"></i>
+                        </div>
+                        <span class="test_880ea48e">省</span>
+                    </div>
+                    <div class="select-box test_e6418543">
+                        <div class="input-box test_73996092">
+                            <input placeholder="<%=area_select_tips%>" type="text" id="city" readonly="readonly" class="test_c901b08a">
+                            <i class="select-icon icon-drop-down test_b3530d60"></i>
+                        </div>
+                        <span class="test_3a88f124">市</span>
+                    </div>
+                    <div class="select-box test_f0fadca3">
+                        <div class="input-box test_809d550d">
+                            <input placeholder="<%=area_select_tips%>" type="text" id="area" readonly="readonly" class="test_47d6c018">
+                            <i class="select-icon icon-drop-down test_babba531"></i>
+                        </div>
+                        <span class="test_a28443a9">区/县</span>
+                    </div>
+                    <div class="select-box test_3a93328b">
+                        <div class="input-box test_c4ae07d5">
+                            <input placeholder="<%=area_select_tips%>" type="text" id="street" readonly="readonly" class="test_acdb775e">
+                            <i class="select-icon icon-drop-down test_85c176b0"></i>
+                        </div>
+                        <span class="test_44388818">街道</span>
+                    </div>
+                 </div>
+                 <div class="address-detail test_42e4d305">
+                        <p class="test_e823d194">
+                            <span class="detail-title test_b176fa69"><span style="padding-right:32px" class="test_ad5db084">名</span><span class="test_ecf8a91d">称:</span></span>
+                            <span title="{{detailData.name}}" class="detail-content test_12495134">{{detailData.name}}</span>
+                        </p>
+                         <p class="test_b60ac6b7">
+                             <span class="detail-title test_8aeda61a">起始邮编:</span>
+                             <span class="detail-content test_1a51a2a2">{{detailData.startPostCode}}</span>
+                         </p>
+                         <p class="test_f46b58d1">
+                             <span class="detail-title test_bff62872">终止邮编:</span>
+                             <span class="detail-content test_c30dbe24">{{detailData.terminalCode}}</span>
+                         </p>
+                 </div>
+             </div>
+             <div class="table-pane test_6b399119">
+                 <!--tableController start-->
+                 <div class="master-table test_ca1c9c46">
+                     <div ng-controller="tableController" class="test_7bacc356">
+                         <div class="add-search-box test_9c073bfc">
+                             <div class="list-search-box test_5427ca6c">
+                                 <input ng-enter="searchCountry()" ng-model="tableModel.restData.q" ng-value="q" type="text" class="form-control test_3e5ad61d" placeholder="<%=area_search_country_condition%>">
+                                 <i class="icon-search search-table test_63f773b8"></i>
+                             </div>
+                             <button ng-click="searchCountry();" class="btn btn-primary test_b3b6ac3a"><%=common_page_search%></button>
+                         </div>
+                         <div class="table-container test_c363c292">
+                             <table class="table-box test_ab7009b2" cellpadding="0" cellspacing="0">
+                                 <thead class="test_8dd36c72">
+                                     <th style="width:{{tableModel.tableHeaderSize[$index]}}" ng-repeat="item in tableModel.tableHeader" class="test_17238291">{{item}}</th>
+                                 </thead>
+                                 <tbody class="test_c087848f">
+                                     <tr ng-repeat="value in tableModel.tableBody" ng-init="renderFinish($last)" class="test_304700a2">
+                                         <td style="width:8%" class="test_64375a97">{{(tableModel.pagination.currentPage-1)*tableModel.pagination.pageSize+$index+1}}</td>
+                                         <td style="width:22%;text-align:left" title="{{value.name}}" ng-bind-html="value.name | trustHtml:q" class="test_81d3baee"></td>
+                                         <td style="width:22%;text-align:left" title="{{value.cityName}}" ng-bind-html="value.cityName | trustHtml:q" class="test_216a1f47"></td>
+                                         <td style="width:16%;text-align:left" title="{{value.startPostCode}}" ng-bind-html="value.startPostCode | trustHtml:q" class="test_e219e14e"></td>
+                                         <td style="width:16%;text-align:left" title="{{value.endPostCode}}" ng-bind-html="value.endPostCode | trustHtml:q" class="test_d027da7e"></td>
+                                         <td style="width:16%;text-align:left" title="{{value.parentId}}" ng-bind-html="value.parentId | trustHtml:q" class="test_bc68bf2c"></td>
+                                     </tr>
+                                 </tbody>
+                             </table>
+                             <div ng-show="!tableModel.pagination.isVisiblePage" style="position: absolute;top:165px;bottom:0px;width:100%" class="no-result test_fe339c23">
+                                 <img style="width:100%;height:100%;" src="/public/img/undefined.svg" class="test_2637e211">
+                             </div>
+                             <hnapagination table-service="table" page-table-model="tableModel" class="test_9f205bf8"></hnapagination>
+                         </div>
+                     </div>
+                 </div>
+                 <!--tableController end-->
+             </div>
+        </div>
+    </div>
+<div class="test_445c940f"></div></div>

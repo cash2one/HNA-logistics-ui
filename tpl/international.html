@@ -1,0 +1,74 @@
+<section class="content test_b6c933b2">
+    <div ng-controller="tableController" class="master-table blank-content test_be378695">
+        <input ng-model="lang" type="hidden" class="test_3f175027">
+        <div class="batch-operation top test_8d69e28a">
+            <button ng-click="goBack();" class="btn btn-default test_d7584540"><%=common_page_back%></button>
+            <button ng-click="editInternational();" ng-hide="showEditInternational" class="btn btn-primary test_028d34c6"><%=common_page_edit%></button>
+        </div>
+        <h3 class="title-international test_d0f121f7">
+            {{title}}
+        </h3>
+        <div class="left-right-blank test_f5e9cf3b">
+            <div class="add-search-box test_91c1ea7a" ng-show="isHide">
+                <div class="list-search-box test_e2fd516c">
+                    <input maxlength="30" ng-enter="retrievalInternational();" ng-model="internationalModel.restData.q" ng-value="q" type="text" class="form-control test_84720f90" placeholder="{{placeholder}}">
+                    <i class="icon-search search-table test_9230f7fb"></i>
+                    <div class="u-search-btn test_34fbb66a">
+                        <button ng-click="retrievalInternational();" class="btn btn-primary test_75261e8b"><%=common_list_search_btn%></button>
+                        <a href="javascript:;" ng-click="seniorFilter();" class="u-senior-search test_67456425">{{seniorText}}</a>
+                    </div>
+                </div>
+                <div class="senior-box test_e81900c5" ng-show="showSenior">
+                    <div class="checkbox checkbox-info test_7b3b2823">
+                        <input type="checkbox" ng-click="checkSenior();" ng-checked="seniorChecked" class="test_33898dc1">
+                        <label class="test_ea71386a"></label>
+                    </div>
+                    <span class="test_48156a22"><%=international_page_empty%></span>
+                </div>
+            </div>
+            <div class="table-container test_6aeeb7fb">
+                <form name="form" novalidate="novalidate" class="test_02a0610d">
+                    <table class="user-table table-box international-table test_754a37c8" cellpadding="0" cellspacing="0">
+                        <thead class="test_d3f4ff60">
+                        <tr class="test_6ea1d67c">
+                            <th ng-repeat="item in internationalModel.tableHeader" class="test_40e11008">{{item}}</th>
+                            <th style="overflow: visible;" class="test_31d6673b">
+                                <div ng-hide="showEditInternational" class="select-box select-international test_831dc153">
+                                    <input readonly="readonly" maxlength="15" type="text" ng-click="showLanguage();" id="language" ng-model="localName" ng-value="localCode" class="test_f0d56d1d">
+                                    <i class="select-icon icon-drop-down test_89307401"></i>
+                                </div>
+                                <p ng-show="showEditInternational" class="test_7c3e878b">{{localName}}</p>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody class="test_1543a81d">
+                        <tr ng-repeat="value in internationalModel.tableBody" data-id="{{value.id}}" ng-init="renderFinish($last)" class="test_60382b0e">
+                            <td class="test_1f304db0">{{(internationalModel.pagination.currentPage-1)*internationalModel.pagination.pageSize+$index+1}}</td>
+                            <td title="{{value.name}}" ng-bind-html="value.name | trustHtml:q" class="test_92567d6f"></td>
+                            <td title="{{value.code}}" ng-bind-html="value.code | trustHtml:q" class="test_6ab2f7e3"></td>
+                            <td class="test_e8e5f277">
+                                <div ng-show="showEditInternational" class="edit-international test_f31ffb32">
+                                    <input ng-trim="false" class="lang-name test_e531b2cc" ng-keyup="languageInfo($event);" ng-model="value.localName" maxlength="30" data-ref="{{value.id}}" data-name="{{value.localName}}" type="text">
+                                </div>
+                                <p style="text-overflow:ellipsis;white-space:nowrap;overflow:hidden;" title="{{value.localName}}" ng-hide="showEditInternational" ng-bind-html="value.localName | trustHtml:q" class="test_a1138b7f"></p>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <!--<div class="validate-text">
+                        <p ng-show="validateInput">符号仅限“-”、“_”</p>
+                    </div>-->
+                </form>
+                <hnapagination ng-hide="showEditInternational" table-service="table" page-table-model="internationalModel" class="test_2956a1cc"></hnapagination>
+                <div ng-show="showEditInternational" class="batch-operation bottom test_d2421d61">
+                    <button ng-click="cancel();" class="btn btn-default test_5ee0516b"><%=common_page_cancel%></button>
+                    <button ng-click="save();" class="btn btn-primary test_44b11fda"><%=common_page_save%></button>
+                </div>
+            </div>
+        </div>
+
+        <div ng-show="!internationalModel.pagination.isVisiblePage" style="position: absolute;top:212px;bottom:0px;width:100%;" class="test_fc8b821f">
+            <img ng-show="isSeach" style="width:100%;height:100%;" src="/public/img/undefined.svg" class="test_a2c99357">
+        </div>
+    </div>
+</section>

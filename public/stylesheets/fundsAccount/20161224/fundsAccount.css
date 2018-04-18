@@ -1,0 +1,513 @@
+/** 模块公共样式 **/
+.c-detail-title .u-title {
+    margin: 10px 0px;
+    text-align: center;
+    font-size: 22px;
+}
+
+.g-main {
+    position: absolute;
+    bottom: 15px;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    overflow-y: auto;
+    height: auto;
+}
+
+.text-right {
+    text-align: right;
+}
+
+/** 模块公共样式End **/
+
+/** 资金账户管理 **/
+.m-account-manager {
+    padding: 30px 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+
+.m-account-manager .m-unit-box {
+    width: 360px;
+    height: 256px;
+    display: inline-block;
+    border: 1px solid #888;
+    margin: 20px 10px;
+    box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.10);
+    border-radius: 4px;
+    padding: 25px;
+    float: left;
+    cursor: pointer;
+    background: #fff url('/public/img/career.svg') right bottom no-repeat;
+}
+
+.m-account-manager .m-unit-box:hover {
+    border: 1px solid #3BAFDA;
+}
+
+.m-account-manager .m-unit-box .title {
+    font-size: 20px;
+    height: 100px;
+    overflow: hidden;
+    color: #848C97;
+}
+
+.m-account-manager .m-unit-box .balance {
+    font-size: 16px;
+    color: #848C97;
+}
+
+.m-account-manager .m-unit-box .money {
+    font-size: 40px;
+    color: #848C97;
+    letter-spacing: 1.67px;
+    height: 56px;
+    line-height: 56px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.m-account-manager .m-unit-box .money span {
+    font-size: 16px;
+    color: #848C97;
+}
+
+.m-account-manager .m-unit-box .cards {
+    font-size: 16px;
+    color: #848C97;
+}
+
+.m-account-manager .m-unit-box .unopened {
+    font-size: 12px;
+    color: #BCBCBC;
+    margin-top: 10px;
+}
+.m-account-manager .title-tips{
+    font-size: 12px;
+    color: #848C97;
+    margin-top: 10px;
+}
+
+/** 资金账户管理End **/
+
+/** 资金账户详情 **/
+.m-account-detail .account-info-box {
+    background: #fff;
+    border: 1px solid #ddd;
+    width: 100%;
+    height: 240px;
+    padding: 20px 40px;
+}
+
+.m-account-detail .account-info-box h3 {
+    font-size: 18px;
+}
+
+.m-account-detail .account-info-box p {
+    height: 25px;
+    line-height: 25px;
+}
+
+.m-account-detail .account-info-box .balance {
+    margin-top: 10px;
+}
+
+.m-account-detail .account-info-box .money {
+    font-size: 40px;
+    color: #F7A42C;
+    height: 50px;
+    line-height: 50px;
+}
+
+.m-account-detail .account-info-box .money span {
+    font-size: 14px;
+    color: #555;
+    margin-left: 5px;
+}
+
+.m-account-detail .account-info-box .operate-box {
+    margin-top: 10px;
+}
+
+.m-account-detail .account-info-box .operate-box button {
+    width: 88px;
+    height: 28px;
+    line-height: 26px;
+    padding: 0px;
+    margin: 0px 10px 0px 0px;
+}
+
+.m-account-detail .account-info-box .left {
+    float: left;
+    width: 40%;
+}
+
+.m-account-detail .account-info-box .right {
+    float: left;
+    border-left: 1px solid #D8D8D8;
+    padding-left: 35px;
+    position: relative;
+    width: 60%;
+    height: 197px;
+}
+
+.m-account-detail .account-info-box .right .u-operate {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    width: 88px;
+    height: 28px;
+    padding: 0px;
+    text-align: center;
+    line-height: 28px;
+}
+
+.m-account-detail .account-info-box .u-new-add {
+    width: 64px;
+    height: 20px;
+    line-height: 20px;
+    opacity: 0.5;
+    background: #3BAFDA;
+    font-size: 12px;
+    color: #fff;
+    border-radius: 2px;
+    display: inline-block;
+    padding: 0px 4px;
+    text-align: center;
+}
+
+.m-account-detail .account-info-box .right li {
+    font-size: 14px;
+    color: #555555;
+    line-height: 25px;
+}
+
+.m-account-detail .account-info-box .right li span.left-text {
+    width: 100px;
+    display: inline-block;
+    font-size: 14px;
+    color: #555555;
+    line-height: 25px;
+}
+
+.m-account-detail .account-deal-record {
+    background: #fff;
+    border: 1px solid #ddd;
+    margin-top: 12px;
+    min-height: 100%;
+}
+
+.m-account-detail .f-down-list {
+    display: inline-block;
+    position: relative;
+}
+
+.m-account-detail .f-down-list:hover .down-ul-list {
+    display: block;
+}
+
+.m-account-detail .f-down-list .down-ul-list {
+    position: absolute;
+    width: 100%;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-top: none;
+    display: none;
+    padding: 5px 0px;
+}
+
+.m-account-detail .f-down-list .down-ul-list li {
+    line-height: 28px;
+    text-align: center;
+}
+
+.m-account-detail .f-down-list .down-ul-list a {
+    color: #555;
+}
+
+.m-account-detail .f-down-list .down-ul-list a:hover {
+    color: #01AAED;
+}
+
+.account-deal-record .m-search-box {
+    padding: 30px 40px;
+}
+
+.account-deal-record .m-search-box h3 {
+    font-size: 18px;
+}
+
+.account-deal-record .m-search-box .normal {
+    text-align: center;
+}
+
+.account-deal-record .m-search-box .form-control {
+    width: 400px;
+}
+
+.account-deal-record .m-search-box .normal-search-btn {
+    font-size: 14px;
+    color: #888;
+}
+
+.account-deal-record .m-search-box .advanced {
+    text-align: center;
+    margin: 17px auto;
+}
+
+.account-deal-record .m-search-box .advanced input {
+    width: 20%;
+    min-width: 248px;
+    text-align: left;
+}
+
+.account-deal-record .m-search-box .advanced .label-span {
+    margin: 0px 8px 0px 15px;
+}
+
+.table-box {
+    text-align: center;
+    position: relative;
+}
+
+.account-record-table th:nth-child(1), .account-record-table td:nth-child(1) {
+    width: 30%;
+    text-align: center;
+}
+
+.account-record-table th:nth-child(2), .account-record-table td:nth-child(2) {
+    width: 15%;
+    text-align: center;
+}
+
+.account-record-table th:nth-child(3), .account-record-table td:nth-child(3) {
+    width: 15%;
+    text-align: center;
+}
+
+.account-record-table th:nth-child(4), .account-record-table td:nth-child(4) {
+    width: 20%;
+    text-align: center;
+}
+
+.account-record-table th:nth-child(5), .account-record-table td:nth-child(5) {
+    width: 10%;
+    text-align: center;
+}
+
+.account-record-table th:nth-child(6), .account-record-table td:nth-child(6) {
+    width: 10%;
+    text-align: center;
+}
+
+/** 资金账户详情End **/
+
+/** 银行账户管理 **/
+.m-bank-manager .m-bank-box {
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 30px;
+    min-height: 100%;
+}
+
+.m-bank-manager .m-bank-box .m-unit-box {
+    width: 360px;
+    height: 190px;
+    display: inline-block;
+    border: 1px solid #888;
+    margin: 20px 10px;
+    box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.10);
+    border-radius: 4px;
+    padding: 20px;
+    float: left;
+    position: relative;
+}
+
+.m-bank-manager .m-unit-box:hover {
+    border: 1px solid #3BAFDA;
+}
+
+.m-bank-manager .m-unit-box li {
+    height: 25px;
+    line-height: 25px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.m-bank-manager .m-unit-box li span.left-text {
+    display: inline-block;
+    width: 85px;
+}
+
+.m-bank-manager .m-unit-box .u-bank-btn {
+    position: absolute;
+    width: 88px;
+    height: 28px;
+    padding: 0px;
+    line-height: 28px;
+    right: 20px;
+    bottom: 20px;
+}
+
+.m-bank-manager .m-bank-box .m-unit-add {
+    padding: 50px 0px 35px 0px;
+    text-align: center;
+    border: 1px dashed #3BAFDA;
+    box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.10);
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.m-bank-manager .m-bank-box .m-unit-add .add-bank-icon {
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
+    display: inline-block;
+    background: url('/public/img/add.svg') center center no-repeat;
+}
+
+.m-bank-manager .m-bank-box .m-unit-add .add-bank-btn {
+    color: #3BAFDA;
+    margin-top: 10px;
+}
+
+.prompt-ul li.lists {
+    margin-bottom: 30px;
+}
+
+.prompt-ul li.lists .left-text {
+    text-align: right;
+    display: inline-block;
+    width: 100px;
+}
+
+.prompt-ul li.lists .right-div-text {
+    display: inline-block;
+    width: 300px;
+    position: relative;
+}
+
+.prompt-ul li.lists .verification .errors {
+    padding: 0px;
+}
+
+.prompt-ul li.lists.mobile-send-code .right-div-text input {
+    width: 190px;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+.prompt-ul li.lists.mobile-send-code .right-div-text button {
+    width: 95px;
+    padding: 0px;
+}
+
+.middle-box .bomb-box {
+    min-height: 520px !important;
+}
+
+.middle-box .bomb-box .prompt-tips {
+    margin: 30px 0px 40px 0px;
+}
+
+/** 银行账户管理End **/
+
+/** 交易记录详情 **/
+.m-business-record .m-record-box {
+    background: #fff;
+    padding: 30px;
+    border: 1px solid #ddd;
+    min-height: 100%;
+}
+
+.m-business-record .wrap-record-box {
+    margin: 0px auto;
+    width: 400px;
+}
+
+.m-business-record .wrap-record-box h3 {
+    font-size: 18px;
+    margin: 30px 0px 10px;
+}
+
+.m-business-record .wrap-record-box li {
+    line-height: 28px;
+}
+
+.m-business-record .wrap-record-box li span.left-text {
+    display: inline-block;
+    min-width: 80px;
+}
+
+/** 交易记录详情End **/
+
+/** 提现申请 **/
+.m-withdraw-apply .m-withdraw-apply {
+    background: #fff;
+    padding: 45px 30px;
+    border: 1px solid #ddd;
+    min-height: 100%;
+}
+
+.m-withdraw-apply .wrap-withdraw-apply {
+    margin: 0px auto;
+    width: 350px;
+}
+
+.m-withdraw-apply .wrap-withdraw-apply li.lists {
+    line-height: 45px;
+}
+
+.m-withdraw-apply .wrap-withdraw-apply li.lists b {
+    color: #F7A42C;
+}
+
+.m-withdraw-apply .wrap-withdraw-apply li.lists .left-text {
+    display: inline-block;
+    width: 90px;
+}
+
+.m-withdraw-apply .wrap-withdraw-apply .p-box {
+    line-height: 28px;
+    margin-top: 35px;
+}
+
+/** 提现申请End **/
+
+.box-tips-h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+.prompt-rechargeContent{
+    position: absolute;
+    top: 65px;
+    line-height: 22px;
+    padding-left: 80px;
+    color: #555;
+}
+.rechargeContent-text span{
+    display: inline-block;
+    padding: 15px 0;
+    text-align: left;
+}
+.prompt-rechargeContent .left-text{
+    width: 120px;
+}
+.prompt-rechargeContent .right-text{
+    width: 220px;
+}
+.rechargeInfo{
+    text-align: left;
+    background: #FFF9EA;
+    border: 1px solid #F5D8C0;
+    color: #FFAB66;
+    font-size: 14px;
+    position: absolute;
+    top: 290px;
+    margin: 0 30px;
+}

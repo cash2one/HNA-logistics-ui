@@ -1,0 +1,95 @@
+<section class="logistic test_1d78dfa2" name="logistics">
+    <div class="lg-main test_6f30e422">
+        <form class="test_a5ee1d80" id="logisticsForm" name="logisticsForm" novalidate="novalidate">
+            <div class="lg-row lgPTitle test_a0c1de89">
+                <span class="test_b6aa5a5b"><%=logistics_page_updateLogisticInfo %></span>
+            </div>
+            <div class="lg-row test_181f4424">
+                <div class="left test_e6c21961">
+                    <span class="test_9623646d"> <b class="test_70355897">*</b>运单号:</span>
+                </div>
+                <div class="right test_a1d77287" style="height:auto">
+                    <div class="radio-box" style="margin-bottom: 10px;">
+                        <div class="radio radio-single radio-primary" style="width:auto;">
+                            <input ng-checked="data.orderNumType == 1" value="1" type="radio" id="orderNumType-1" ng-model="data.orderNumType" name="orderNumType">
+                            <label for="orderNumType-1">主单号</label>
+                        </div>
+                        <div class="radio radio-single radio-primary" style="margin-left:10px;width:auto;">
+                            <input ng-checked="data.orderNumType == 2" value="2" type="radio" id="orderNumType-2" ng-model="data.orderNumType" name="orderNumType">
+                            <label for="orderNumType-2">子单号</label>
+                        </div>
+                    </div>
+                    <div class="orderNumNo test_5290325b">
+                        <textarea ng-model="orderNumNo" ng-change="invalidList = []" ng-show="showTextarea" name="content" id="content" ng-keyup="isValid()" placeholder="多个单号之间用逗号空格或换行隔开，最多1000字。" class="orderNumNo p5 orderNumList test_039d757a" maxlength="1000"></textarea>
+                        <!--<p ng-show="!showTextarea" contenteditable="true" id="contentP" name="content" ng-keyup="delInvalid()" ng-focus="reShowTextarea()" style="overflow-x:hidden;" class="orderNumNo p5 orderNumList test_30baef17"></p>-->
+                    </div>
+                    <div ng-if="invalidList && invalidList.length" class="orders-error-box">
+                        单号 <span ng-repeat="item in invalidList track by $index">{{item}}<b ng-if="!$last">，</b></span> 不存在，无法更新，其余单号更新成功。
+                    </div>
+                </div>
+            </div>
+            <div class="lg-row test_be7a972d">
+                <div class="left test_45c7da79">
+                    <span class="test_65ff5c2f"><b class="test_70355897">*</b><%=logistics_label_updateTime%>:</span>
+                </div>
+                <div class="right test_e3136238">
+                    <input name="updateTime" id="updateTime" type="text" class="w100 p5 test_09c0d6a4" readonly ng-click="resetCalender()" ng-model="logisticsModel.updateTime" required>
+
+                </div>
+            </div>
+            <div class="lg-row test_ef0c90e6">
+                <div class="left test_4436ebee">
+                    <span class="test_9f6b7c35"><%=logistics_label_infoType %>:</span>
+                </div>
+                <div class="right test_17e15045" style="position:relative">
+                    <input class="test_62a4bd83" type="text" id="typeList" ng-model="logisticsModel.infoType" name="infoType">
+                    <i class="selectIcon icon-drop-down test_30698209"></i>
+                </div>
+            </div>
+            <div class="lg-row test_2048e823">
+                <div class="left test_7db44727">
+                    <span class="test_c7b8ab9b"><b class="test_70355897">*</b><%=logistics_label_logisticsInfo %>:</span>
+                </div>
+                <div class="right test_871c41da" style="position:relative">
+                    <input id="orderStatus" name="orderStatus" readonly class="w100  test_a5e08007" type="text" ng-model="logisticsModel.tplName" required>
+                    <i class="selectIcon icon-drop-down test_30698209"></i>
+                </div>
+            </div>
+            <div class="lg-row test_a16cd667" ng-show="logisticsModel.params.length >= 1">
+                <div class="left test_6518e0d4">
+                    <span class="test_34c7adda"><b class="test_70355897">*</b><%=logistics_label_placeA %>:</span>
+                </div>
+                <div class="right test_4aa398ad" style="height:auto">
+                    <input type="text" id="placeA" name="placeA" class="w100 p5 test_b7ffbb40" maxlength="30" ng-change="formCheck()" placeholder="<%=logistics_label_place_PH%>" ng-model="logisticsModel.params[0]" required>
+
+                    <div ng-if="placeAInvalidTip" class="verification test_38f193ee">
+                            <span class="errors test_9d42e8b1">
+                                  {{placeAInvalidTip}}
+                            </span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="lg-row test_c77ae260" ng-show="logisticsModel.params.length >= 2">
+                <div class="left test_b1e40e3b">
+                    <span class="test_8913b171"><b class="test_70355897">*</b><%=logistics_label_placeB %>:</span>
+                </div>
+                <div class="right test_10b203b5" style="height:auto">
+                    <input type="text" name="placeB" id="placeB" maxlength="30" class="w100 p5 test_ae23e1e3" ng-change="formCheck()" placeholder="<%=logistics_label_place_PH%>" ng-model="logisticsModel.params[1]" required>
+
+                    <div ng-if="placeBInvalidTip" class="verification test_38f193ee">
+                            <span class="errors test_9d42e8b1">
+                                  {{placeBInvalidTip}}
+                            </span>
+                    </div>
+                </div>
+            </div>
+            <div class="lg-action test_668c0482">
+                <button class="btn btn-primary test_d0a43f0b" ng-click="update()">
+                    <%=logistics_btn_update%>
+                </button>
+            </div>
+        </form>
+
+    </div>
+</section>

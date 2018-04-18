@@ -1,0 +1,1 @@
+app.controller("customerBasicDetailCtrl",["$scope","orderModifyService",function(e,o){}]);

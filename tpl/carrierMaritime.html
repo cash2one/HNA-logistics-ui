@@ -1,0 +1,146 @@
+<section class="content has-sides-margin test_8fcefae8">
+    <div class="carrierMaritime-table-page test_de5198d4" ng-controller="tableController">
+        <div class="box-header test_c6b95441">
+            <div class="search-box test_624547eb">
+                <span style="margin:0px 2px 0px 50px;" class="test_ac2fd363"><%=carrierMaritime_page_country%></span>
+                <input autocomplete="off" type="text" style="width:20%;margin:0px 10px 0px 2px;padding-left: 12px" id="search-country" ng-model="searchCountry" class="form-control test_36a28f92">
+                <div class="list-search-box test_a2dde802">
+                    <input style="width:100%; padding-left: 35px" maxlength="30" ng-enter="getTable(true);" ng-model="tableModel.restData.q" placeholder="<%=carrierMaritime_search_placeholder%>" ng-value="q" type="text" class="form-control test_da26d406">
+                    <i class="icon-search search-table test_4c7aa708"></i>
+                </div>
+                <div class="carrierMaritime-search-btn test_9cbdba2d">
+                    <span style="color:#888;cursor:pointer;position:relative;right:20px" ng-click="clearData();" class="test_dd1d33ab"><%=carrierMaritime_page_empty%></span>
+                    <button ng-click="getTable(true);" class="btn btn-primary test_aed7b446"><%=common_list_search_btn%></button>
+                </div>
+            </div>
+        </div>
+        <div class="batch-operation test_9edc3931">
+            <button ng-click="add();" class="btn btn-primary test_6477be93">
+                <%=common_page_add%>
+            </button>
+            <button ng-click="del();" class="btn btn-primary test_403b44c5">
+                <%=common_page_delete%>
+            </button>
+            <button ng-click="international();" class="btn btn-primary test_1ff7e9b2">
+                <%=carrierMaritime_page_international%>
+            </button>
+        </div>
+        <div class="table-container test_34996ebe">
+            <table class="company-table-ship table-box test_12b04a12" cellpadding="0" cellspacing="0">
+                <thead class="test_9ad0eb1c">
+                <tr class="test_f7ca6992">
+                    <th class="test_75abd1c8">
+                        <div class="checkbox checkbox-info test_b835c3c4">
+                            <input type="checkbox" ng-model="tableModel.selectFlag" ng-click="table.selectAll(tableModel);" class="test_3c189c0a">
+                            <label class="test_92e4979b"></label>
+                        </div>
+                    </th>
+                    <th ng-repeat="item in tableModel.tableHeader" class="test_cd8b0e5f">{{item}}</th>
+                </tr>
+                </thead>
+                <tbody class="test_c9aa7ec1">
+                <tr ng-repeat="value in tableModel.tableBody" ng-init="renderFinish($last)" class="test_9770f304">
+                    <td class="test_2829f20b">
+                        <div class="checkbox checkbox-info test_38b9b918">
+                            <input type="checkbox" ng-checked="value.checkbox" ng-click="table.selectOne(tableModel, value.checkboxId, $event);" class="test_851a4ac7">
+                            <label class="test_ff0db220"></label>
+                        </div>
+                    </td>
+                    <td class="test_fea8b87b">{{(tableModel.pagination.currentPage-1)*tableModel.pagination.pageSize+$index+1}}</td>
+                    <td title="{{value.name}}" class="test_e6c70b31">
+                        <a href="javascript:;" ng-click="edit(value.id)" ng-bind-html="value.name | trustHtml:q" class="test_295d6cde"></a>
+                    </td>
+                    <td title="{{value.countryName+'('+value.countryId+')'}}" class="test_9ebe8318">{{value.countryName+'('+value.countryId+')'}}</td>
+                    <td title="{{value.code}}" ng-bind-html="value.code | trustHtml:q" class="test_0fc8fe42"></td>
+                    <td title="{{value.description}}" class="test_0727c900">{{value.description}}</td>
+                </tr>
+                </tbody>
+            </table>
+            <hnapagination table-service="table" page-table-model="tableModel" class="test_91ac4b87"></hnapagination>
+        </div>
+
+        <div ng-show="!tableModel.pagination.isVisiblePage" style="position: absolute;top:165px;bottom:0px;width:100%;" class="test_0b533dd7">
+            <img style="width:100%;height:100%;" src="/public/img/undefined.svg" class="test_65927c02">
+        </div>
+    </div>
+    <div id="slides" class="test_0c9f2102"></div>
+</section>
+
+<div style="display: none;" ng-show="nestCarrierMaritimeForm" ng-init="initSelectList();" id="nest-carrierMaritimeForm" class="prompt-modal middle-box test_3187405b">
+    <div class="prompt-wrap test_5d96fb50">
+        <div class="bomb-box test_a5ea0e0a">
+            <div class="title test_e6161c3e"><%=carrierMaritime_page_add%></div>
+            <div class="prompt-content test_6d90a7c4">
+                <form name="carrierMaritimeForm" novalidate="novalidate" class="test_b92728ea">
+                    <div id="carrierMaritimeForm" class="test_ac1b8ba4">
+                        <div ng-click="" class="label-text test_da38cd77">
+                            <%=carrierMaritime_page_baseInfo%>
+                            <i style="transform:rotate(0deg);" class="icon-more-down icon-angle-down test_1ece0cba"></i>
+                        </div>
+                        <ul class="isContainer switch-list test_40b37c91">
+                            <li class="test_2ba3d2bf">
+                                <label class="test_6d65e3a6"><b class="test_0cabaf9a">*</b><%=carrierMaritime_page_name%>：</label>
+                                <input ng-trim="true" class="input-text test_18bdf685" maxlength="30" name="carrierMaritimeName" id="carrierMaritimeName_id" ng-model="carrierMaritimeName" verification="{'ruleType':'onlyname'}" type="text" required>
+                                <div class="verification test_68e16be3">
+                                    <span id="code-msg-name" class="errors test_bc6bd0a1" ng-show="carrierMaritimeForm.carrierMaritimeName.$viewValue &&
+                                              carrierMaritimeForm.carrierMaritimeName.$error.defined &&
+                                              carrierMaritimeForm.carrierMaritimeName.$dirty">
+                                        {{carrierMaritimeForm.carrierMaritimeName.errorTips}}
+                                    </span>
+                                </div>
+                            </li>
+                            <li class="test_68a46c38">
+                                <label class="test_4dba1abb"><b class="test_f774b9de">*</b><%=carrierMaritime_page_code%>：</label>
+                                <input ng-trim="true" class="input-text test_321d975d" maxlength="15" name="carrierMaritimeCode" id="carrierMaritimeCode_id" ng-model="carrierMaritimeCode" verification="{'ruleType':'carrierCode'}" ng-blur="checkShippingCompanyCode();" type="text" required>
+                                <div class="verification test_b823b9cb">
+                                    <span id="code-msg-code" class="errors test_2a80b220" ng-show="carrierMaritimeForm.carrierMaritimeCode.$viewValue &&
+                                              carrierMaritimeForm.carrierMaritimeCode.$error.defined &&
+                                              carrierMaritimeForm.carrierMaritimeCode.$dirty">
+                                        {{carrierMaritimeForm.carrierMaritimeCode.errorTips}}
+                                    </span>
+                                </div>
+                            </li>
+                            <li class="test_635cbfbb">
+                                <label class="test_81207e61"><b class="test_c71c49ba">*</b><%=carrierMaritime_page_country%>：</label>
+                                <div class="select-box input-text test_bf61924c">
+                                    <input ng-trim="false" id="add-country" name="addCountry" autocomplete="off" ng-model="addCountry" type="text" required class="country-list test_73c5d461">
+                                </div>
+                            </li>
+                            <li class="test_cce96a7f">
+                                <label class="test_2547ced1"><%=common_page_remarks%>：</label>
+                                <div class="remark-info test_2783f417">
+                                    <textarea style="height:92px;" ng-change="showTextNumber();" maxlength="140" ng-trim="false" rows="5" ng-model="remark" class="form-control textarea-text  test_04f15f65">
+                                    </textarea>
+                                    <div class="show-string-length test_f1c3d993"><span class="test_db7d0adb">{{textareaNumber}}</span>字</div>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="label-text test_988e77ed">
+                            <%=carrierMaritime_page_interName%>
+                            <i style="transform:rotate(0deg);" class="icon-more-down icon-angle-right test_bd180379"></i>
+                        </div>
+                        <ul class="isContainer switch-list test_8139da7b" id="globalization">
+                            <li ng-repeat="item in language" class="test_5edbb0ce">
+                                <label class="test_53505190">
+                                    {{item.localName}}：
+                                </label>
+                                <input ng-show="item.code !=='en-us'" maxlength="30" data-localname="{{item.localName}}" data-id="{{item.id}}" data-code="{{item.code}}" class="input-text test_7ed116bd" type="text">
+                                <input ng-show="item.code ==='en-us'" ng-change="checkEnName()" ng-blur="checkEnName()"
+                                       name="$parent.carrierEnName" ng-model="$parent.carrierEnName"
+                                       maxlength="30" data-localname="{{item.localName}}" data-id="{{item.id}}"
+                                       data-code="{{item.code}}" class="input-text" type="text">
+                                <div ng-show="item.code ==='en-us' && enNameError" class="enNameClass">
+                                    <span class="errors">{{enNameErrorTips}}</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+            <div class="operation test_074c8681">
+                <button ng-click="cancel();" name="prompt-close" class="btn btn-default  test_f00fa9f1" data-event="close"><%=common_page_cancel%></button>
+                <button ng-click="save();" name="prompt-save" class="btn btn-primary test_54940bcb" data-event="close"><%=common_page_save%></button>
+            </div>
+        </div>
+    </div>
+</div>

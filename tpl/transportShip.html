@@ -1,0 +1,206 @@
+<section class="content has-sides-margin test_d8b562a9">
+    <div class="ship-table-page test_8e94d996" ng-controller="tableController">
+        <div class="box-header test_4368ada5">
+            <div class="search-box test_16c1b30c">
+                <span style="margin:0px 2px 0px 50px;" class="test_c18f3bc6"><%=transportShip_page_keyword%></span>
+                <input style="width:20%" maxlength="30" ng-enter="getTable(true);" ng-model="tableModel.restData.q" placeholder="<%=transportShip_page_searchHolder%>" ng-value="q" type="text" class="form-control test_ef229070">
+                <span style="margin:0px 2px 0px 50px;" class="test_783137c3"><%=transportShip_page_country%></span>
+                <input autocomplete="off" type="text" style="width:20%" id="search-country" ng-model="countrySearch" class="form-control test_584d4025">
+                <span style="margin:0px 2px 0px 50px;" class="test_689767ea"><%=transportShip_page_company%></span>
+                <input autocomplete="off" type="text" style="width:20%" id="search-company" ng-model="searchCompanyName" class="form-control test_7a79e4c5">
+                <div class="ship-search-btn test_f1d4aa9b">
+                    <span style="color:#888;cursor:pointer;position:relative;right: 20px" ng-click="clearDate();" class="test_0aaceebc"><%=transportShip_page_empty%></span>
+                    <button ng-click="getTable(true);" class="btn btn-primary test_c78769a4"><%=common_list_search_btn%></button>
+                </div>
+            </div>
+        </div>
+        <div class="batch-operation test_7a6b0572">
+            <button ng-click="add();" class="btn btn-primary test_3ddc1390">
+                <%=common_page_add%>
+            </button>
+            <button ng-click="del();" class="btn btn-primary test_1e1cb2bf">
+                <%=common_page_delete%>
+            </button>
+            <button ng-click="international();" class="btn btn-primary test_b939e0c9">
+                <%=transportShip_page_international%>
+            </button>
+        </div>
+
+        <div class="table-container test_6afcbdbd">
+            <table class="transport-table-ship table-box test_724f7aa6" cellpadding="0" cellspacing="0">
+                <thead class="test_760b94ff">
+                <tr class="test_f27e2788">
+                    <th class="test_24d2e8dd">
+                        <div class="checkbox checkbox-info test_5b113081">
+                            <input type="checkbox" ng-model="tableModel.selectFlag" ng-click="table.selectAll(tableModel);" class="test_b9c15a0a">
+                            <label class="test_e753c176"></label>
+                        </div>
+                    </th>
+                    <th ng-repeat="item in tableModel.tableHeader" class="test_30ff7df4">{{item}}</th>
+                </tr>
+                </thead>
+                <tbody class="test_f1a71a49">
+                <tr ng-repeat="value in tableModel.tableBody" ng-init="renderFinish($last)" class="test_c584a9fe">
+                    <td class="test_684f5c76">
+                        <div class="checkbox checkbox-info test_7fb075b0">
+                            <input type="checkbox" ng-checked="value.checkbox" ng-click="table.selectOne(tableModel, value.checkboxId, $event);" class="test_4abf7c1d">
+                            <label class="test_aa526762"></label>
+                        </div>
+                    </td>
+                    <td class="test_7bfb52f5">{{(tableModel.pagination.currentPage-1)*tableModel.pagination.pageSize+$index+1}}</td>
+                    <td title="{{value.nameEn}}" class="test_7a50692f">
+                        <a href="javascript:;" ng-click="edit(value.id)" ng-bind-html="value.nameEn | trustHtml:q" class="test_671f5bd3"></a>
+                    </td>
+                    <td title="{{value.name}}" ng-bind-html="value.name | trustHtml:q" class="test_11f1f046"></td>
+                    <td title="{{value.countryName+'('+value.countryId+')'}}" class="test_9e9bf0fc">{{value.countryName+'('+value.countryId+')'}}</td>
+                    <td title="{{value.mmsi}}" ng-bind-html="value.mmsi | trustHtml:q" class="test_202fa9be"></td>
+                    <td title="{{value.imo}}" ng-bind-html="value.imo | trustHtml:q" class="test_f933e6c6"></td>
+                    <td title="{{value.callSign}}" ng-bind-html="value.callSign | trustHtml:q" class="test_b9803472"></td>
+                    <td title="{{value.companyName}}" class="test_b1b877f2">{{value.companyName}}</td>
+                    <td title="{{value.description}}" class="test_3d7667b3">{{value.description}}</td>
+                </tr>
+                </tbody>
+            </table>
+            <hnapagination table-service="table" page-table-model="tableModel" class="test_df3c178c"></hnapagination>
+        </div>
+
+        <div ng-show="!tableModel.pagination.isVisiblePage" style="position: absolute;top:165px;bottom:0px;width:100%;" class="test_515f50bb">
+            <img style="width:100%;height:100%;" src="/public/img/undefined.svg" class="test_809616fc">
+        </div>
+    </div>
+    <div id="slides" class="test_dc97d787"></div>
+</section>
+
+<div style="display: none;" ng-show="nestTransportShipForm" ng-init="initSelectList();" id="nest-TransportShipFrom" class="prompt-modal middle-box test_568589f7">
+    <div class="prompt-wrap test_48ce1b1f">
+        <div class="bomb-box test_cca0b95b">
+            <div class="title test_e1cfa443"><%=transportShip_page_add%></div>
+            <div class="prompt-content test_0b4bbfb7">
+                <form name="TransportShipForm" novalidate="novalidate" class="test_52f1a02a">
+                    <div id="TransportShipForm" class="test_f9f01a50">
+                        <div ng-click="" class="label-text test_cb2c1eb3">
+                            <%=transportShip_page_baseInfo%>
+                            <i style="transform:rotate(0deg);" class="icon-more-down icon-angle-down test_46a7ace9"></i>
+                        </div>
+                        <ul class="isContainer switch-list test_1d88f8ff">
+                            <!--英文名称-->
+                            <li class="test_b609e770">
+                                <label class="test_4f808bee"><b class="test_d502cb44">*</b><%=transportShip_page_nameEn%>：</label>
+                                <input ng-trim="false" class="input-text test_bb9337b0" ng-blur="checkShipNameEn();" maxlength="30" name="transportShipNameEN" verification="{'ruleType':'nameen'}" ng-model="transportShipNameEN" type="text" required>
+                                <div class="verification test_92cab563">
+                                    <span id="code-msg-nameEn" class="errors test_abd701ac" ng-show="TransportShipForm.transportShipNameEN.$viewValue &&
+                                              TransportShipForm.transportShipNameEN.$error.defined &&
+                                              TransportShipForm.transportShipNameEN.$dirty">
+                                        {{TransportShipForm.transportShipNameEN.errorTips}}
+                                    </span>
+                                </div>
+                            </li>
+                            <!--中文船名-->
+                            <li class="test_860c6dd8">
+                                <label class="test_df342be4"><%=transportShip_page_name%>：</label>
+                                <input ng-trim="false" class="input-text test_c884e87a" maxlength="30" name="transportShipName" verification="{'ruleType':'namecn'}" ng-model="transportShipName" type="text">
+                                <div class="verification test_762ecd68">
+                                    <span id="code-msg-name" class="errors test_ae0537f0" ng-show="TransportShipForm.transportShipName.$viewValue &&
+                                              TransportShipForm.transportShipName.$error.defined &&
+                                              TransportShipForm.transportShipName.$dirty">
+                                        {{TransportShipForm.transportShipName.errorTips}}
+                                    </span>
+                                </div>
+                            </li>
+                            <!--国家-->
+                            <li class="test_b0d286e8">
+                                <label class="test_9a409440"><b class="test_f4382282">*</b><%=transportShip_page_country%>：</label>
+                                <div class="select-box input-text test_cf53da4f">
+                                    <input ng-trim="false" id="add-country" name="countryName" autocomplete="off" ng-model="countryName" type="text" required class="country-list test_1c5f9774">
+                                </div>
+                            </li>
+                            <!--MMSI-->
+                            <li class="test_3831e5f0">
+                                <label class="test_0ab19dfc"><b class="test_8ea0617c">*</b><%=transportShip_page_mmsi%>：</label>
+                                <input ng-trim="false" class="input-text test_ff9ad676" maxlength="9" ng-blur="checkShipMmsi();" name="transportShipMmsi" verification="{'ruleReg':'/^[\\d]{8,9}$/', 'ruleRegMsg':'请输入8位或9位数字'}" ng-model="transportShipMmsi" type="text" required>
+                                <div class="verification test_93f5ff9b">
+                                    <span id="code-msg-mmsi" class="errors test_4065dcaf" ng-show="TransportShipForm.transportShipMmsi.$viewValue &&
+                                              TransportShipForm.transportShipMmsi.$error.defined &&
+                                              TransportShipForm.transportShipMmsi.$dirty">
+                                        {{TransportShipForm.transportShipMmsi.errorTips}}
+                                    </span>
+                                </div>
+                            </li>
+                            <!--imo-->
+                            <li class="test_067deb6b">
+                                <label class="test_0cdaeda3"><b>*</b><%=transportShip_page_mio%>：</label>
+                                <input maxlength="10" ng-trim="false" class="input-text test_d5c19cf6" ng-blur="checkShipImo();" name="transportShipImo" verification="{'ruleType':'imocode'}" ng-model="transportShipImo" type="text" required>
+                                <div class="verification test_40e6ce6f">
+                                    <span id="code-msg-imo" class="errors test_2e7a7051" ng-show="TransportShipForm.transportShipImo.$viewValue &&
+                                              TransportShipForm.transportShipImo.$error.defined &&
+                                              TransportShipForm.transportShipImo.$dirty">
+                                        {{TransportShipForm.transportShipImo.errorTips}}
+                                    </span>
+                                </div>
+                            </li>
+                            <!--呼号-->
+                            <li class="test_6f1b960d">
+                                <label class="test_928c8b18"><%=transportShip_page_callSign%>：</label>
+                                <input maxlength="30" ng-trim="false" class="input-text test_fbdb0713" name="transportShipCallSign" ng-model="transportShipCallSign" type="text">
+                            </li>
+                            <!--船公司-->
+                            <li class="test_597ca012">
+                                <label class="test_98fc3781"><b class="test_e50aea39">*</b><%=transportShip_page_company%>：</label>
+                                <div class="select-box input-text test_60b223a8">
+                                    <input ng-trim="false" id="add-company" name="companyName" autocomplete="off" ng-model="companyName" type="text" required class="test_18f6f824">
+                                </div>
+                            </li>
+                            <!--图片-->
+                            <li class="test_05220a66">
+                                <label class="test_f817457e"><%=transportShip_page_picture%>：</label>
+                                <div class="img-list-box clearfix test_e229034f" ng-controller="pictureController">
+                                    <div class="img-box test_79a3e1bf" ng-mouseleave="picture.mouseleave(pictureModel, $index, $event)" ng-repeat="item in pictureModel.picture">
+                                        <div title="{{item.name}}" ng-click="getPictureUrl(item.picUrlID.id)" ng-mouseover="picture.mouseover(pictureModel, $index, $event)" class="img-pic test_4d790e45">
+                                            <img ng-if="item.typeImage && item.suffix!='tiff'" ng-src="{{item.picUrl}}" width="80" height="80" class="imgs test_a2290e45">
+                                            <div ng-if="item.typePdf" type="application/pdf" style="background-image: url('../public/img/pdf-file.svg');" height="80" width="80" class="imgs test_7b6f960d">
+                                            </div>
+                                            <div ng-if="item.typeImage && item.suffix=='tiff'" type="image/tiff" style="background-image: url('../public/img/tiff-file.svg');" height="80" width="80" class="imgs test_3559de2e">
+                                            </div>
+                                        </div>
+                                        <div ng-show="item.delshow" ng-click="picture.del(pictureModel, $index)" class="img-del test_d1400d00" ng-if="pictureModel.edit">
+                                            <i ng-click="picture.del(pictureModel, $index)" class="icon-minus-sign icon-minus-delete test_bd028217"></i>
+                                        </div>
+                                    </div>
+                                    <div ng-if="pictureModel.uploadShow" class="img-box img-upload-box test_582749e7">
+                                        <input multiple="multiple" type="file" accept="image/jpeg,image/png,image/bmp,image/tiff,application/pdf" file-model="avatarFile" class="img-file test_37604223">
+                                        <span class="img-upload-button test_9652e03c"></span>
+                                    </div>
+                                </div>
+                            </li>
+                            <!--备注-->
+                            <li class="test_e0fe047d">
+                                <label class="test_de125bd8"><%=transportShip_page_info%>：</label>
+                                <div class="remark-info test_292b32a3">
+                                    <textarea style="height:92px;" ng-change="showTextNumber();" maxlength="140" ng-trim="false" rows="5" ng-model="remark" class="form-control textarea-text  test_ac7fe377">
+                                    </textarea>
+                                    <div class="show-string-length test_1ec5dd17"><span class="test_57d2d1c0">{{textareaNumber}}</span>字</div>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="label-text test_42584fd2">
+                            <%=transportShip_page_interName%>
+                            <i style="transform:rotate(0deg);" class="icon-more-down icon-angle-right test_3f176c9a"></i>
+                        </div>
+                        <ul class="isContainer switch-list test_fc779859" id="globalization">
+                            <li ng-repeat="item in language" class="test_1b39a2da">
+                                <label class="test_6db80ab7">
+                                    {{item.localName}}：
+                                </label>
+                                <input maxlength="30" data-localname="{{item.localName}}" data-id="{{item.id}}" data-code="{{item.code}}" class="input-text test_f1a6d7d3" type="text">
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+            <div class="operation test_141857cc">
+                <button ng-click="cancel();" name="prompt-close" class="btn btn-default  test_e096f72d" data-event="close"><%=common_page_cancel%></button>
+                <button ng-click="save();" name="prompt-save" class="btn btn-primary test_9a3478e8" data-event="close"><%=common_page_save%></button>
+            </div>
+        </div>
+    </div>
+</div>

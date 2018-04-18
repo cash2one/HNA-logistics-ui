@@ -1,0 +1,247 @@
+<section class="content test_bedb0f53">
+    <div ng-hide="main" class="test_d88ff84b">
+        <!-- 行政组织机构树 -->
+        <div class="col-md-3 tree-container test_a4af0d33">
+            <div class="box-header with-border tree test_d2cf49f3">
+                <div class="seach-tree test_5162215f">
+                    <input type="text" name="organization" class="form-control i18n-input test_5d8ef4ac" maxlength="30" placeholder="<%=common_tree_searchGroup%>">
+                </div>
+            </div>
+            <div class="tree-scroll-box test_6be7fc1d">
+                <div id="tree" class="layout-container test_b4b339d8"></div>
+            </div>
+        </div>
+        <!-- 用户管理 -->
+        <div ng-controller="tableController" class="col-md-9 group-detail-box right-panel-box test_122bdb4c">
+            <div class="layout-right user-box test_6b8d064c">
+                <div class="box-header with-border add-user test_a17cd878">
+                    <div class="add-search-box test_cb7df1f8">
+                        <input ng-enter="retrievalUser();" ng-model="tableModel.restData.q" ng-value="q" type="text" class="form-control i18n-input test_2d51b74c" placeholder="<%=common_table_searchUserGroup%>">
+                        <i class="icon-search search-table test_d8d6853d"></i>
+                        <div class="senior-seach test_09431d98">
+                            <button ng-click="retrievalUser();" class="btn btn-primary test_1d284e48"><%=common_list_search_btn%></button>
+                            <span ng-click="seniorSeach($event);" class="test_1d284e48"><%=common_page_advancedFilter%></span>
+                        </div>
+                    </div>
+                    <nav class="fade test_df557347">
+                        <div class="checkbox checkbox-info test_b9ee8ddb">
+                            <input name="LockUser" type="checkbox" ng-checked="LockChecked" ng-click="getLockUser($event);" class="test_edfc2ebe">
+                            <label class="test_55e7e1f3"></label>
+                        </div>
+                        <span class="test_e59f4449"><%=user_page_lockUser%></span>
+                    </nav>
+                </div>
+                <div class="white-background test_046a1dc3">
+                    <div class="batch-operation test_9562f2bb">
+                        <button ng-click="addUser();" class="btn btn-primary test_03fb253e"><%=common_page_add%></button>
+                        <button ng-click="deleteUser();" class="btn btn-primary test_38391cbe"><%=common_page_delete%></button>
+                        <button ng-click="moveGroup();" class="btn btn-primary test_61b285cd"><%=common_page_move%></button>
+                        <div style="position: relative;display: inline-block;" class="test_2a918766">
+                            <button ng-mouseover="showMore();" ng-mouseout="hideMore();" class="btn btn-primary test_ac472d9f"><%=common_page_more%>
+                                <i class="icon-more-down icon-angle-down test_ac5d44e4"></i>
+                            </button>
+                            <nav ng-show="tableModel.more" ng-mouseover="showMore();" ng-mouseout="hideMore();" class="more-operat test_0466f808" style="width: 98px">
+                                <a ng-click="resetPassword();" class="test_0de36213"><%=user_page_resetPassword%></a>
+                                <a ng-click="lockUser();" class="test_5dada557"><%=user_page_lock%></a>
+                                <a ng-click="unlockUser();" class="test_f9a9930e"><%=user_page_unlock%></a>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="table-container test_25f97a39">
+                        <table class="user-table table-box test_f43c6de1" cellpadding="0" cellspacing="0">
+                            <div class="test_ea8a68fa">
+                                <thead class="test_70e166dc">
+                                <tr class="test_abed1470">
+                                    <th class="test_9820b703">
+                                        <div class="checkbox checkbox-info test_7f71cad9">
+                                            <input type="checkbox" ng-model="tableModel.selectFlag" ng-click="table.selectAll(tableModel);" class="test_2f680494">
+                                            <label class="test_07ba93b0"></label>
+                                        </div>
+                                    </th>
+                                    <th ng-repeat="item in tableModel.tableHeader" class="test_16d2120e">{{item}}</th>
+                                </tr>
+                                </thead>
+                            </div>
+                            <tbody class="test_b5d2269e">
+                            <tr ng-repeat="value in tableModel.tableBody" data-id="{{value.userId}}" data-orgid="{{value.orgId}}" ng-init="renderFinish($last)" class="test_c7805138">
+                                <td class="test_edc8a9dc">
+                                    <i ng-show="value.locked" class="icon-lock lock test_16f49c2c"></i>
+                                    <div class="checkbox checkbox-info test_a517f499">
+                                        <input type="checkbox" ng-value="{{value.userId}}" ng-checked="value.checkbox" ng-click="table.selectOne(tableModel, value.checkboxId);" class="test_8df9dbbe">
+                                        <label class="test_2e727a1e"></label>
+                                    </div>
+                                </td>
+                                <td class="test_7f2b2bbd">{{(tableModel.pagination.currentPage-1)*tableModel.pagination.pageSize+$index+1}}</td>
+                                <td title="{{value.fullName}}" class="test_497efbde">
+                                    <a href="javascript:void(0);" ng-click="getUserDetails($event);" ng-bind-html="value.fullName | trustHtml:q" class="test_aef0dac3"></a>
+                                </td>
+                                <td title="{{value.userCode}}" ng-bind-html="value.userCode | trustHtml:q" class="test_34d398e7"></td>
+                                <td title="{{value.orgName}}" class="test_5efbb277">{{value.orgName}}</td>
+                                <td title="{{value.positionName}}" class="test_c5954ca3">{{value.positionName}}</td>
+                                <td title="{{value.mobilephone}}" ng-bind-html="value.mobilephone | trustHtml:q" class="test_1179640a"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <hnapagination table-service="table" page-table-model="tableModel" class="test_d277d0a9"></hnapagination>
+                </div>
+
+                <div ng-show="!tableModel.pagination.isVisiblePage" style="position: absolute;top:165px;bottom:0px;width:100%;" class="test_76227453">
+                    <img ng-show="isSeach" style="width:100%;height:100%;" src="/public/img/undefined.svg" class="test_95e6a2e1">
+                </div>
+            </div>
+
+            <!-- 移动用户弹框 -->
+            <div id="moveUserBox" class="user-prompt-box test_5fb6eda3">
+                <div id="moveUser" class="test_35fdcb6b"></div>
+            </div>
+        </div>
+
+    </div>
+    <div ng-show="main" class="test_31597cc9">
+        <div class="add-from test_7096617a">
+            <form name="form" novalidate="novalidate" class="test_eb216735">
+                <input ng-model="userOrgId" type="hidden" class="test_c0a9f24b">
+                <input ng-model="currentUserId" type="hidden" class="test_4bffbba9">
+                <div class="user-operation test_db5f7c80">
+                    <button ng-click="backMainContet();" class="btn btn-default test_f54410f2"><%=user_page_back%></button>
+                    <button ng-show="editDetail" ng-click="editUser()" class="btn btn-primary test_52165c9b"><%=common_page_edit%></button>
+                </div>
+                <div class="user-form test_945e7c58">
+                    <input type="hidden" ng-value="{{userId}}" class="test_3bcc63df">
+                    <div class="user-head test_06217ae0">
+                        <div class="col-md-6 row-left test_0a6105ea">
+                            <div class="row test_26845f60">
+                                <label class="label-panel test_871c2d24"><%=user_page_head%></label>
+                                <img class="updateImg test_266464fc" ng-src="{{avatarPath}}">
+                                <br class="test_74299691">
+                                <!-- 修改头像 -->
+                                <div ng-hide="isSave" class="test_bd079ba0">
+                                    <input ng-show="visible" type="file" accept="image/jpeg,image/png" file-model="avatarFile" class="img-file test_c9e8fafe">
+                                </div>
+
+                                <!-- 新建头像 -->
+                                <div ng-show="isSave" class="test_d4976f2c">
+                                    <input ng-show="visible" type="file" accept="image/jpeg,image/png" file-new="avatarUpdateFile" class="img-file test_c9e8fafe">
+                                </div>
+
+                                <span ng-show="visible" class="img-upload test_05c8daa5"><%=user_page_change_head%></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 row-left test_8853ad1a">
+                        <div class="row test_d99e868c">
+                            <label class="label-panel test_00576b4e"><b ng-show="visible" class="test_a84e7c65">*</b><%=user_page_fullName%></label>
+                            <span id="fullName" class="form-info test_a2c412b1" ng-hide="visible">{{fullName}}</span>
+                            <input ng-trim="false" validate-code="{ruleReg:'name', ruleRegMsg:'<%=common_validate_name%>', maxLength:'30'}" class="form-info form-control test_7106a449" ng-show="visible" ng-model="fullNameInfo" name="fullNameInfo" type="text" required>
+                            <div class="verification test_fdc48491" ng-show="visible">
+                                <span class="errors test_617b19b2" ng-show="form.fullNameInfo.$viewValue && form.fullNameInfo.$error.defined && form.fullNameInfo.$dirty">
+                                    {{form.fullNameInfo.errorTips}}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row test_157330c9">
+                            <label class="label-panel test_62ee81d8"><b ng-show="visible" class="test_5bd93b42">*</b><%=user_page_code%></label>
+                            <span id="code" class="form-info test_f2bedbe7" ng-hide="visible">{{code}}</span>
+                            <input ng-trim="false" validate-code="{ruleReg:'code', ruleRegMsg:'<%=common_validate_code%>', maxLength:'15'}" class="form-info form-control test_13e10073" ng-show="visible" ng-model="codeInfo" ng-disabled="codeDisabled" ng-focus="focusUserCode();" ng-blur="validateUserCode();" name="codeInfo" type="text" required>
+                            <div class="verification test_a4bcd010" ng-show="visible">
+                                <span class="isExisted test_44a5cfe5" ng-show="validateUserCodeError"><%=user_validate_codeInfo%></span>
+                                <span class="errors test_131d836a" ng-show="form.codeInfo.$viewValue && form.codeInfo.$error.defined && form.codeInfo.$dirty">
+                                    {{form.codeInfo.errorTips}}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row test_e92349bc">
+                            <label class="label-panel test_0e9a7f53"><b ng-show="visible" class="test_8706e4df">*</b><%=user_validate_sex%></label>
+                            <span ng-hide="visible" id="sexInfo" class="form-info sex-radio test_e225fb9f" ng-init="m">{{sex}}</span>
+                            <input type="hidden" ng-model="sexInfo" class="test_e331b47f">
+                            <div ng-show="visible" class="radio-box test_b675aceb">
+                                <div class="radio radio-single radio-primary test_5be6b27d">
+                                    <input value="m" ng-click="getMaleSexInfo($event);" type="radio" ng-model="male" class="test_63688e4c">
+                                    <label class="test_e4769164"></label>
+                                </div>
+                                <span class="test_a29383d6"><%=user_radio_man%></span>
+                                <div class="radio radio-single radio-primary test_3a23febf">
+                                    <input value="f" ng-click="getFemaleSexInfo($event);" type="radio" ng-model="female" class="test_9021d528">
+                                    <label class="test_828ef16c"></label>
+                                </div>
+                                <span class="test_7f5ce6d2"><%=user_radio_woman%></span>
+                                <div class="radio radio-single radio-primary test_1541436e">
+                                    <input value="null" ng-click="getDefaultSexInfo($event);" type="radio" ng-model="defaultSet" class="test_ada1a172">
+                                    <label class="test_7b371215"></label>
+                                </div>
+                                <span class="test_357cb779"><%=user_radio_no%></span>
+                            </div>
+                        </div>
+                        <div class="row test_3b85a604">
+                            <label class="label-panel test_a2091521"><b ng-show="visible" class="test_a33c7f4f">*</b><%=user_page_orgName%></label>
+                            <span id="orgName" class="form-info test_17717a78" ng-hide="visible">{{orgName}}</span>
+                            <input class="form-info form-control test_b4e3aa0b" ng-show="visible" ng-model="orgNameInfo" readonly="readonly" ng-focus="moveUserGroup();" ng-value="orgId" name="orgNameInfo" type="text">
+
+                            <!-- 修改用户弹框 -->
+                            <div id="userSelectGroupBox" class="user-prompt-box test_4c4246ec">
+                                <div id="userSelectGroup" class="test_cb79b55c"></div>
+                            </div>
+                        </div>
+                        <div class="row position-box test_f7b102c7">
+                            <label class="label-panel test_4fe347d4"><b ng-show="visible" class="test_100431eb">*</b><%=user_page_positionName%></label>
+                            <span id="positionName" class="form-info test_35d73eea" ng-hide="visible">{{positionName}}</span>
+                            <div class="select-box test_ddbac44a">
+                                <input class="form-info form-control test_4b078a59" ng-click="showCarrerList($event)" ng-show="visible" ng-model="positionInfo" name="positionInfo" ng-value="positionCode" id="carrer-input-text" readonly="readonly" type="text" placeholder="<%=user_page_positionInfo%>" required>
+                                <i ng-show="visible" ng-click="showCarrerList($event)" class="select-icon icon-drop-down test_c79d44a2"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 row-right test_71e60335">
+                        <div class="row test_4eb38deb">
+                            <label class="label-panel test_70a6cd8a"><b ng-show="visible" class="test_2f667731">*</b><%=user_page_mobilephone%></label>
+                            <span id="mobilephone" class="form-info test_89bc7cd5" ng-hide="visible">{{mobilephone}}</span>
+                            <input ng-trim="false" validate-code="{ruleReg:'phone', ruleRegMsg:'<%=common_phoneNumberFormatErr%>', maxLength:'30'}" class="form-info form-control test_765ef7f7" ng-show="visible" ng-model="mobilephoneInfo" type="tel" name="mobilephoneInfo" required>
+                            <div class="verification test_55ff5a1e" ng-show="visible">
+                                <span class="errors test_a8ec88e9" ng-show="form.mobilephoneInfo.$viewValue && form.mobilephoneInfo.$error.defined && form.mobilephoneInfo.$dirty">
+                                    {{form.mobilephoneInfo.errorTips}}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row test_e5e4806e">
+                            <label class="label-panel test_7acc5c12"><%=user_page_telephone%></label>
+                            <span id="telephone" class="form-info test_4b5c4348" ng-hide="visible">{{telephone}}</span>
+                            <input ng-trim="false" validate-code="{ruleReg:'phone', ruleRegMsg:'<%=common_validate_mobilephone%>', maxLength:'30'}" class="form-info form-control test_e62b419e" ng-show="visible" ng-model="telephoneInfo" type="tel" name="telephoneInfo">
+                            <div class="verification test_6f71c1e1" ng-show="visible">
+                                <span class="errors test_38df9e5d" ng-show="form.telephoneInfo.$viewValue && form.telephoneInfo.$error.defined && form.telephoneInfo.$dirty">
+                                    {{form.telephoneInfo.errorTips}}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row test_a6db1cde">
+                            <label class="label-panel test_d860a2a5"><b ng-show="visible" class="test_7a3bb54d">*</b><%=user_page_email%></label>
+                            <span id="email" class="form-info test_abcb7cca" ng-hide="visible">{{email}}</span>
+                            <input ng-trim="false" validate-code="{ruleReg:'email', ruleRegMsg:'<%=common_validate_email%>', maxLength:'30'}" class="form-info form-control test_87933f4c" ng-show="visible" ng-model="emailInfo" ng-focus="focusUserEmail();" ng-blur="validateUserEmail();" name="emailInfo" type="text" required>
+                            <div class="verification test_abfd9b3f" ng-show="visible">
+                                <span class="isExisted test_616a5912" ng-show="validateEmailError"><%=user_validate_emailInfo%></span>
+                                <span class="errors test_93f791f7" ng-show="form.emailInfo.$viewValue && form.emailInfo.$error.defined && form.emailInfo.$dirty">
+                                    {{form.emailInfo.errorTips}}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row test_77fb21da">
+                            <label class="label-panel test_7a403b66"><%=user_page_description%></label>
+                            <span id="description" class="form-info test_0c02510c" ng-hide="visible">{{description}}</span>
+                            <div ng-show="visible" class="form-info form-control test_2ef059c8">
+                                <textarea ng-trim="false" class="form-info form-control test_4a21508e" ng-focus="visibleTextNumber();" ng-blur="hiddenTextNumber();" ng-change="showTextNumber();" ng-show="visible" ng-model="descriptionInfo" rows="5" maxlength="140" name="descriptionInfo"></textarea>
+                                <div ng-show="textCountVisible" class="show-string-length test_47eb77b1"><span class="test_cf5abe03">{{textNumber}}</span>字</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="user-bottom-operation test_b8373b31">
+                    <button ng-show="closeEditDetail" ng-click="closeEditUser()" class="btn btn-default test_1a6c11d2"><%=common_page_cancel%></button>
+                    <button ng-hide="editDetail" ng-click="saveUser($event)" name="saveOrEdit" class="btn btn-primary test_7a219f17"><%=common_page_save%></button>
+                    <button ng-hide="editHide" ng-click="saveAndNewUser()" name="saveOrEdit" class="btn btn-primary test_eadfeebf"><%=user_page_save_again%></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+

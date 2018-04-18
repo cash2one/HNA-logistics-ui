@@ -1,0 +1,246 @@
+<section class="content test_45627ae2">
+    <div class="master-table blank-content test_41ba9de7">
+        <div class="batch-operation top test_c1b88542">
+            <button ng-click="goBack();" class="btn btn-default u-go-back test_2b197acb"><%=common_page_back%></button>
+        </div>
+        <h3 class="u-title test_0da63fe0">
+            {{titleName}}
+        </h3>
+        <div class="m-search test_75f34bf6">
+            <div class="list-search-box test_5542d7b7">
+                <input maxlength="30" ng-enter="search();" ng-model="tableModel.restData.q" ng-value="q" type="text" class="form-control u-search test_c41267cf" placeholder="{{placeholder}}">
+                <i class="icon-search u-icon-search test_d5b81470"></i>
+                <div class="u-search-btn test_e8638d72">
+                    <button ng-click="search();" class="btn btn-primary test_3c2d71c9"><%=common_list_search_btn%></button>
+                </div>
+            </div>
+        </div>
+        <div class="batch-operation test_eba0d7d6">
+            <button ng-show="editable" ng-click="add();" class="btn btn-primary test_2c7eff84"><%=common_page_add%></button>
+            <button ng-show="editable" ng-click="del();" class="btn btn-primary test_a5e42035"><%=common_page_delete%></button>
+        </div>
+
+        <div class="table-container test_df569751" ng-controller="tableController">
+            <table class="m-table table-box test_e0ce8073" cellpadding="0" cellspacing="0">
+                <thead class="test_dfeaecbc">
+                    <tr class="test_8d3da678">
+                        <th ng-show="editable" class="test_746bd869">
+                            <div class="checkbox checkbox-info test_80091e3c">
+                                <input type="checkbox" ng-model="tableModel.selectFlag" ng-click="table.selectAll(tableModel);" class="test_bf94a8c6">
+                                <label class="test_e149d699"></label>
+                            </div>
+                        </th>
+                        <th ng-repeat="item in tableModel.tableHeader" class="test_c104641d">{{item}}</th>
+                    </tr>
+                </thead>
+
+                <tbody class="test_486cabe6">
+                    <tr ng-repeat="value in tableModel.tableBody" ng-init="renderFinish($last)" class="test_15c4aab8">
+                        <td ng-show="editable" class="test_e2f24503">
+                            <div class="checkbox checkbox-info test_1ba26f27">
+                                <input type="checkbox" ng-checked="value.checkbox" ng-click="table.selectOne(tableModel, value.checkboxId, $event);" class="test_e352089c">
+                                <label class="test_333d6ef4"></label>
+                            </div>
+                        </td>
+                        <td class="test_fb5b987f">{{(tableModel.pagination.currentPage-1)*tableModel.pagination.pageSize+$index+1}}</td>
+                        <td title="{{value.name}}" class="test_4c424cf3">
+                            <span ng-hide="editable" ng-bind-html="value.name | trustHtml:q" class="test_f8a963d4"></span>
+                            <a ng-show="editable" href="javascript:;" ng-click="edit(value.id)" ng-bind-html="value.name | trustHtml:q" class="test_102724bd"></a>
+                        </td>
+                        <td title="{{value.code}}" ng-bind-html="value.code | trustHtml:q" class="test_f17fec9e"></td>
+                        <td title="{{value.type}}" class="test_6ebbf2e4">{{value.type}}</td>
+                        <td title="{{value.typeValue}}" ng-bind-html="value.typeValue | trustHtml:q" class="test_fa24d60b"></td>
+                        <td title="{{value.description}}" class="test_653a739f">{{value.description}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <hnapagination table-service="table" page-table-model="tableModel" class="test_63e2c284"></hnapagination>
+        </div>
+        <div ng-show="!tableModel.pagination.isVisiblePage" style="position: absolute;top:265px;bottom:0px;width:100%;" class="test_ce15f534">
+            <img style="width:100%;height:100%;" src="/public/img/undefined.svg" class="test_ed41f16b">
+        </div>
+    </div>
+</section>
+
+<!-- 添加分区方案详情弹出框 -->
+<div style="display: none;" id="detail" class="test_0d64e8c1">
+    <form name="form" novalidate="novalidate" class="test_27745420">
+        <dd class="test_f9e6b9a0">
+            <label class="test_8d9d5794"><b class="test_c3639f21">*</b><%=common_thead_name%>：</label>
+            <div class="content-info test_9eca386d">
+                <input verification="{'ruleType':'name'}" ng-trim="false" name="regionName" ng-model="regionName" type="text" maxlength="{{form.regionName.maxLength}}" required class="test_091981cc">
+                <div class="verification test_751680b5">
+                    <span class="errors test_3193bbed" ng-show="form.regionName.$viewValue && form.regionName.$error.defined && form.regionName.$dirty">{{form.regionName.errorTips}}</span>
+                </div>
+            </div>
+        </dd>
+        <dd class="test_05d00514">
+            <label class="test_630a65a3"><b class="test_afed9700">*</b><%=common_code_code%>：</label>
+            <div class="content-info test_598a7600">
+                <input ng-blur="checkCode()" verification="{'ruleType':'code','maxType':'15'}" ng-trim="false" name="regionCode" ng-model="regionCode" type="text" maxlength="{{form.regionCode.maxLength}}" required class="test_a692d14a">
+                <div class="verification test_635ec301">
+                    <span id="code-msg" class="errors test_79cd42fa" ng-show="form.regionCode.$viewValue && form.regionCode.$error.defined && form.regionCode.$dirty">{{form.regionCode.errorTips}}</span>
+                </div>
+            </div>
+        </dd>
+        <dd class="test_dfab45c4">
+            <label class="test_e64ad577"><b class="test_effbbc80">*</b><%=common_thead_type%>：</label>
+            <div class="content-info select-box test_3f36292f">
+                <input ng-disabled="productGroupId != 11" readonly="readonly" ng-trim="false" name="regionType" ng-model="regionType" ng-value="regionTypeValue" type="text" id="type-select-input" maxlength="30" required ng-init="init()">
+                <i class="select-icon icon-drop-down test_9d4f9fd0"></i>
+            </div>
+        </dd>
+        <dd ng-if="productGroupId != 11" class="test_884bb4c4">
+            <label class="test_a47d3eee"><b class="test_ebdb24d4">*</b><%=regDetail_page_area%>：</label>
+            <div class="content-info test_12891fef">
+                <input ng-click="selectOtherRegion()" readonly="readonly" ng-trim="false" name="regionSeaAirZone" ng-model="regionSeaAirZone" type="text" required class="test_00c0aa33">
+                <div class="verification test_ffe9a06e">
+                    <span id="remote-seaair-msg" class="errors"></span>
+                </div>
+            </div>
+        </dd>
+        <dd ng-if="regionTypeValue == 1" class="test_884bb4c4">
+            <label class="test_a47d3eee"><b class="test_ebdb24d4">*</b><%=regDetail_page_area%>：</label>
+            <div class="content-info test_12891fef">
+                <input ng-click="selectRegion()" readonly="readonly" ng-trim="false" name="regionZone" ng-model="regionZone" type="text" required class="test_00c0aa33">
+                <div class="verification test_ffe9a06e">
+                    <span id="remote-zone-msg" class="errors test_f4967492"></span>
+                </div>
+            </div>
+        </dd>
+        <dd ng-if="regionTypeValue == 2" ng-init="showRegionCountry();" class="test_709beaac">
+            <label class="test_814d5ba3"><b class="test_d6ea592e">*</b><%=regDetail_page_country%>：</label>
+            <div class="select-box input-box test_93da9772">
+                <input readonly="readonly" autocomplete="off" name="regionCountry" id="country" ng-model="$parent.regionCountry" ng-value="regionCountryId" type="text" required placeholder="<%=regDetail_page_countryChoose%>" class="test_4a43e6fb">
+            </div>
+        </dd>
+
+        <dd ng-if="regionTypeValue == 2" class="test_f74fce5e">
+            <label class="test_352efc02"><b class="test_abd14b15">*</b><%=regDetail_page_post%>：</label>
+            <div class="content-info test_62d868b0">
+                <ul id="post-zone" class="test_f74b9763">
+                    <li class="item-post clearfix test_3b2e4019" ng-repeat="item in post.data">
+                        <input ng-keyup="rePostClass($event)" class="u-post-start test_6045bb0d" ng-trim="false" name="regionPostStart" ng-value="item.start" type="text" maxlength="15" placeholder="<%=regDetail_page_postStart%>">
+
+                        <span class="u-post-split test_4a8114ab">—</span>
+
+                        <input ng-keyup="rePostClass($event)" class="u-post-end test_f3a4fda7" ng-trim="false" name="regionPostEnd" ng-value="item.end" type="text" maxlength="15" placeholder="<%=regDetail_page_postEnd%>">
+
+                        <i ng-if="post.delFlag" ng-click="post.del($index);" class="icon-minus-sign icon-minus-delete test_9aef4078"></i>
+                    </li>
+                </ul>
+                <div ng-show="checkPostResult" class="red add-post test_e8e0129d">
+                    请输入英文或数字
+                </div>
+                <div ng-if="post.addFlag" class="add-post test_570d98fa">
+                    <a href="javascript:;" ng-click="post.add();" class="test_18a248aa"><i class="add-node icon-add test_28d1a6ad"></i><%=regDetail_page_postAdd%></a>
+                </div>
+            </div>
+        </dd>
+        <dd class="test_4c6809cb">
+            <label class="test_61debef5"><%=common_page_remarks%>：</label>
+            <div class="content-info test_97b1989b" style="height: 175px;">
+                <textarea text-length="" ng-trim="false" name="remark" ng-model="remark" type="text" maxlength="140" rows="10" class="test_5350e184"></textarea>
+            </div>
+        </dd>
+    </form>
+</div>
+<!--速递地区选择弹出层-->
+<div include="tpl/fragment/common/selectArea.html" class="test_875a5b24"></div>
+
+
+<!--海运或空运地区选择弹出层-->
+<div id="airSeaZone" ng-show="airSeaZone" class="prompt-modal box-form hidden box-width" style="z-index: 11001;">
+    <div class="prompt-wrap">
+        <div class="bomb-box">
+            <div class="title">{{airSeaZoneTitle}}</div>
+            <div class="prompt-content">
+                <div class="panel">
+                    <p class="panel-tips">所有地区</p>
+
+                    <ul class="area-box" style="margin-top: 50px;">
+                        <li>
+                            <div class="select-box input-box">
+                                <input readonly="readonly" ng-model="countryName" type="text" id="select-country" ng-click="showCountry()" placeholder="请选择国家">
+                            </div>
+                        </li>
+                        <li>
+                            <div class="select-box input-box">
+                                <input readonly="readonly" ng-model="cityName" type="text" id="select-city" ng-click="showCity()" placeholder="请选择城市">
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="panel middle">
+                    <p class="panel-tips">待选地区</p>
+
+                    <div class="box-header with-border tree">
+                        <div class="seach-tree">
+                            <input ng-enter="seaAirSearchCandidate()" ng-model="seaAirSearchCandidateVal" maxlength="30" type="text" class="form-control" placeholder="请输入关键字">
+                            <i ng-click="seaAirSearchCandidate()" class="icon-search search-group"></i>
+                        </div>
+                    </div>
+
+                    <div class="selected-user unselect" id="candidateZones">
+                        <div ng-show="unSelectedData.length">
+                            <span class="selected-user-list">
+                                <div class="checkbox checkbox-info">
+                                    <input ng-click="airSeaCandidateAll();" ng-model="candidateFlag" type="checkbox">
+                                    <label></label>
+                                </div>
+                                全选
+                            </span>
+                            <span ng-if="value.isShow" ng-class="{'selected-user-list':true,'u-delete':value.delete}" ng-repeat="value in unSelectedData">
+                                <div class="checkbox checkbox-info">
+                                    <input ng-disabled="value.delete" ng-click="airSeaCandidateOne(value.transportId);" ng-checked="value.checkbox" type="checkbox">
+                                     <label></label>
+                                </div>
+                                {{value.name}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="move-select-user">
+                    <button ng-click="selectedToRight();" class="cancel-selected btn btn-primary icon-angle-right"></button>
+                    <button ng-click="selectedToLeft();" class="add-unselected btn btn-primary icon-angle-left"></button>
+                </div>
+
+                <div class="panel right">
+                    <p class="panel-tips">已选地区</p>
+
+                    <div class="box-header with-border tree">
+                        <div class="seach-tree">
+                            <input ng-enter="seaAirSearchSelected()" ng-model="seaAirSearchSelectedVal" maxlength="30" type="text" class="form-control" placeholder="请输入关键字">
+                            <i ng-enter="seaAirSearchSelected()" class="icon-search search-group"></i>
+                        </div>
+                    </div>
+
+                    <div class="selected-user selected" id="selectedZones">
+                        <span class="selected-user-list">
+                            <div class="checkbox checkbox-info">
+                                <input ng-click="airSeaSelectedAll();" ng-model="selectedFlag" type="checkbox">
+                                <label></label>
+                            </div>
+                            全选
+                        </span>
+                        <span ng-if="value.isShow" class="selected-user-list" ng-repeat="value in selectedData">
+                            <div class="checkbox checkbox-info">
+                                <input ng-click="airSeaSelectedOne(value.transportId);" ng-checked="value.checkbox" type="checkbox">
+                                 <label></label>
+                            </div>
+                            {{value.name}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="operation">
+                <button name="prompt-operation" ng-click="airSeaZone = false;" class="btn btn-default">取消</button>
+                <span class="other-btn">
+                    <button ng-click="cfmSeaAirSelected();" name="prompt-operation" class="btn btn-primary">确认</button>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

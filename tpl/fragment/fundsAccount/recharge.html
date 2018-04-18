@@ -1,0 +1,96 @@
+<div class="c-detail-title">
+    <div class="u-back clearfix">
+        <button ng-click="goBack('recharge');" class="btn btn-default test_2874b5ed">返回</button>
+    </div>
+    <div class="u-title">
+        充值
+    </div>
+</div>
+
+<div class="m-recharge">
+    <form name="rechargeForm" novalidate="novalidate">
+        <div class="wrap-recharge">
+            <h3 class="box-tips-h3">充值金额</h3>
+            <ul>
+                <li class="lists">
+                    <span class="left-text">充值金额：</span>
+                    <div style="display: inline-block; position: relative;">
+                        <input ng-change="moneyChanged()" maxlength="9" name="money" ng-model="money" type="text"
+                               value="" class="input-box" required verification="{'ruleType':'floatTwo','ruleRegMsg':'请输入数字，小数点后最多2位'}">
+
+                        <div class="verification" style="margin: 0px;">
+                            <span style="padding: 0px;white-space: nowrap;word-break: keep-all;" class="errors" ng-show="rechargeForm.money.$viewValue && rechargeForm.money.$error.defined && rechargeForm.money.$dirty">{{rechargeForm.money.errorTips}}</span>
+                        </div>
+                    </div>
+                    {{accountInfo.currency}}
+                </li>
+                <li class="lists" style="margin-top:20px;">
+                    <span class="left-text">充值后余额：</span>
+                    {{availableBalance.toFixed(2)}} {{accountInfo.currency}}
+                </li>
+            </ul>
+            <h3 class="box-tips-h3">支付方式</h3>
+            <ul>
+                <li class="lists">
+                    <span class="left-text">银行支付：</span>
+                    <div class="select-box" style="display: inline-block;">
+                        <input ng-click="getSubbranchList()" name="subbranch" ng-model="subbranch"
+                               id="select-subbranch-list" readonly="readonly" type="text" value="" class="input-box"
+                               required>
+                        <i class="select-icon icon-drop-down"></i>
+                    </div>
+                </li>
+                <li class="lists" style="margin-top: 20px;line-height: 23px;">
+                    <span class="left-text">备注：</span>
+                    <textarea name="note" ng-model="note" ng-trim="false" class="textarea-text" maxlength="120"
+                              style="display: inline-block;vertical-align: top;width:auto;height:100px;"
+                              required></textarea>
+                </li>
+                <li class="lists">
+                    <span class="left-text">&nbsp;</span>
+                    <span>
+                        <button type="button" ng-click="submitRecharge()" style="margin-top:35px;" type="button"
+                                class="btn btn-primary">提交申请</button>
+                    </span>
+                </li>
+            </ul>
+            <div class="p-box">
+                <p>充值说明：</p>
+                <p>1. 提交申请后，将从所选择的付款账户划转所填金额，请注意查收银行通知</p>
+                <p>2. 若所选择的付款账户中余额低于充值金额，将不划转任何金额</p>
+            </div>
+        </div>
+    </form>
+</div>
+
+<style type="text/css">
+    .m-recharge {
+        background: #fff;
+        padding: 45px 30px;
+        border: 1px solid #ddd;
+        min-height: 100%;
+    }
+
+    .m-recharge .wrap-recharge {
+        margin: 0px auto;
+        width: 350px;
+    }
+
+    .m-recharge .wrap-recharge li.lists {
+        line-height: 45px;
+    }
+
+    .m-recharge .wrap-recharge li.lists b {
+        color: #F7A42C;
+    }
+
+    .m-recharge .wrap-recharge li.lists .left-text {
+        display: inline-block;
+        width: 90px;
+    }
+
+    .m-recharge .wrap-recharge .p-box {
+        line-height: 28px;
+        margin-top: 35px;
+    }
+</style>

@@ -1,0 +1,1 @@
+app.factory("userView",[function(){return{}}]);

@@ -1,0 +1,26 @@
+<div ng-repeat="item in list track by $index" class="m-unit-box" ng-click="getAccountDetail('accountDetail', item)">
+    <div class="title">
+        {{item.custName}}
+        <p class="title-tips">资金存管账户号：{{item.accountId}}</p>
+    </div>
+    <div ng-if="item.signing">
+        <p class="balance">账户余额：</p>
+        <p class="money">{{item.totalAmount}}<span>{{item.currencyCode}}</span></p>
+    </div>
+    <div ng-if="!item.signing" style="margin-top:10px;">
+        <button class="btn btn-primary" ng-click="openAccountManager(item)">签约</button>
+        <p class="unopened">请记录资金存管账户号，前往平安银行网银签约。</p>
+    </div>
+</div>
+
+
+<!--签约提示-->
+<div class="prompt-modal middle-box" ng-show="showSigning" ng-click="showSigning = false">
+    <div class="prompt-wrap">
+        <div class="bomb-box" style="min-height:100px!important;line-height: 100px">
+            <a href={{hrefPay}} target="_blank" type="button" class="btn btn-default" style="display: inline-block;margin:0px 10px;">平安电商平台</a>
+            <a href={{hrefBasic}} target="_blank" type="button" class="btn btn-primary" style="display: inline-block;margin:0px 10px;">平安企业网银</a>
+        </div>
+    </div>
+</div>
+<!--签约提示End-->

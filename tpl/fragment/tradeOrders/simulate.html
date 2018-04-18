@@ -1,0 +1,529 @@
+<div ng-controller="simulateController" class="detail">
+	<h4 class="title">模拟页面</h4>
+	<button class="btn btn-default btn-bill" ng-click="goBack()" >返回</button>
+	<div>
+		<div class="search-order">
+			<div class="search-input">
+			<form name="form7" novalidate="novalidate">
+				<label>订单编号</label>
+
+				<input type="text" ng-model="orderNo" name="orderNo" required />
+
+				<button class="btn btn-primary" ng-click="searchOneOrder()">查询</button>
+				<span ng-show="orderStatusName">订单状态：{{orderStatusName}}</span>
+				</form>
+			</div>
+		</div>
+		<ul class="order-ul" ng-show="orderOut" id=" OrderOut">  <!--待发货-->
+			<li>
+			<h4>对方信息</h4>
+			<div class="good-detail clearfix">
+
+					<ul>
+					<li class="good-li">
+					    <label><i>*</i>公司名称</label>
+					    <div class="content-info">
+					        <input ng-trim="false"  name="custCompanyName"  ng-model="out.custCompanyName" type="text" required>
+                    		<validatetip from-model="customerForm.custCompanyName"></validatetip>
+					    </div>
+				    </li>
+				    <li class="good-li">
+					    <label><i>*</i>对方称呼</label>
+					    <div class="content-info">
+					        <input ng-trim="false"  name="custCompanyNickName"  ng-model="out.custCompanyNickName" type="text" required>
+                    		<validatetip from-model="customerForm.name"></validatetip>
+					    </div>
+				    </li>
+				    <li class="good-li">
+					    <label><i>*</i>公司地址</label>
+					    <div class="content-info">
+					        <input ng-trim="false"  name="custCompanyAddress"  ng-model="out.custCompanyAddress" type="text" placeholder="" ng-value="name" required>
+                    		<validatetip from-model="customerForm.custCompanyAddress"></validatetip>
+					    </div>
+				    </li>
+				    </ul>
+
+				</div>
+			</li>
+			<li>
+				<h4>订单信息</h4>
+				<div class="good-detail clearfix">
+					<ul class="clearfix">
+						<li class="good-li">
+							<label><i>*</i>我方订单编号</label>
+						    <div class="content-info">
+						        <p class="content-text">{{out.orderNo}}</p>
+						    </div>
+					    </li>
+					    <li class="good-li">
+						    <label><i>*</i>对方订单编号</label>
+						    <div class="content-info">
+						        <input ng-trim="false"  name="custOrderNo"  ng-model="out.custOrderNo" type="text" required>
+	                    		<validatetip from-model="customerForm.name"></validatetip>
+						    </div>
+					    </li>
+					    <li class="good-li">
+							<label><i>*</i>订单日期</label>
+						    <div class="content-info">
+						        <p class="content-text">{{out.orderTime}}</p>
+						    </div>
+					    </li>
+					</ul>
+				</div>
+			</li>
+			<li>
+				<h4>运输信息</h4>
+				<div class="good-detail clearfix">
+
+					<ul>
+					<li class="good-li">
+					    <label><i>*</i>船名</label>
+					    <div class="content-info">
+					        <input ng-trim="false"  name="shipName"  ng-model="out.shipName" type="text" required>
+                    		<validatetip from-model="customerForm.name"></validatetip>
+					    </div>
+				    </li>
+				    <li class="good-li">
+					    <label><i>*</i>IMO编号</label>
+					    <div class="content-info">
+					        <input ng-trim="false"  name="imoCode"  ng-model="out.imoCode" type="text" required>
+                    		<validatetip from-model="customerForm.name"></validatetip>
+					    </div>
+				    </li>
+				    <li class="good-li">
+					    <label><i>*</i>目的港</label>
+					    <div class="content-info">
+					        <input ng-trim="false"  name="destinationPort"  ng-model="out.destinationPort" type="text" required>
+                    		<validatetip from-model="customerForm.name"></validatetip>
+					    </div>
+				    </li>
+				    <li class="good-li">
+					    <label>停泊位置</label>
+					    <div class="content-info">
+					        <input ng-trim="false"  name="mooringSite"  ng-model="out.mooringSite" type="text" required>
+                    		<validatetip from-model="customerForm.mooringSite"></validatetip>
+					    </div>
+				    </li>
+				    <li class="good-li good-time">
+					    <label><i>*</i>运输期间</label>
+					    <div class="content-info">
+					        <input ng-trim="false" required name="transportStartTime" id="outtransportStartTime" ng-model='out.transportStartTime' type="text"> ~ <input ng-trim="false" required type="text" id="outtransportEndTime" name="transportEndTime" ng-model='out.transportEndTime'>
+					    </div>
+				    </li>
+				    <li class="good-li" style="width: 35%">
+					    <label>运输时长</label>
+					    <div class="content-info">
+					        <input ng-trim="false"  name="transportDuration"  ng-model="out.transportDuration" type="text" required>
+                    		<validatetip from-model="customerForm.name"></validatetip>
+					    </div>
+				    </li>
+				    <li class="good-li good-time">
+					    <label><i>*</i>预计开航时间</label>
+					    <div class="content-info">
+					        <input ng-trim="false" required type="text" id="outsailStartTime" ng-model="out.sailStartTime"> ~ <input ng-trim="false" required type="text" id="outsailEndTime" ng-model="out.sailEndTime">
+					    </div>
+				    </li>
+				    <li class="good-li good-time">
+					    <label><i>*</i>预计抵达时间</label>
+					    <div class="content-info">
+					         <input ng-trim="false" required type="text" id="outreachStartTime" ng-model="out.reachStartTime"> ~ <input ng-trim="false" required type="text" id="outreachEndTime" ng-model="out.reachEndTime">
+					    </div>
+				    </li>
+				    </ul>
+
+				</div>
+			</li>
+
+			<li>
+				<h4>商品信息</h4>
+				<div class="good-detail clearfix">
+					<div class="table-box-div">
+					<table class="table-box" cellpadding="0" cellspacing="0">
+					    <thead>
+					    	<tr>
+					    		<th>商品名称</th>
+					    		<th>采购数量</th>
+					    		<th>计量单位</th>
+					    		<th>币种</th>
+					    		<th>单价</th>
+					    	</tr>
+					    </thead>
+					    <tbody>
+					    	<tr ng-repeat="item in out.orderGoods">
+					    		<td>{{item.goodsName}}</td>
+					    		<td>{{item.goodsNum}}</td>
+					    		<td>{{item.goodsUnit}}</td>
+					    		<td>{{item.goodsCurrencyType}}</td>
+					    		<td>{{item.goodsPrice}}</td>
+					    	</tr>
+					    	<tr><td class="total" colspan="9">总金额：{{getAmoutTotal(out.orderGoods)}}</td></tr>
+					    </tbody>
+					    </table>
+					    </div>
+				</div>
+			</li>
+			<li>
+				<h4>其他信息</h4>
+				<div class="textarea-strong">
+					<strong>代理</strong>
+					<div class="textarea-div">
+						<textarea ng-model="out.agent" maxlength="140"></textarea>
+						<span>1000字</span>
+					</div>
+				</div>
+				<div class="textarea-strong">
+					<strong>留言</strong>
+					<div class="textarea-div">
+						<textarea ng-model="data.note" maxlength="140"></textarea>
+						<span>1000字</span>
+					</div>
+				</div>
+			</li>
+
+			<li>
+			<h4>我方授权代表</h4>
+			<div class="good-detail clearfix">
+
+					<ul>
+					<li class="good-li">
+					    <label><i>*</i>代表姓名</label>
+					    <div class="content-info">
+					        <input ng-trim="false"  name="representativeName"  ng-model="out.representativeName" type="text" required>
+                    		<validatetip from-model="customerForm.name"></validatetip>
+					    </div>
+				    </li>
+				    <li class="good-li">
+					    <label><i>*</i>联系电话</label>
+					    <div class="content-info">
+					        <input ng-trim="false"  name="representativePhone"  ng-model="out.representativePhone" type="text" required>
+                    		<validatetip from-model="customerForm.name"></validatetip>
+					    </div>
+				    </li>
+				    </li>
+				    </ul>
+
+				</div>
+			</li>
+
+			<li>
+			<h4>我方信息</h4>
+			<div class="good-detail clearfix">
+
+					<ul>
+					<li class="good-li">
+					    <label><i>*</i>公司地址</label>
+					    <div class="content-info">
+					        <input ng-trim="false"  name="companyAddress"  ng-model="out.companyAddress" type="text" required>
+                    		<validatetip from-model="customerForm.companyAddress"></validatetip>
+					    </div>
+				    </li>
+				    <li class="good-li">
+					    <label><i>*</i>联系电话</label>
+					    <div class="content-info">
+					        <input ng-trim="false"  name="companyPhone"  ng-model="out.companyPhone" type="text" required>
+                    		<validatetip from-model="customerForm.companyPhone"></validatetip>
+					    </div>
+				    </li>
+				    <li class="good-li">
+					    <label><i>*</i>传真</label>
+					    <div class="content-info">
+					        <input ng-trim="false"  name="companyFax"  ng-model="out.companyFax" type="text" required>
+                    		<validatetip from-model="customerForm.companyFax"></validatetip>
+					    </div>
+				    </li>
+				    <li class="good-li">
+					    <label><i>*</i>电子邮件</label>
+					    <div class="content-info">
+					        <input ng-trim="false"  name="companyEmail"  ng-model="out.companyEmail" type="text" required>
+                    		<validatetip from-model="customerForm.companyEmail"></validatetip>
+					    </div>
+				    </li>
+				    </li>
+				    </ul>
+
+				</div>
+			</li>
+
+
+		</ul>
+
+
+
+
+
+		<ul class="order-ul" ng-show="orderIn" id=" OrderIn"> <!--待收货-->
+			<li>
+			<h4>对方信息</h4>
+			<div class="good-detail clearfix">
+
+					<ul>
+					<li class="good-li">
+					    <label><i>*</i>公司名称</label>
+					    <div class="content-info">
+					        <input ng-trim="false"  name="custCompanyName"  ng-model="inn.custCompanyName" type="text" required>
+                    		<validatetip from-model="customerForm.name"></validatetip>
+					    </div>
+				    </li>
+				    <li class="good-li">
+					    <label><i>*</i>公司地址</label>
+					    <div class="content-info">
+					        <input ng-trim="false"  name="custCompanyAddress"  ng-model="inn.custCompanyAddress" type="text" required>
+                    		<validatetip from-model="customerForm.name"></validatetip>
+					    </div>
+				    </li>
+				    </ul>
+
+				</div>
+			</li>
+			<li>
+				<h4>收货确认单信息</h4>
+				<div class="good-detail clearfix">
+					<ul class="clearfix">
+						<li class="good-li">
+					    <label><i>*</i>交易员</label>
+					    <div class="content-info">
+					        <input ng-trim="false"  name="dealer"  ng-model="inn.dealer" type="text" required>
+                    		<validatetip from-model="customerForm.name"></validatetip>
+					    </div>
+				    </li>
+
+				    <li class="good-li">
+						<label><i>*</i>订单编号</label>
+					    <div class="content-info">
+					        <p class="content-text">{{inn.orderNo}}</p>
+					    </div>
+				    </li>
+					</ul>
+				</div>
+			</li>
+			<li>
+				<h4>采购方账户信息</h4>
+				<div class="good-detail clearfix">
+
+					<ul>
+					<li class="good-li">
+						<label><i>*</i>采购方</label>
+					    <div class="content-info">
+					        <p class="content-text">{{inn.purchaserCustomerName}}</p>
+					    </div>
+				    </li>
+					<li class="good-li">
+					    <label><i>*</i>船名</label>
+					    <div class="content-info">
+					        <input ng-trim="false"  name="shipName"  ng-model="inn.shipName" type="text" required>
+                    		<validatetip from-model="customerForm.name"></validatetip>
+					    </div>
+				    </li>
+				    <li class="good-li">
+					    <label><i>*</i>目的港</label>
+					    <div class="content-info">
+					        <input ng-trim="false"  name="destinationPort"  ng-model="inn.destinationPort" type="text" required>
+                    		<validatetip from-model="customerForm.name"></validatetip>
+					    </div>
+				    </li>
+				     <li class="good-li">
+					    <label><i>*</i>收货日期</label>
+					    <div class="content-info">
+					        <input ng-trim="false"  id="InnReceiptTime" name="receiptTime"  ng-model="inn.receiptTime" type="text" required>
+                    		<validatetip from-model="customerForm.name"></validatetip>
+					    </div>
+				    </li>
+
+				    </ul>
+
+				</div>
+			</li>
+
+			<li>
+				<h4>商品信息</h4>
+				<div class="good-detail clearfix">
+					<div class="table-box-div">
+					<table class="goods-table" cellpadding="0" cellspacing="0">
+					    <thead>
+					    	<tr>
+					    		<th width="15%">商品名称</th>
+					    		<th width="15%">采购数量</th>
+					    		<th width="15%">计量单位</th>
+					    		<th width="15%">币种</th>
+					    		<th width="15%">单价</th>
+					    		<th width="15%">总金额</th>
+					    		<th  width="10%">操作</th>
+					    	</tr>
+					    </thead>
+					    <tbody>
+					    	<tr ng-repeat="item in inn.orderGoods">
+					    		<td ng-if="!item.isEdit">
+					    		{{item.goodsName}}
+					    		</td>
+					    		<td ng-if="item.isEdit">
+					    			<input type="text" ng-model="item.goodsName">
+					    		</td>
+					    		<td ng-if="!item.isEdit">{{item.goodsNum}}</td>
+					    		<td ng-if="item.isEdit">
+					    			<input type="text" ng-model="item.goodsNum">
+					    		</td>
+					    		<td ng-if="!item.isEdit">{{item.goodsUnit}}</td>
+					    		<td ng-if="item.isEdit" style="overflow:visible;">
+					    			<div class="content-info ng-select" id="goodsUnitName{{$index}}">
+								        <input ng-trim="false" name="goodsUnitName{{$index}}" ng-model="item.goodsUnitName" type="text" required readonly="readonly" />
+								        <i class="select-icon icon-drop-down" style="top: 3px"></i>
+								    </div>
+					    		</td>
+					    		<td ng-if="!item.isEdit">{{item.goodsCurrencyType}}</td>
+					    		<td ng-if="item.isEdit" style="overflow:visible;">
+					    			<div class="content-info ng-select" id="goodsCurrencyTypeName{{$index}}">
+								        <input ng-trim="false" name="goodsCurrencyTypeName{{$index}}" ng-model="item.goodsCurrencyTypeName" type="text" required readonly="readonly" />
+								        <i class="select-icon icon-drop-down" style="top: 3px"></i>
+								    </div>
+					    		</td>
+					    		<td ng-if="!item.isEdit">{{item.goodsPrice}}</td>
+					    		<td ng-if="item.isEdit">
+					    			<input type="text" ng-model="item.goodsPrice">
+					    		</td>
+					    		<td>{{item.goodsTotal}}</td>
+					    		<td><span ng-click="edit(item,$index)">编辑</span><span ng-click="delete(inn.orderGoods,item)">删除</span></td>
+					    	</tr>
+					    	<tr>
+					    		<td colspan="67">总金额：{{getAmoutTotal(inn.orderGoods)}}</td>
+					    	</tr>
+					    	<tr>
+					    		<td colspan="6"></td>
+					    		<td><span ng-click="add(inn.orderGoods)">添加</span></td>
+					    	</tr>
+					    </tbody>
+					    </table>
+					    </div>
+					<ul>
+					<li class="good-li">
+					    <label><i>*</i>增值税</label>
+					    <div class="content-info">
+					        <input ng-trim="false"  name="name"  ng-model="name" type="text" placeholder="" ng-value="name" required>
+                    		<validatetip from-model="customerForm.name"></validatetip>
+					    </div>
+				    </li>
+				    <li class="good-li">
+					    <label>不含增值<br/>税总金额</label>
+					    <div class="content-info">
+					        <p class="content-text">{{inn.noVat}}</p>
+					    </div>
+				    </li>
+				    <li class="good-li">
+					    <label><i>*</i>最迟付款日期</label>
+					    <div class="content-info">
+					        <input ng-trim="false" name="paymentTime"  ng-model="inn.paymentTime" id="innPaymentTime" type="text" required>
+                    		<validatetip from-model="customerForm.name"></validatetip>
+					    </div>
+				    </li>
+				    </ul>
+
+				</div>
+			</li>
+
+
+			<li>
+			<h4>付款信息</h4>
+			<div class="good-detail clearfix">
+
+					<ul>
+					<li class="good-li">
+					    <label><i>*</i>银行</label>
+					    <div class="content-info">
+					        <input ng-trim="false"  name="bank"  ng-model="inn.bank" type="text"  required>
+                    		<validatetip from-model="customerForm.name"></validatetip>
+					    </div>
+				    </li>
+				    <li class="good-li">
+					    <label><i>*</i>银行地址</label>
+					    <div class="content-info">
+					        <input ng-trim="false"  name="bankAddress"  ng-model="inn.bankAddress" type="text" required>
+                    		<validatetip from-model="customerForm.name"></validatetip>
+					    </div>
+				    </li>
+				    <li class="good-li">
+					    <label><i>*</i>Swift代码</label>
+					    <div class="content-info">
+					        <input ng-trim="false"  name="name"  ng-model="name" type="text" placeholder="" ng-value="name" required>
+                    		<validatetip from-model="customerForm.name"></validatetip>
+					    </div>
+				    </li>
+				    <li class="good-li">
+					    <label><i>*</i>账号</label>
+					    <div class="content-info">
+					        <input ng-trim="false"  name="account"  ng-model="inn.account" type="text" required>
+                    		<validatetip from-model="customerForm.name"></validatetip>
+					    </div>
+				    </li>
+				    <li class="good-li">
+					    <label><i>*</i>开户人</label>
+					    <div class="content-info">
+					        <input ng-trim="false"  name="accountHolder"  ng-model="inn.accountHolder" type="text" required>
+                    		<validatetip from-model="customerForm.name"></validatetip>
+					    </div>
+				    </li>
+				    <li class="good-li">
+					    <label><i>*</i>币种</label>
+					    <div class="content-info">
+					        <input ng-trim="false"  name="currencyCode"  ng-model="inn.currencyCode" type="text" placeholder="" ng-value="name" required>
+                    		<validatetip from-model="customerForm.name"></validatetip>
+					    </div>
+				    </li>
+				    <li class="good-li">
+					    <label><i>*</i>订单编号</label>
+					    <div class="content-info">
+					        <p class="content-text"></p>
+					    </div>
+				    </li>
+				     <li class="good-li" style="width: 100%">
+					    <label><i>*</i>付款条款</label>
+					    <div class="content-info">
+					        <p class="content-text"></p>
+					    </div>
+				    </li>
+				    </ul>
+
+				</div>
+			</li>
+
+			<li>
+			<h4>我方信息</h4>
+			<div class="good-detail clearfix">
+
+					<ul>
+					<li class="good-li">
+					    <label><i>*</i>公司地址</label>
+					    <div class="content-info">
+					        <p class="content-text"></p>
+					    </div>
+				    </li>
+				    <li class="good-li">
+					    <label><i>*</i>联系电话</label>
+					    <div class="content-info">
+					        <p class="content-text"></p>
+					    </div>
+				    </li>
+				    <li class="good-li">
+					    <label><i>*</i>传真</label>
+					    <div class="content-info">
+					        <p class="content-text"></p>
+					    </div>
+				    </li>
+				    <li class="good-li">
+					    <label><i>*</i>电子邮件</label>
+					    <div class="content-info">
+					        <p class="content-text"></p>
+					    </div>
+				    </li>
+				    </li>
+				    </ul>
+
+				</div>
+			</li>
+
+
+		</ul>
+		<div class="btn-group btn-group-center mtb-30" ng-show="orderButtonName">
+			<button class="btn btn-default btn-bill" ng-click="goBack()" >返回</button>
+			<button class="btn btn-primary btn-bill" ng-click="save()" >{{orderButtonName}}</button>
+		</div>
+	</div>
+</div>

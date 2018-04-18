@@ -1,0 +1,16 @@
+<div class="master-table stream-box test_a87b20b7">
+    <input type="button" class="btn btn-default test_a36fe919" value="<%=common_page_back%>" ng-click="goBack()">
+    <h3 class="title-stream test_06b8d988">
+        <%=process%>
+    </h3>
+    <ul class="stream-list test_49878ceb">
+        <li ng-repeat="value in streamList.data" class="{{$index == 0 ? 'active':''}} test_27afd404">
+            <div class="circle test_10697298" style="{{$index == 0 ? 'top:-17px;left:-7.5px': ''}}"></div>
+            <div class="stream-content test_cad66253">
+                <p class="title test_10a276b1">[{{value.action}}]</p>
+                <p class="test_e3468921">{{value.operator}}&nbsp;&nbsp;&nbsp;&nbsp;{{value.approvalTime}}</p>
+                <p class="test_80af59f6"><span ng-if="value.opinion" class="test_f200de72"><%=comments%>:</span><span class="deal-detail test_f1659c94">{{value.opinion}}</span></p>
+            </div>
+        </li>
+    </ul>
+</div>

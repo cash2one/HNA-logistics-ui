@@ -1,0 +1,1 @@
+app.factory("service",["$http","easyHttp",function(t,i){var r={};return r.audit=function(t,r){return i.post("logistics.submitSalesPrice",t,r)},r}]);

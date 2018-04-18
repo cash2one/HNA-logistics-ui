@@ -1,0 +1,161 @@
+<div id="commodityList" class="test_a8cb5e17" ng-hide="fromCockpit">
+	<ul class="bill-tabs test_1b0fae71">
+		<li ng-class="activeTabs('DRAFT')" ng-click="switch('DRAFT')" class="test_d5425220">草稿</li>
+		<li ng-class="activeTabs('CONFIRMING')" ng-click="switch('CONFIRMING')" class="test_fc32cb83">待确认</li>
+		<li ng-class="activeTabs('DELIVERY')" ng-click="switch('DELIVERY')" class="test_ba084a5e">待发货</li>
+		<li ng-class="activeTabs('TRANSPORT')" ng-click="switch('TRANSPORT')" class="test_38ab26ca">待收货</li>
+		<li ng-class="activeTabs('SIGNED')" ng-click="switch('SIGNED')" class="test_532a8d83">已签收</li>
+	</ul>
+	<div class="bills bills-with-tab test_efe6e671">
+		<div class="bill-btn-line clearfix test_18da8a96">
+			<div class="bill-line clearfix test_1231bcc8">
+				<div class="bill-input bill-status test_cbcd9fb4">
+					<label class="test_154343a4">订单编号</label>
+					<p class="test_0673dd96">
+						<input type="text" ng-model="search.orderNo" maxlength="30" placeholder="请输入订单编号或者业务单号" class="test_6440a68a">
+					</p>
+				</div>
+				<div class="bill-input bill-status test_74177856">
+					<label class="test_bc38a9b6">项目</label>
+					<!--下拉-->
+					<p class="test_e413b45f">
+						<input type="text" id="projectId" ng-click="initProjectShort()" ng-model="projectId" readonly="readonly" class="test_686b4842">
+					</p>
+				</div>
+				<div class="bill-input bill-status test_091cd180" ng-if="orderType === 'SALE'">
+					<label class="test_e1331979">商品信息</label>
+					<!-- goodsId -->
+					<p class="test_cc5835bc">
+						<input type="text" placeholder="" ng-click="initGoods()" id="goods" ng-model="salesgoods" class="test_60e3d4e2">
+					</p>
+				</div>
+			</div>
+			<div class="bill-line clearfix test_4dcf9833">
+				<div class="bill-input bill-status test_55f7a714" style="margin-right:0px;">
+					<label class="test_cd52f527">下单时间</label>
+					<p class="test_c232ba01">
+						<input type="text" ng-model="search.startTime" placeholder="" id="sstartDate" class="test_2934ffe5">
+					</p>
+				</div>
+				<div class="bill-input bill-status test_a4454eaf" style="margin-left:0px;">
+					<label style="text-align:center;" class="test_07581fed">-</label>
+					<p class="test_0b58e009">
+						<input type="text" placeholder="" id="sendDate" ng-model="search.endTime" class="test_15a423c2">
+					</p>
+				</div>
+			</div>
+			<div class="bill-line clearfix test_2075746b">
+				<div class="bill-input bill-status test_57a3fa30" ng-if="orderType === 'SALE'">
+					<label class="test_1b0b720b">所属客户</label>
+					<p class="test_7252b0e9">
+						<input type="text" id="customerId" placeholder="" name="customerId" ng-model="customerId" ng-click="initCustomerId()" class="test_3946b0bc">
+					</p>
+				</div>
+				<div class="bill-input bill-status likedusernamelist test_8c7ece83" ng-if="orderType === 'SALE'">
+					<p class="test_004fdfaf">
+						<input type="text" id="likedusernamelist" name="likedusernamelist" ng-model="likedusernamelist" ng-click="initLikedusernamelist()" ng-disabled="!search.customerId" class="test_2a6387d5">
+					</p>
+				</div>
+				<div class="bill-input bill-status test_200fb3da" ng-if="orderType === 'PURCHASE'">
+					<label class="test_b5c50c76">供应商</label>
+					<p class="test_7164c738">
+						<input type="text" placeholder="" id="supplierName" name="supplierName" ng-model="supplierName" ng-click="initSupplier()" class="test_b8710753">
+					</p>
+				</div>
+				<div class="bill-input bill-status test_bf3eb826" ng-if="orderType === 'PURCHASE'">
+					<label class="test_d7b62805">商品信息</label>
+					<!-- goodsId -->
+					<p class="test_cebe1bff">
+						<input type="text" placeholder="" ng-click="initGoods()" id="goods" ng-model="goods" class="test_ddc672e7">
+						<!--<input type="text" placeholder="" ng-click="initPurchaseCus()" id="goodsId" ng-model="goodsId" />-->
+					</p>
+				</div>
+				<div class="bill-btn test_c8606dbc">
+					<span class="clear-search test_c6d01f1d" ng-click="clearSearch()" style="margin:0px 10px;">重置</span>
+					<button class="btn btn-primary btn-bill test_5c645123" ng-click="search()">搜索</button>
+				</div>
+			</div>
+		</div>
+		<div class="btn-group test_d735666b">
+			<button class="btn btn-primary btn-bill test_8dcb7cc8" ng-click="getDetail('detail')" ng-if="activeTab === 'DRAFT'">下单</button>
+			<button class="btn btn-primary btn-bill test_14dc96cc" ng-click="deleteOrder()" ng-if="activeTab === 'DRAFT'">删除</button>
+			<button class="btn btn-primary btn-bill test_b1c46767" ng-click="submitOrder()" ng-if="activeTab === 'DRAFT'">提交订单</button>
+			<button class="btn btn-primary btn-bill test_7a974736" ng-click="comfirmOrder()" ng-if="activeTab === 'CONFIRMING'">订单确认</button>
+			<button ng-disabled="canOutComfirmOrder" class="btn btn-primary btn-bill test_04ee7837" ng-click="outComfirmOrder()" ng-if="activeTab === 'CONFIRMING'||activeTab === 'DELIVERY'||activeTab === 'TRANSPORT'">导出确认单</button>
+			<button class="btn btn-primary btn-bill test_a07e4395" ng-click="deliveryOrder()" ng-if="activeTab === 'DELIVERY'">发货确认</button>
+			<button class="btn btn-primary btn-bill test_d8aa3f1e" ng-click="signedOrder()" ng-if="activeTab === 'TRANSPORT'">收货确认</button>
+			<button class="btn btn-primary btn-bill test_f2a735b7" ng-click="outSignedOrder()" ng-if="activeTab === 'SIGNED'&& orderType == 'PURCHASE'">导出确认单</button>
+			<button class="btn btn-primary btn-bill" ng-click="uploadFile()">附件管理</button>
+		</div>
+
+		<div class="table-container test_b7527ed8" ng-controller="tableController">
+			<!-- <div class="table-wrap" id="tableWrap"> -->
+				<table class="customer-table table-box test_60d39bdc" cellpadding="0" cellspacing="0">
+					<thead class="test_d48b8c50">
+						<tr class="test_c86c1452">
+							<th style="width:5%" class="test_a784eada">
+								<div class="checkbox checkbox-info test_32f16568">
+									<input type="checkbox" ng-model="tableModel.selectFlag" ng-click="table.selectAll(tableModel);" class="test_feae66a1">
+									<label class="test_c71ef664"></label>
+								</div>
+							</th>
+							<th style="width:{{tableModel.tableHeaderSize[$index]}}" ng-repeat="item in tableModel.tableHeader" class="test_10a17e45">{{item}}</th>
+						</tr>
+					</thead>
+
+					<tbody class="test_99501665">
+						<tr ng-repeat="value in tableModel.tableBody" ng-init="renderFinish($last)" class="test_f9215958">
+							<td class="test_c02d035b">
+								<div class="checkbox checkbox-info test_03cb6955">
+									<input type="checkbox" ng-checked="value.checkbox" ng-click="table.selectOne(tableModel, value.checkboxId, $event);" class="test_a32df63f">
+									<label class="test_e987e3c1"></label>
+								</div>
+							</td>
+							<td class="test_374ebafa">{{(tableModel.restData.pageIndex-1)*tableModel.restData.pageSize+$index+1}}</td>
+							<td ng-if="value.orderStatusCode == '5'" title="{{value.orderNo}}" class="test_248eb72e"><span class="span-a test_5cff3984" ng-click="getDetail('sdetail',value.orderNo)">{{value.orderNo}}</span></td>
+							<td ng-if="value.orderStatusCode != '5'" title="{{value.orderNo}}" class="test_8c0af5ea"><span class="span-a test_b4d03903" ng-click="getDetail('detail',value.orderNo)">{{value.orderNo}}</span></td>
+							<td title="{{value.businessNo}}" class="test_eaaeca2e">{{value.businessNo}}</td>
+							<td class="td-p test_8c3308a0">
+								<p title="{{orderGoodsMsg(item)}}" ng-repeat="item in value.orderGoods" class="test_d47149eb">{{item.goodsName}}</p>
+							</td>
+							<td class="test_12f14098">
+								<p ng-if="value.projectName" title="{{value.projectName}}({{value.projectCode}})" class="test_006dc58b">{{value.projectName}}({{value.projectCode}})</p>
+							</td>
+							<td title="{{value.sellerName}}" class="test_d27d3e1a">{{value.sellerName}}</td>
+							<td title="{{value.purchaserName}}" class="test_0ea4780b">{{value.purchaserName}}</td>
+							<td class="test_5bdfbdbd">{{value.orderTime}}</td>
+							<td class="test_0b0606a6">
+								<div ng-if="!value.orderConfirmUrl&&!value.orderDeliverUrl" class="test_6aa7955e">
+									／
+								</div>
+								<div class="test_4aa1f4a5">
+									<a style="cursor: pointer" ng-if="value.orderConfirmUrl" id="confirmOrder-{{value.orderNo}}" ng-click="checkConfirmOrderUrl(value)" download="{{value.orderNo}}.pdf" class="test_0a2d0bf7">订单确认单</a>
+								</div>
+								<div class="test_11e421c6">
+									<a style="cursor: pointer" ng-if="value.orderDeliverUrl" id="deliveryOrder-{{value.orderNo}}" ng-click="checkDeliveryOrderUrl(value)" download="{{value.orderNo}}.pdf" class="test_4e421d38">收货确认单</a>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			<!-- </div> -->
+			<hnapagination table-service="table" page-table-model="tableModel" class="test_a2407979"></hnapagination>
+			<div ng-show="!tableModel.pagination.isVisiblePage" class="undefinedsvg test_262424ad">
+				<img src="/public/img/undefined.svg" class="test_b60e6ccf">
+			</div>
+		</div>
+	</div>
+</div>
+
+<div ng-hide="fromCockpit">
+	<div ng-show="showUploadFile" class="fileContent  prompt-modal">
+		<div class="uploadFileTittle upload_file">上传附件</div>
+		<div class="uploadFileContent upload_file" id="tradeOrderUploadFileContent"></div>
+		<div class="uploadFileButton upload_file">
+			<button class="btn btn-primary" ng-click="showUploadFile = false">关闭</button>
+		</div>
+	</div>
+</div>
+<div id="slides"></div>
+<div id="detail" class="test_16a99f5d"></div>
+<a href="javascript:void(0)" class="closePDF test_0170a260">关闭</a>

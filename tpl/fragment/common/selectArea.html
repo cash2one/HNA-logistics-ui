@@ -1,0 +1,113 @@
+<!--服务范围点击弹出框-->
+<div id="serviceZone" style="display: none;" ng-controller="areaController" ng-init="init()">
+    <div class="panel">
+        <p class="panel-tips"><%=common_page_areaAll%></p>
+
+        <div class="m-tab" id="m-tab">
+            <ul class="nav nav-tabs nav-justified">
+                <li class="active" style="border-left:none;">
+                    <a href="javascript:void(0);"><%=common_page_country%></a>
+                </li>
+                <li style="border-right:none;">
+                    <a href="javascript:void(0);"><%=common_page_area%></a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="table-pane active">
+                    <p class="u-little-tips"><%=common_page_countryTips%></p>
+                    <a style="padding:15px;cursor: default;" href="javascript:;"><%=common_code_leftTips%></a>
+                </div>
+                <div class="table-pane">
+                    <p class="u-little-tips"><%=common_page_countryTips%></p>
+                    <ul class="area-box">
+                        <li >
+                            <div class="select-box input-box">
+                                <input readonly="readonly" ng-model="countryName" ng-value="countryFigureCode" type="text" id="countryFigure" ng-click="showCountry(areaModel)" autocomplete="off"  class="test_002ef147">
+                            </div>
+                        </li>
+                        <li>
+                            <div class="select-box input-box select-disabled">
+                                <input readonly="readonly" ng-model="provinceName" type="text" id="province" ng-click="showProvince()" autocomplete="off" >
+                            </div>
+                        </li>
+                        <li>
+                            <div class="select-box input-box select-disabled">
+                                <input readonly="readonly" ng-model="cityName" type="text" id="city" ng-click="showCity()" autocomplete="off" >
+                            </div>
+                        </li>
+                        <li>
+                            <div class="select-box input-box select-disabled">
+                                <input readonly="readonly" ng-model="areaName" type="text" id="area" ng-click="showArea()" autocomplete="off" >
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel middle">
+        <p class="panel-tips"><%=common_page_candidate%></p>
+
+        <div class="box-header with-border tree">
+            <div class="seach-tree">
+                <input ng-enter="searchCandidate()" ng-model="searchCandidateValue" maxlength="200" type="text" class="form-control" placeholder="{{checkedPlaceholder}}">
+                <i ng-click="searchCandidate()" class="icon-search search-group"></i>
+            </div>
+        </div>
+
+        <div class="selected-user unselect" id="candidateZone">
+            <a ng-if="!countryFigureCode && tabIndex" style="display:block;padding:15px;cursor: default;" href="javascript:;"><%=common_code_centerTips%></a>
+
+            <div ng-show="areaModel.unSelectedData.length">
+                <span class="selected-user-list">
+                    <div class="checkbox checkbox-info">
+                        <input ng-click="toggleCandidateAll(areaModel);" ng-model="areaModel.candidateFlag" type="checkbox">
+                        <label></label>
+                    </div>
+                    <%=common_page_selectAll%>
+                </span>
+                <span ng-if="value.isShow" ng-class="{'selected-user-list':true,'u-delete':value.delete}" ng-repeat="value in areaModel.unSelectedData">
+                    <div class="checkbox checkbox-info">
+                        <input ng-disabled="value.delete" ng-click="toggleCandidateOne(value.interId);" ng-checked="value.checkbox" type="checkbox">
+                         <label></label>
+                    </div>
+                    {{value.name}}
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="move-select-user">
+        <button ng-click="addSelectedData();" class="cancel-selected btn btn-primary icon-angle-right"></button>
+        <button ng-click="removeSelectedData();" class="add-unselected btn btn-primary icon-angle-left"></button>
+    </div>
+
+    <div class="panel right">
+        <p class="panel-tips"><%=common_page_selected%></p>
+
+        <div class="box-header with-border tree">
+            <div class="seach-tree">
+                <input ng-enter="searchSelected()" ng-model="searchSelectedValue" maxlength="30" type="text" class="form-control" placeholder="<%=common_page_checked_inputName%>">
+                <i ng-click="searchSelected()" class="icon-search search-group"></i>
+            </div>
+        </div>
+
+        <div class="selected-user selected" id="selectedZone">
+            <span class="selected-user-list">
+                <div class="checkbox checkbox-info">
+                    <input ng-click="toggleSelectedAll(areaModel);" ng-model="areaModel.selectedFlag" type="checkbox">
+                    <label></label>
+                </div>
+                <%=common_page_selectAll%>
+            </span>
+            <span ng-if="value.isShow" class="selected-user-list" ng-repeat="value in areaModel.selectedData">
+                <div class="checkbox checkbox-info">
+                    <input ng-click="toggleSelectedOne(value.interId);" ng-checked="value.checkbox" type="checkbox">
+                     <label></label>
+                </div>
+                {{value.name}}
+            </span>
+        </div>
+    </div>
+</div>

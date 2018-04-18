@@ -1,0 +1,1 @@
+app.factory("service",["$http","easyHttp",function(t,s){var r={};return r.auditPassed=function(t,r){return s.post("logistics.costPriceAuditPassed",t,r)},r.returnDraft=function(t,r){return s.post("logistics.costPriceReturnDraft",t,r)},r.stopPrice=function(t,r){return s.post("logistics.stopUse",t,r)},r.startPrice=function(t,r){return s.post("logistics.startUse",t,r)},r}]);

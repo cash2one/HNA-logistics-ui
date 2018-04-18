@@ -1,0 +1,22 @@
+<div class="weekly-statics">
+	<h3 class="title">每周统计</h3>
+	<div class="select-option-container clearfix">
+		<div class="start-time select-box">
+			<input type="text" maxlength="30" ng-model="weeklyStart" readonly="readonly" id="startTime" ng-trim="false" autocomplete="off">
+			<i style="z-index: 1"></i>
+		</div>
+		<div class="line-through">~</div>
+		<div class="end-time select-box">
+			<input type="text" maxlength="30" ng-model="weeklyEnd" readonly="readonly" id="endTime" ng-trim="false" autocomplete="off">
+			<i style="z-index: 1"></i>
+		</div>
+		<div class="select-box">
+			<input ng-model="stateName" id="state" autocomplete="off" class="input-text ng-pristine ng-untouched ng-valid" type="text">
+			<i class="select-icon icon-drop-down" style="z-index: 1"></i>
+		</div>
+		<button class="btn btn-primary" ng-click="initChart()">查询</button>
+	</div>
+	<div class="chart-container">
+		<div id="weeklyChart" style="width: 1100px;height: 540px;"></div>
+	</div>
+</div>

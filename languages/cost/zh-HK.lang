@@ -1,0 +1,17 @@
+{
+    "cost_page_newcost": "添加費用類型",
+    "cost_page_baseinfo": "基本信息",
+    "cost_page_costname": "費用名稱",
+    "cost_page_costnameplacer": "請輸入費用名稱",
+    "cost_page_costcode": "編碼",
+    "cost_page_costall": "全部",
+    "cost_page_costcodeplacer": "請輸入編碼",
+    "cost_page_costtype": "類型",
+    "cost_page_choice": "請選擇",
+    "cost_page_remarkinfo": "請輸入備註",
+    "cost_page_globalization": "國際化",
+    "cost_page_searchplacer": "請輸入名稱或編碼",
+    "cost_code_delCostType": "確定刪除已選費用類型？",
+    "cost_code_costDetail": "費用類型詳情",
+    "cost_page_globalizationName": "費用類型國際化名稱"
+}

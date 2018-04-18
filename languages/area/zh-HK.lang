@@ -1,0 +1,16 @@
+{
+    "area_countryName": "中國",
+    "area_otherCountry": "其他",
+    "area_search_country_condition": "請輸入國家名稱，簡稱，程式碼或區號",
+    "area_province": "省",
+    "area_city": "市",
+    "area_area": "區/縣",
+    "area_street": "街道",
+    "area_code_start": "郵編起點",
+    "area_code_end": "郵編終點",
+    "area_country_id": "序號",
+    "area_country_name": "國家名稱",
+    "area_city_name": "都市名稱",
+    "area_no_result_tips": "無搜索結果",
+    "area_select_tips": "請選擇"
+}

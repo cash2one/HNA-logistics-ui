@@ -1,0 +1,1 @@
+app.factory("projectManageView",[function(){return{}}]);

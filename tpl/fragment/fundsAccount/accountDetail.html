@@ -1,0 +1,118 @@
+<div class="c-detail-title">
+    <div class="u-back clearfix">
+        <button ng-click="goBack('accountDetail');" class="btn btn-default test_2874b5ed">返回</button>
+    </div>
+    <div class="u-title">
+        {{accountInfo.custName}}
+    </div>
+</div>
+
+<div class="account-info-box clearfix">
+    <div class="left">
+        <h3>账户信息</h3>
+        <p class="balance">账户余额：</p>
+        <p class="money">{{accountInfoTotalAmount}}<span> {{accountInfo.currencyCode}}</span></p>
+        <p class="withdraw">可提现余额：{{accountInfoTotalBalance}} {{accountInfo.currencyCode}}</p>
+        <p class="depository">存管账户号：{{accountInfo.thirdCustId}}</p>
+        <div class="operate-box">
+            <button type="button" class="btn btn-primary" ng-click="reCharge('recharge')">充值</button>
+            <button type="button" class="btn btn-primary" ng-click="withdraw('withdrawApply')">提现</button>
+        </div>
+    </div>
+    <div class="right">
+        <h3>银行账户信息</h3>
+        <ul>
+            <li>
+                <span class="left-text">账户号：</span>
+                <span class="right-text">{{accountBank.cardNo}}</span>
+            </li>
+            <li>
+                <span class="left-text">银行：</span>
+                <span class="right-text">{{accountBank.bank}}</span>
+            </li>
+            <li>
+                <span class="left-text">开户行：</span>
+                <span class="right-text">{{accountBank.subbranch}}</span>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="account-deal-record" ng-controller="tableController">
+    <div class="m-search-box">
+        <h3>交易记录</h3>
+        <div class="normal">
+            <input ng-model="tableModel.restData.q" ng-enter="searchRecord()" type="text" maxlength="50" class="form-control" placeholder="搜索对方账号持有人/账单号">
+            <button class="btn btn-primary" style="margin:0px 12px;" ng-click="searchRecord();">搜索</button>
+            <a href="javascript:;" class="normal-search-btn" ng-click="filters()">{{advancedText}}</a>
+        </div>
+        <div class="advanced" ng-show="advanced">
+            <div style="display: inline-block;text-align: left;">
+                <span class="label-span">交易时间</span>
+                <input readonly="readonly" ng-model="tableModel.restData.beginDate" id="begin-time" ng-trim="false" type="text" maxlength="30" autocomplete="off">
+                ~
+                <input readonly="readonly" ng-model="tableModel.restData.endDate" id="end-time" ng-trim="false" type="text" maxlength="30" autocomplete="off">
+
+                <span class="label-span">交易类型</span>
+                <div class="select-box" style="display: inline-block">
+                    <input ng-click="getStatus()" ng-model="statusName" ng-value="statusValue" id="select-status" readonly="readonly" ng-trim="false" type="text" placeholder="全部">
+                    <i class="select-icon icon-drop-down"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="table-box">
+        <table class="account-record-table table-box" cellpadding="0" cellspacing="0">
+            <thead>
+                <tr>
+                    <th ng-repeat="item in tableModel.tableHeader">{{item}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="value in tableModel.tableBody" ng-init="renderFinish($last)">
+                    <td title="{{value.id}}"><a href="javascript:;" ng-click="getRecordDetail(value)">{{value.id}}</a></td>
+                    <td title="{{value.tranTime}}">
+                        {{value.tranTime}}
+                    </td>
+                    <td ng-bind-html="(value.thirdPayAccountName || '-') | trustHtml:q" title="{{value.thirdPayAccountName || '-'}}"></td>
+                    <td title="{{value.billNo || '-'}}"><a ng-click="getBillDetail(value)" href="javascript:void(0);" ng-bind-html="(value.billNo || '-') | trustHtml:q"></a></td>
+                    <td title="{{value.tranAmount}}">{{value.tranAmount}}</td>
+                    <td title="{{value.tranType}}">{{value.tranType}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <hnapagination table-service="table" page-table-model="tableModel"></hnapagination>
+    </div>
+</div>
+
+<!--充值提示-->
+<div class="prompt-modal middle-box" ng-show="showRecharge" ng-click="showRecharge = false">
+    <div class="prompt-wrap">
+        <div class="bomb-box" style="min-height:440px!important;min-width: 440px!important;">
+            <div class="title">充值入金账户提示</div>
+            <div class="prompt-rechargeContent">
+                <div class="rechargeContent-text">
+                    <span class="left-text">平台账户号：</span>
+                    <span class="right-text">{{accountBank.cardNo}}</span>
+                </div>
+                <div class="rechargeContent-text">
+                    <span class="left-text">平台账户名称：</span>
+                    <span class="right-text">{{accountBank.bank}}</span>
+                </div>
+                <div class="rechargeContent-text">
+                    <span class="left-text">企业账户号：</span>
+                    <span class="right-text">{{bankCode}}</span>
+                </div>
+                <div class="rechargeContent-text">
+                    <span class="left-text">企业账户名称：</span>
+                    <span class="right-text">{{bankName}}</span>
+                </div>
+            </div>
+            <div class="rechargeInfo">充值提示：请登陆贵公司企业网银，向以上平台网银账户中充入您需要充入的金额。充值时务必仔细核对网银信息，如有任何疑问请联系平台客服（客服电话：400-6886-400）。</div>
+            <div style="min-height:100px!important;line-height: 100px;margin-top: 280px">
+                <a href={{hrefBasic}} target="_blank" type="button" class="btn btn-primary" style="display: inline-block;margin:0px 10px;">平安企业网银</a>
+                <button disabled type="button" class="btn btn-default" style="display: inline-block;margin:0px 10px;">其他银行网银</button>
+            </div>
+        </div>
+    </div>
+</div>

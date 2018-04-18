@@ -1,0 +1,58 @@
+<div ng-show="pageTable.pagination.isVisiblePage" class="col-md-12 kkpage">
+    <div class="btn-group dropup">
+        <div class="total-page">
+            <span data-lang="common_pagination_total">{{total}}</span>
+            <span>{{pageTable.pagination.totalResult}}</span>
+            <span data-lang="common_pagination_piecedata">{{piecedata}}</span>
+        </div>
+        <div class="page-sizeList">
+            <span data-lang="common_pagination_perPage">{{perPage}}</span>
+            <div style="display:inline-block; position:relative;" class="page-size">
+                <i class="down icon-caret-down" data-toggle="dropdown"></i>
+                <button style="border:1px solid #96A0AD;" type="button" class="btn btn-default dropdown-toggle select-page" data-toggle="dropdown">
+                    {{pageTable.pagination.pageSize}}
+                </button>
+                <ul class="dropdown-menu select-page-index" role="menu">
+                    <li ng-repeat="item in pageTable.pagination.pageSizeList">
+                        <a href="javascript:void(0);" ng-click="table.pageSize(pageTable, item);">{{item}}</a>
+                    </li>
+                </ul>
+            </div>
+            <span data-lang="common_pagination_piece">{{piece}}</span>
+        </div>
+    </div>
+    <div class="btn-group dropup" ng-if="pageTable.tableBody">
+        <button ng-if="pageTable.pagination.firstShow" ng-disabled="pageTable.pagination.firstDisabled"
+                ng-click="table.first(pageTable)" type="button" class="btn btn-default" data-lang="common_pagination_home">{{home}}
+        </button>
+        <button ng-disabled="pageTable.pagination.previousDisabled" type="button" class="btn btn-primary"
+                ng-click="table.previous(pageTable)" data-lang="common_pagination_prev">{{prev}}
+        </button>
+        <ul style="display:inline-block;">
+            <li style="display:inline-block;" ng-repeat="page in pageTable.pagination.pageLists">
+                <a class="usable-page" href="javascript:;" ng-show="!page.ellipsis && !page.isActive"
+                   ng-click="table.selectPage(pageTable, page.index)">{{page.index}}</a>
+
+                <button ng-show="!page.ellipsis && page.isActive" type="button" class="btn active btn-primary page-size"
+                        ng-click="table.selectPage(pageTable, page.index)">{{page.index}}
+                </button>
+
+                <span class="unusable-ellipsis" ng-show="page.ellipsis">...</span>
+            </li>
+        </ul>
+        <button ng-disabled="pageTable.pagination.nextsDisabled" type="button" class="btn btn-primary"
+                ng-click="table.nexts(pageTable)" data-lang="common_pagination_next">{{next}}
+        </button>
+        <button ng-if="pageTable.pagination.lastShow" ng-disabled="pageTable.pagination.lastDisabled"
+                ng-click="table.last(pageTable)" type="button" class="btn btn-default" data-lang="common_pagination_last">{{last}}
+        </button>
+        <div class="go-page">
+            <span class="text" data-lang="common_pagination_go">{{go}}</span>
+            <input name="getPage" ng-enter="table.goPage(pageTable)" ng-model="pageTable.pagination.getPage"
+                   class="form-control page-blank" type="text"/>
+            <span class="text" data-lang="common_pagination_page">{{page}}</span>
+            <button ng-click="table.goPage(pageTable)" class="btn btn-primary" data-lang="common_pagination_confirm">{{confirm}}
+            </button>
+        </div>
+    </div>
+</div>

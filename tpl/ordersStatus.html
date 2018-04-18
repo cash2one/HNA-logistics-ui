@@ -1,0 +1,28 @@
+<section name="ordersStatus" class="test_9276d9e7">
+    <div class="test_6001e665">
+        <input type="hidden" ng-model="supplierId" class="test_1de5dbd5">
+
+        <div class="os-goBack test_4b69e846">
+            <button ng-click="goBack();" class="btn btn-default test_705536ed"><%=common_page_back%></button>
+        </div>
+        <div class="os-orderNum test_3eec6ad6">
+            <p class="test_c364e286">{{orderInfo.orderNum}}</p>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="../public/stylesheets/confirmOrder/20161224/confirmOrder.css" class="test_cc11ec1a">
+    <link rel="stylesheet" href="tpl/fragment/ordersStatus/ordersStatus.css" class="test_98e1c58b">
+    <div class="cm-main test_e901d653">
+        <!--订单状态-->
+        <div class="fatherDiv test_ad81cc8f" style="margin-bottom: 20px!important">
+            <div class="label-text test_c6c5f55e"><%=ordersStatus_page_oStatus%><i class="icon-more-down icon-angle-right test_8cb746bb"></i></div>
+            <div include="tpl/fragment/ordersStatus/ordersStatus.html" class="test_b0f81cd4"></div>
+        </div>
+        <!--物流状态-->
+        <div class="fatherDiv test_6ae54fdf">
+            <div class="label-text test_c6c5f55e"><%=ordersStatus_page_logisticsInfo%><i class="icon-more-down icon-angle-right test_8cb746bb"></i></div>
+            <div include="tpl/fragment/ordersStatus/subOrderFlow.html" class="test_f2031577"></div>
+        </div>
+    </div>
+
+</section>

@@ -1,0 +1,123 @@
+<div ng-controller="commodityCtrl" id="commodityList" class="test_c31116ef">
+	<div class="bills test_3d311e2a">
+		<div class="bill-btn-line clearfix test_f901d370">
+			<div class="bill-line clearfix test_bdd476e0">
+				<div class="bill-input bill-status test_a7dd6078">
+					<label class="test_042682bf">商品</label>
+					<p class="test_6c30a838">
+						<input type="text" placeholder="请输入商品名称" ng-model="search.name" maxlength="30" class="test_40c089e9">
+					</p>
+				</div>
+				<div class="bill-input bill-status test_3540725b">
+					<label class="test_356995fd">商品类别</label>
+					<!--下拉 businessTypeId-->
+					<p class="test_dd9ea1ca">
+						<input type="text" id="goodsType" ng-click="goodsTypeIdSelect()" ng-model="goodsTypeId" readonly class="test_f1397f3f">
+					</p>
+				</div>
+				<div class="bill-input bill-status test_8cf0a36a">
+					<label class="test_65403ecf">供应商</label>
+					<p class="test_9c978249">
+						<input type="text" ng-click="initSupplier()" id="supplier" readonly ng-model="supplier" class="test_a059fcb8">
+					</p>
+				</div>
+			</div>
+			<div class="bill-line clearfix test_2665ef39">
+				<div class="bill-input bill-status test_73f4bdbd">
+					<label class="test_41e4e8d3">限制项目</label>
+					<!--下拉 projectLimit-->
+					<p class="test_7896ef24">
+						<input type="text" ng-model="projectLimit" id="projectLimit" readonly class="test_d3e76f5e">
+						<i class="select-icon icon-drop-down test_2d83e1df"></i>
+					</p>
+				</div>
+				<div class="bill-input bill-status test_a1a0bc74">
+					<label class="test_a86e221a">项目</label>
+					<p class="test_7dccb58e">
+						<input type="text" id="projectIds" ng-model="projectIds" readonly ng-click="initProjectShort()" ng-disabled="!search.projectLimit || search.projectLimit == '0'" class="test_3faa5861">
+					</p>
+				</div>
+				<div class="bill-input bill-status test_8d8d079c">
+					<label class="test_09e8a13b">限制采购企业</label>
+					<!--下拉 purchaseLimit-->
+					<p class="test_e442b603">
+						<input type="text" ng-model="purchaserLimit" id="purchaserLimit" readonly class="test_0f75f7f1">
+						<i class="select-icon icon-drop-down test_0fda3b12"></i>
+					</p>
+				</div>
+			</div>
+			<div class="bill-line clearfix test_6d5e536d">
+				<div class="bill-input bill-status test_80ef87b8">
+					<label class="test_7322ba81">采购企业</label>
+					<!-- purchaserCustomerIds 采购企业id数组 -->
+					<p class="test_7b98253e">
+						<input type="text" ng-click="initPurchaseCus()" id="purchaserCustomerCodes" readonly ng-model="purchaserCustomerCodes" ng-disabled="!search.purchaserLimit || search.purchaserLimit == '0'" class="test_2ee77959">
+					</p>
+				</div>
+				<div class="bill-input bill-status test_84e927c5">
+					<label class="test_199a730b">启用状态</label>
+					<p class="test_f98760a8">
+						<input type="text" id="isEnabled" ng-model="isEnabled" readonly class="test_19099fad">
+						<i class="select-icon icon-drop-down test_2ac59436"></i>
+					</p>
+				</div>
+				<div class=" test_f34a81b8" style="margin-right: 108px;text-align: right;">
+					<span class="btn btn-reset test_fba3e9f4" ng-click="clearSearch()">重置</span>
+					<button type="button" class="btn btn-primary btn-bill test_67a5070a" ng-click="searchList()">搜索</button>
+				</div>
+			</div>
+		</div>
+		<div class="btn-group test_a0c7f5a6">
+			<button type="button" class="btn btn-primary btn-bill test_8374f86a" ng-click="getDetail()">添加</button>
+			<button type="button" class="btn btn-primary btn-bill test_0820385a" ng-click="deleteGoods()">删除</button>
+			<button type="button" class="btn btn-primary btn-bill test_d1b5e723" ng-click="enabledGoods(true)">启用</button>
+			<button type="button" class="btn btn-primary btn-bill test_cdaeff44" ng-click="enabledGoods(false)">停用</button>
+		</div>
+		<div class="table-container test_556d2c90" ng-controller="tableController">
+			<div class="table-wrap test_3283f982" id="tableWrap">
+				<table class="customer-table table-box test_1c4ddac0" cellpadding="0" cellspacing="0">
+					<thead class="test_6caefbf9">
+						<tr class="test_75f536f0">
+							<th style="width:5%" class="test_f7b32646">
+								<div class="checkbox checkbox-info test_9c96ca15">
+									<input type="checkbox" ng-model="tableModel.selectFlag" ng-click="table.selectAll(tableModel);" class="test_237e7314">
+									<label class="test_9b36c3a1"></label>
+								</div>
+							</th>
+							<th style="width:{{tableModel.tableHeaderSize[$index]}}" ng-repeat="item in tableModel.tableHeader" class="test_cb4fdbe6">{{item}}</th>
+						</tr>
+					</thead>
+					<tbody class="test_79ae5a56">
+						<tr ng-repeat="value in tableModel.tableBody" ng-init="renderFinish($last)" class="test_efcabfec">
+							<td class="test_01a22198">
+								<div class="checkbox checkbox-info test_3ded0b32">
+									<input type="checkbox" ng-checked="value.checkbox" ng-click="table.selectOne(tableModel, value.checkboxId, $event);" class="test_e578a016">
+									<label class="test_97f36334"></label>
+								</div>
+							</td>
+							<td class="test_e3056f83">{{(tableModel.pagination.currentPage-1)*tableModel.pagination.pageSize+$index+1}}</td>
+							<td title="{{ value.goodsName }}" class="test_337808c6"><span class="span-a test_f47a30ea" ng-click="getDetail(value.id)" ng-bind-html="value.goodsName | trustHtml:searchName"></span></td>
+							<td title="{{ value.goodsType }}" class="test_f8d736d7">{{value.goodsType}}</td>
+							<td title="{{ value.goodsCode }}" class="test_a58125a2">{{ value.goodsCode }}</td>
+							<td title="{{ showMore(value.project,'name') }}" class="test_ccc583ac">
+								<p ng-repeat="subject in value.project.slice(0,2) track by $index" class="test_23315c8e">{{ subject.name }}</p>
+								<p ng-if="value.project.length > 2" class="test_c076beb6">...</p>
+							</td>
+							<td title="{{ showMore(value.purchaserCustomer,'userName') }}" class="test_33e25d22">
+								<p ng-repeat="subject in value.purchaserCustomer.slice(0,2) track by $index" class="test_a142f271">{{ subject.userName }}</p>
+								<p ng-if="value.purchaserCustomer.length > 2" class="test_946715f0">...</p>
+							</td>
+							<td title="{{ value.supplier }}" class="test_cb8d993f">{{value.supplier}}</td>
+							<td title="{{ value.enabled ? '启用' : '停用' }}" class="test_e189e47a">{{value.enabled ? '启用' : '停用'}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<hnapagination table-service="table" page-table-model="tableModel" class="test_33d69725"></hnapagination>
+			<div ng-show="!tableModel.pagination.isVisiblePage" class="undefinedsvg test_c29bbe7e">
+				<img src="/public/img/undefined.svg" class="test_d5936f19">
+			</div>
+		</div>
+	</div>
+</div>
+<div id="detail" class="test_d9695d11"></div>

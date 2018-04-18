@@ -1,0 +1,1 @@
+app.factory("internationalView",[function(){return{}}]);

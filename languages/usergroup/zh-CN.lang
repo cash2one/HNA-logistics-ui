@@ -1,0 +1,27 @@
+{
+    "usergroup_page_orgName": "用户组名称：",
+    "usergroup_page_orgShortName": "用户组简称：",
+    "usergroup_page_orgCode": "用户组编码：",
+    "usergroup_page_description": "备注：",
+    "usergroup_page_orgNameInfo": "请输入用户组名称",
+    "usergroup_page_orgShortNameInfo": "请输入用户组简称",
+    "usergroup_page_orgCodeInfo": "请输入用户组编码",
+    "usergroup_page_descriptionInfo": "请输入备注",
+    "usergroup_validate_orgName": "用户组名称已存在",
+    "usergroup_validate_orgShortName": "用户组简称已存在",
+    "usergroup_validate_orgCode": "用户组编码已存在",
+    "usergroup_tab_title": "用户",
+    "usergroup_move_title_all": "所有用户",
+    "usergroup_move_title_unselect": "待选用户",
+    "usergroup_move_title_selected": "已选用户",
+    "usergroup_move_select_all": "全选",
+    "usergroup_move_search": "请输入用户姓名或工号",
+    "usergroup_tree_search": "该用户组下无搜索结果",
+    "usergroup_prompt_delete_tip": "确定删除该用户组？删除用户组后，包含的子用户组以及用户从属关系也被删除。",
+    "usergroup_prompt_add_text_first": "添加到",
+    "usergroup_prompt_add_text_last": "用户组",
+    "usergroup_prompt_remove_tip": "确定移除已选用户？",
+
+    "usergroup_nestable_add_tip": "当前用户组只支持添加到第5级！",
+    "usergroup_nestable_seat_tip": "新增用户组"
+}

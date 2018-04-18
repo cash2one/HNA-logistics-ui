@@ -1,0 +1,663 @@
+<section class="content test_b81338d6">
+    <div class="g-main test_4287d9cd" ng-hide="mainInfo">
+        <div class="u-back clearfix test_abbb0954">
+            <button ng-click="goBack();" class="btn btn-default test_2874b5ed"><%=common_page_back%></button>
+            <div style="float:right;" class="test_b785973d">
+                <button ng-click="submitAudit();" ng-show="status == 1" ng-disabled="isEdit || isEditPrice" class="btn btn-primary test_ab61faf8"><%=priceDetail_page_submitAudit%></button>
+
+                <button ng-click="enabled(enableValue);" ng-show="viewButton.enable" ng-disabled="isEdit || isEditPrice" class="btn btn-primary test_7d752e42">{{enableName}}</button>
+            </div>
+        </div>
+        <div class="u-title test_b379b305">
+            {{title}}
+        </div>
+        <div class="m-content-box test_4029f140">
+            <div class="m-tab test_411c8201" id="m-tabs">
+                <ul class="nav nav-tabs test_6665f502">
+                    <li class="active test_0a24d3b2">
+                        <a href="javascript:void(0);" class="test_a7eff22d"><%=priceDetail_page_info%></a>
+                    </li>
+                    <li class="test_1e4b8d41">
+                        <a href="javascript:void(0);" class="test_8620f22c"><%=priceDetail_page_price%></a>
+                    </li>
+                </ul>
+                <div class="tab-content test_66e2cdec">
+                    <!--基本信息-->
+                    <div class="table-pane active test_70a46205">
+                        <div class="m-base-info test_d500c0bb">
+                            <form name="infoForm" novalidate="novalidate" class="test_21251633">
+                                <div class="text-right u-edit-box test_65a56d11">
+                                    <button ng-hide="isEdit || isHidenEditBtn" id="editInfo" ng-click="editInfo();" class="btn btn-primary test_a974693c"><%=common_page_edit%></button>
+                                </div>
+
+                                <div class="row clearfix test_7dc2b179">
+                                    <div class="col-md-1 test_535c27df"></div>
+                                    <div class="col-md-5 test_5961f9c9">
+                                        <!--价格名称-->
+                                        <div class="row row-list clearfix test_a156240c">
+                                            <div class="text-right col-md-4 test_4260e712">
+                                                <label class="test_a6692ff0">
+                                                    <b ng-show="isEdit" class="u-must-red test_7de26879">*</b>
+                                                    <%=priceDetail_page_priceName%>：
+                                                </label>
+                                            </div>
+                                            <div class="text-left col-md-8 test_2c8a5719">
+                                                <span ng-hide="isEdit" class="span-value test_d52bcac8">{{iPriceName}}</span>
+                                                <input ng-show="isEdit" ng-trim="false" verification="{'ruleType':'name'}" name="iInputPriceName" ng-model="iInputPriceName" type="text" maxlength="{{infoForm.iInputPriceName.maxLength}}" autocomplete="off" required="required" class="u-info-input test_a75bb216">
+                                                <div class="verification test_a664fd68">
+                                                    <span class="errors test_80064f50" ng-show="infoForm.iInputPriceName.$viewValue && infoForm.iInputPriceName.$error.defined && infoForm.iInputPriceName.$dirty">{{infoForm.iInputPriceName.errorTips}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--编码-->
+                                        <div class="row row-list clearfix test_2a6541b8" ng-if="iCode && uid">
+                                            <div class="text-right col-md-4 test_a26458ce">
+                                                <label class="test_14500336">
+                                                    <%=common_code_code%>：
+                                                </label>
+                                            </div>
+                                            <div class="text-left col-md-8 test_45e377bc">
+                                                <span class="span-value test_e10b58e9">{{iCode}}</span>
+                                            </div>
+                                        </div>
+
+                                        <!--服务-->
+                                        <div class="row row-list clearfix test_4d7a59b1" ng-if="!viewButton.isSalesPrice">
+                                            <div class="text-right col-md-4 test_aca8456f">
+                                                <label class="test_dcb8e2b0">
+                                                    <b ng-show="isEdit" class="u-must-red test_1bb05939">*</b>
+                                                    <%=priceDetail_page_service%>：
+                                                </label>
+                                            </div>
+                                            <div class="text-left col-md-8 test_005e4ae4">
+                                                <span ng-hide="isEdit" class="span-value test_17c19c38"><a href="javascript:;" ng-click="showDetails('services');" class="test_0cf1ddd9">{{iServices}}</a></span>
+                                                <div class="select-box test_efb80af6" ng-show="isEdit">
+                                                    <input id="select-service" ng-value="iInputServicesValue" ng-click="getServices();" readonly="readonly" ng-trim="false" name="iInputServices" ng-model="iInputServices" type="text" autocomplete="off" required="required" class="u-info-input test_f1935c9b">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--产品-->
+                                        <div class="row row-list clearfix test_eacde64e" ng-if="viewButton.isSalesPrice">
+                                            <div class="text-right col-md-4 test_2c4ce84b">
+                                                <label class="test_daae4980">
+                                                    <b ng-show="isEdit" class="u-must-red test_55a3bc53">*</b>
+                                                    <%=priceDetail_page_product%>：
+                                                </label>
+                                            </div>
+                                            <div class="text-left col-md-8 test_1afbe39a">
+                                                <span ng-hide="isEdit" ng-click="jumpTo()" style="color: #01AAED;cursor: pointer;" class="span-value test_7da41fb8">{{iProduct}}</span>
+                                                <div class="select-box test_0d3d1f7c" ng-show="isEdit">
+                                                    <input id="select-product" ng-value="iInputProductValue" readonly="readonly" ng-trim="false" name="iInputProduct" ng-model="iInputProduct" type="text" maxlength="62" autocomplete="off" required="required" class="u-info-input test_56bd646e">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--价格类型-->
+                                        <div class="row row-list clearfix test_91b8571f" ng-if="viewButton.isSalesPrice">
+                                            <div class="text-right col-md-4 test_44ae693c">
+                                                <label class="test_e74e6644">
+                                                    <b ng-show="isEdit" class="u-must-red test_677fa81a">*</b>
+                                                    <%=priceDetail_page_priceType%>：
+                                                </label>
+                                            </div>
+                                            <div class="text-left col-md-8 test_f65783c0">
+                                                <span ng-hide="isEdit" class="span-value test_63314633">{{iPriceType}}</span>
+                                                <span ng-if="iInputPriceTypeValue == 1 && iPriceLevel" ng-hide="isEdit" class="span-value test_8a90ad90"> - {{iPriceLevel}}</span>
+                                                <span ng-if="iInputPriceTypeValue == 2 && iClient" ng-hide="isEdit" class="span-value test_7e4096de"> - {{iClient}}</span>
+                                                <div class="row clearfix test_9245c872" ng-show="isEdit" style="margin-right: 0px;">
+                                                    <div ng-click="getPriceType();" class="col-md-6 select-box test_6edf14b5" style="padding-right:0px;">
+                                                        <input id="select-price-type" readonly="readonly" ng-trim="false" name="iInputPriceType" ng-value="iInputPriceTypeValue" ng-model="iInputPriceType" type="text" maxlength="30" autocomplete="off" required="required" class="u-info-input test_6830d94c" placeholder="<%=priceDetail_page_pleaseChoose%>">
+                                                        <i class="select-icon icon-drop-down test_0f8e82cf"></i>
+                                                    </div>
+                                                    <div ng-if="iInputPriceTypeValue == 1" ng-init="getPriceLevel();" class="col-md-6 select-box test_a5e16e36" style="padding-right:0px;">
+                                                        <input id="select-price-level" readonly="readonly" ng-trim="false" name="iInputPriceLevel" ng-value="iInputPriceLevelValue" ng-model="iInputPriceLevel" type="text" maxlength="30" autocomplete="off" required="required" class="u-info-input test_4cf24aef" placeholder="<%=priceDetail_page_pleaseChoose%>">
+                                                        <i class="select-icon icon-drop-down test_d5700b63"></i>
+                                                    </div>
+
+                                                    <div ng-if="iInputPriceTypeValue == 2" class="col-md-6 select-box test_519d84be" style="padding-right:0px;">
+                                                        <input ng-click="getClient();" id="select-client" readonly="readonly" ng-show="isEdit" ng-trim="false" name="iInputClient" ng-value="iInputClientValue" ng-model="iInputClient" type="text" maxlength="30" autocomplete="off" required="required" class="u-info-input test_52959f94">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--起运地-->
+                                        <div class="row row-list clearfix test_dc45c500">
+                                            <div class="text-right col-md-4 test_aa113f1d">
+                                                <label class="test_1e8f79fd">
+                                                    <%=priceDetail_page_departure%>：
+                                                </label>
+                                            </div>
+                                            <div class="text-left col-md-8 test_250c8046">
+                                                <span ng-hide="isEdit" class="span-value test_e0d995d5">{{iDeparture}}</span>
+                                                <input readonly="readonly" ng-click="selectRegion();" ng-show="isEdit" ng-trim="false" name="iInputDeparture" ng-model="iInputDeparture" type="text" autocomplete="off" class="u-info-input test_4ca3776a" placeholder="<%=priceDetail_page_departurePlacer%>">
+                                            </div>
+                                        </div>
+
+                                        <!--分区-->
+                                        <div class="row row-list clearfix test_155e31f1">
+                                            <div class="text-right col-md-4 test_7561850d">
+                                                <label class="test_4fa6666f">
+                                                    <b ng-show="isEdit" class="u-must-red test_02faaaae">*</b>
+                                                    <%=priceDetail_page_region%>：
+                                                </label>
+                                            </div>
+                                            <div class="text-left col-md-8 test_7d3125bd">
+                                                <span ng-hide="isEdit" class="span-value test_ecd0901f"><a href="javascript:;" ng-click="showDetails('regions');" class="test_46a33171">{{iRegion}}</a></span>
+                                                <div class="select-box test_11a2cc71" ng-show="isEdit">
+                                                    <input id="select-region-info" ng-click="getRegion('info');" readonly="readonly" ng-trim="false" name="iInputRegion" ng-value="iInputRegionValue" ng-model="iInputRegion" type="text" autocomplete="off" required="required" class="u-info-input test_193f444c">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--重量段-->
+                                        <div class="row row-list clearfix test_765025cb">
+                                            <div class="text-right col-md-4 test_d796566d">
+                                                <label class="test_57e34c65">
+                                                    <b ng-show="isEdit" class="u-must-red test_dd0d5e8c">*</b>
+                                                    <%=priceDetail_page_weight%>：
+                                                </label>
+                                            </div>
+                                            <div class="text-left col-md-8 test_56ec9a59">
+                                                <span ng-hide="isEdit" class="span-value test_f4ae0c0a"><a href="javascript:;" ng-click="showDetails('weights');" class="test_a979df72">{{iWeight}}</a></span>
+                                                <div class="select-box test_6964cea6" ng-show="isEdit">
+                                                    <input id="select-weight-info" ng-click="getWeight('info');" readonly="readonly" ng-trim="false" name="iInputWeight" ng-value="iInputWeightValue" ng-model="iInputWeight" type="text" autocomplete="off" required="required" class="u-info-input test_dccb3770">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-5 test_ab5f60ca">
+                                        <!--计价货币-->
+                                        <div class="row row-list clearfix test_0398854d">
+                                            <div class="text-right col-md-4 test_8b6228de">
+                                                <label class="test_e81a615d">
+                                                    <b ng-show="isEdit" class="u-must-red test_3410553b">*</b>
+                                                    <%=priceDetail_page_currency%>：
+                                                </label>
+                                            </div>
+                                            <div class="text-left col-md-8 test_418cb9b5">
+                                                <span ng-hide="isEdit" class="span-value test_d64565e2">{{iCurrency}}</span>
+                                                <div class="select-box test_371496cd" ng-show="isEdit">
+                                                    <input id="select-currency" ng-click="getCurrency();" readonly="readonly" ng-trim="false" name="iInputCurrency" ng-value="iInputCurrencyValue" ng-model="iInputCurrency" type="text" maxlength="30" autocomplete="off" required="required" class="u-info-input test_5e41ce02">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--货物类型-->
+                                        <div class="row row-list clearfix test_029d9a7f">
+                                            <div class="text-right col-md-4 test_4f4da345">
+                                                <label class="test_8de7105d">
+                                                    <b ng-show="isEdit" class="u-must-red test_ebe91ada">*</b>
+                                                    <%=priceDetail_page_goods%>：
+                                                </label>
+                                            </div>
+                                            <div class="text-left col-md-8 test_3c24fcb4">
+                                                <span ng-hide="isEdit" class="span-value test_6d565a4b">{{iGoodsType}}</span>
+                                                <div class="select-box test_2be26545" ng-show="isEdit" ng-click="getGoods();">
+                                                    <input id="select-goods" readonly="readonly" ng-show="isEdit" ng-trim="false" name="iInputGoodsType" ng-value="iInputGoodsTypeValue" ng-model="iInputGoodsType" type="text" maxlength="30" autocomplete="off" required="required" class="u-info-input test_219fff6b" placeholder="<%=priceDetail_page_pleaseChoose%>">
+                                                    <i class="select-icon icon-drop-down test_0f82f370"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--结算方式-->
+                                        <div class="row row-list clearfix test_c17fa6f1">
+                                            <div class="text-right col-md-4 test_ec10e8fa">
+                                                <label class="test_ea4e9bc2">
+                                                    <%=priceDetail_page_account%>：
+                                                </label>
+                                            </div>
+                                            <div class="text-left col-md-8 test_8598fe53">
+                                                <span ng-hide="isEdit" class="span-value test_20e65c47">{{iAccount}}</span>
+                                                <div class="select-box test_fe1a9e65" ng-show="isEdit">
+                                                    <input id="select-account" ng-click="getAccount();" readonly="readonly" ng-show="isEdit" ng-trim="false" name="iInputAccount" ng-value="iInputAccountValue" ng-model="iInputAccount" type="text" autocomplete="off" class="u-info-input test_6505ddec">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--生效时间-->
+                                        <div class="row row-list clearfix test_c0703c7c">
+                                            <div class="text-right col-md-4 test_e232a72e">
+                                                <label class="test_136021fb">
+                                                    <b ng-show="isEdit" class="u-must-red test_c3f830a7">*</b>
+                                                    <%=priceDetail_page_startTime%>：
+                                                </label>
+                                            </div>
+                                            <div class="text-left col-md-8 test_da32c126">
+                                                <span ng-hide="isEdit" class="span-value test_d96155ad">{{iBeginTime}}</span>
+                                                <input id="begin-time" readonly="readonly" ng-show="isEdit" ng-trim="false" name="iInputBeginTime" ng-model="iInputBeginTime" type="text" maxlength="30" autocomplete="off" required="required" class="u-info-input test_8ab4857c" placeholder="<%=priceDetail_page_startTimePlacer%>">
+                                            </div>
+                                        </div>
+
+                                        <!--失效时间-->
+                                        <div class="row row-list clearfix test_e0666dc4">
+                                            <div class="text-right col-md-4 test_b78433b0">
+                                                <label class="test_595a00d7">
+                                                    <b ng-show="isEdit" class="u-must-red test_1a40c983">*</b>
+                                                    <%=priceDetail_page_endTime%>：
+                                                </label>
+                                            </div>
+                                            <div class="text-left col-md-8 test_13e1f64a">
+                                                <span ng-hide="isEdit" class="span-value test_e6dc998b">{{iEndTime}}</span>
+                                                <input id="end-time" readonly="readonly" ng-show="isEdit" ng-trim="false" name="iInputEndTime" ng-model="iInputEndTime" type="text" maxlength="30" autocomplete="off" required="required" class="u-info-input test_042fc717" placeholder="<%=priceDetail_page_endTimePlacer%>">
+                                            </div>
+                                        </div>
+
+                                        <!--备注-->
+                                        <div class="row row-list clearfix test_de654d2c">
+                                            <div class="text-right col-md-4 test_15c8001d">
+                                                <label class="test_8571f61c">
+                                                    <%=common_table_remark%>：
+                                                </label>
+                                            </div>
+                                            <div class="text-left col-md-8 test_5550acc9">
+                                                <div class="wrap-textarea test_c5068090">
+                                                    <span class="span-value test_12757bfb" ng-hide="isEdit">{{iRemark}}</span>
+                                                    <textarea text-length="" ng-show="isEdit" name="iInputRemark" ng-model="iInputRemark" ng-trim="false" rows="5" type="text" maxlength="140" class="test_84c93d20"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1 test_ee92eda0"></div>
+                                </div>
+
+                                <div ng-show="isEdit" class="btn-groups text-center test_86c19c2c">
+                                    <button ng-show="viewButton.isShowCancelBtn" ng-click="cancelInfo()" class="btn btn-default test_87ba064c"><%=common_page_cancel%></button>
+                                    <button ng-show="viewButton.isShowCancelBtn" ng-click="saveInfo(false)" class="btn btn-primary test_fe5670c9">{{isOffline || status == 1 ? '保存' : '保存草稿'}}</button>
+                                    <button ng-hide="viewButton.isShowCancelBtn" ng-click="saveInfo(true)" class="btn btn-primary test_0e7670e0"><%=priceDetail_page_saveAndNext%></button>
+                                </div>
+                                <div ng-show="!isEdit" class="btn-groups text-right test_355ce24c">
+                                    <%=priceDetail_page_creator%>：{{creatorUserName}}    <%=priceDetail_page_creatorTime%>：{{createTime}}
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!--价格明细-->
+                    <div class="table-pane test_d1b05cb1">
+                        <div class="m-base-price test_f1e0fede">
+                            <div class="text-right u-edit-box test_f4994673">
+                                <button ng-hide="isEditPrice || isHidenEditBtn" id="editPrice" ng-click="editPrice();" class="btn btn-primary test_a746f6ac"><%=common_page_edit%></button>
+                            </div>
+                            <div ng-if="viewButton.isSalesPrice" class="price-detail-top test_f5dce71a">
+                                <ul class="clearfix">
+                                    <li ng-repeat="item in serviceTypeList" ng-class="{'active':$index == currentServiceTypeIndex}" ng-click="changeServiceType($index)">
+                                        <a href="javascript:;">{{item.serviceTypesName}}</a>
+                                    </li>
+                                </ul>
+                                <ul class="clearfix test_f53c3062">
+                                    <li ng-click="getPriceTable($index, item.id);" ng-repeat="item in priceDetailList" ng-class="{'active':$index == currentDetailIndex,'disabled':($index != currentDetailIndex) && isEditPrice}" class="test_79204bbe">
+                                        <a href="javascript:;" class="test_4380b7e0">{{item.supplierOrServiceName}}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="price-detail-search test_62c51ad9">
+                                <form name="priceDetailForm" novalidate="" class="test_f13d5396">
+                                    <div class="row row-list clearfix">
+                                        <div class="text-right col-md-2 test_33553fb9">
+                                            <label class="test_f6338fc3">
+                                                <b ng-show="isEditPrice" class="u-must-red test_9fc8343b">*</b>
+                                                <%=priceDetail_page_costType%>：
+                                            </label>
+                                        </div>
+                                        <div class="text-left col-md-4 test_b25f2334">
+                                            <span ng-hide="isEditPrice" class="span-value test_5464dc23">{{iCostType}}</span>
+                                            <span ng-if="iCost" ng-hide="isEditPrice" class="span-value test_97445716"> - {{iCost}}</span>
+                                            <div class="row clearfix test_7d3c50ce" ng-show="isEditPrice">
+                                                <div ng-click="getCostType();" class="col-md-4 select-box test_d335fc02" style="padding-right:0px;">
+                                                    <input id="select-cost-type" readonly="readonly" ng-trim="false" name="iInputCostType" ng-value="iInputCostTypeValue" ng-model="iInputCostType" type="text" maxlength="30" autocomplete="off" required="required" class="u-info-input test_d701d3bd" placeholder="<%=priceDetail_page_pleaseChoose%>">
+                                                    <i class="select-icon icon-drop-down test_b69c866f"></i>
+                                                </div>
+                                                <div class="col-md-8 select-box test_a3969f7f">
+                                                    <input ng-click="getCost();" id="select-cost" readonly="readonly" ng-trim="false" name="iInputCost" ng-value="iInputCostValue" ng-model="iInputCost" type="text" autocomplete="off" required="required" class="u-info-input test_9cf466b8" placeholder="<%=priceDetail_page_regionPlacer%>">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button ng-show="viewButton.isSalesPrice && (status == 1 || (status == 3 && isOnline === false))" id="copyPriceDetail" ng-click="copyPriceDetail();" ng-disabled="isEdit || isEditPrice || allPriceDetailList.length === 1" class="btn btn-primary copy-btn pull-right test_a746f6ac"><%=priceDetail_page_copy%></button>
+                                    </div>
+                                    <div ng-if="viewButton.isSalesPrice" class="row row-list clearfix test_ee151796">
+                                        <div class="text-right col-md-2">
+                                            <label><%=priceDetail_page_region%>：</label>
+                                        </div>
+                                        <div class="text-left col-md-4">
+                                            <span ng-hide="isEditPrice" class="span-value">{{iDetailRegion}}</span>
+                                            <div class="select-box" ng-show="isEditPrice">
+                                                <input id="select-region-detail" ng-click="getRegion('detail');" readonly="readonly" ng-trim="false" name="iDetailRegion" ng-value="iDetailRegionValue" ng-model="iDetailRegion" type="text" autocomplete="off" class="u-info-input" placeholder="<%=priceDetail_page_regionPlacer%>">
+                                            </div>
+                                        </div>
+                                        <div class="text-right col-md-2 test_d796566d">
+                                            <label class="test_57e34c65"><%=priceDetail_page_weight%>：</label>
+                                        </div>
+                                        <div class="text-left col-md-4 test_56ec9a59">
+                                            <span ng-hide="isEditPrice" class="span-value test_f4ae0c0a">{{iDetailWeight}}</span>
+                                            <div class="select-box test_6964cea6" ng-show="isEditPrice">
+                                                <input id="select-weight-detail" ng-click="getWeight('detail');" readonly="readonly" ng-trim="false" name="iDetailWeight" ng-value="iDetailWeightValue" ng-model="iDetailWeight" type="text" autocomplete="off" class="u-info-input test_dccb3770" placeholder="<%=priceDetail_page_regionPlacer%>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div ng-class="{'lock-table-box':true,'m-isedit-price':isEditPrice}" class="test_570b37f2">
+                                <div class="w-lock-table test_948c355f" id="w-lock-table"></div>
+                            </div>
+                            <div ng-show="isEditPrice" class="u-save-price btn-groups text-center test_e74fcbef">
+                                <button ng-show="viewButton.isShowCancelBtn && isEditPrice && module !='costPrice' && module!='salesPrice'" ng-click="cancelPrice()" class="btn btn-default test_636777a8"><%=common_page_cancel%></button>
+                                <button ng-click="savePrice()" class="btn btn-primary test_4e2d48a0">{{isOffline ? '保存' : '保存草稿'}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="m-audit-box test_79b02eaa" ng-show="viewButton.audit">
+            <form name="auditForm" novalidate="novalidate" class="test_8c4ee52e">
+                <div class="row row-list clearfix test_a5223103">
+                    <div class="text-right col-md-2 test_61f4fad6">
+                        <label class="test_04208147"><b class="u-must-red test_28b891f8">*</b><%=priceDetail_page_auditSuggest%>：</label>
+                    </div>
+                    <div class="text-left col-md-10 test_99bb4b6e" style="position: relative;">
+                        <div class="radio radio-single radio-primary test_ad476433">
+                            <input name="auditStatus" value="1" type="radio" ng-model="auditStatus" class="test_d0a4ae6b">
+                            <label class="test_64fb1e5d"></label>
+                        </div>
+                        <span class="test_fcb79576"><%=priceDetail_page_backDraft%></span>
+
+                        <div class="radio radio-single radio-primary test_0d9c948d" style="margin-left: 15px;">
+                            <input name="auditStatus" value="2" type="radio" ng-model="auditStatus" class="test_eaa07b9d">
+                            <label class="test_0e5658ef"></label>
+                        </div>
+                        <span class="test_d8b03156"><%=priceDetail_audit_passed%></span>
+
+                        <span ng-show="!auditStatus && auditSubmitStatus" class="u-must-red test_4141cbb5" style="position: absolute;left: 15px;top: 25px;font-size: 14px;">请先选择审核意见</span>
+                    </div>
+                </div>
+                <div class="row row-list clearfix test_1ffd7115">
+                    <div class="text-right col-md-2 test_4900ab32">
+                        <label class="test_eab55a04"><b class="u-must-red test_aa1b1cac">*</b><%=priceDetail_page_auditRemark%>：</label>
+                    </div>
+                    <div class="text-left col-md-10 test_2efd1330">
+                        <div class="wrap-textarea test_0de33fa8">
+                            <textarea required="required" text-length="" name="auditRemark" ng-model="auditRemark" ng-trim="false" rows="5" type="text" maxlength="140" placeholder="<%=priceDetail_page_auditRemarkPlacer%>" class="test_fec7e9ff"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center test_68d35391">
+                    <button ng-disabled="viewButton.submitDisabled" class="btn btn-primary test_ce86a99e" ng-click="submitAudit();"><%=priceDetail_page_submitSuggest%></button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="g-main test_13628c09" ng-show="mainInfo">
+        <div class="u-back clearfix test_e820efc9">
+            <button ng-click="goBackToInfo();" class="btn btn-default test_e1cc30d9"><%=common_page_back%></button>
+        </div>
+        <div class="u-title test_6821a417">
+            {{detail.title}}
+        </div>
+        <!--服务详情-->
+        <div class="m-detail-content test_d33d0b26" ng-show="detail.isServices">
+            <div class="m-base-info test_aea39a73">
+                <div class="row clearfix test_674ae3a0">
+                    <div class="col-md-1 test_06219b47"></div>
+                    <div class="col-md-5 test_f7b96efb">
+                        <div class="row row-list clearfix test_9c643075">
+                            <div class="text-right col-md-4 test_65ed5cdc">
+                                <label class="test_642704c5">
+                                    <%=priceDetail_page_serviceName%>：
+                                </label>
+                            </div>
+                            <div class="text-left col-md-8 test_6d05dd80">
+                                <span class="span-value test_8dc15d04">{{detail.name}}</span>
+                            </div>
+                        </div>
+                        <div class="row row-list clearfix test_acb5e775">
+                            <div class="text-right col-md-4 test_95f6195d">
+                                <label class="test_e929f26a">
+                                    <%=common_code_code%>：
+                                </label>
+                            </div>
+                            <div class="text-left col-md-8 test_d9f0453e">
+                                <span class="span-value test_32880064">{{detail.code}}</span>
+                            </div>
+                        </div>
+                        <div class="row row-list clearfix test_434f887a">
+                            <div class="text-right col-md-4 test_d9b5efa0">
+                                <label class="test_133d4a59">
+                                    <%=priceDetail_page_serviceType%>：
+                                </label>
+                            </div>
+                            <div class="text-left col-md-8 test_15d3f66c">
+                                <span class="span-value test_5b8cb71b">{{detail.serviceTypeName}}</span>
+                            </div>
+                        </div>
+                        <div class="row row-list clearfix test_e876e77c">
+                            <div class="text-right col-md-4 test_fa07ca83">
+                                <label class="test_dcd9e896">
+                                    <%=priceDetail_page_serviceContent%>：
+                                </label>
+                            </div>
+                            <div class="text-left col-md-8 test_f575adb1">
+                                <span class="span-value test_3e384ef2">{{detail.serviceContent}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-5 test_24fbd936">
+                        <div class="row row-list clearfix test_4177d43d">
+                            <div class="text-right col-md-4 test_f5559099">
+                                <label class="test_d59c5b8f">
+                                    <%=priceDetail_page_serviceRange%>：
+                                </label>
+                            </div>
+                            <div class="text-left col-md-8 test_caab6b85">
+                                <span class="span-value test_bc447055">{{detail.serviceRange}}</span>
+                            </div>
+                        </div>
+                        <div class="row row-list clearfix test_42b86662">
+                            <div class="text-right col-md-4 test_a7019984">
+                                <label class="test_a15b7da5">
+                                    <%=priceDetail_page_goods%>：
+                                </label>
+                            </div>
+                            <div class="text-left col-md-8 test_4eaf696e">
+                                <span class="span-value test_fc8745e8">{{detail.cargoTypeName}}</span>
+                            </div>
+                        </div>
+                        <div class="row row-list clearfix test_16bcf9d8">
+                            <div class="text-right col-md-4 test_c7ba558b">
+                                <label class="test_e654ba29">
+                                    <%=priceDetail_page_supplier%>：
+                                </label>
+                            </div>
+                            <div class="text-left col-md-8 test_93f510d0">
+                                <span class="span-value test_40124bc3">{{detail.supplierName}}</span>
+                            </div>
+                        </div>
+                        <div class="row row-list clearfix test_f642b6cb">
+                            <div class="text-right col-md-4 test_3017bd9f">
+                                <label class="test_19a5854e">
+                                    <%=common_page_remarks%>：
+                                </label>
+                            </div>
+                            <div class="text-left col-md-8 test_e0fdb10d">
+                                <span class="span-value test_2ab728e8">{{detail.description}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1 test_b4d87e6f"></div>
+                </div>
+                <div class="btn-groups text-right test_2441e4ed">
+                    <%=priceDetail_page_creator%>：{{detail.userName}}    <%=priceDetail_page_creatorTime%>：{{detail.createTime}}
+                </div>
+            </div>
+        </div>
+
+        <!--分区详情-->
+        <div class="m-detail-content test_208f22fd" id="m-show-region" ng-show="detail.isRegions">
+            <div class="m-search test_7546f7c1">
+                <div class="list-search-box test_ca6cb46f">
+                    <input maxlength="30" ng-enter="searchRegionTable();" ng-model="tableModel.restData.q" ng-value="q" type="text" class="form-control u-search test_0360038f" placeholder="<%=priceDetail_page_searchPlacer%>">
+                    <i class="icon-search u-icon-search test_59cd1133"></i>
+                    <div class="u-search-btn test_49a9e35c">
+                        <button ng-click="searchRegionTable();" class="btn btn-primary test_397c682d"><%=common_page_search%></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-container test_cb0ad624" ng-controller="tableController">
+                <table class="m-table table-box test_9b84af88" cellpadding="0" cellspacing="0">
+                    <thead class="test_11e29b2e">
+                    <tr class="test_de721e2c">
+                        <th ng-repeat="item in tableModel.tableHeader" class="test_cf32a457">{{item}}</th>
+                    </tr>
+                    </thead>
+
+                    <tbody class="test_4c3b5ef2">
+                    <tr ng-repeat="value in tableModel.tableBody" ng-init="renderFinish($last)" class="test_1f9c405c">
+                        <td class="test_03fcaa7a">{{(tableModel.pagination.currentPage-1)*tableModel.pagination.pageSize+$index+1}}</td>
+                        <td title="{{value.name}}" ng-bind-html="value.name | trustHtml:q" class="test_ef6758f3"></td>
+                        <td title="{{value.code}}" ng-bind-html="value.code | trustHtml:q" class="test_0872e014"></td>
+                        <td title="{{value.type}}" class="test_eb8f0a07">{{value.type}}</td>
+                        <td title="{{value.typeValue}}" ng-bind-html="value.typeValue | trustHtml:q" class="test_1c9c4af9"></td>
+                        <td title="{{value.description}}" class="test_6e0681ea">{{value.description}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <hnapagination table-service="table" page-table-model="tableModel" class="test_69b85d89"></hnapagination>
+            </div>
+            <div ng-show="!tableModel.pagination.isVisiblePage" style="position: absolute;top:137px;bottom:15px;width:100%;" class="test_e43f1aff">
+                <img style="width:100%;height:100%;" src="/public/img/undefined.svg" class="test_e8d7eef0">
+            </div>
+        </div>
+
+        <!--重量段详情-->
+        <div class="m-detail-content test_435bf640" ng-show="detail.isWeights">
+            <div class="m-base-info test_9c4b0b2d">
+                <div class="row row-list clearfix test_23d63489">
+                    <div class="text-right col-md-5 test_f793b101">
+                        <label class="test_ea1d06c2">
+                            <%=priceDetail_page_name%>：
+                        </label>
+                    </div>
+                    <div class="text-left col-md-7 test_7ef7da04">
+                        <span class="span-value test_c2500cea">{{detail.name}}</span>
+                    </div>
+                </div>
+                <div class="row row-list clearfix test_6424221b">
+                    <div class="text-right col-md-5 test_c41942bd">
+                        <label class="test_1b219002">
+                            <%=common_code_code%>：
+                        </label>
+                    </div>
+                    <div class="text-left col-md-7 test_1f76a7ea">
+                        <span class="span-value test_db894915">{{detail.code}}</span>
+                    </div>
+                </div>
+                <div class="row row-list clearfix test_ee95d5f5">
+                    <div class="text-right col-md-5 test_cfbcff85">
+                        <label class="test_77c7a294">
+                            <%=priceDetail_page_unit%>：
+                        </label>
+                    </div>
+                    <div class="text-left col-md-7 test_c4b6063c">
+                        <span class="span-value test_e8dd9dca">{{detail.unit}}</span>
+                    </div>
+                </div>
+                <div class="row row-list clearfix test_0b231954">
+                    <div class="text-right col-md-5 test_cbf81191">
+                        <label class="test_af721fcf">
+                            <%=priceDetail_page_weight%>：
+                        </label>
+                    </div>
+                    <div class="text-left col-md-7 test_4f31a90c">
+                        <div ng-repeat="item in detail.weightSectionList" class="row clearfix m-weight-list test_8eae688e">
+                            {{item.startPoint}} - {{item.endPoint}}
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-list clearfix test_82c54900">
+                    <div class="text-right col-md-5 test_6c8a751e">
+                        <label class="test_f0d57470">
+                            <%=common_page_remarks%>：
+                        </label>
+                    </div>
+                    <div class="text-left col-md-7 test_986a48a1">
+                        <span class="span-value test_61305a38">{{detail.remark}}</span>
+                    </div>
+                </div>
+                <div class="btn-groups text-right test_9f1ed68b">
+                    <%=priceDetail_page_creator%>：{{detail.creator}}    <%=priceDetail_page_creatorTime%>：{{detail.createTime}}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- 单元格编辑详情弹出框 -->
+<div style="display: none;" id="cellEdit" class="test_54424323">
+    <form name="priceForm" novalidate="novalidate" class="test_c0865ccb">
+        <dd ng-class="{'u-dd-padding':true, 'u-dd-hasprice':!ePriceValue}" class="test_cf45f2f4">
+            <label class="test_c95e94f0"><%=priceDetail_page_weight%>：</label>
+            <div class="content-info test_d4d5cf38">
+                <p style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="test_757ba567">{{weightName}}<span style="margin-left: 15px;" ng-if="ePriceValue" class="test_a8aa3aa1"><%=priceDetail_page_region%>：{{regionName}}</span></p>
+            </div>
+        </dd>
+        <dd class="test_7908161f">
+            <label class="test_52350074"><b class="test_f98ca2cb">*</b><%=priceDetail_page_priceMethod%>：</label>
+            <div class="content-info test_7ddb7f04">
+                <input ng-trim="false" ng-click="showPriceMethod();" id="select-price-method" name="priceMethodModel" ng-model="priceMethodModel" ng-value="priceMethodValue" type="text" readonly="readonly" maxlength="30" placeholder="<%=priceDetail_page_priceMethodPlacer%>" required="required" class="test_b3389d6c">
+            </div>
+        </dd>
+        <dd ng-if="ePriceValue" class="test_d1205805">
+            <label class="test_3863dc17"><b class="test_d6a4d74f">*</b><%=priceDetail_page_priceValue%>：</label>
+            <div class="content-info test_d4312943">
+                <input verification="{'ruleType':'payload','ruleRegMsg':'请输入数字，小数点后保留三位'}" maxlength="10" ng-model="$parent.priceValue" name="priceValue" required type="text" ng-trim="false" placeholder="<%=common_code_pleinput%>" class="test_253645ec">
+                <div class="verification test_b745a60a">
+                    <span class="errors test_659b9a92" ng-show="priceForm.priceValue.$viewValue && priceForm.priceValue.$error.defined && priceForm.priceValue.$dirty">{{priceForm.priceValue.errorTips}}</span>
+                </div>
+            </div>
+        </dd>
+        <dd ng-if="!ePriceTotal" class="test_1a1cb157">
+            <label class="test_cf97a364"><b class="test_c970a098">*</b><%=priceDetail_page_priceUnit%>：</label>
+            <div class="content-info test_263688de">
+                <div class="row clearfix test_43e6ad12">
+                    <div class="col-md-5 select-box test_28244496" style="padding-right:0px;">
+                        <input verification="{'ruleType':'payload','ruleRegMsg':'请输入数字，小数点后保留三位'}" ng-trim="false" required="required" name="priceBaseUnit" ng-model="$parent.priceBaseUnit" type="text" maxlength="5" autocomplete="off" placeholder="<%=common_code_pleinput%>" class="test_86cf901c">
+                    </div>
+                    <div class="col-md-7 test_f166e73a">
+                        <div class="select-box test_431da8ac" ng-click="showPriceUnit();">
+                            <input required="required" id="select-price-unit" readonly="readonly" ng-trim="false" name="priceUnit" ng-value="priceUnitValue" ng-model="$parent.priceUnit" type="text" maxlength="30" autocomplete="off" placeholder="<%=priceDetail_page_pleaseChoose%>" class="test_897dfdc9">
+                            <i class="select-icon icon-drop-down test_c2277491"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="verification test_6c838b6d">
+                    <span class="errors test_1ceadae0" ng-show="priceForm.priceBaseUnit.$viewValue && priceForm.priceBaseUnit.$error.defined && priceForm.priceBaseUnit.$dirty">{{priceForm.priceBaseUnit.errorTips}}</span>
+                </div>
+            </div>
+        </dd>
+    </form>
+</div>
+<!-- 复制价格明细 -->
+<div style="display: none;" id="copyDetail" class="copy-detail-box">
+    <div>
+        <div class="checkbox checkbox-info">
+            <input type="checkbox" name="selectAllService" ng-checked="isCheckedAll()" ng-click="checkedOrCancelAll($event)" />
+            <label></label>
+        </div>
+        <span><%=priceDetail_page_selectall%></span>
+    </div>
+    <div ng-repeat="item in allPriceDetailList" ng-if="item.serviceUid != priceDetail.serviceUid">
+        <div class="checkbox checkbox-info">
+            <input type="checkbox" name="cusUserType" ng-checked="isCheckedOne(item.serviceUid)" ng-click="checkedOne($event,item.serviceUid)" />
+            <label></label>
+        </div>
+        <span>{{item.supplierOrServiceName}}</span>
+    </div>
+</div>
+<!--服务范围点击弹出框-->
+<div include="tpl/fragment/common/selectArea.html" class="test_14370a85"></div>

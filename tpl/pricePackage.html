@@ -1,0 +1,128 @@
+<div ng-show="showPricePackage" class="prompt-modal middle-box  test_af70c360">
+    <div class="prompt-wrap test_df56b752">
+        <div class="bomb-box test_6755d34e" style="width: 658px">
+            <div ng-if="!IsEdit" class="title test_625230ed">添加价格套餐</div>
+            <div ng-if="IsEdit" class="title test_625230ed">价格套餐详情</div>
+            <div class="prompt-content test_b332ff14" style="position: relative;top: 0;padding: 30px 0 0">
+                <form name="pricePackageFrom" novalidate="novalidate" class="test_079ef08a">
+                    <ul class="isContainer switch-list  test_56f496c9" style="height: 400px;overflow-y: auto">
+                        <div class="container test_41975709">
+                            <div class="lable-left test_a52cbd6a"><b class="test_933e132d">*</b>名称</div>
+                            <input id="pricePackage-Name" ng-trim="false" validate-code="{ruleReg:'name', ruleRegMsg:'<%=common_validate_name%>', maxLength:'30'}" name="pricePackageName" ng-model="data.pricePackageName" type="text" required class="test_4aedd911">
+                        </div>
+                        <div class="verification test_9ac365a2">
+                            <span class="errors test_42b485e2" id="name-msg" ng-show="pricePackageFrom.pricePackageName.$viewValue && pricePackageFrom.pricePackageName.$error.defined && pricePackageFrom.pricePackageName.$dirty">{{pricePackageFrom.pricePackageName.errorTips}}</span>
+                        </div>
+                        <div class="container test_d774f05a">
+                            <div class="lable-left test_0ecabdc8"><b class="test_933e132d">*</b>编码</div>
+
+                            <input ng-trim="false" id="pricePackage-Code" name="pricePackageCode" autocomplete="off" ng-blur="isExistedCode()" ng-model="data.pricePackageCode" maxlength="15" type="text" required class="country-list test_0feb3f81" verification="{'ruleType':'code','maxType':'15','tipsType':'two'}">
+                            <!--<div class="verification">-->
+                            <!--<span class="errors" id="name-msg" ng-show="pricePackageFrom.pricePackageCode.$viewValue && pricePackageFrom.pricePackageCode.$error.defined && pricePackageFrom.pricePackageCode.$dirty">{{pricePackageFrom.pricePackageCode.errorTips}}</span>-->
+                            <!--</div>-->
+                        </div>
+                        <div class="test_dfc935b4">
+                            <div class="verification test_1c5e1322">
+                                <span class="errors test_2e4d1282" id="code-msg" ng-show="pricePackageFrom.pricePackageCode.$viewValue && pricePackageFrom.pricePackageCode.$error.defined && pricePackageFrom.pricePackageCode.$dirty">{{pricePackageFrom.pricePackageCode.errorTips}}</span>
+                            </div>
+                        </div>
+                        <div class="test_78cdf5c4">
+                            <div class="lable-left test_890cb846"><b class="test_933e132d">*</b>价格等级</div>
+                            <div class="input-weight-box  test_ae43dd0d">
+                                <div style="margin-bottom: 10px" ng-repeat="section in priceLevelList" class="test_ff1fd320">
+                                    <input ng-keyup="limit3Data($event, $index)" type="text" ng-blur="verifyWeightFormat($event)" style="width: 275px" name="productName{{$index}}" id="productName-{{$index}}" ng-click="reSetProductList($index)" ng-model="section.productName" required class="test_694fa5ab" readonly>
+                                    <div style="display: inline-block;position: relative;" class="test_5cbca9ef">
+                                        <label style="margin-left: 14px" class="test_4af0621e">等级</label>
+                                        <input style="width: 110px" ng-keyup="limit3Data($event, $index)" type="text" ng-blur="verifyWeightFormat($event)" name="productLevel{{$index}}" id="productLevel-{{$index}}" ng-model="section.productLevel" required class="test_ddeded06" readonly>
+                                        <i class="select-icon icon-drop-down  test_ec0ad160" style="top: 1px!important;"></i>
+                                    </div>
+                                    <div class="delete-icon  test_c81dd3b0" ng-if="$last && priceLevelList.length > 1" ng-click="deletePriceLevel()">
+                                        <div class="delete-center  test_d77e5984"></div>
+                                    </div>
+                                    <div class="verification test_298f8873">
+                                        <span class="errors test_7aabae07" ng-show="pricePackageFrom.productName{{$index}}.$viewValue && pricePackageFrom.productName{{$index}}.$error.defined && pricePackageFrom.productName{{$index}}.$dirty">{{pricePackageFrom.productName$index.errorTips}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="addPricePackage test_c09c9a77">
+                                <div class="add-icon  test_04e371d6">
+                                    <div class="add-center  test_932b8ddd" ng-click="addPriceLevel()">+</div>
+                                </div>
+                                <div class="add-tips  test_0c9776bd">
+                                    <p style="font-size:16px" class="test_6b4d1f20">增加价格等级</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="test_61f48605">
+                            <div class="lable-left test_a54f978c">
+                                <%=common_page_remarks%>
+                            </div>
+                            <remark description="data.description" class="test_d401dda5"></remark>
+                        </div>
+                    </ul>
+                </form>
+            </div>
+            <div class="operation test_a24469e3" style="position: relative;">
+                <button ng-click="closePrompt();" name="prompt-close" class="btn btn-default test_20ff55c0" data-event="close">取消</button>
+                <button ng-click="savePrompt();" name="prompt-save" class="btn btn-primary test_c45922e8" data-event="close">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="country-box test_5406b841">
+    <!--tableController start-->
+    <div class="master-table test_77506c18" style="left: 0;right: 0">
+        <div ng-controller="tableController" class="test_643a40b6">
+            <div class="add-search-box test_6316bc19">
+                <div class="list-search-box test_b65fa3b1">
+                    <input maxlength="30" ng-enter="search();" ng-model="tableModel.restData.q" ng-value="q" type="text" class="form-control test_8d9a90e1" placeholder="<%=common_input_NameOrCode_first%>">
+                    <i class="icon-search search-table test_4365bc49"></i>
+                </div>
+                <button ng-click="search();" class="btn btn-primary test_c413bc1a"><%=common_page_search%></button>
+            </div>
+            <div class="batch-operation test_057198d1">
+                <button ng-click="addPricePackage();" class="btn btn-primary test_09980732"><%=common_page_add%></button>
+                <button ng-click="deletePricePackage();" class="btn btn-primary test_5fa7d2c2"><%=common_page_delete%></button>
+            </div>
+            <div class="table-container  test_584e32dd" ng-controller="tableController">
+                <table class="customer-table table-box test_f2912469" cellpadding="0" cellspacing="0" style="text-align: center;">
+                    <thead class="test_ecfd3946">
+                        <tr class="test_b54cd405">
+                            <th class="test_fdcb9546" style="width: 5%">
+                                <div class="checkbox checkbox-info test_e81a66c5">
+                                    <input type="checkbox" ng-model="tableModel.selectFlag" ng-click="table.selectAll(tableModel);" class="test_4cd25f8a">
+                                    <label class="test_ab9872b4"></label>
+                                </div>
+                            </th>
+                            <th style="width:{{tableModel.tableHeaderSize[$index]}}" ng-repeat="item in tableModel.tableHeader" class="test_c5a75423">{{item}}</th>
+                        </tr>
+                    </thead>
+                    <tbody class="test_d7f612cc">
+                        <tr ng-repeat="value in tableModel.tableBody" ng-init="renderFinish($last)" class="test_db59ff86">
+                            <td class="test_b034707d">
+                                <div class="checkbox checkbox-info test_10e22bd0">
+                                    <input type="checkbox" ng-checked="value.checkbox" ng-click="table.selectOne(tableModel, value.checkboxId, $event);" class="test_c6c66536">
+                                    <label class="test_3b793999"></label>
+                                    <span class="state-code test_62e3775b" style="display: none;">{{value.status}}</span>
+                                </div>
+                            </td>
+                            <td class="test_a6bf605c">{{(tableModel.pagination.currentPage-1)*tableModel.pagination.pageSize+$index+1}}</td>
+                            <td class="memberName  test_01277331" title="{{value.name}}">
+                                <a href="javascript:;" style="cursor:pointer;display:block" ng-click="editPricePackage(value)" class="test_fdc37dac" ng-bind-html="value.name | trustHtml:q"></a>
+                            </td>
+                            <td title="{{value.code}}" class="test_e37040c2" ng-bind-html="value.code | trustHtml:q"></td>
+                            <td title="{{value.fullName}}" class="test_7b1a1782">{{value.fullName}} {{value.createUserName}} </td>
+                            <td title="{{value.createTime}}" class="test_9225a323">{{value.createTime}}</td>
+                            <td title="{{value.description}}" class="test_6b8f9382">{{value.description}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <hnapagination table-service="table" page-table-model="tableModel" class="test_db87c767"></hnapagination>
+                <div ng-show="!tableModel.pagination.totalPage" style="position: absolute;top:265px;bottom:0px;width:100%;" class="test_74283d9e">
+                    <img style="width:100%;height:100%;" src="/public/img/undefined.svg" class="test_bdb42a4a">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--tableController end-->
+</div>

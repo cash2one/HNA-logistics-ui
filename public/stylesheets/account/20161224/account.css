@@ -1,0 +1,124 @@
+.has-sides-margin .m-table-page{
+    margin:0px 125px;
+}
+.m-table-page{
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+    top: 15px;
+    left:15px;
+    background: #fff;
+    border: 1px solid #ddd;
+    overflow: hidden;
+}
+
+.m-table-page .box-header{
+    margin-top: 15px;
+    text-align: center;
+}
+.m-table-page .box-header .search-box{
+    width: 50%;
+    display: inline-block;
+    position: relative;
+    margin-left:-108px;
+}
+.m-table-page .box-header .search-box input{
+    padding-left: 35px;
+    width: 100%;
+}
+.m-table-page .box-header .search-box .search-table{
+    position: absolute;
+    top: 8px;
+    left: 10px;
+    color: #ccc;
+}
+.m-table-page .batch-operation{
+    position: relative;
+    text-align: left;
+    padding: 15px;
+}
+/*.m-table-page .batch-operation button {*/
+    /*position: relative;*/
+    /*line-height: 10px;*/
+    /*padding: 0;*/
+    /*width: 98px;*/
+    /*margin-right: 8px;*/
+/*}*/
+.m-table-page .batch-operation .more-operat{
+    position: absolute;
+    border: 1px solid #A9B2BD;
+    top: 49px;
+    left: 235px;
+    z-index: 18;
+}
+.m-table-page .batch-operation .more-operat a {
+    float: left;
+    padding: 5px 0;
+    line-height: 30px;
+    background: #fff;
+    width: 100%;
+    text-align: center;
+}
+.m-table-page .batch-operation .more-operat a:hover {
+    background: #5fbdf0;
+    color: #fff;
+}
+.m-table-page .batch-operation .more-operat a+a {
+    border-top: 1px solid #dfdfdf;
+}
+
+.table-container {
+    text-align: center;
+    position: relative;
+}
+.account-table th:nth-child(1), .account-table td:nth-child(1){
+    width: 7%;
+    -ms-text-overflow: inherit!important;
+    text-overflow: inherit!important;
+}
+.account-table th:nth-child(2), .account-table td:nth-child(2){
+    width: 8%;
+}
+.account-table th:nth-child(3), .account-table td:nth-child(3){
+    width: 30%;
+}
+.account-table th:nth-child(4), .account-table td:nth-child(4){
+    width: 30%;
+}
+.account-table th:nth-child(5), .account-table td:nth-child(5){
+    width: 25%;
+}
+
+#AccountForm .verification{
+    position: absolute;
+    right: 0px;
+    text-align: left;
+    width: 295px;
+}
+#AccountForm .verification .errors{
+    position: relative;
+    padding-left: 0px;
+}
+.remark-info{
+    height: 58px;
+}
+.remark-info .show-string-length{
+    bottom: 19px;
+}
+.u-search-btn{
+    cursor: pointer;
+    top: 0px;
+    right: -108px;
+    position: absolute;
+    line-height: 34px;
+    color: #fff;
+    width: auto;
+    padding: 0px;
+}
+.u-search-btn button {
+    width: 98px;
+    padding: 0px;
+}
+td {
+    text-align:center !important;
+}

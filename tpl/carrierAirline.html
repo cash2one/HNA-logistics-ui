@@ -1,0 +1,120 @@
+<div style="display: none;" ng-show="nestAirportFrom" id="nest-AirportFrom" ng-init="initSelectList();" class="prompt-modal middle-box test_6dcec38a">
+    <div class="prompt-wrap test_dd516b67">
+        <div class="bomb-box test_a9abeb3f">
+            <div class="title test_b1217dd1">{{title}}</div>
+            <div class="prompt-content test_7862f621">
+                <form name="AirportFrom" novalidate="novalidate" class="test_ab5c9e00">
+                    <div id="AirportFrom" class="test_7c2adbda">
+                        <div ng-click="" class="label-text test_2e476368"><%=company_title_detail%><i class="icon-more-down icon-angle-down test_1f5b5a7c"></i></div>
+                        <ul class="isContainer switch-list test_c699e9a8" data-title="<%=company_title_detail%>">
+                            <li class="test_da19a39b">
+                                <label class="test_024f04fd"><b class="test_dcf2053f">*</b><%=company_label_name%></label>
+                                <input ng-trim="false" class="input-text test_bb893b97" validate-code="{ruleReg:'name', ruleRegMsg:'<%=common_validate_name%>', maxLength:'30'}" name="airportName" ng-model="airportName" type="text" required>
+                                <validatetip from-model="AirportFrom.airportName" class="test_8df9fbcc"></validatetip>
+                            </li>
+                            <li class="test_64731a25">
+                                <label class="test_97f9c029"><b class="test_966bbb5b">*</b><%=company_label_country%></label>
+                                <div class="select-box input-text test_220dbf90">
+                                    <input ng-trim="false" class="test_d5117d00" id="country" name="countryName" autocomplete="off" ng-value="countryId" ng-model="countryName" maxlength="30" type="text" required>
+                                    <validatetip from-model="AirportFrom.countryName" class="test_8df9fbcc"></validatetip>
+                                </div>
+                            </li>
+                            <li class="test_0a8502d3">
+                                <label class="test_51ab9a08"><b class="test_4bba5abe">*</b><%=company_label_triadCode%></label>
+                                <input style="text-transform: uppercase;" ng-trim="false" ng-blur="validateTriadCode();" ng-focus="removeValidateTriadCode();" class="validate-triad-code input-text test_445dd256" validate-code="{ruleReg:'/^[A-Za-z0-9]{2}$/', ruleRegMsg:'<%=common_validate_code_two%>', maxLength:'2'}" name="triadCode" ng-model="triadCode" type="text" required>
+                                <validatetip from-model="AirportFrom.triadCode" class="test_51238e8c"></validatetip>
+                                <div class="verification test_0010b872">
+                                    <span class="errors test_a30ad093" ng-show="showTriadCode"><%=company_validate_triadCode%></span>
+                                </div>
+                            </li>
+                            <li class="test_01d1e86b">
+                                <label class="test_f8215618"><b class="test_60cb20c8">*</b><%=company_label_tetradCode%></label>
+                                <input style="text-transform: uppercase;" ng-trim="false" class="input-text test_d5fff165" validate-code="{ruleReg:'/^[0-9]{3}$/', ruleRegMsg:'<%=common_validate_code_three%>', maxLength:'3'}" name="tetradCode" ng-model="tetradCode" type="text" required>
+                                <validatetip from-model="AirportFrom.tetradCode" class="test_ee6868c9"></validatetip>
+                            </li>
+                            <li class="test_59134a9c">
+                                <label class="test_b11fc6a7"><%=company_label_remark%></label>
+                                <div class="remark-info test_e5147a86">
+                                    <textarea ng-trim="false" class="input-text test_efb4d847" ng-change="showTextNumber();" ng-model="remark" rows="5" maxlength="140"></textarea>
+                                    <div class="show-string-length test_1f3afeb8"><span class="test_2227e65a">{{textNumber}}</span>字</div>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="label-text test_6f1367d5"><%=company_title_international%><i class="icon-more-down icon-angle-down test_51b80c67"></i></div>
+                        <ul class="isContainer switch-list language-international test_21b26293" data-title="<%=company_title_international%>">
+                            <li ng-repeat="item in language" class="test_2b4484c4">
+                                <label class="test_cafd3bcc">{{item.localName}}：</label>
+                                <input ng-trim="false" ng-keyup="langVerification($event);" maxlength="30" data-id="{{item.id}}" data-code="{{item.code}}" class="input-text test_36a59885" type="text">
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+            <div class="operation test_e645a41a">
+                <button ng-click="closePrompt();" name="prompt-close" class="btn btn-default test_f9e0079a" data-event="close"><%=common_page_cancel%></button>
+                <button ng-click="savePrompt();" name="prompt-save" class="btn btn-primary test_84426f90" data-event="close"><%=common_page_save%></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Main content -->
+<section class="content test_de5fa58a">
+    <div ng-controller="tableController" class="master-table test_67a9334f">
+
+        <div class="add-search-box test_277033b0">
+            <span style="margin:0px 2px 0px 10px;" class="test_d83dad97">国家</span>
+            <input placeholder="<%=common_all_tips%>" autocomplete="off" type="text" style="width:25%;margin:0px 10px 0px 2px;padding-left: 12px" id="countrySearch" ng-model="countrySearch" class="form-control test_78fed6bb">
+
+            <div class="list-search-box test_1b1abe88">
+                <input maxlength="30" ng-enter="retrievalAirport();" ng-model="tableModel.restData.q" ng-value="q" type="text" class="form-control test_cae2c7fd" placeholder="请输入名称，二字码或三字码">
+                <i class="icon-search search-table test_2e1582c7"></i>
+                <div class="senior-seach test_4844594e" style="right: -148px">
+                    <span style="color:#888;margin-right:10px;cursor:pointer;position:relative;" ng-click="clearData()" class="test_7ca26a40">重置</span>
+                    <button ng-click="retrievalAirport();" class="btn btn-primary test_1d284e48"><%=common_list_search_btn%></button>
+                </div>
+            </div>
+        </div>
+        <div class="batch-operation test_d4cc5dd2">
+            <button ng-click="addAirport();" class="btn btn-primary test_fb5baf2a"><%=common_page_add%></button>
+            <button ng-click="deleteAirport();" class="btn btn-primary test_0f3f741b"><%=common_page_delete%></button>
+            <button ng-click="internationalization();" class="btn btn-primary test_cc42c4d5"><%=company_title_international%></button>
+        </div>
+        <div class="table-container test_4f281c7a">
+            <input type="hidden" ng-model="clickTrId" class="test_fc05eba3">
+            <table class="user-table table-box airport-table test_bd68d1e0" cellpadding="0" cellspacing="0">
+                <thead class="test_1ce6e559">
+                <tr class="test_ab4c03a6">
+                    <th class="test_528b1133">
+                        <div class="checkbox checkbox-info test_05f4f752">
+                            <input type="checkbox" ng-model="tableModel.selectFlag" ng-click="table.selectAll(tableModel);" class="test_b6afda02">
+                            <label class="test_f3bd0334"></label>
+                        </div>
+                    </th>
+                    <th ng-repeat="item in tableModel.tableHeader" class="test_1587c5d1">{{item}}</th>
+                </tr>
+                </thead>
+                <tbody class="test_016895cb">
+                <tr ng-repeat="value in tableModel.tableBody" data-id="{{value.id}}" ng-init="renderFinish($last)" class="test_53d0a5b6">
+                    <td class="test_fb575f96">
+                        <div class="checkbox checkbox-info test_240fd521">
+                            <input type="checkbox" ng-value="{{value.userId}}" ng-checked="value.checkbox" ng-click="table.selectOne(tableModel, value.checkboxId);" class="test_9ce7a40f">
+                            <label class="test_aa30e127"></label>
+                        </div>
+                    </td>
+                    <td class="test_40154fac">{{(tableModel.pagination.currentPage-1)*tableModel.pagination.pageSize+$index+1}}</td>
+                    <td class="test_3915ad70" title="{{value.name}}"><a href="javascript:;" ng-click="editAirportInfo($event);" ng-bind-html="value.name | trustHtml:q" class="test_b2c3d15f"></a></td>
+                    <td title="{{value.countryName+'('+value.countryId+')'}}" class="test_49677fdb">{{value.countryName+'('+value.countryId+')'}}</td>
+                    <td title="{{value.figureCode}}" ng-bind-html="value.figureCode | trustHtml:q" class="test_8daae60b">{{value.triadCode}}</td>
+                    <td title="{{value.triadCode}}" ng-bind-html="value.triadCode | trustHtml:q" class="test_2752c06b">{{value.tetradCode}}</td>
+                    <td title="{{value.description}}" class="test_cbdc54e5">{{value.description}}</td>
+                </tr>
+                </tbody>
+            </table>
+            <hnapagination table-service="table" page-table-model="tableModel" class="test_c339ea0a"></hnapagination>
+        </div>
+        <div ng-show="!tableModel.pagination.isVisiblePage" style="position: absolute;top:165px;bottom:0px;width:100%;" class="test_62cea564">
+            <img style="width:100%;height:100%;" src="/public/img/undefined.svg" class="test_c1b6e3b0">
+        </div>
+    </div>
+</section>

@@ -1,0 +1,84 @@
+.name {
+    cursor:pointer;
+}
+.table-box td+td {
+    height:40px;
+}
+.select-icon {
+    top:0px!important;
+    cursor:pointer!important;
+    right:1px!important;
+    z-index:10!important;
+}
+.switch-list {
+    overflow:visible!important;
+}
+.select-list-box {
+    z-index:1000!important;
+}
+.unit {
+    font-size: 10px;
+    float: right;
+    position: absolute;
+    top: 34px;
+    right: 310px;
+    color: #555;
+}
+.middle-box .prompt-content {
+    overflow:visible!important;
+}
+.search-cell {
+    position:relative;
+    width:224px;
+    display:inline-block;
+    height:34px;
+    text-align:left;
+    margin-right:1px;
+}
+.add-search-box {
+    padding: 15px 10px;
+    border-bottom:1px solid #ddd;
+    margin-bottom:15px;
+}
+.select-list-box li {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 0 4px!important;
+}
+body .canlander {
+    width:16%!important;
+}
+body .canlander2 {
+    width:295px!important;
+}
+body .canlander2 td {
+    max-width: 41px!important;
+    width: 41px!important;
+}
+body .canlander2 {
+    width:295px!important;
+}
+#nest-rateFrom .select-list-box li {
+    text-align:left;
+    padding-left:12px!important;
+}
+.verification {
+    text-align:left;
+}
+.select-box {
+    position:relative;
+    width:73%;
+    display:inline-block;
+    vertical-align:middle;
+}
+.kkpage {
+    margin-top:0!important;
+}
+.master-table {
+    left:15px;
+    right:15px;
+}
+td {
+    text-align:center !important;
+}

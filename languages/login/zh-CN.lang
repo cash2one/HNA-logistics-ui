@@ -1,0 +1,19 @@
+{
+    "login_code_userNameTips": "请输入用户名",
+    "login_code_passWordTips": "请输入密码",
+    "login_code_login": "登录",
+    "login_code_backtrack": "返回登录",
+    "login_code_sliderTips": "按住左边滑块，拖动完成上方拼图",
+    "login_data_110000": "用户名或密码错误",
+    "login_data_110001": "尝试次数过多，剩余次数：",
+    "login_data_110002": "账户已锁定",
+    "login_data_110003": "尝试次数过多，剩余次数：",
+    "login_data_110004": "用户名或密码错误",
+    "login_data_110005": "验证码错误",
+    "login_page_forget": "忘记密码？",
+    "login_page_phone": "电话",
+    "login_page_email": "邮箱",
+    "login_page_connect": "忘记密码？请联系管理员",
+    "login_page_locked": "您的账号已被锁定！请联系管理员",
+    "login_out_time": "会话超时, 请重新登录"
+}

@@ -1,0 +1,137 @@
+<div style="display: none" ng-show="nestAirportFrom" id="nest-AirportFrom" ng-init="initSelectList();" class="prompt-modal middle-box test_093f0d55">
+    <div class="prompt-wrap test_745ce00c">
+        <div class="bomb-box test_89ae7dbe">
+            <div class="title test_8b03a42c">{{title}}</div>
+            <div class="prompt-content test_a9b0562e">
+                <form name="AirportFrom" novalidate="novalidate" class="test_734bc1ca">
+                <div id="AirportFrom" class="test_670299fe">
+                    <div ng-click="" class="label-text test_b44b6456"><%=airport_title_detail%><i class="icon-more-down icon-angle-down test_05696143"></i></div>
+                    <ul class="isContainer switch-list test_1a914fe8" data-title="<%=airport_title_detail%>">
+                        <li class="test_ba17e3b7">
+                            <label class="test_6f0e08dc"><b class="test_169a5952">*</b><%=airport_label_name%></label>
+                            <input ng-trim="false" ng-blur="validateName();" ng-focus="removeValidateName();" class="input-text test_2e597b85" validate-code="{ruleReg:'name', ruleRegMsg:'<%=common_validate_name%>', maxLength:'30'}" name="airportName" ng-model="airportName" type="text" required>
+                            <div class="verification test_d9af4330">
+                                <span class="errors test_23d48fc2" ng-show="AirportFrom.airportName.$viewValue && AirportFrom.airportName.$error.defined && AirportFrom.airportName.$dirty">{{AirportFrom.airportName.errorTips}}</span>
+                                <span class="errors test_f494eb54" ng-show="showAirportName"><%=airport_validate_name%></span>
+                            </div>
+                        </li>
+                        <li class="test_4e1dac5c">
+                            <label class="test_16d894e5"><b class="test_22b0fc68">*</b><%=airport_label_triadCode%></label>
+                            <input style="text-transform: uppercase;" ng-trim="false" ng-blur="validateTriadCode();" ng-focus="removeValidateTriadCode();" maxlength="3" class="validate-triad-code input-text test_28d1981e" validate-code="{ruleReg:'/^[A-Za-z]{3}$/', ruleRegMsg:'<%=airport_input_three_code_limit%>', maxLength:'3'}" name="triadCode" ng-model="triadCode" type="text" required>
+                            <div class="verification test_2e8df21a">
+                                <span class="errors test_c4d6345b" ng-show="AirportFrom.triadCode.$viewValue && AirportFrom.triadCode.$error.defined && AirportFrom.triadCode.$dirty">{{AirportFrom.triadCode.errorTips}}</span>
+                                <span class="errors test_a11bce21" ng-show="showTriadCode"><%=airport_validate_triadCode%></span>
+                            </div>
+                        </li>
+                        <li class="test_3758a2c4">
+                            <label class="test_258665b8"><b class="test_71aa3abe">*</b><%=airport_label_tetradCode%></label>
+                            <input style="text-transform: uppercase;" ng-trim="false" ng-blur="validateTetradCode();" ng-focus="removeValidateTetradCode();" class="input-text test_08895198" validate-code="{ruleReg:'/^[A-Za-z]{4}$/', ruleRegMsg:'<%=airport_input_four_code_limit%>', maxLength:'4'}" name="tetradCode" model-uppercase="" ng-model="tetradCode" type="text" required>
+                            <div class="verification test_bc07652f">
+                                <span class="errors test_8fd45d95" ng-show="AirportFrom.tetradCode.$viewValue && AirportFrom.tetradCode.$error.defined && AirportFrom.tetradCode.$dirty">{{AirportFrom.tetradCode.errorTips}}</span>
+                                <span class="errors test_cbc49735" ng-show="showTetradCode"><%=airport_validate_tetradCode%></span>
+                            </div>
+                        </li>
+                        <li class="test_4e12c504">
+                            <label class="test_3fe5f834"><b class="test_933e132d">*</b><%=airport_label_country%></label>
+                            <div class="select-box input-text test_b0eb3f43">
+                                <input ng-trim="false" id="country" name="countryName" autocomplete="off" ng-value="countryId" ng-model="countryName" maxlength="30" type="text" required class="country-list test_0feb3f81">
+                                <div class="verification test_bc07652f">
+                                    <span class="errors test_cbc49735" ng-show="AirportFrom.countryName.$dirty"></span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="test_3a47d58d">
+                            <label class="test_86b0095f"><b class="test_4d72f9c4">*</b><%=airport_label_city%></label>
+                            <div class="select-box input-text test_c7e968bf">
+                                <input ng-trim="false" ng-click="test()" ng-disabled="isEditCity" id="city" name="cityName" autocomplete="off" ng-value="cityId" ng-model="cityName" maxlength="30" type="text" required class="city-list test_bbe620ad">
+                                <div class="verification test_bc07652f">
+                                    <span class="errors test_cbc49735" ng-show="AirportFrom.cityName.$dirty"></span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="test_ee0051fb">
+                            <label class="test_3c296a28"><%=airport_label_remark%></label>
+                            <div class="remark-info test_fd71851a">
+                                <textarea ng-trim="false" class="input-text test_3c359324" ng-change="showTextNumber();" ng-model="remark" rows="5" maxlength="140"></textarea>
+                                <div class="show-string-length test_e126f059"><span class="test_de5e5a37">{{textNumber}}</span>字</div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="label-text test_ccb5e46a"><%=airport_title_international%><i class="icon-more-down icon-angle-down test_47c91db6"></i></div>
+                    <ul class="isContainer switch-list language-international test_ff1b2848" data-title="<%=airport_title_international%>">
+                        <li ng-repeat="item in language" class="test_21993f77">
+                            <label class="test_ec78eea3">{{item.localName}}：</label>
+                            <input ng-trim="false" ng-keyup="langVerification($event);" maxlength="30" data-id="{{item.id}}" data-code="{{item.code}}" class="input-text test_797ade02" type="text">
+                        </li>
+                    </ul>
+                </div>
+                </form>
+            </div>
+            <div class="operation test_c1578338">
+                <button ng-click="closePrompt();" name="prompt-close" class="btn btn-default test_75034fc3" data-event="close"><%=common_page_cancel%></button>
+                <button ng-click="savePrompt();" name="prompt-save" class="btn btn-primary test_2b751043" data-event="close"><%=common_page_save%></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Main content -->
+<section class="content test_449e02e3">
+        <div ng-controller="tableController" class="master-table test_2203e541">
+            <div class="search-box test_cf1448b4" style="padding:20px 2%;text-align: center;">
+                <span style="margin-right: 2px;" class="test_09859f95">关键词</span>
+                <input style="width:20%;" maxlength="30" ng-enter="retrievalAirport();" ng-model="tableModel.restData.q" ng-value="q" type="text" class="form-control test_67e77ad4" placeholder="<%=airport_search_list%>">
+
+                <span style="margin:0px 2px 0px 10px;" class="test_872788e6">国家城市</span>
+                <input placeholder="<%=common_all_tips%>" autocomplete="off" type="text" style="width:20%;margin:0px 10px 0px 2px;" id="countrySearch" ng-model="countrySearch" class="form-control test_9ae6c369">
+                <input ng-click="resetCitySearchData()" placeholder="<%=common_all_tips%>" autocomplete="off" type="text" style="width:20%;" id="citySearch" ng-model="citySearch" class="form-control test_773e52ea">
+
+                <div class="test_de2468b7" style="display: inline-block;">
+                    <span style="color:#888;margin-right:10px;cursor:pointer;position:relative;" ng-click="clearDate()" class="test_1c8b5405">重置</span>
+                    <button ng-click="retrievalAirport();" class="btn btn-primary test_1d284e48"><%=common_list_search_btn%></button>
+                </div>
+            </div>
+            <div class="batch-operation test_7f195c4f">
+                <button ng-click="addAirport();" class="btn btn-primary test_71a21012"><%=common_page_add%></button>
+                <button ng-click="deleteAirport();" class="btn btn-primary test_15fabdf8"><%=common_page_delete%></button>
+                <button ng-click="internationalization();" class="btn btn-primary test_2bf6ec65"><%=airport_title_international%></button>
+            </div>
+            <div class="table-container test_15e1d9c6">
+                <input type="hidden" ng-model="clickTrId" class="test_fe153c7a">
+                <table class="user-table table-box airport-table test_c8714f65" cellpadding="0" cellspacing="0">
+                    <thead class="test_24b4f39b">
+                        <tr class="test_71574d9c">
+                            <th class="test_d9bfb84d">
+                                <div class="checkbox checkbox-info test_34e029f8">
+                                    <input type="checkbox" ng-model="tableModel.selectFlag" ng-click="table.selectAll(tableModel);" class="test_16f755c1">
+                                    <label class="test_ce02d3e3"></label>
+                                </div>
+                            </th>
+                            <th ng-repeat="item in tableModel.tableHeader" class="test_91a939c1">{{item}}</th>
+                        </tr>
+                    </thead>
+                    <tbody class="test_90597831">
+                    <tr ng-repeat="value in tableModel.tableBody" data-id="{{value.id}}" ng-init="renderFinish($last)" class="test_2cf52b5a">
+                        <td class="test_e1140770">
+                            <div class="checkbox checkbox-info test_0453c890">
+                                <input type="checkbox" ng-value="{{value.userId}}" ng-checked="value.checkbox" ng-click="table.selectOne(tableModel, value.checkboxId);" class="test_75bf9f54">
+                                <label class="test_aa47710d"></label>
+                            </div>
+                        </td>
+                        <td class="test_cf1ac66d">{{(tableModel.pagination.currentPage-1)*tableModel.pagination.pageSize+$index+1}}</td>
+                        <td title="{{value.name}}" class="test_cd9d85bc"><a href="javascript:;" ng-click="editAirportInfo($event);" ng-bind-html="value.name | trustHtml:q" class="test_a335cc8d"></a></td>
+                        <td title="{{value.triadCode}}" ng-bind-html="value.triadCode | trustHtml:q" class="test_8ff17e1f">{{value.triadCode}}</td>
+                        <td title="{{value.tetradCode}}" ng-bind-html="value.tetradCode | trustHtml:q" class="test_eab94229">{{value.tetradCode}}</td>
+                        <td title="{{value.countryName+'('+value.countryId+')'}}" class="test_14571931">{{value.countryName+'('+value.countryId+')'}}</td>
+                        <td title="{{value.cityName}}" ng-bind-html="value.cityName | trustHtml:q" class="test_8293667e"></td>
+                        <td title="{{value.remark}}" class="test_77696682">{{value.remark}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <hnapagination table-service="table" page-table-model="tableModel" class="test_521d3ffd"></hnapagination>
+            </div>
+            <div ng-show="!tableModel.pagination.isVisiblePage" style="position: absolute;top:165px;bottom:0px;width:100%;" class="test_8c5360d1">
+                <img style="width:100%;height:100%;" src="/public/img/undefined.svg" class="test_5bbd407d">
+            </div>
+        </div>
+</section>

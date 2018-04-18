@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>500</title>
+    <style type="text/css">
+        a{
+            color:#2B70D3;
+        }
+        .content{
+            position: absolute;
+            top: 0;
+            left: 0;
+            right:0;
+            bottom:0px;
+            text-align: center;
+        }
+        .content .img{
+            position: relative;
+            top: 50%;
+            margin-top: -167px;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+<div class="content">
+    <div class="img">
+        <img src="/public/img/500.svg" >
+        <p style="margin-top:50px;line-height:25px;color:#555;">内部错误，请返回上一页或<a id="link">首页</a></p>
+    </div>
+</div>
+<script>
+    window.onload = function() {
+        var cookieStr = document.cookie;
+        if (cookieStr.indexOf('loginSuccess=true') === -1) {
+            document.querySelector('#link').setAttribute('href', '/login.html');
+        } else {
+            document.querySelector('#link').setAttribute('href', '/');
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,597 @@
+<section class="content type-filter-layout">
+
+    <!-- =========服务listTable列表======== -->
+    <div ng-show="mainBlock == 'list'">
+        <!-- 类型入口 -->
+        <div class="panel-left">
+            <ul class="type-filter">
+                <li ng-repeat="item in types" ng-click="getTypeTable(item.code, $event);" ng-class="{'active':item.code == typeId}">{{item.name}}</li>
+            </ul>
+        </div>
+        <!-- 类型列表 -->
+        <div class="panel-right" ng-controller="tableController">
+            <!-- ****类型列表检索* -->
+            <div class="add-search-box">
+                <div class="list-search-box">
+                    <!-- 审核状态 -->
+                    <div class="state-box">
+                        <label class="state-label">
+                            <%=services_select_state%>
+                        </label>
+                        <div ng-init="initStateSelectList();" class="select-box">
+                            <input readonly="readonly" class="state-input" maxlength="15" type="text" id="serviceState" ng-model="serviceStateInfo" ng-value="serviceStateId">
+                            <i class="select-icon icon-drop-down"></i>
+                        </div>
+                    </div>
+                    <!-- 检索框 -->
+                    <input maxlength="30" ng-enter="retrievalList();" ng-model="tableModel.restData.q" ng-value="q" type="text" class="form-control"
+                        placeholder="<%=services_placeholder_list%>">
+                    <i class="icon-search search-table"></i>
+                    <div class="senior-seach">
+                        <button type="button" ng-click="retrievalList();" class="btn btn-primary">
+                            <%=common_list_search_btn%>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- ****类型列表List* -->
+            <div class="white-background">
+                <div class="batch-operation">
+                    <button type="button" ng-click="addService();" class="btn btn-primary">
+                        <%=common_page_add%>
+                    </button>
+                    <button type="button" ng-disabled="disabled" ng-class="{'btn':true,'btn-primary':true,'disabled':disabled}" ng-click="deleteService();">
+                        <%=common_page_delete%>
+                    </button>
+                    <button type="button" ng-disabled="disabled" ng-class="{'btn':true,'btn-primary':true,'disabled':disabled}" ng-click="auditService();">
+                        <%=services_btn_check%>
+                    </button>
+                </div>
+                <div class="table-container">
+                    <input ng-model="typeId" type="hidden">
+                    <table class="services-table table-box" cellpadding="0" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <div class="checkbox checkbox-info">
+                                        <input type="checkbox" ng-model="tableModel.selectFlag" ng-click="table.selectAll(tableModel);">
+                                        <label></label>
+                                    </div>
+                                </th>
+                                <th ng-repeat="item in tableModel.tableHeader">{{item}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="value in tableModel.tableBody" ng-init="renderFinish($last)">
+                                <td>
+                                    <div class="checkbox checkbox-info">
+                                        <input type="checkbox" ng-checked="value.checkbox" ng-click="table.selectOne(tableModel, value.checkboxId, $event);">
+                                        <label></label>
+                                        <span class="state-code" style="display: none;">{{value.status}}</span>
+                                    </div>
+                                </td>
+                                <td>{{(tableModel.pagination.currentPage-1)*tableModel.pagination.pageSize+$index+1}}</td>
+                                <td title="{{value.name}}">
+                                    <a href="javascript:;" ng-click="editServiceDetail(value.uid)" ng-bind-html="value.name | trustHtml:q"></a>
+                                </td>
+                                <td title="{{value.code}}" ng-bind-html="value.code | trustHtml:q"></td>
+                                <td title="{{value.serviceContent}}" ng-bind-html="value.serviceContent | trustHtml:q"></td>
+                                <td title="{{value.serviceTypeName}}">{{value.serviceTypeName}}</td>
+                                <td title="{{value.statusName}}" style="text-align:center;">
+                                    <p style="line-height:20px;">{{value.statusName}}</p>
+                                    <a href="javascript:;" ng-click="showFlowProcess(value.uid, value.name)" style="display:block;line-height:20px">
+                                        <span ng-if="value.isRejected" class="u-red-dot" title="待处理"></span>查看流转
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <hnapagination table-service="table" page-table-model="tableModel"></hnapagination>
+                </div>
+            </div>
+            <div ng-show="!tableModel.pagination.isVisiblePage" style="position: absolute;top:165px;bottom:0px;width:100%;">
+                <img style="width:100%;height:100%;" src="/public/img/undefined.svg">
+            </div>
+        </div>
+    </div>
+
+    <!-- =========添加服务页面======== -->
+    <div ng-show="mainBlock == 'detail'">
+        <div class="go-back">
+            <button type="button" ng-click="goBack();" class="btn btn-default">
+                <%=common_page_back%>
+            </button>
+            <button type="button" ng-disabled="setGrey" ng-class="{'btn-disable': setGrey}" ng-click="auditSingleService();" class="btn-right btn btn-primary">
+                <%=services_btn_check%>
+            </button>
+        </div>
+        <div class="add-title">
+            <p>{{serviceTitle}}</p>
+        </div>
+        <div class="m-tab m-info-tab" id="info-tab">
+            <ul class="nav nav-tabs">
+                <li class="active base-info-tab">
+                    <a href="javascript:void(0);">基本信息</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);">计重规则</a>
+                </li>
+                <li ng-class="{'active':backfromRegion}">
+                    <a href="javascript:void(0);">服务范围</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="table-pane base-info-pane active">
+                    <div class="form-box">
+                        <form name="serviceForm" novalidate="novalidate">
+                            <div class="operation-box right">
+                                <button type="button" ng-show="isVisibleEdit" name="editService" ng-click="editService();" class="btn btn-primary">
+                                    <%=common_page_edit%>
+                                </button>
+                            </div>
+                            <div class="rows">
+                                <dl class="panel">
+                                    <dd>
+                                        <label>
+                                            <b ng-hide="visible">*</b>
+                                            <%=services_title_name%>
+                                        </label>
+                                        <div class="content-info">
+                                            <span ng-show="visible" class="text-info">{{name}}</span>
+                                            <input ng-keydown="preventEvent($event);" ng-trim="false" validate-code="{ruleReg:'name', ruleRegMsg:'<%=common_validate_name%>', maxLength:'30'}"
+                                                name="nameInfo" ng-hide="visible" ng-model="nameInfo" type="text" required>
+                                            <validatetip from-model="serviceForm.nameInfo"></validatetip>
+                                        </div>
+                                    </dd>
+                                    <dd>
+                                        <label>
+                                            <b ng-hide="visible">*</b>
+                                            <%=services_label_code%>
+                                        </label>
+                                        <div class="content-info">
+                                            <span ng-show="visible" class="text-info">{{code}}</span>
+                                            <input ng-keydown="preventEvent($event);" ng-trim="false" ng-blur="validateCode()" ng-focus="removeValidateCode()" validate-code="{ruleReg:'code', ruleRegMsg:'<%=common_validate_code%>', maxLength:'15'}"
+                                                name="codeInfo" ng-hide="visible" ng-model="codeInfo" type="text" required>
+                                            <validatetip from-model="serviceForm.codeInfo"></validatetip>
+                                            <div class="verification">
+                                                <span ng-show="validateCodeError" class="errors">
+                                                    <%=services_validate_code%>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </dd>
+                                    <dd ng-init="selectServiceTypes()">
+                                        <label>
+                                            <b ng-hide="visible">*</b>
+                                            <%=services_label_type%>
+                                        </label>
+                                        <div class="content-info">
+                                            <span ng-show="visible" ng-if="serviceTypeIds.indexOf('ST004') !== -1" class="text-info">{{serviceTypeName}} / {{ subServiceTypeName }}</span>
+                                            <span ng-show="visible" ng-if="serviceTypeIds.indexOf('ST004') === -1" class="text-info">{{serviceTypeName}}</span>
+                                            <div class="row clearfix" ng-hide="visible">
+                                                <div class="col-md-7">
+                                                    <div class="content-info" style="padding-left:0">
+                                                        <div class="select-box" ng-hide="visible">
+                                                            <input ng-keydown="preventEvent($event);" readonly="readonly" autocomplete="off" name="serviceTypeName" id="serviceType"
+                                                                ng-trim="false" ng-model="serviceTypeName" ng-value="serviceTypeIds" type="text" required>
+                                                            <i class="select-icon icon-drop-down"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-5">
+                                                    <div class="content-info" ng-show="serviceTypeIds.indexOf('ST004') !== -1">
+                                                        <div class="select-box">
+                                                            <input readonly="readonly" name="subServiceTypeName" id="initLineType" ng-model="subServiceTypeName" ng-value="subServiceTypeCode" type="text" ng-click="initLineType()" ng-required="serviceTypeIds.indexOf('ST004') !== -1">
+                                                            <i ng-hide="visible" class="select-icon icon-drop-down"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </dd>
+                                    <dd ng-init="selectTimeTypes()">
+                                        <label>
+                                            <b ng-hide="visible"></b>预估时效：</label>
+                                        <div class="content-info">
+                                            <span ng-show="visible" class="text-info">{{estimatedTime}}{{estimatedUnitValue}}</span>
+                                            <div class="row clearfix" ng-hide="visible">
+                                                <div class="col-md-7">
+                                                    <div class="content-info" style="padding-left:0">
+                                                        <input id="estimatedTime" ng-change="checkEstimatedTime()" validate-code="{ruleReg:'number', ruleRegMsg:'请输入数字，保留三位小数', maxLength:'5'}"
+                                                            name="estimatedTime" ng-hide="visible" ng-required="estimatedUnitValue" ng-model="estimatedTime" type="text">
+                                                    </div>
+                                                    <validatetip from-model="serviceForm.estimatedTime"></validatetip>
+                                                </div>
+                                                <div class="col-md-5">
+                                                    <div class="content-info">
+                                                        <div class="select-box">
+                                                            <input id="intenTimeType" readonly="readonly" autocomplete="off" name="estimatedUnit" ng-trim="false" ng-hide="visible" ng-value="estimatedUnit"
+                                                                ng-model="estimatedUnitValue" type="text" ng-required="estimatedTime" placeholder="请选择">
+                                                            <i ng-hide="visible" class="select-icon icon-drop-down"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </dd>
+                                    <dd>
+                                        <label>
+                                            <b ng-hide="visible">*</b>
+                                            <%=services_label_content%>
+                                        </label>
+                                        <div class="content-info" style="height: 120px;">
+                                            <span ng-show="visible" class="text-info">{{serviceContent}}</span>
+                                            <textarea ng-trim="false" ng-change="removeSpace()" name="serviceContentInfo" style="height: 120px;" text-length="" ng-hide="visible"
+                                                ng-model="serviceContentInfo" maxlength="140" required></textarea>
+                                        </div>
+                                    </dd>
+                                </dl>
+                                <dl class="panel">
+                                    <dd>
+                                        <label>
+                                            <b ng-hide="visible"></b>重量限制：</label>
+                                        <div class="content-info">
+                                            <span ng-show="visible" class="text-info">{{weightLimitMin}} -- {{weightLimitMax}} kg</span>
+                                            <div class="row clearfix" ng-hide="visible">
+                                                <div class="col-md-4">
+                                                    <div class="content-info" style="padding-left:0">
+                                                        <input ng-hide="visible" ng-trim="false" maxlength="10" name="weightLimitMin" valiate-weight="min" ng-model="weightLimitMin" placeholder="下限" type="text">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="content-info" style="padding-left:0;">
+                                                        <input ng-hide="visible" ng-trim="false" maxlength="10" name="weightLimitMax" valiate-weight="max" ng-model="weightLimitMax" placeholder="上限" type="text">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="content-info">kg</div>
+                                                </div>
+                                                <span ng-show="weightLimitMsg && !visible" style="padding-left: 20px;color: #f00">{{weightLimitMsg}}</span>
+                                            </div>
+                                        </div>
+                                    </dd>
+                                    <dd>
+                                        <label>
+                                            <b ng-hide="visible">*</b>
+                                            <%=services_label_goods_type%>
+                                        </label>
+                                        <div class="content-info">
+                                            <span ng-show="visible" class="text-info">{{goodsTypeIdsInfo}}</span>
+                                            <input ng-keydown="preventEvent($event);" ng-hide="visible" ng-click="selectGoodTypes()" name="goodsTypeIdsInfo" ng-model="goodsTypeIdsInfo"
+                                                ng-value="listGoodsTypeIds" type="text" readonly="readonly" required>
+                                        </div>
+                                        <div id="getUnGoodTypes" style="display: none;">
+                                            <div include="tpl/fragment/common/selectTypes.html"></div>
+                                        </div>
+                                    </dd>
+                                    <dd>
+                                        <label>
+                                            <b ng-hide="visible">*</b>
+                                            <%=services_label_supplier%>
+                                        </label>
+                                        <div class="content-info">
+                                            <a href="javascript:void(0)" ng-click="getSupplier(supplierId)" ng-show="visible" class="text-info">{{supplierName}}</a>
+                                            <input ng-click="getSupplierList();" ng-keydown="preventEvent($event);" readonly="readonly" name="supplierName" id="supplier"
+                                                ng-trim="false" ng-hide="visible" ng-model="supplierName" ng-value="supplierId"
+                                                type="text" required>
+                                        </div>
+                                    </dd>
+                                    <dd>
+                                        <label>
+                                            <%=services_label_remark%>
+                                        </label>
+                                        <div class="content-info" style="height: 120px;">
+                                            <span ng-show="visible" class="text-info">{{description}}</span>
+                                            <textarea style="height: 120px;" ng-trim="false" ng-change="removeRemarkSpace()" text-length="" ng-hide="visible" ng-model="descriptionInfo"
+                                                maxlength="140"></textarea>
+                                        </div>
+                                    </dd>
+                                </dl>
+                            </div>
+                            <div class="operation-box">
+                                <button type="button" ng-hide="isVisibleDraft" ng-click="saveDraftService();" name="draftService" class="btn btn-primary">
+                                    <%=common_page_save_draft%>
+                                </button>
+                                <button type="button" ng-show="isVisible" ng-click="cancelService();" class="btn btn-default">
+                                    <%=common_page_cancel%>
+                                </button>
+                                <button type="button" ng-show="isVisible" ng-click="submitService();" name="saveService" class="btn btn-primary">
+                                    <%=common_page_save%>
+                                </button>
+                            </div>
+                            <div ng-show="showAuthor && visible" class="rows author-rows">
+                                <div class="author">
+                                    <label>创建时间：</label>
+                                    <span>{{createTime}}</span>
+                                </div>
+                                <div class="author">
+                                    <label>创建者：</label>
+                                    <span>{{userName}}</span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="table-pane m-rule">
+                    <div class="form-box">
+                        <form name="ruleForm" novalidate="novalidate">
+                            <div class="operation-box right mb0">
+                                <button type="button" ng-show="isVisibleEdit" name="editService" ng-click="editService();" class="btn btn-primary">
+                                    <%=common_page_edit%>
+                                </button>
+                            </div>
+                            <div class="rows">
+                                <dl class="panel">
+                                    <dd>
+                                        <label>
+                                            <b ng-hide="visible">*</b>
+                                            是否计体积：
+                                        </label>
+                                        <div class="content-info">
+                                            <span ng-show="visible" class="text-info">{{isremarkVolume}}</span>
+                                            <div ng-show="!visible" style="margin-left: 20px; " class=" radio-box ">
+                                                <div class="radio radio-single radio-primary ">
+                                                    <input value="true" ng-click="SetIsConsiderVolume($event);" type="radio" ng-model="isVolume" name="volume">
+                                                    <label>  </label>
+                                                </div>
+                                                <span>是</span>
+                                                <div class="radio radio-single radio-primary " style="margin-left: 40px;">
+                                                    <input value="false" ng-click="SetIsConsiderVolume($event);" type="radio" ng-model="isVolume" name="volume">
+                                                    <label> </label>
+                                                </div>
+                                                <span>否</span>
+                                            </div>
+                                        </div>
+                                    </dd>
+                                    <div ng-show="showVolumeDetail">
+                                        <dd>
+                                            <label>
+                                                <b ng-hide="visible">*</b>体积系数：
+                                            </label>
+                                            <div class="content-info">
+                                                <span ng-show="visible" class="text-info">{{volumeFactor}}</span>
+                                                <div ng-show="!visible">
+                                                    <input ng-trim="false" validate-code="{'ruleReg':'/^[0-9]*$/', ruleRegMsg:'请输入数字', maxLength:'5'}" name="volumeFactor" ng-hide="visible"
+                                                        ng-model="volumeFactor" type="text" required class="ng-pristine ng-untouched ng-valid-defined ng-invalid-required"
+                                                        maxlength="30">
+                                                    <div class="verification" style="position: relative;">
+                                                        <span class="errors" id="name-msg" ng-show="ruleForm.volumeFactor.$viewValue && ruleForm.volumeFactor.$error.defined && ruleForm.volumeFactor.$dirty">请输入数字</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </dd>
+                                        <dd>
+                                            <label>
+                                                <b ng-hide="visible">*</b>取值方式：
+                                            </label>
+                                            <div class="content-info select-box ">
+                                                <span ng-show="visible" class="text-info">{{weightValueName}}</span>
+                                                <div ng-show="!visible">
+                                                    <input ng-trim="false" required ng-model="weightValueName" name="valueMode" type="text" id="type-select-input" readonly="readonly">
+                                                    <i class="select-icon icon-drop-down "></i>
+                                                </div>
+                                            </div>
+                                        </dd>
+                                    </div>
+                                </dl>
+                            </div>
+                            <div class="operation-box">
+                                <button type="button" ng-show="isVisible" ng-click="cancelWeight();" class="btn btn-default">
+                                    <%=common_page_cancel%>
+                                </button>
+                                <button type="button" ng-show="isVisible" ng-click="submitWeight();" name="saveService" class="btn btn-primary">
+                                    <%=common_page_save%>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="table-pane m-range" ng-class="{'active':backfromRegion}">
+                    <div ng-hide="subServiceTypeCode === 'MAINLINESHIP' || subServiceTypeCode === 'MAINLINEAIR'">
+                        <div class="top-btn-group" ng-show="serviceStateId == 1">
+                            <button type="button" ng-disabled="disabledAdd" ng-class="{'btn':true, 'btn-primary':true, 'btn-disable':disabledAdd}" class="btn btn-primary"
+                                ng-click="add();">添加</button>
+                            <button type="button" class="btn btn-primary" ng-click="del();" style="margin-left:10px;">删除</button>
+                        </div>
+                        <div class="table-container" ng-controller="tableController">
+                            <table class="service-table table-box" cellpadding="0" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th ng-if="serviceStateId == 1">
+                                            <div class="checkbox checkbox-info">
+                                                <input type="checkbox" ng-model="serviceRangeTable.selectFlag" ng-click="table.selectAll(serviceRangeTable);">
+                                                <label></label>
+                                            </div>
+                                        </th>
+                                        <th ng-repeat="item in serviceRangeTable.tableHeader">{{item}}</th>
+                                    </tr>
+                                </thead>
+    
+                                <tbody>
+                                    <tr ng-repeat="value in serviceRangeTable.tableBody" ng-init="renderFinish($last)">
+                                        <td ng-if="serviceStateId == 1">
+                                            <div class="checkbox checkbox-info">
+                                                <input type="checkbox" ng-checked="value.checkbox" ng-click="table.selectOne(serviceRangeTable, value.checkboxId, $event);">
+                                                <label></label>
+                                            </div>
+                                        </td>
+                                        <td>{{(serviceRangeTable.pagination.currentPage-1)*serviceRangeTable.pagination.pageSize+$index+1}}</td>
+                                        <td title="{{value.type == 's' ? '起点范围' : '终点范围'}}">
+                                            <a ng-show="serviceStateId == 1" href="javascript:;" ng-click="edit(value)">{{value.type == 's' ? '起点范围' : '终点范围'}}</a>
+                                            <span ng-show="serviceStateId != 1">{{value.type == 's' ? '起点范围' : '终点范围'}}</span>
+                                        </td>
+                                        <td title="{{value.code}}">{{value.code}}</td>
+                                        <td title="{{value.creator}}">{{value.creator}}</td>
+                                        <td title="{{value.createTime}}">{{value.createTime}}</td>
+                                        <td>
+                                            <a href="javascript:;" ng-click="regionDetail(value.schemaUid, value.type === 's' ? '起点范围' : '终点范围')">点击查看</a>
+                                        </td>
+                                        <td title="{{value.remark}}">{{value.remark}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <hnapagination table-service="table" page-table-model="serviceRangeTable"></hnapagination>
+                        </div>
+                    </div>
+                    <div class="form-box" ng-show="subServiceTypeCode === 'MAINLINESHIP' || subServiceTypeCode === 'MAINLINEAIR'">
+                        <form name="mainlineForm" novalidate="novalidate">
+                            <div class="operation-box right">
+                                <button type="button" ng-show="isVisibleEdit" name="editService" ng-click="editService();" class="btn btn-primary">
+                                    <%=common_page_edit%>
+                                </button>
+                            </div>
+                            <div class="rows">
+                                <dl class="panel" style="width: 100%">
+                                    <dd style="width: 50%">
+                                        <label>航线</label>
+                                        <div class="content-info">
+                                            <span ng-show="visible" class="text-info">{{lineName}}</span>
+                                            <input name="lineName" id="lineId" ng-model="lineName" ng-hide="visible" type="text" ng-value="lineName" ng-click="initLineIds()" readonly>
+                                        </div>
+                                    </dd>
+                                    <dd>
+                                        <label>航班</label>
+                                        <div class="content-info">
+                                            <!-- <input name="className" id="classIds" ng-model="className" ng-hide="visible" type="text" ng-value="className" ng-click="initFlightIds()" readonly required> -->
+                                            <div class="table-container" ng-controller="tableController">
+                                                <table class="flight-table table-box" cellpadding="0" cellspacing="0">
+                                                    <thead>
+                                                        <tr>
+                                                            <th ng-if="!visible">
+                                                                <div class="checkbox checkbox-info">
+                                                                    <input type="checkbox" ng-disabled="visible" ng-model="flightTable.selectFlag" ng-click="table.selectAll(flightTable);">
+                                                                    <label></label>
+                                                                </div>
+                                                            </th>
+                                                            <th ng-repeat="item in flightTable.tableHeader">{{item}}</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="value in flightTable.tableBody" ng-init="renderFinish($last)">
+                                                            <td ng-if="!visible">
+                                                                <div class="checkbox checkbox-info">
+                                                                    <input type="checkbox" ng-disabled="visible" ng-checked="value.checkbox" ng-click="table.selectOne(flightTable, value.checkboxId, $event);">
+                                                                    <label></label>
+                                                                </div>
+                                                            </td>
+                                                            <td>{{(flightTable.pagination.currentPage-1)*flightTable.pagination.pageSize+$index+1}}</td>
+                                                            <td title="{{value.code}}">{{value.code}}</td>
+                                                            <td title="{{value.carrierCompanyName || value.shippingCompanyName}}">{{value.carrierCompanyName || value.shippingCompanyName}}</td>
+                                                            <td title="{{value.startTime || value.eta}}">{{value.startTime || value.eta}}</td>
+                                                            <td title="{{value.endTime || value.etd}}">{{value.endTime || value.etd}}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </dd>
+                                </dl>
+                            </div>
+                            <div class="operation-box">
+                                <button type="button" ng-hide="isVisibleDraft" ng-click="saveDraftService();" name="draftService" class="btn btn-primary">
+                                    <%=common_page_save_draft%>
+                                </button>
+                                <button type="button" ng-show="isVisible" ng-click="cancelService();" class="btn btn-default">
+                                    <%=common_page_cancel%>
+                                </button>
+                                <button type="button" ng-show="isVisible" ng-click="submitFlights();" name="saveFlights" class="btn btn-primary">
+                                    <%=common_page_save%>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 添加分区方案 -->
+    <div style="display: none;" id="regionDetail">
+        <form name="regionForm" novalidate="novalidate">
+            <dd>
+                <label class="label-tip">
+                    <b>*</b>范围类型：</label>
+                <div class="content-info" style="line-height: 32px;">
+                    <div class="radio radio-single radio-primary">
+                        <input ng-disabled="startDisabled" style="margin-left:0px;" value="s" ng-checked="rangeRadio == 's'" type="radio" ng-model="rangeRadio">
+                        <label></label>
+                    </div>
+                    <span style="margin-right: 20px;vertical-align: middle;">起点范围</span>
+
+                    <div class="radio radio-single radio-primary">
+                        <input ng-disabled="endDisabled" style="margin-left:0px;" value="e" ng-checked="rangeRadio == 'e'" type="radio" ng-model="rangeRadio">
+                        <label></label>
+                    </div>
+                    <span style="vertical-align: middle;">终点范围</span>
+                </div>
+            </dd>
+            <dd ng-if="showCode">
+                <label class="label-tip">
+                    <b>*</b>编码：</label>
+                <div class="content-info">
+                    <input disabled="disabled" ng-trim="false" ng-blur="checkCode()" verification="{'ruleType':'code','tipsType':'two'}" maxlength="15"
+                        name="code" ng-model="code" type="text" placeholder="请输入编码" required="required" autocomplete="off">
+                    <div class="verification">
+                        <span id="code-msg" class="errors" ng-show="regionForm.code.$viewValue && regionForm.code.$error.defined && regionForm.code.$dirty">{{regionForm.code.errorTips}}</span>
+                    </div>
+                </div>
+            </dd>
+            <dd>
+                <label class="label-tip">备注：</label>
+                <div class="content-info" style="height: 92px;">
+                    <textarea text-length="" ng-trim="false" maxlength="140" rows="5" name="description" ng-model="description" type="text"></textarea>
+                </div>
+            </dd>
+            <dd ng-hide="isDetailCheck" class="isHref-box">
+                <div class="checkbox checkbox-info">
+                    <input type="checkbox" ng-model="isSaveNext" ng-checked="isSaveNext">
+                    <label></label>
+                </div>
+                <span class="isHref-tip">保存并跳转到详情页</span>
+            </dd>
+        </form>
+    </div>
+
+    <!-- =========供应商详情======== -->
+    <div ng-show="mainBlock == 'suppler'">
+        <div class="go-back">
+            <button type="button" ng-click="goSupplerBack();" class="btn btn-default">
+                <%=common_page_back%>
+            </button>
+        </div>
+        <div class="add-title">
+            <p>
+                <%=services_title_supplier%>
+            </p>
+        </div>
+        <div class="form-box supplier-box">
+            <div include="tpl/fragment/common/supplierDetail.html"></div>
+        </div>
+    </div>
+
+    <!--流转过程-->
+    <div ng-show="mainBlock == 'process'">
+        <div class="stream-box">
+            <input type="button" class="btn btn-default" value="<%=common_page_back%>" ng-click="goBack()">
+            <h3 class="title-stream">
+                {{processTitle}}的流转过程
+            </h3>
+            <ul class="stream-list">
+                <li ng-repeat="value in streamList" class="{{$index == 0 ? 'active':''}}">
+                    <div class="circle" style="{{$index == 0 ? 'top:-17px;left:-7.5px': ''}}"></div>
+                    <div class="stream-content">
+                        <p class="title">[{{value.action}}]</p>
+                        <p>{{value.operator}}&nbsp;&nbsp;&nbsp;&nbsp;{{value.approvalTime}}</p>
+                        <p ng-if="value.opinion">
+                            <span>处理意见:</span>
+                            <span class="deal-detail">{{value.opinion}}</span>
+                        </p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!--服务范围点击弹出框-->
+<div include="tpl/fragment/common/selectArea.html"></div>

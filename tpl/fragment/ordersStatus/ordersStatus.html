@@ -1,0 +1,17 @@
+
+<div class="processDiv" style="height:100px;">
+    <div class="processStyle {{process.statusColor}}" ng-repeat="process in processList track by $index">
+        <span
+                ng-if="$index != 0"
+                class="dividingLine {{process.statusColor}}">.....</span>
+        <img class="processStyle_img" ng-src={{process.svgUrl}}
+             width="47"
+             height="47"
+             type="image/svg+xml"/>
+
+        <div class="processStyle_txt"
+             >{{process.txt}}
+
+        </div>
+    </div>
+</div>

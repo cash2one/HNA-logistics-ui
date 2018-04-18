@@ -1,0 +1,1 @@
+app.factory("service",["easyHttp",function(t){var r={};return r.deleteCostPrice=function(r,e){return t.post("logistics.deleteCostPrice",{urlParams:r},e)},r.submitVerifyCostPrice=function(r,e){return t.post("logistics.submitCostPrice",{urlParams:r},e)},r}]);

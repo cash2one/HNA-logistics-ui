@@ -1,0 +1,1 @@
+app.factory("balanceManagementView",[function(){return{}}]);

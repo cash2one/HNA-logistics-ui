@@ -1,0 +1,474 @@
+.go-back {
+    padding-left: 15px;
+}
+.add-title {
+    padding-top: 10px;
+    padding-bottom: 30px;
+    text-align: center;
+}
+.add-title p {
+    font-size: 22px;
+    font-weight: bold;
+}
+.from-box {
+    position: absolute;
+    top: 116px;
+    left: 15px;
+    bottom: 15px;
+    right: 15px;
+}
+.go-back .btn-right {
+    float: right;
+}
+
+.from-box .panel {
+    position: relative;
+    padding-left: 135px;
+    float: left;
+    width: 50%;
+}
+.from-box div.panel {
+    width: 100%;
+}
+.from-box .rows {
+    float: left;
+    position: relative;
+    width: 100%;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+.from-box .panel dd {
+    padding: 25px;
+    padding-left: 0px;
+    margin: 0;
+    text-align: center;
+}
+.from-box .panel .content-title b {
+    display: inline-block;
+    text-align: left;
+    color: red;
+    width: 10px;
+    margin-left: -5px;
+}
+.from-box .panel .content-title .subsidiary {
+    position: absolute;
+    display: inherit;
+    right: 6px;
+    top: 19px;
+}
+.from-box .panel .content-title {
+    position: absolute;
+    width: 135px;
+    left: 0;
+    line-height: 34px;
+    text-align: right;
+}
+.from-box .panel .content-info-wrap .content-info {
+    width: 49%;
+    float: left;
+}
+.from-box .panel .content-info {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    text-align: left;
+    height: auto;
+    padding-left: 13px;
+    line-height: 32px;
+}
+.from-box .panel .content-info label {
+    margin-right: 20px;
+    cursor: pointer;
+    line-height: 36px;
+}
+.from-box .panel .content-info label > input {
+    margin-right: 4px;
+}
+.from-box .panel .content-info.business {
+    height: 172px;
+}
+.from-box .panel .content-info span.text-info,
+a.text-info {
+    display: inline-block;
+    height: 34px;
+    line-height: 34px;
+    padding-left: 13px;
+    white-space: pre-line;
+    word-break: break-all;
+    width: 100%;
+}
+.from-box .tab-content {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+}
+.operate-box {
+    position: absolute;
+    right: 14px;
+    top: 15px;
+}
+#baseInfo {
+    padding-top: 40px;
+}
+#baseInfo .content-info .text-legth {
+    position: absolute;
+    bottom: 9px;
+    right: 60px;
+    color: #999;
+}
+#baseInfo .save-box {
+    text-align: center;
+    padding-bottom: 30px;
+    position: relative;
+    top: 30px;
+    float: left;
+    clear: both;
+    width: 100%;
+}
+#baseInfo .verification .errors {
+    padding-left: 0;
+}
+
+#baseInfo .required {
+    border: 1px solid #fa787e;
+    display: inline;
+}
+
+#weightRegular .save-box {
+    text-align: center;
+    padding-bottom: 30px;
+    position: absolute;
+    top: 400px;
+    float: left;
+    clear: both;
+    width: 100%;
+}
+
+.text-left {
+    text-align: left;
+}
+.text-right {
+    text-align: right;
+}
+.text-center {
+    text-align: center;
+}
+.u-must-red {
+    color: red;
+}
+.m-audit-box {
+    background: #fff;
+    padding: 20px;
+    width: 100%;
+    font-size: 16px;
+}
+.m-audit-box .row-list {
+    padding: 15px 0px;
+}
+
+/*产品范围*/
+#product-range .top-btn-group {
+    margin: 15px;
+}
+#product-range .table-container {
+    text-align: center;
+    position: relative;
+}
+#product-range .product-table th:nth-child(1),
+#product-range .product-table td:nth-child(1) {
+    width: 5%;
+    -ms-text-overflow: inherit !important;
+    text-overflow: inherit !important;
+}
+#product-range .product-table th:nth-child(2),
+#product-range .product-table td:nth-child(2) {
+    width: 5%;
+}
+#product-range .product-table th:nth-child(3),
+#product-range .product-table td:nth-child(3) {
+    width: 15%;
+}
+#product-range .product-table th:nth-child(4),
+#product-range .product-table td:nth-child(4) {
+    width: 15%;
+}
+#product-range .product-table th:nth-child(5),
+#product-range .product-table td:nth-child(5) {
+    width: 15%;
+}
+#product-range .product-table th:nth-child(6),
+#product-range .product-table td:nth-child(6) {
+    width: 15%;
+}
+#product-range .product-table th:nth-child(7),
+#product-range .product-table td:nth-child(7) {
+    width: 15%;
+}
+#product-range .product-table th:nth-child(8),
+#product-range .product-table td:nth-child(8) {
+    width: 15%;
+}
+
+/* 居中弹框表单样式 */
+.middle-box .prompt-content dd {
+    position: relative;
+    padding-left: 95px;
+    width: 100%;
+    margin: 0px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.middle-box .prompt-content .content-info {
+    position: relative;
+}
+.middle-box .prompt-content label.label-tip {
+    position: absolute;
+    left: 0px;
+    line-height: 34px;
+    height: 34px;
+    text-align: right;
+    width: 85px;
+}
+.prompt-content label b {
+    display: inline-block;
+    width: 12px;
+    text-align: left;
+    color: red;
+}
+.verification {
+    position: absolute;
+}
+.prompt-content .verification .errors {
+    padding-left: 0px;
+}
+.middle-box .prompt-content .ready-panel {
+    display: table;
+    height: 34px;
+    line-height: 34px;
+}
+.middle-box .prompt-content dd.isHref-box {
+    text-align: center;
+    padding: 0px;
+    position: absolute;
+    bottom: 10px;
+    right: 0px;
+}
+/* 居中弹框表单样式 end */
+
+.select-type {
+    position: absolute;
+    top: 0;
+    left: 40px;
+    right: 40px;
+    bottom: 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 22px 15px;
+}
+.select-type ul li {
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+.select-type ul li:first-child {
+    padding-top: 0;
+}
+.select-type ul li .checkbox {
+    margin-right: 15px;
+}
+.wrap-textarea .text-legth {
+    bottom: 7px;
+    left: auto;
+    right: 19px;
+    color: #aaa;
+    position: absolute;
+}
+.warning-abs {
+    position: absolute;
+    bottom: -22px;
+    color: red;
+}
+.product_code.ng-dirty {
+    border: 1px solid #fa787e;
+}
+
+.switch-list .row {
+    margin: 0;
+}
+
+.switch-list .row .verification .errors {
+    top: 32px;
+}
+.switch-list .row .col-md-6,
+.switch-list .row .col-md-4 {
+    margin-left: 0;
+    padding: 0;
+}
+
+.switch-list .row .col-md-6:first-child,
+.switch-list .row .col-md-4:first-child {
+    padding-right: 10px;
+}
+.switch-list .row .col-md-6:nth-child(2),
+.switch-list .row .col-md-4:nth-child(2) {
+    padding-left: 10px;
+}
+
+.service-modify-content {
+    margin: 0 100px 100px 100px;
+}
+
+.select__layer {
+    height: 100%;
+    background-color: #f6f8fa;
+}
+.select__layer .layer__content {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: #fff;
+}
+.select__layer .layer__content h4 {
+    padding-top: 20px;
+    height: 45px;
+    color: #888;
+    background-color: #f6f8fa;
+}
+.select__layer .layer__content .content__box {
+    border: 1px solid #ddd;
+    height: 100%;
+}
+.select__layer .layer__content .checkbox {
+    margin-right: 4px;
+}
+
+.select__layer .layer__content .box__tab {
+    height: 100%;
+}
+.select__layer .layer__content .box__tab .tab__title {
+    width: 100%;
+    height: 50px;
+}
+.select__layer .layer__content .box__tab .tab__title > li {
+    float: left;
+    width: 140px;
+    text-align: center;
+    line-height: 50px;
+    background-color: #f6f6f6;
+    cursor: pointer;
+}
+.select__layer .layer__content .box__tab .tab__title > li.active {
+    background-color: #fff;
+}
+.select__layer .layer__content .box__tab .tab__content {
+    height: calc(100% - 50px);
+}
+.select__layer .layer__content .box__tab .tab__panel {
+    height: 100%;
+    overflow-y: auto;
+    border-top: 2px solid #ddd;
+}
+.select__layer .layer__content .checkbox {
+    margin-right: 4px;
+}
+
+.select__box {
+    padding: 15px;
+    height: 100%;
+    overflow-y: auto;
+}
+.select__box li {
+    padding: 5px 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.modify-table {
+    width: 100%;
+    background-color: #fff;
+    border-collapse: collapse;
+}
+.modify-table thead,
+.modify-table tbody {
+    position: relative;
+    width: 100% !important;
+    text-align: center;
+}
+.modify-table th,
+.modify-table td {
+    position: relative;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 5px;
+    font-weight: normal;
+    overflow: hidden;
+    border: 1px solid #ddd;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    -icab-text-overflow: ellipsis;
+    -khtml-text-overflow: ellipsis;
+    -moz-text-overflow: ellipsis;
+    -webkit-text-overflow: ellipsis;
+}
+.modify-table th,
+.modify-table td p {
+    margin: 0 20%;
+}
+.modify-table td p {
+    text-align: left;
+}
+.border-red{
+    border-color:#FA787E!important;
+}
+
+.from-box .panel .content-title.title-pic {
+    height: 80px;
+    line-height: 80px;
+}
+.img-upload-box {
+    width: 80px;
+    height: 80px;
+}
+.img-upload-box .img-file{
+    position: absolute;
+    height: 80px;
+    width: 80px;
+    top: 0px;
+    left: 0px;
+    opacity: 0;
+    z-index: 10;
+}
+.img-upload-box .img-upload-button{
+    position: absolute;
+    top: 0px;
+    left: 12px;
+    height: 80px;
+    width: 80px;
+    line-height: 80px;
+    text-align: center;
+    border: none;
+    background: #ddd url(public/img/add-P.png) center center no-repeat;
+    color: #fff;
+    z-index: 5;
+    border: 1px dashed #929292;
+}
+.uploaded-img-box {
+    width: 80px;
+    margin-left: 12px;
+    position: relative;
+}
+.icon-minus-sign {
+    position: absolute;
+    top: -13px;
+    right: -10px;
+    background-color: #fff;
+    color: #F96268;
+    border-radius: 50%;
+    font-size: 22px;
+    cursor: pointer;
+}

@@ -1,0 +1,96 @@
+<table class="login-table test_4d9e487d" ng-keyup="enterEvent($event)">
+    <tr class="test_ffb244fe" style="height: 23%;">
+        <td class="test_ab026e74">
+            <div class="g-login-header w-1068 test_4deab047">
+                <div class="logo test_7a3a6b48"><%=common_page_logo%></div>
+                <div class="f-lang dropdown test_f81cea18">
+                    <a href="javascript:;" class="btn test_cf34fbb3" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                        <img ng-src="public/img/lang-{{langModel.showLangImg}}.png" width="29" height="21" class="test_79dae37e">
+                        <span ng-bind="langModel.showLangTxt" class="test_40fcb9f0"></span>
+                        <span class="caret test_d925b8d8"></span>
+                    </a>
+                    <ul class="dropdown-menu u-language test_7c6ec50e" role="menu">
+                        <li class="test_893ce655">
+                            <ul class="menu test_308ac432">
+                                <li role="presentation" ng-repeat="(key,value) in langModel.langLibrary" class="test_82899ba9"><img ng-src="public/img/lang-{{key}}.png" width="29" height="21" class="test_5ffef918"><a ng-click="langModel.switchLang(key);" role="menuitem" tabindex="-1" href="javascript:;" class="test_b4ed60d0">{{value}}</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr class="test_49ba906f" style="height: 60%;">
+        <td class="test_86574bcd">
+            <div class="g-login-content test_6cce8346">
+                <div class="w-1068 clearfix test_6d9b8657">
+                    <div class="g-left test_428befcc">
+                        <div class="m-banner test_932127a3"></div>
+                    </div>
+                    <div class="g-right test_7756157d">
+                        <div class="m-login test_771797e7">
+                            <div ng-show="loginModel.loginBox" class="test_3be010a2">
+                                <div class="form-group test_79c79be3" ng-class="{'has-error':loginModel.usernameError}">
+                                    <input type="text" name="username" class="form-control test_f25ddd83" autocomplete="off" maxlength="15" ng-focus="userFocus();" ng-blur="userBlur();" ng-keydown="keyDownEvent('username');" ng-model="loginModel.username" id="username">
+                                </div>
+
+                                <div class="form-group has-feedback test_cf0d5089" ng-class="{'has-error':loginModel.passwordError}">
+                                    <input type="text" class="form-control test_eb696453" autocomplete="off" ng-focus="passFocus();" ng-model="loginModel.passwordText" id="password-text">
+                                    <input type="password" class="form-control test_005492e4" autocomplete="off" maxlength="20" ng-blur="passBlur();" ng-keydown="keyDownEvent('password');" ng-model="loginModel.password" id="password" style="display: none;color:#5d5c5c;">
+                                    <span ng-class="{'icon-eye-close':eyeClose, 'icon-eye-open':eyeOpen}" id="eye" class="form-control-feedback u-eye test_bddaa9b6" ng-click="show();"></span>
+                                </div>
+                                <div class="form-group test_9d76693d">
+                                    <div class="m-code test_eabee463">
+                                        <div id="m-code-box" class="m-code-box test_0cc72901">
+                                            <div id="code_bg" class="bg test_4611496a"></div>
+                                            <span id="code_label" class="block test_d72760d1"></span>
+                                            <span id="code_Tips" class="tips test_b4ff7d10"></span>
+                                        </div>
+                                        <div id="m-code-img" class="m-code-img test_dcbb9c08">
+                                            <div id="big-img" class="big test_2cc45d6c">
+                                                <div id="small-img" class="small test_4a4c4090"></div>
+                                                <div id="msg-tips" class="msg-tips msg-tips-success test_58e8212e">
+                                                    <span class="u-icon test_eb51d79f"></span>
+                                                    <span class="u-tips test_2259c443"></span>
+                                                    <span class="u-msg test_3848728c"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-block u-submit test_81867670" ng-click="submit();" ng-bind="loginModel.login"></button>
+                                <div class="row clearfix test_59877bed">
+                                    <div class="col-xs-7 test_c66d9fb7" style="padding-right:0px;width:60%;">
+                                        <p class="u-login-msg c-fl test_7423d1f5" id="login-callback-tips"></p>
+                                    </div>
+                                    <div class="col-xs-5 test_7cd451f1" style="padding-left:0px;width:40%;">
+                                        <p class="u-login-msg c-fr test_876b16a1"><a href="javascript:;" ng-click="forget();" class="test_56e6c11c"><%=login_page_forget%></a> </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="login-box test_c5a0714b" ng-show="loginModel.forgetBox">
+                                <h4 class="test_e39597ad"><%=login_page_connect%></h4>
+                                <p class="test_c892c369"><span class="test_efaf8556"><%=login_page_phone%></span>：400-5895-8812</p>
+                                <p class="test_b9898617"><span class="test_36edc5e9"><%=login_page_email%></span>：ITservice@hnair.com</p>
+                                <button type="button" class="btn btn-block u-submit test_4fd176a0" ng-click="backtrack();" ng-bind="loginModel.backtrack"></button>
+                            </div>
+                            <div class="login-box test_9bafca23" ng-show="loginModel.lockingBox">
+                                <h4 class="test_7549b90a"><%=login_page_locked%></h4>
+                                <p class="test_b72b9693"><span class="test_bf77b031"><%=login_page_phone%></span>：400-5895-8812</p>
+                                <p class="test_5c424e09"><span class="test_d8fc21b5"><%=login_page_email%></span>：ITservice@hnair.com</p>
+                                <button type="button" class="btn btn-block u-submit test_ae3a5dd1" ng-click="backtrack();" ng-bind="loginModel.backtrack"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr class="test_a2df991b" style="height: 17%;">
+        <td class="test_6f85630e">
+            <div class="g-login-footer test_8585a4ca">
+                Copyright &copy; 2017 <a href="javascript:;" class="test_bf6f981d">上海至精供应链管理股份有限公司</a>
+            </div>
+        </td>
+    </tr>
+</table>

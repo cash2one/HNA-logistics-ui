@@ -1,0 +1,1 @@
+app.factory("supplierView",[function(){var a={};return a.tab=function(a,r){return $(a).tab({callback:r})},a}]);

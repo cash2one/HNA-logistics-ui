@@ -1,0 +1,99 @@
+<!-- Main content -->
+<section class="content test_db3309be">
+  <div ng-controller="tableController" class="master-table project-manage test_81677df0">
+    <div class="search-input test_96d0950e">
+      <div class="row test_2464aa48">
+        <div class="col-md-4 test_0e83b90e">
+          <div class="form-group test_dfbd5574">
+            <label class="test_01a45267"><%=projectManage_project_name%></label>
+            <input type="text" class="form-control test_6fbd882b" ng-model="tableModel.restData.project" maxlength="30" placeholder="<%=projectManage_project_nameCode%>">
+          </div>
+        </div>
+        <div class="col-md-8 test_ea159231">
+          <div class="form-group test_7c060bda">
+            <label class="test_025d1bb4"><%=projectManage_project_createTime%></label>
+            <div class="form-control test_758ad264">
+              <div class="col-md-5 test_d711a8e1"><input type="text" id="startTime" ng-model="tableModel.restData.starttime" class="test_f436fe85"></div>
+              <span class="test_4cd3e2b9">~</span>
+              <div class="col-md-5 test_fd1ad25d"><input type="text" id="endTime" ng-model="tableModel.restData.endtime" class="test_23992ac3"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row test_a7e53483">
+        <div class="col-md-4 test_16a56fa8">
+          <div class="form-group test_0548d37d">
+            <label class="test_9a6d75bc"><%=projectManage_project_status%></label>
+            <input type="text" class="form-control test_9ecb0580" id="projectStatus" ng-model="statusName" ng-value="tableModel.restData.status" placeholder="<%=projectManage_project_all%>">
+            <i class="select-icon icon-drop-down test_7e3fe619"></i>
+          </div>
+        </div>
+        <div class="col-md-4 test_6ce11299">
+          <div class="form-group test_0479e783"><label class="test_3050502e"><%=projectManage_relationship_enterprise%></label>
+            <input type="text" placeholder="全部" title="{{tableModel.restData.companyname}}" class="form-control test_b1cd06d9" id="relationshipEnterprise" ng-model="tableModel.restData.companyname">
+          </div>
+        </div>
+        <div class="col-md-4 test_6ce11299">
+          <span class="btn btn-reset test_939e088b" style="margin:0;" ng-click="resetProjectsData()"><%=projectManage_reset%></span>
+          <button class="btn btn-primary btn-bill test_20388b1d" ng-click="getProjectsData()"><%=common_page_search%></button>
+        </div>
+      </div>
+      <!--<div class="row test_ad8441e0">-->
+        <!--<div class="col-md-12 form-footer test_59146d74">-->
+          <!--<span class="btn btn-reset test_939e088b" style="margin:0;" ng-click="resetProjectsData()"><%=projectManage_reset%></span>-->
+          <!--<button class="btn btn-primary btn-bill test_20388b1d" ng-click="getProjectsData()"><%=common_page_search%></button>-->
+        <!--</div>-->
+      <!--</div>-->
+    </div>
+    <div class="search-action test_7762b9bc" ng-if="projectAction == 1">
+      <div class="row test_882c5c98">
+        <div class="col-md-12 form-footer test_9a611505">
+          <button class="btn btn-primary btn-bill test_73aa82c8" ng-click="jumpTo('#/projectDetail', 1)"><%=common_page_add%></button>
+          <button class="btn btn-primary btn-bill test_85a7e22e" ng-disabled="delDisabled" ng-click="delProjectsData()"><%=common_page_delete%></button>
+          <button class="btn btn-primary btn-bill test_a58db6fe" ng-disabled="submitDisabled" ng-click="submitProjectsData()"><%=projectManage_submit_check%></button>
+        </div>
+      </div>
+    </div>
+    <div class="table-container test_9e955291">
+      <input type="hidden" ng-model="clickTrId" class="test_6521cad7">
+      <table class="user-table table-box project-table test_620ead98" cellpadding="0" cellspacing="0">
+        <thead class="test_12833cbf">
+          <tr class="test_e21584ac">
+            <th ng-if="projectAction == 1" class="test_d6fac29d">
+              <div class="checkbox checkbox-info test_6f81ab81">
+                <input type="checkbox" ng-model="tableModel.selectFlag" ng-click="table.selectAll(tableModel);" class="test_f74ca645">
+                <label class="test_edc8b3a1"></label>
+              </div>
+            </th>
+            <th ng-repeat="item in tableModel.tableHeader" class="test_87ad2f98">{{item}}</th>
+          </tr>
+        </thead>
+        <tbody class="test_dab71c50">
+          <tr ng-repeat="item in tableModel.tableBody" data-id="{{item.id}}" ng-init="renderFinish($last)" class="test_9aca9b4c">
+            <td ng-if="projectAction == 1" class="test_c409bb8f">
+              <div class="checkbox checkbox-info test_5ebcd0e0">
+                <input type="checkbox" ng-value="{{item.id}}" ng-checked="item.checkbox" ng-click="table.selectOne(tableModel, item.checkboxId);" class="test_141888f4">
+                <label class="test_beb55607"></label>
+              </div>
+            </td>
+            <td class="test_6ef91933">{{(tableModel.pagination.currentPage-1)*tableModel.pagination.pageSize+$index+1}}</td>
+            <td class="link test_99d90130" ng-click="jumpTo('#/projectDetail', item.status, item.id)" ng-bind-html="item.name | trustHtml:project"></td>
+            <td ng-bind-html="item.code | trustHtml:project" class="test_d2a46594"></td>
+            <td class="test_ef68e100">{{ item.bizTypeCode | bizType }}</td>
+            <td class="long test_cfa57032" title="{{ item.companyNames }}">
+              <p ng-repeat="subject in item.companys.slice(0,2) track by $index" class="test_eb70cc5d">{{ subject.companyName }}</p>
+              <p ng-if="item.companys.length > 2" class="test_feb59fad">...</p>
+            </td>
+            <td class="test_66b84d45">{{ item.creator }}</td>
+            <td class="test_ca08a323">{{ item.createTime }}</td>
+            <td class="test_826719c6"><i class="badge test_368e9986" ng-if="item.isReject"></i>{{ item.statusName }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <hnapagination table-service="table" page-table-model="tableModel" class="test_c1df7efc"></hnapagination>
+    </div>
+    <div ng-show="!tableModel.pagination.totalPage" style="position: absolute;top:265px;bottom:0px;width:100%;" class="test_74283d9e">
+      <img style="width:100%;height:100%;" src="/public/img/undefined.svg" class="test_bdb42a4a">
+    </div>
+  </div>
+</section>

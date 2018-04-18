@@ -1,0 +1,19 @@
+<div class="subOrdersArea" ng-repeat="subOrder in orderInfo.orderLogistics track by $index">
+    <div ng-if="orderInfo.packageNum > 1" class="subOrdersAreaTitle test_c6c5f55e"
+         ng-click="toggleList($index)">
+        <span class="subOrdersAreaOrderLabel">
+            <%= confirmOrder_page_detail_subOrderNum%>:
+        </span>
+        <span class="subOrdersAreaOrderNum">
+            {{subOrder.subOrderNum}}
+        </span>
+        <i ng-class="{true:'icon_open',false:'icon_close'}[subOrder.isShow]" class="icon-more-down icon-angle-right test_8cb746bb"></i>
+    </div>
+    <div ng-class="{'subOrders': true, 'paddleftzero': (orderInfo.packageNum == 1)}" id="{{subOrder.subOrderNum}}" ng-show="!subOrder.isShow" ng-repeat="time in subOrder.item track by $index">
+        <div class="subOrderAreaFlow">
+            <span class="subOrders_detail_span" ng-repeat="detail in time.detail track by $index">
+                {{time.date  + "  " + detail}}
+            </span>
+        </div>
+    </div>
+</div>

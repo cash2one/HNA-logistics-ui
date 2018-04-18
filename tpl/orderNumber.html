@@ -1,0 +1,22 @@
+<section class="content">
+    <ul class="tab-list">
+        <li ng-class="{active: activeTab === 'RULE'}" ng-click="switchTabON('RULE')"><%=orderNumber_tab_rule%></li>
+        <li ng-class="{active: activeTab === 'INVENTORY'}" ng-click="switchTabON('INVENTORY')"><%=orderNumber_tab_inventory%></li>
+        <li ng-class="{active: activeTab === 'SUPERVISE'}" ng-click="switchTabON('SUPERVISE')"><%=orderNumber_tab_supervise%></li>
+    </ul>
+
+    <div class="tab-content">
+        <!-- 单号规则 -->
+        <div class="table-pane" ng-if="activeTab === 'RULE'">
+            <div include="tpl/fragment/orderNumber/ruleInfo.html" class="order-table-rule" ng-controller="ruleCtrl"></div>
+        </div>
+        <!-- 单号库存 -->
+        <div class="table-pane" ng-if="activeTab === 'INVENTORY'">
+            <div include="tpl/fragment/orderNumber/inventoryInfo.html" class="order-table-inventory" ng-controller="inventoryCtrl"></div>
+        </div>
+        <!-- 单号监督 -->
+        <div class="table-pane" ng-if="activeTab === 'SUPERVISE'">
+            <div include="tpl/fragment/orderNumber/superviseInfo.html" class="order-table-supervise" ng-controller="superviseCtrl"></div>
+        </div>
+    </div>
+</section>

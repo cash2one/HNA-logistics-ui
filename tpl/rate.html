@@ -1,0 +1,144 @@
+<div ng-show="nestRateFrom" id="nest-rateFrom" class="prompt-modal middle-box test_490ab7ba" style="display:none">
+    <div class="prompt-wrap test_3e116593">
+        <div class="bomb-box test_52a80eb5">
+            <div class="title test_b6cfd8d0">{{promptTitle}}</div>
+            <div class="prompt-content test_5ba467bf">
+                <form name="rateFrom" novalidate="novalidate" class="test_b4fe258e">
+                    <div id="rateFrom" class="test_97dccdf4">
+                        <ul class="isContainer switch-list test_7e7c9641">
+                            <li class="test_71864b77">
+                                <label style="overflow:hidden" class="test_c892a0a7">
+                                    <b class="test_409e6bc1">*</b><%=rate_current%>：
+                                    <p class="unit test_9545ec8b"><%=rate_unit%></p>
+                                </label>
+                                <input autocomplete="off" ng-change="verifySame('rate-current')" id="rate-current" class="input-text test_c077f158" name="rateCurrent" ng-model="rateCurrent" type="text" maxlength="30" required>
+                                <div class="verification test_9a34f117">
+                                    <span class="errors test_53e851b3" id="name-msg" ng-show="rateFrom.rateCurrent.$viewValue && rateFrom.rateCurrent.$error.defined && rateFrom.rateCurrent.$dirty">{{rateFrom.rateCurrent.errorTips}}</span>
+                                </div>
+                            </li>
+                            <li class="test_5b13f49a">
+                                <label class="test_c5267a7a"><b class="test_f5b85c5f">*</b><%=rate_exchange%>：</label>
+                                <input autocomplete="off" ng-change="verifySame('exchange-text')" id="exchange-text" class="input-text test_6dc0d670" name="exchange" ng-model="exchange" type="text" maxlength="140" required>
+                                <div class="verification test_1b74b753">
+                                    <span class="errors test_2982de65" id="exchange-msg" ng-show="rateFrom.exchange.$viewValue && rateFrom.exchange.$error.defined && rateFrom.exchange.$dirty">{{rateFrom.exchange.errorTips}}</span>
+                                </div>
+                            </li>
+                            <li class="test_e9f8b5d7">
+                                <label class="test_68f602de"><b class="test_eb628e6f">*</b><%=rate_rate_val%>：</label>
+                                <input ng-keyup="limit3Data()" ng-blur="verifyRateFormat()" class="verify-rate-format input-text test_56cde500" name="rateVal" ng-model="rateVal" type="text" maxlength="10" required>
+                                <div class="verification test_cd6ceda7">
+                                    <span class="errors test_5b9a74dd" id="rate-val-msg" ng-show="rateFrom.rateVal.$viewValue && rateFrom.rateVal.$error.defined && rateFrom.rateVal.$dirty">{{rateFrom.rateVal.errorTips}}</span>
+                                </div>
+                            </li>
+                            <li class="test_2d47f162">
+                                <label class="test_5a3a62bf"><b class="test_31157e49">*</b><%=rate_start_time%>：</label>
+                                <input id="start-time" class="input-text test_cb0b21f6" maxlength="30" name="startTime" ng-model="startTime" type="text" placeholder="<%=rate_input_startTime_tips%>" required readonly>
+                                <div class="verification test_185f9c99">
+                                    <span class="errors test_851292c7" id="startTime-msg" ng-show="rateFrom.startTime.$viewValue && rateFrom.startTime.$error.defined && rateFrom.startTime.$dirty">{{rateFrom.startTime.errorTips}}</span>
+                                </div>
+                            </li>
+                            <li class="test_de1a6d6d">
+                                <label class="test_d461998a"><b class="test_a762bff3">*</b><%=rate_end_time%>：</label>
+                                <input readonly id="end-time" class="input-text test_c376e64e" maxlength="30" name="endTime" ng-model="endTime" type="text" placeholder="<%=rate_input_endTime_tips%>" required>
+                                <div class="verification test_9ca5250c">
+                                    <span class="errors test_52e6754c" id="endTime-msg" ng-show="rateFrom.endTime.$viewValue && rateFrom.endTime.$error.defined && rateFrom.endTime.$dirty">{{rateFrom.endTime.errorTips}}</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+            <div class="operation test_1698cc48">
+                <button ng-click="closePrompt();" name="prompt-close" class="btn btn-default test_7b04b94e" data-event="close"><%=rate_cancel%></button>
+                <button ng-click="savePrompt();" name="prompt-save" class="btn btn-primary test_a0dea892" data-event="close"><%=rate_save%></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="rate-box test_925d6aef" ng-init="initSelectList()">
+    <!--tableController start-->
+    <div class="master-table test_feda47b2">
+        <div class="add-search-box test_cfaa1902">
+            <div class="list-search-box test_81228c9e" style="width:100%;margin-left:2%">
+                <!--<input maxLength="30" ng-enter="searchRate();" ng-model="tableModel.restData.q" ng-value="q" type="text" class="form-control" placeholder="<%=rate_search_condition%>">
+                <i ng-click="searchRate();" class="icon-search search-table"></i>-->
+                <div class="search-cell test_95c4487e" style="width:18%">
+                    <span class="test_ae284b4b"><%=rate_current%></span>
+                    <div class="select-box test_4947b79d">
+                        <input id="search-currency" style="width:100%;padding-left:2px" autocomplete="off" class="input-text test_bfbcd906" name="searchCurrentRate" ng-model="searchCurrentRate" type="text" maxlength="30">
+                    </div>
+                </div>
+                <div class="search-cell test_0faa4872" style="width:20%">
+                    <span class="test_1b8697da"><%=rate_exchange%></span>
+                    <div class="select-box test_bc7781f6" style="width:66%">
+                        <input id="search-exchange" style="width:100%;padding-left:2px" autocomplete="off" class="input-text test_9f62b0b6" name="searchExchangeRate" ng-model="searchExchangeRate" type="text" maxlength="30">
+                    </div>
+                </div>
+                <div class="search-cell test_61acf831" style="width:21%">
+                    <span class="test_c1286b3a"><%=rate_start_time%></span>
+                    <input type="text" id="begin-time" style="width:69%;padding-left:2px" autocomplete="off" class="test_5321e841">
+                </div>
+                <div class="search-cell test_9478a001" style="width:21%">
+                    <span class="test_b5e854f1"><%=rate_end_time%></span>
+                    <input type="text" id="finish-time" style="width:69%;padding-left:2px" autocomplete="off" class="test_119d5023">
+                </div>
+                <div class="search-cell test_fa0969ed" style="width:17%">
+                    <span style="color:#888;margin-right:10px;cursor:pointer;position:relative;left:-15px" ng-click="clearDate()" class="test_e8c36f22"><%=rate_reset_date%></span>
+                    <button ng-click="search();" class="btn btn-search test_a115f552" style="padding: 0; margin-left:-12px"><%=rate_search%></button>
+                </div>
+            </div>
+        </div>
+        <div ng-controller="tableController" class="test_590ff7d2">
+            <div class="batch-operation test_1fec92c2">
+                <button ng-click="add();" class="btn btn-primary test_c05b44a9"><%=rate_add%></button><button ng-click="delete();" class="btn btn-primary test_5ae5f58e"><%=rate_delete%></button>
+            </div>
+            <div class="table-container test_5f1d4aad">
+                <table class="table-box test_492c10e5" cellpadding="0" cellspacing="0">
+                    <thead class="test_4bb4e214">
+                    <th style="width:5%" class="test_1bed7cb1">
+                        <div class="checkbox checkbox-info test_282c8baf">
+                            <input type="checkbox" ng-model="tableModel.selectFlag" ng-click="table.selectAll(tableModel);" class="test_dd03a509">
+                            <label class="test_e7dcea23"></label>
+                        </div>
+                    </th>
+                    <th style="width:{{tableModel.tableHeaderSize[$index]}}" ng-repeat="item in tableModel.tableHeader" class="test_70fa44a1">
+                        {{item}}
+                        <p ng-if="$index==1" style="position:relative;color:#555;top:-12px;color:#555;font-size:10px;line-height:15px" class="test_d08b9f50"><%=rate_unit%></p>
+                    </th>
+                    </thead>
+                    <tbody class="test_c13a7a38">
+                        <tr ng-repeat="value in tableModel.tableBody" ng-init="renderFinish($last)" class="test_f24e9d29">
+                            <td class="test_8b8a5c6a">
+                                <div class="checkbox checkbox-info test_ffd8fe7d">
+                                    <input type="checkbox" ng-value="{{value.id}}" ng-checked="value.checkbox" ng-click="table.selectOne(tableModel, value.checkboxId);" class="test_77321bd1">
+                                    <label class="test_1ea6d08e"></label>
+                                </div>
+                            </td>
+                            <td class="test_ffd9430b">{{(tableModel.pagination.currentPage-1)*tableModel.pagination.pageSize+$index+1}}</td>
+                            <td class="name test_fb79ec3a" title="{{value.sourceName}}({{value.sourceCurrency}})-{{value.destName}}({{value.destCurrency}})">
+                                <a href="javascript:;" style="cursor:pointer;display:block" ng-click="editRate(value)" class="test_0cee2851">
+                                    {{value.sourceName}}({{value.sourceCurrency}})-{{value.destName}}({{value.destCurrency}})
+                                </a>
+                            </td>
+                            <td title="{{value.rate}}" class="test_b59bf32a">
+                                {{value.rate}}
+                            </td>
+                            <td title="{{value.beginTime}}" class="test_448d4be1">
+                                <span class="test_f764b49a">{{value.beginTime}}</span>
+                            </td>
+                            <td title="{{value.endTime}}" class="test_f9cf2423">
+                                <span class="test_2767b833">{{value.endTime}}</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div ng-show="!tableModel.pagination.isVisiblePage" style="position: absolute;top:165px;bottom:0px;width:100%;" class="test_317c3b58">
+                    <img style="width:100%;height:100%;" src="/public/img/undefined.svg" class="test_fddb0276">
+                </div>
+                <hnapagination table-service="table" page-table-model="tableModel" class="test_12730fd6"></hnapagination>
+            </div>
+        </div>
+    </div>
+    <!--tableController end-->
+</div>

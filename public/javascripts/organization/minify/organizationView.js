@@ -1,0 +1,1 @@
+app.factory("organizationView",["$rootScope","organizationService",function(o,i){return{}}]);

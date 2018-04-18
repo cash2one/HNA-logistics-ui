@@ -1,0 +1,365 @@
+<div class="rule-table">
+    <div class="rule-search-box">
+        <div style="width:100%;padding-left:40px">
+            <!--搜索服务-->
+            <div class="search-cell" style="width: 25%"  ng-if="module==='channelNumber'">
+                <span><%=orderNumber_table_service%></span>
+                <div class="select-box" style="width: 70%">
+                    <input ng-trim="false" class="input-text" id="search-ruleService" autocomplete="off" type="text"
+                           ng-click="getSearchServiceData()" ng-model="ruleInfoService" readonly>
+                </div>
+            </div>
+            <!--搜索供应商-->
+            <div class="search-cell" style="width: 25%"  ng-if="module==='channelNumber'">
+                <span><%=orderNumber_table_supplier%></span>
+                <div class="select-box" style="width: 70%">
+                    <input ng-trim="false" class="input-text" id="search-ruleSupplier" autocomplete="off" type="text"
+                           ng-click="getSearchSupplierData()" ng-model="ruleInfoSupplier" readonly>
+                </div>
+            </div>
+            <!--搜索产品组-->
+            <div class="search-cell" style="width: 36%"  ng-if="module==='waybillNumber'">
+                <span><%=orderNumber_table_productTeam%></span>
+                <div class="select-box" style="width: 82%">
+                    <div style="width: 49%;display: inline-block;position: relative;">
+                        <input ng-trim="false" id="search-ruleProductTeam-first" ng-model="ruleInfoProductTeamFirst"
+                               placeholder="<%=orderNumber_select_all%>" readonly
+                               ng-click="getSearchProductTeamFirstData()" type="text" class="input-text" >
+                        <i class="select-icon icon-drop-down"></i>
+                    </div>
+                    <div style="width: 49%;display: inline-block;position: relative;">
+                        <input ng-trim="false" id="search-ruleProductTeam-leaf" ng-model="ruleInfoProductTeamLeaf"
+                               placeholder="<%=orderNumber_select_all%>" readonly
+                               ng-click="getSearchProductTeamLeafData()" type="text" class="input-text">
+                        <i class="select-icon icon-drop-down"></i>
+                    </div>
+                </div>
+            </div>
+            <!--搜索产品-->
+            <div class="search-cell" style="width: 24%"  ng-if="module==='waybillNumber'">
+                <span><%=orderNumber_add_product%></span>
+                <div class="select-box" style="width: 78%">
+                    <input ng-trim="false" class="input-text" id="search-ruleProduct" autocomplete="off" type="text"
+                           ng-click="getSearchProductData()" ng-model="ruleInfoProduct" readonly>
+                </div>
+            </div>
+            <div class="search-cell" style="width: 18%;padding-left: 4px;">
+                <span><%=orderNumber_table_useInfo%></span>
+                <div class="select-box" style="width: 78%">
+                    <input ng-trim="false" class="input-text" id="rule-useInfo" autocomplete="off"
+                           type="text" ng-model="ruleUseInfo" placeholder="<%=orderNumber_select_all%>"
+                           ng-click="getSearchRuleUseInfoData()" readonly>
+                    <i class="select-icon icon-drop-down"></i>
+                </div>
+            </div>
+            <div style="margin-right: 15px;display: inline-block;float: right">
+                <span ng-click="resetData()" class="btn btn-reset"><%=common_clear_data%></span>
+                <button ng-click="getTable(true);" class="btn btn-primary" style="padding:0 30px;position:relative;top:2px">
+                    <%=orderNumber_tab_search%>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="batch-operation">
+        <button ng-click="ruleAdd();" class="btn btn-primary">
+            <%=common_page_add%>
+        </button>
+        <button ng-click="ruleStartUse();" class="btn btn-primary" ng-disabled="canStartUse">
+            <%=orderNumber_button_startUse%>
+        </button>
+        <button ng-click="ruleEndUse();" class="btn btn-primary" ng-disabled="canEndUse">
+            <%=orderNumber_button_endUse%>
+        </button>
+    </div>
+    <div class="table-container" ng-controller="tableController">
+        <table class="rule-table-info table-box" cellpadding="0" cellspacing="0">
+            <thead>
+            <tr>
+                <th style="width:5%;">
+                    <div class="checkbox checkbox-info">
+                        <input type="checkbox" ng-model="tableModel.selectFlag" ng-click="table.selectAll(tableModel);">
+                        <label ></label>
+                    </div>
+                </th>
+                <th ng-repeat="item in tableModel.tableHeader" style="width:{{tableModel.tableHeaderSize[$index]}}">{{item}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="value in tableModel.tableBody" ng-init="renderFinish($last)">
+                <td>
+                    <div class="checkbox checkbox-info">
+                        <input type="checkbox" ng-checked="value.checkbox"
+                               ng-click="table.selectOne(tableModel, value.checkboxId, $event);">
+                        <label></label>
+                    </div>
+                </td>
+                <td>{{(tableModel.pagination.currentPage-1)*tableModel.pagination.pageSize+$index+1}}</td>
+                <td ng-if="module==='channelNumber'" title="{{value.refUidName}}">
+                    <a href="javascript:;" ng-click="ruleEdit(value.id)" ng-bind-html="value.refUidName | trustHtml:q"></a>
+                </td>
+                <td ng-if="module==='channelNumber'" title="{{value.refIdName}}">{{value.refIdName}}</td>
+                <td ng-if="module==='waybillNumber'" title="{{value.refIdName}}">
+                    <a href="javascript:;" ng-click="ruleEdit(value.id)" ng-bind-html="value.refIdName | trustHtml:q"></a>
+                </td>
+                <td ng-if="module==='waybillNumber'" title="{{value.refUidName}}">{{value.refUidName}}</td>
+                <td title="{{value.numberSection}}">{{value.numberSection}}</td>
+                <td title="{{value.createMethodName}}">{{value.createMethodName}}</td>
+                <td title="{{value.statusName}}">{{value.statusName}}</td>
+            </tr>
+            </tbody>
+        </table>
+        <hnapagination table-service="table" page-table-model="tableModel"></hnapagination>
+    </div>
+    <div ng-show="!tableModel.pagination.isVisiblePage" style="position: absolute;top:165px;bottom:0px;width:100%;">
+        <img style="width:100%;height:100%;" src="/public/img/undefined.svg">
+    </div>
+</div>
+
+<div ng-show="nestRuleInfoFrom" id="nest-ruleInfoFrom" ng-init="initSelectList();" class="prompt-modal middle-box" style="display:none">
+    <div class="prompt-wrap">
+        <div class="bomb-box ruleInfo-box">
+            <div class="title">{{title}}</div>
+            <div class="prompt-content">
+                <form name="ruleInfoFrom" novalidate="novalidate">
+                    <div ng-click="" class="label-text"><%=orderNumber_title_detail%>
+                        <i class="icon-more-down icon-angle-down"></i>
+                    </div>
+                    <ul class="isContainer switch-list">
+                        <!--服务-->
+                        <li ng-show="module==='channelNumber'">
+                            <label><b>*</b><%=orderNumber_table_service%>：</label>
+                            <input ng-trim="false" class="input-text" id="rule-serviceRule" autocomplete="off" type="text"
+                                   ng-click="getServiceRuleData()" ng-model="serviceRule" name="serviceRule"
+                                   ng-required="serviceRuleRequired" readonly ng-disabled="serviceRuleDisabled">
+                            <div class="verification">
+                                <span class="errors" ng-show="ruleInfoFrom.serviceRule.$dirty"></span>
+                            </div>
+                        </li>
+                        <!--产品组-->
+                        <li ng-show="module==='waybillNumber'">
+                            <label><b>*</b><%=orderNumber_table_productTeam%>：</label>
+                            <input ng-trim="false" class="input-text" id="rule-productTeamRule" autocomplete="off" type="text"
+                                   ng-click="getProductTeamRuleData()" ng-model="productTeamRule" name="productTeamRule"
+                                   ng-required="productTeamRuleRequired" readonly ng-disabled="productRuleTeamDisabled">
+                            <i class="regexWeiRuleIcon icon-drop-down"></i>
+                            <div class="verification">
+                                <span class="errors" ng-show="ruleInfoFrom.productTeamRule.$dirty"></span>
+                            </div>
+                        <!--产品-->
+                        <li ng-show="module==='waybillNumber'">
+                            <label><%=orderNumber_add_product%>：</label>
+                            <input ng-trim="false" class="input-text" id="rule-productRule" autocomplete="off"
+                                   ng-click="getProductRuleData()" ng-model="productRule" name="productRule"
+                                   readonly ng-disabled="productRuleDisabled" type="text">
+                        <!--校验规则-->
+                        <li>
+                            <label><b>*</b><%=orderNumber_table_verify%></label>
+                            <span class="questionMark-img">
+                                <small ><%=orderNumber_questionMark_title%></small>
+                            </span>
+                            <input ng-trim="false" class="input-text" id="rule-regexRule" readonly
+                                   autocomplete="off" type="text" name="regexRule" ng-model="regexRule"
+                                   ng-click="getRegexRuleData()" required ng-disabled="regexRuleDisabled">
+                            <div class="verification">
+                                <span class="success" ng-show="regexRuleInfoShow">{{regexRuleInfo}}</span>
+                            </div>
+                        </li>
+                        <!--单号前缀-->
+                        <li>
+                            <label><%=orderNumber_add_numberPrefix%>：</label>
+                            <input ng-trim="false" class="input-text" name="numberPrefix" style="text-transform: uppercase;"
+                                   ng-model="numberPrefix" type="text" maxlength="15" ng-disabled="numberPrefixDisabled"
+                                   verification="{'ruleType':'numberPrefix','ruleRegMsg':'<%=orderNumber_checkout_numberSuffix%>'}">
+                            <div class="verification">
+                                <span class="errors"
+                                      ng-show="ruleInfoFrom.numberPrefix.$viewValue &&
+                                      ruleInfoFrom.numberPrefix.$error.defined &&
+                                      ruleInfoFrom.numberPrefix.$dirty">
+                                    {{ruleInfoFrom.numberPrefix.errorTips}}
+                                </span>
+                            </div>
+                        </li>
+                        <!--序列-->
+                        <li>
+                            <label><b>*</b><%=orderNumber_add_seriesNumber%>：</label>
+                            <input ng-trim="false" class="input-text" ng-disabled="seriesNumberDisabled"
+                                   ng-model="seriesNumber" name="seriesNumber" maxlength="50" type="text"
+                                   verification="{'ruleType':'seriesNumber'}" ng-change="checkSeriesNumber()"
+                                   placeholder="<%=orderNumber_seriesNumber_placeholder%>" required>
+                            <div class="verification">
+                                <span class="errors"
+                                      ng-show="ruleInfoFrom.seriesNumber.$viewValue &&
+                                      ruleInfoFrom.seriesNumber.$error.defined &&
+                                      ruleInfoFrom.seriesNumber.$dirty">
+                                    {{ruleInfoFrom.seriesNumber.errorTips}}
+                                </span>
+                            </div>
+                            <div class="verification">
+                                <span class="errors"
+                                      ng-show="seriesNumberError">
+                                    {{seriesNumberErrorTips}}
+                                </span>
+                            </div>
+                        </li>
+                        <!--检验位规则-->
+                        <li ng-if = "regexWeiRuleShow">
+                            <label><b>*</b><%=orderNumber_add_verify%>：</label>
+                            <input ng-trim="false" class="input-text" id="rule-regexWeiRule" autocomplete="off" type="text"
+                                   placeholder="<%=orderNumber_select_tips%>" ng-click="getRegexWeiRuleData()" readonly required
+                                   ng-model="regexWeiRule" name="regexWeiRule" ng-disabled="regexWeiRuleDisabled">
+                            <i class="regexWeiRuleIcon icon-drop-down"></i>
+                            <div class="verification">
+                                <span class="errors" ng-show="ruleInfoFrom.regexWeiRule.$dirty"></span>
+                            </div>
+                        </li>
+                        <!--单号后缀-->
+                        <li>
+                            <label><%=orderNumber_add_numberSuffix%>：</label>
+                            <input ng-trim="false" class="input-text" name="numberSuffix" ng-model="numberSuffix"
+                                   type="text" maxlength="15" ng-disabled="numberSuffixDisabled" style="text-transform: uppercase;"
+                                   verification="{'ruleType':'numberPrefix','ruleRegMsg':'<%=orderNumber_checkout_numberSuffix%>'}">
+                            <div class="verification">
+                                <span class="errors"
+                                      ng-show="ruleInfoFrom.numberSuffix.$viewValue &&
+                                      ruleInfoFrom.numberSuffix.$error.defined &&
+                                      ruleInfoFrom.numberSuffix.$dirty">
+                                    {{ruleInfoFrom.numberSuffix.errorTips}}
+                                </span>
+                            </div>
+                        </li>
+                        <!--生成方式-->
+                        <li>
+                            <label><%=orderNumber_add_createWay%>：</label>
+                            <div class="input-text radio-box" style="text-align: left;padding-left: 10px;padding-top: 4px;">
+                                <div class="radio radio-single radio-primary" ng-show="createWayTypeRadio">
+                                    <input value="1" type="radio" ng-model="createWayType" name="createWayType"
+                                           class="ng-pristine ng-valid ng-touched">
+                                    <label></label>
+                                </div>
+                                <span ng-show="createWayAutoRadio"><%=orderNumber_createWay_auto%></span>
+                                <div class="radio radio-single radio-primary" style="margin-left: 40px;" ng-show="createWayTypeRadio">
+                                    <input value="2" type="radio" ng-model="createWayType" name="createWayType"
+                                           class="ng-pristine ng-untouched ng-valid">
+                                    <label></label>
+                                </div>
+                                <span ng-show="createWayHandRadio"><%=orderNumber_createWay_hand%></span>
+                            </div>
+                        </li>
+                        <!--生成数量-->
+                        <li ng-show="createWayType === '1'">
+                            <label><b>*</b><%=orderNumber_add_createAll%>：</label>
+                            <input ng-trim="false" class="input-text" maxlength="4" type="text" ng-change="checkThresholdSet()"
+                                   name="generatorCounter" ng-model="generatorCounter" ng-disabled="generatorCounterDisabled"
+                                   verification="{'ruleType':'positiveinteger'}" required ng-blur="checkThresholdSet()">
+                            <div class="verification">
+                                <span class="errors"
+                                      ng-show="ruleInfoFrom.generatorCounter.$viewValue &&
+                                      ruleInfoFrom.generatorCounter.$error.defined &&
+                                      ruleInfoFrom.generatorCounter.$dirty">
+                                    {{ruleInfoFrom.generatorCounter.errorTips}}
+                                </span>
+                            </div>
+                        </li>
+                        <!--生成阈值-->
+                        <li  ng-show="createWayType === '1'">
+                            <label><b>*</b><%=orderNumber_add_thresholdSet%></label>
+                            <span class="questionMark-img">
+                                <small><%=orderNumber_questionMark_detail%></small>
+                            </span>
+                            <input ng-trim="false" class="input-text" name="thresholdSet" ng-change="checkThresholdSet()"
+                                   ng-model="thresholdSet" type="text" maxlength="4" ng-disabled="thresholdSetDisabled"
+                                   verification="{'ruleType':'positiveinteger'}" required ng-blur="checkThresholdSet()">
+                            <div class="verification">
+                                <span class="errors"
+                                      ng-show="ruleInfoFrom.thresholdSet.$viewValue &&
+                                      ruleInfoFrom.thresholdSet.$error.defined &&
+                                      ruleInfoFrom.thresholdSet.$dirty">
+                                    {{ruleInfoFrom.thresholdSet.errorTips}}
+                                </span>
+                            </div>
+                            <div class="verification">
+                                <span class="errors"
+                                      ng-show="thresholdSetError">
+                                    {{thresholdSetErrorTips}}
+                                </span>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="label-text"><%=orderNumber_add_warningInform%>
+                        <i class="icon-more-down icon-angle-down"></i>
+                    </div>
+                    <ul class="isContainer switch-list language-international">
+                        <!--预警阈值-->
+                        <li>
+                            <label><%=orderNumber_add_warningSet%></label>
+                            <span class="questionMark-img">
+                                <small><%=orderNumber_questionMark_warningSet%></small>
+                            </span>
+                            <input ng-trim="false" class="input-text" name="warningSet" maxlength="4"
+                                   ng-model="warningSet" type="text" ng-disabled="warningSetDisabled"
+                                   verification="{'ruleType':'positiveinteger'}">
+                            <div class="verification">
+                                <span class="errors"
+                                      ng-show="ruleInfoFrom.warningSet.$viewValue &&
+                                      ruleInfoFrom.warningSet.$error.defined &&
+                                      ruleInfoFrom.warningSet.$dirty">
+                                    {{ruleInfoFrom.warningSet.errorTips}}
+                                </span>
+                            </div>
+                        </li>
+                        <!--通知方式-->
+                        <li>
+                            <label><%=orderNumber_add_informWay%>：</label>
+                            <div class="input-text radio-box" style="text-align: left;padding-left: 10px;padding-top: 4px;">
+                                <div class="radio radio-single radio-primary" ng-show="informWayTypeRadio">
+                                    <input value="sms" type="radio" ng-model="informWayType" name="informWayType"
+                                           class="ng-pristine ng-valid ng-touched">
+                                    <label></label>
+                                </div>
+                                <span ng-show="informWayNoteRadio"><%=orderNumber_informWay_note%></span>
+                                <div class="radio radio-single radio-primary" style="margin-left: 40px;" ng-show="informWayTypeRadio">
+                                    <input value="email" type="radio" ng-model="informWayType" name="informWayType"
+                                           class="ng-pristine ng-untouched ng-valid">
+                                    <label></label>
+                                </div>
+                                <span ng-show="informWayMailRadio"><%=orderNumber_informWay_mail%></span>
+                            </div>
+                        </li>
+                        <!--手机号-->
+                        <li ng-show="informWayType === 'sms'">
+                            <label><%=orderNumber_add_phoneNumber%>：</label>
+                            <input ng-trim="false" type="text" class="input-text" ng-model="phoneNumber" name="phoneNumber"
+                                   maxlength="140" ng-disabled="phoneNumberDisabled" placeholder="多个用分号分开"
+                                   ng-change="checkPhoneNumber()" ng-blur="checkPhoneNumber()">
+                            <div class="verification">
+                                <span class="errors" ng-show="phoneNumberError">
+                                    {{phoneNumberErrorTips}}
+                                </span>
+                            </div>
+                        </li>
+                        <!--邮箱地址-->
+                        <li ng-show="informWayType === 'email'">
+                            <label><%=orderNumber_add_mailAddress%>：</label>
+                            <input ng-trim="false" type="text" class="input-text" name="mailAddress" maxlength="140"
+                                   ng-model="mailAddress" ng-disabled="mailAddressDisabled" placeholder="多个用分号分开"
+                                   ng-change="checkMailAddress()" ng-blur="checkMailAddress()">
+                            <div class="verification">
+                                <span class="errors" ng-show="mailAddressError">
+                                    {{mailAddressErrorTips}}
+                                </span>
+                            </div>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            <div class="operation">
+                <button ng-click="closeRule();" name="prompt-close" class="btn btn-default" data-event="close">
+                    <%=orderNumber_button_cancel%>
+                </button>
+                <button ng-click="saveRule();" name="prompt-save" class="btn btn-primary" data-event="close">
+                    <%=orderNumber_button_ok%>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

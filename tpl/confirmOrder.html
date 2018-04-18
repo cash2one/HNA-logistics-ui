@@ -1,0 +1,982 @@
+<link rel="stylesheet" href="/tpl/fragment/orderLog/orderLog.css">
+<!--订单编辑页面-->
+<section ng-show="couldEdit" name="confirmOrder" class="test_f9d14229">
+    <div class="test_6001e665">
+        <input type="hidden" ng-model="supplierId" class="test_1de5dbd5">
+
+        <div class="cm-goBack test_4b69e846">
+            <button ng-click="goBack();" class="btn btn-default test_705536ed"><%=common_page_back%></button>
+        </div>
+
+        <div class="cm-addTitle test_3eec6ad6">
+            <p id="orderDetailOrModify" class="test_c364e286"><%=confirmOrder_add_title%></p>
+        </div>
+    </div>
+    <ul class="bill-tabs" ng-if="isOrderSearch">
+        <li ng-class="{active: activeTab == 'ORDERDETAIL'}" ng-click="switchTab('ORDERDETAIL')"><%=confirmOrder_add_detail%></li>
+        <li ng-class="{active: activeTab == 'OPERATIONLOG'}" ng-click="switchTab('OPERATIONLOG')"><%=confirmOrder_operationLog%></li>
+    </ul>
+    <div class="cm-main test_e901d653" ng-show="activeTab == 'ORDERDETAIL'">
+        <form id="ConformOrderForm" class="ConformOrderForm test_3561d010" name="ConformOrderForm" novalidate="novalidate">
+            <!--订单基本信息-->
+            <div class="test_ed3ee6d9">
+                <div class="label-text test_8f2a10df"><%=confirmOrder_page_baseInfo%>
+                    <i class="icon-more-down icon-angle-right test_d3efdcfa"></i>
+                </div>
+                <div class="switch-list test_fdf40e1d" style="overflow:visible" data-title="<%=confirmOrder_page_baseInfo%>">
+                    <div class="test_ed7182b9">
+                        <!--客户-->
+                        <label class="test_d4f99cac"><b class="test_90935942">*</b><%=confirmOrder_page_baseInfo_customer%>：</label>
+
+                        <div class="rightPart  test_9d8ba083">
+                            <input ng-show="orderStatus =='DRAFT'" class="test_bcdeed6c" ng-trim="true" maxlength="30" name="customerName" id="userList" ng-click="clientEle()" ng-model="orderBaseInfo.customerName" type="text" required>
+
+                            <input ng-show="orderStatus !='DRAFT'" class="input-text test_55801dbc" type="text" ng-model="orderBaseInfo.customerName" disabled="disabled">
+                        </div>
+                    </div>
+
+                     <div class="test_e6ad4334">
+                        <!--客户单号-->
+                        <label class="test_052264d7"><b class="test_70355897">*</b><%=confirmOrder_client_num%>：</label>
+
+                        <div class="rightPart  test_6a290389">
+                            <input class="test_c92a90bb" ng-trim="false" maxlength="30" name="externalNo" id="clientNum" ng-disabled="noCustomerName" ng-blur="checkExternalNo(orderBaseInfo.externalNo)" ng-model="orderBaseInfo.externalNo" type="text" verification="{'ruleType': 'code'}" required>
+                            <div class="verification test_38f193ee">
+                                <span class="errors test_9d42e8b1" ng-show="ConformOrderForm.externalNo.$dirty &&
+                                               ConformOrderForm.externalNo.$invalid &&
+                                               ConformOrderForm.externalNo.$$rawModelValue">
+                                      {{ConformOrderForm.externalNo.errorTips}}
+                                </span>
+                            </div>
+                            <div class="verification test_6b4b7f87">
+                                <span class="errors test_d1cdff29" ng-show="existExternalNo">客户单号已存在</span>
+                            </div>
+                            <div class="checkbox checkbox-info test_3387fd93">
+                              <input type="checkbox" ng-init="value=false" ng-model="checkbox" ng-checked="value.checkbox" ng-click="getClientNum()" class="test_4a0a25ff">
+                              <label class="test_b85e3229"></label>
+                            </div>
+                            <span id="checkText" class="test_46ad4485">自动生成</span>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="test_ebed8d96">
+                    	<!--产品-->
+                        <label class="test_052264d7"><b class="test_70355897">*</b>
+                            <%=confirmOrder_page_baseInfo_product%>：</label>
+
+                        <div ng-show="orderStatus =='DRAFT'" class="rightPart select-box  test_92bd1907">
+                            <input type="text" name="productName" readonly="readonly" id="productList" ng-model="orderBaseInfo.productName" class="test_392fc792" required>
+                        </div>
+                        <div ng-show="orderStatus !='DRAFT'" class="rightPart  test_92bd1907">
+                            <input ng-show="orderStatus !='DRAFT'" class="input-text test_55801dbc" type="text" ng-model="orderBaseInfo.productName" disabled="disabled">
+                        </div>
+                    </div>
+                    <div ng-show="serviceList.length" class="test_c3eb3241">
+                        <!--可选服务-->
+                        <label class="w15 test_052264d7"><%=confirmOrder_page_baseInfo_service%>：</label>
+
+                        <div class="rightPart w85 checkboxList test_c40c2f0f">
+                            <div class="checkboxList_div test_fa1282c5" ng-repeat="service in serviceList track by $index">
+                                <input type="checkbox" ng-model="service.isChecked" ng-if="orderStatus =='DRAFT'" id="checkbox-{{$index}}" ng-false-value="false" ng-true-value="true" class="checkboxList_div_input test_9d655896" ng-click="changeProductReceived();">
+                                <input type="checkbox" ng-if="orderStatus !='DRAFT'" disabled="disabled" ng-model="service.isChecked" id="checkbox-{{$index}}" ng-false-value="false" ng-true-value="true" class="checkboxList_div_input test_207e7d5a">
+                                <label class="checkboxList_div_label test_65004cac">
+                                    {{service.serviceTypeName}}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="test_22e03ab8">
+                        <!--货物类型-->
+                        <label class="test_052264d7"><b class="test_70355897">*</b>
+                            <%=confirmOrder_page_baseInfo_productType%>：</label>
+
+                        <div class="rightPart select-box test_92bd1907">
+
+                            <input type="text" id="cargoTypeList" name="cargoTypeName" ng-click="cargoEle()" ng-model="orderBaseInfo.cargoTypeName" readonly="readonly" class="test_392fc792" required>
+                            <i class="confirOrderIcon icon-drop-down test_30698209"></i>
+                        </div>
+                    </div>
+                    <div class="test_4d903286">
+                        <!--货物件数-->
+                        <label class="test_052264d7"><b class="test_70355897">*</b><%=confirmOrder_page_baseInfo_number%>：</label>
+                        <div class="rightPart test_c2cb7ec8">
+                            <input ng-trim="false" ng-show="orderStatus == 'DRAFT' || orderStatus == 'COMMITED' || orderStatus == 'ACCEPT'" class="input-text test_55801dbc" verification="{'ruleReg':'/^[1-9][0-9]?$/', 'ruleRegMsg':'<%=confirmOrder_model_productNum%>'}" maxlength="2" name="packageNum" ng-model="orderBaseInfo.packageNum" type="text" required>
+
+                            <div class="verification test_38f193ee">
+                                    <span class="errors test_9d42e8b1" ng-show="ConformOrderForm.packageNum.$viewValue &&
+                                           ConformOrderForm.packageNum.$validators.defined &&
+                                           ConformOrderForm.packageNum.$dirty">
+                                          {{ConformOrderForm.packageNum.errorTips}}
+                                    </span>
+                            </div>
+
+                            <input ng-show="orderStatus != 'DRAFT' && orderStatus != 'COMMITED' && orderStatus != 'ACCEPT'" class="input-text test_55801dbc" type="text" ng-model="orderBaseInfo.packageNum" disabled="disabled">
+                        </div>
+                    </div>
+                    <div class="test_8724530a">
+                        <!--货物总重-->
+                        <label class="test_052264d7"><b class="test_70355897">*</b><%=confirmOrder_page_baseInfo_totalWeight%>：</label>
+
+                        <div class="rightPart test_776cd34b">
+                            <div class="cargoWeight test_84512598">
+                                <input ng-trim="false" id="cusWeight" class="input-text test_55801dbc" verification="{'ruleReg':'/^-?\\d+(\\.\\d{1,3})?$/',
+                                       'ruleRegMsg':'<%=confirmOrder_model_cargoTotalWeight%>'}" maxlength="9" name="cusWeight" ng-model="orderBaseInfo.cusWeight" type="text" ng-change="checkWeight()" required>
+
+                                <div class="verification test_38f193ee">
+                                    <span class="errors test_9d42e8b1" ng-if="ConformOrderForm.cusWeight.$viewValue &&
+                                           ConformOrderForm.cusWeight.$validators.defined &&
+                                           ConformOrderForm.cusWeight.errorTips &&
+                                           ConformOrderForm.cusWeight.$dirty">
+                                          {{ ConformOrderForm.cusWeight.errorTips}}
+                                    </span>
+                                    <span class="errors test_9d42e8b1" ng-if="ConformOrderForm.cusWeight.invalidNum">
+                                          {{ConformOrderForm.cusWeight.invalidNum}}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="cargoWeightUnit test_9dfb8968">
+                                <input type="text" id="cargoUnitList" name="cusWeightUnit" ng-model="orderBaseInfo.cusWeightUnit" readonly="readonly" ng-click="unitEle()" class=" test_392fc792" required>
+                                <i class="confirOrderIcon icon-drop-down test_30698209"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--支付信息-->
+            <div ng-show="orderNo && orderStatus != 'DRAFT'" class="fatherDiv">
+                <div class="label-text">支付信息<i class="icon-more-down icon-angle-right"></i></div>
+                <div include="tpl/fragment/ordersDetail/payInfo.html" ng-controller="payInfoCtrl"></div>
+            </div>
+
+            <!--子订单详情-->
+            <div ng-show="orderNo && orderStatus != 'DRAFT' && ordSubOrderDtos.length > 0 && orderDetail.packageNum > 1" style="overflow:hidden;" class="test_7d774da6">
+                <div class="label-text test_c0167d92"><%=confirmOrder_page_detail_subOrderInfo%>
+                    <i class="icon-more-down icon-angle-right test_e9efedfe"></i>
+                </div>
+                <div class="switch-list test_fdf40e1d" style="overflow:hidden;" data-title="<%=confirmOrder_page_baseInfo%>">
+                    <div class="subOrderList test_60dc2c0d" ng-repeat="subOrder in ordSubOrderDtos" style="overflow:hidden;">
+                        <span class="test_aab6d53e"><%= confirmOrder_page_detail_subOrderNum%></span>
+                        <span class="test_78797912">{{subOrder.subOrderNo}}</span>
+                        <span class="test_2ba60dcd"><%=confirmOrder_page_detail_weight%></span>
+                        <span ng-show="subOrder.weight" class="test_539854af">{{subOrder.weight + subOrder.weightUnit}}</span>
+                        <span class="test_ea528488"><%= confirmOrder_page_detail_space%>({{subOrder.lwhUnit||""}})</span>
+                        <span ng-show="subOrder.length" class="test_277d5762">{{subOrder.length + "*" + subOrder.width + "*" + subOrder.height}}</span>
+                    </div>
+
+                </div>
+            </div>
+
+            <!--始发地址及联系人信息-->
+            <div id="fromAddress" class="test_e67ba46d">
+                <div class="label-text test_c6c5f55e"><%=confirmOrder_page_oPlaceContracts%>
+                    <i class="icon-more-down icon-angle-right test_8cb746bb"></i></div>
+                <ul class="isContainer switch-list  test_0e56d104" data-title="<%=confirmOrder_page_oPlaceContracts%>" id="oPlace">
+                    <div class="address1 test_5df91408" ng-show="orderNo">
+                        <div class="currentUseAddress pl56 test_cd118183">
+                            <div ng-if="orderDetail.fromAddress.transportType == seaId || orderDetail.fromAddress.transportType == airId" class="test_bfa2790a">
+                                <span class="span-name test_f33afcb5">{{orderDetail.fromName}}</span>
+                                <span class="test_78bf73b9">{{orderDetail.fromAddress.countryName}}</span>
+                                <span class="test_a7ab0ea0">{{orderDetail.fromAddress.cityName}}</span>
+                                <span class="test_b41b3264">{{orderDetail.fromAddress.transportName}}</span>
+                                <span class="test_1739ec92">{{orderDetail.fromAddress.address}}</span>
+                                <span class="span-post test_e78e5641">{{orderDetail.fromAddress.postcode}}</span>
+                                <span class="currentUserAddressNote test_0d83187e">现用地址</span>
+                            </div>
+                            <div ng-if="orderDetail.fromAddress.transportType != seaId && orderDetail.fromAddress.transportType != airId" class="test_7547580d">
+                                <span class="span-name test_50e2d490">{{orderDetail.fromName}}</span>
+                                <span ng-show="orderDetail.fromAddress.provinceName" class="test_5e4e418e">
+                                    {{orderDetail.fromAddress.countryName}} {{orderDetail.fromAddress.provinceName}} {{orderDetail.fromAddress.cityName}} {{orderDetail.fromAddress.districtName}} {{orderDetail.fromAddress.streetName}}
+                                </span>
+                                <span ng-show="!orderDetail.fromAddress.provinceName" class="test_a6bbe70e">
+                                     {{orderDetail.fromAddress.countryName}} {{orderDetail.fromAddress.cityName}}
+                                </span>
+                                <span class="test_dadd2b1a">{{orderDetail.fromAddress.address}}</span>
+                                <span class="span-post test_6e3b3721">{{orderDetail.fromAddress.postcode}}</span>
+                                <span class="currentUserAddressNote test_8ac80c03">现用地址</span>
+                            </div>
+                            <div class="test_fd1a4d5d">
+                                <span class="span-phone test_5639c766">{{orderDetail.fromPhone}}</span>
+                                <span>{{orderDetail.fromTelephone}}</span>
+                                <span class="span-email test_952c9745">{{orderDetail.fromAddress.email}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <input ng-if="!item.isNotAccess" class="address_radio test_9b37906f" type="radio" ng-model="oPlaceIndex" ng-value="-1" style="display:none!important" name="oAddress">
+                    <div class="address test_0359bc49" ng-repeat="item in oPlaceList track by $index">
+                        <input ng-if="!item.isNotAccess" class="address_radio test_bf1a99ef" type="radio" ng-model="oPlaceIndex" ng-value="$index" ng-change="selectAddress($index,1)" name="oAddress">
+                        <input ng-if="item.isNotAccess" class="address_radio test_425c9049" type="radio" ng-model="oPlaceIndex" ng-value="$index" ng-change="selectAddress($index,1)" name="oAddress" disabled="disabled">
+
+                        <div ng-if="item.transportType == seaId || item.transportType == airId" class="test_92cbe95d">
+                            <span class="span-name test_28e24c54">{{item.name}}</span>
+                            <span class="test_8e784eaf">{{item.countryName}}</span>
+                            <span class="test_2b3814e1">{{item.cityName}}</span>
+                            <span class="test_9fd0260f">{{item.transportName}}</span>
+                            <span class="test_48e40345">{{item.address}}</span>
+                            <span class="span-post pr30 test_e40688d1">{{item.postcode}}</span>
+                            <span class="address_setDefault  cursorPoint test_926221f2" ng-show="!item.isDefault" ng-click="setDefaultAddress(item.id,1)">
+                                    <%=confirmOrder_page_oPlaceContracts_setDefault%>
+                            </span>
+                            <span class="address_modify  cursorPoint test_b57514c4" ng-click="modifyAddress($index,1)"><%=confirmOrder_page_oPlaceContracts_modify%></span>
+                            <span class="address_modify cursorPoint test_4fdc28d0" ng-click="delAddress(item.id,1,$index)">删除地址</span>
+                        </div>
+                        <div ng-if="item.transportType != seaId && item.transportType != airId" class="test_1b9b0063">
+                            <span class="span-name test_ca89c252">{{item.name}}</span>
+                            <span ng-show="item.provinceName" class="test_38e09d02">
+                                {{item.countryName}} {{item.provinceName}} {{item.cityName}} {{item.districtName}} {{item.streetName}}
+                            </span>
+                            <span ng-show="!item.provinceName" class="test_ac0f99ae">
+                                 {{item.countryName}} {{item.cityName}}
+                            </span>
+                            <span class="test_6a1ebd79">{{item.address}}</span>
+                            <span class="span-post pr30 test_ef45167b">{{item.postcode}}</span>
+                            <span class="address_setDefault  cursorPoint test_29b89bf0" ng-show="!item.isDefault" ng-click="setDefaultAddress(item.id,1)">
+                                    <%=confirmOrder_page_oPlaceContracts_setDefault%>
+                            </span>
+                            <span class="address_modify  cursorPoint test_5ef573ff" ng-click="modifyAddress($index,1)"><%=confirmOrder_page_oPlaceContracts_modify%></span>
+                            <span class="address_modify cursorPoint test_701d7221" ng-click="delAddress(item.id,1,$index)">删除地址</span>
+                        </div>
+                        <div class="pl56 test_10e37701">
+                            <span class="span-phone test_29f79227">{{item.phone}}</span>
+                            <span>{{item.telPhone}}</span>
+                            <span class="span-email test_f1a71506">{{item.email}}</span>
+                        </div>
+                    </div>
+                </ul>
+                <div class="address_operator test_097c4f34">
+                    <span id="oPlaceBtn" ng-show="oPlaceList.length > 0" ng-click="switchStatus('origin')" class="oAddressOperator test_b36e9a97">
+                        <%=confirmOrder_page_oPlaceContracts_open%>
+                    </span>
+                    <span ng-click="openAddNewAddress(1)" ng-class="{true:'couldSet',false:'couldNotSet'}[!!orderBaseInfo.productName]" class="oAddressNew btn btn-primary test_6a1d6e0a"><%=confirmOrder_page_oPlaceContracts_new%></span>
+                </div>
+            </div>
+
+            <!--目的地址及联系人信息-->
+            <div id="toAddress" class="test_870e6103">
+                <div class="label-text test_c6c5f55e"><%=confirmOrder_page_destinationContracts%><i class="icon-more-down icon-angle-right test_8cb746bb"></i>
+                </div>
+                <ul class="isContainer switch-list  test_569b6be2" data-title="<%=confirmOrder_page_destinationContracts%>" id="dPlace">
+                    <div class="address1 test_f62a4d3c" ng-show="orderNo">
+                        <div class="currentUseAddress pl56 test_5f96f303">
+                            <div ng-if="orderDetail.toAddress.transportType == seaId || orderDetail.toAddress.transportType == airId" class="test_98b74878">
+                                <span class="span-name test_eb6a5320">{{orderDetail.toName}}</span>
+                                <span class="test_e164c7f7">{{orderDetail.toAddress.countryName}}</span>
+                                <span class="test_556b1c5e">{{orderDetail.toAddress.cityName}}</span>
+                                <span class="test_02b6cd1e">{{orderDetail.toAddress.transportName}}</span>
+                                <span class="test_7194c87c">{{orderDetail.toAddress.address}}</span>
+                                <span class="span-post test_3037a9d8">{{orderDetail.toAddress.postcode}}</span>
+                                <span class="currentUserAddressNote test_34bd2a13">现用地址</span>
+                            </div>
+                            <div ng-if="orderDetail.toAddress.transportType != seaId && orderDetail.toAddress.transportType != airId" class="test_fb203d39">
+                                <span class="span-name test_27bac45f">{{orderDetail.toName}}</span>
+                                <span ng-show="orderDetail.toAddress.provinceName" class="test_e6cd8415">
+                                    {{orderDetail.toAddress.countryName}} {{orderDetail.toAddress.provinceName}} {{orderDetail.toAddress.cityName}} {{orderDetail.toAddress.districtName}} {{orderDetail.toAddress.streetName}}
+                                </span>
+                                <span ng-show="!orderDetail.toAddress.provinceName" class="test_f6c5ea58">
+                                     {{orderDetail.toAddress.countryName}} {{orderDetail.toAddress.cityName}}
+                                </span>
+                                <span class="test_dcbedfe1">{{orderDetail.toAddress.address}}</span>
+                                <span class="span-post test_bec95a70">{{orderDetail.toAddress.postcode}}</span>
+                                <span class="currentUserAddressNote test_0370cb55">现用地址</span>
+                            </div>
+                            <div class="test_1ba63c51">
+                                <span class="span-phone test_79630d73">{{orderDetail.toPhone}}</span>
+                                <span>{{orderDetail.toTelephone}}</span>
+                                <span class="span-email test_5263dc0d">{{orderDetail.toAddress.email}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <input ng-if="!item.isNotAccess" class="address_radio test_47cdfea8" type="radio" ng-model="dPlaceIndex" ng-value="-1" style="display:none!important" name="dAddress">
+                    <div class="address test_329c6584" ng-repeat="item in dPlaceList track by $index">
+                        <input ng-if="!item.isNotAccess" class="address_radio test_cd348ef3" type="radio" ng-model="dPlaceIndex" ng-value="$index" ng-change="selectAddress($index,2)" name="dAddress">
+                        <input ng-if="item.isNotAccess" class="address_radio test_8bc489d5" type="radio" ng-model="dPlaceIndex" ng-value="$index" ng-change="selectAddress($index,2)" name="dAddress" disabled="disabled">
+                       <div ng-if="item.transportType == seaId || item.transportType == airId" class="test_c1191249">
+                           <span class="span-name test_81679d5e">{{item.name}}</span>
+                           <span class="test_d0e50e76">{{item.countryName}}</span>
+                           <span class="test_42d5a2e0">{{item.cityName}}</span>
+                           <span class="test_93c4847b">{{item.transportName}}</span>
+                           <span class="test_4e891dd4">{{item.address}}</span>
+                           <span class="span-post pr30 test_4c29ecc6">{{item.postcode}}</span>
+                           <span class="address_setDefault  cursorPoint test_b226b36d" ng-show="!item.isDefault" ng-click="setDefaultAddress(item.id,2)">
+                                   <%=confirmOrder_page_oPlaceContracts_setDefault%>
+                           </span>
+                           <span class="address_modify  cursorPoint test_8a9f3a00" ng-click="modifyAddress($index,2)"><%=confirmOrder_page_oPlaceContracts_modify%></span>
+                           <span class="address_modify cursorPoint test_fa78ef66" ng-click="delAddress(item.id,2,$index)">删除地址</span>
+                       </div>
+                        <div ng-if="item.transportType != seaId && item.transportType != airId" class="test_9dc0f028">
+                            <span class="span-name test_b1b95f0f">{{item.name}}</span>
+                            <span ng-show="item.provinceName" class="test_415744cb">
+                                {{item.countryName}} {{item.provinceName}} {{item.cityName}} {{item.districtName}} {{item.streetName}}
+                            </span>
+                            <span ng-show="!item.provinceName" class="test_98485f15">
+                                {{item.countryName}} {{item.cityName}}
+                            </span>
+                            <span class="test_cd55e132">{{item.address}}</span>
+                            <span class="span-post pr30 test_c0f22d81">{{item.postcode}}</span>
+                            <span class="address_setDefault cursorPoint  test_3cfb804e" ng-show="!item.isDefault" ng-click="setDefaultAddress(item.id,2)"><%=confirmOrder_page_destinationContracts_setDefault%></span>
+                            <span class="address_modify  cursorPoint test_b1ddab3b" ng-click="modifyAddress($index,2)"><%=confirmOrder_page_destinationContracts_modify%></span>
+                            <span class="address_modify cursorPoint test_891a44c1" ng-click="delAddress(item.id,2,$index)">删除地址</span>
+                        </div>
+                        <div class="pl56 test_db9de1f0">
+                            <span class="span-phone test_57e4a70c">{{item.phone}}</span>
+                            <span>{{item.telPhone}}</span>
+                            <span class="span-email test_264b2220">{{item.email}}</span>
+                        </div>
+                    </div>
+                </ul>
+                <div class="address_operator test_2eb5ab24">
+                    <span id="dPlaceBtn" ng-show="dPlaceList.length > 0" ng-click="switchStatus('destination')" class="dAddressOperator test_cf2a71d0"><%=confirmOrder_page_oPlaceContracts_open%></span>
+                    <span id="select-service1" ng-click="openAddNewAddress(2)" ng-class="{true:'couldSet',false:'couldNotSet'}[!!orderBaseInfo.productName]" class="dAddressNew btn btn-primary test_f1329c12">
+                        <%=confirmOrder_page_destinationContracts_new%>
+                    </span>
+                </div>
+            </div>
+
+            <!--提货地及联系人信息-->
+            <div ng-if="productReceived" id="acceptAddress" class="test_b894ef44">
+                <div class="label-text test_c6c5f55e">提货地及联系人信息<i class="icon-more-down icon-angle-right test_8cb746bb"></i>
+                </div>
+                <ul class="isContainer switch-list  test_495fd706" data-title="提货地及联系人信息" id="aPlace">
+                    <div class="address1 test_f4fae5b1" ng-show="orderNo">
+                        <div ng-if="orderDetail.fetchName" class="currentUseAddress pl56 test_380e090b">
+                            <div ng-if="orderDetail.fetchAddress.transportType == seaId || orderDetail.fetchAddress.transportType == airId" class="test_ff5b6f81">
+                                <span class="span-name test_355f793e">{{orderDetail.fetchName}}</span>
+                                <span class="test_ce29e794">{{orderDetail.fetchAddress.countryName}}</span>
+                                <span class="test_ed01e95f">{{orderDetail.fetchAddress.cityName}}</span>
+                                <span class="test_73755bd9">{{orderDetail.fetchAddress.transportName}}</span>
+                                <span class="test_d902e334">{{orderDetail.fetchAddress.address}}</span>
+                                <span class="span-post test_09c87945">{{orderDetail.fetchAddress.postcode}}</span>
+                                <span class="currentUserAddressNote test_94056ec9">现用地址</span>
+                            </div>
+                            <div ng-if="orderDetail.fetchAddress.transportType != seaId && orderDetail.fetchAddress.transportType != airId" class="test_b5a843d2">
+                                <span class="test_1f9fc8e1">{{orderDetail.fetchName}}</span>
+                                <span ng-show="orderDetail.fetchAddress.provinceName" class="test_2b81fdaf">
+                                    {{orderDetail.fetchAddress.countryName}} {{orderDetail.fetchAddress.provinceName}} {{orderDetail.fetchAddress.cityName}} {{orderDetail.fetchAddress.districtName}} {{orderDetail.fetchAddress.streetName}}
+                                </span>
+                                <span ng-show="!orderDetail.fetchAddress.provinceName" class="test_c437c685">
+                                     {{orderDetail.fetchAddress.countryName}} {{orderDetail.fetchAddress.cityName}}
+                                </span>
+                                <span class="test_e1aaacaf">{{orderDetail.fetchAddress.address}}</span>
+                                <span class="span-post test_316b1428">{{orderDetail.fetchAddress.postcode}}</span>
+                                <span class="currentUserAddressNote test_4a19d28c">现用地址</span>
+                            </div>
+                            <div class="test_3512b38e">
+                                <span class="span-phone test_7f33bc1b">{{orderDetail.fetchPhone}}</span>
+                                <span>{{orderDetail.fetchTelephone}}</span>
+                                <span class="span-email test_ca2b3648"> {{orderDetail.fetchAddress.email}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="address test_3d4905ee" ng-repeat="item in aPlaceList track by $index">
+                        <input ng-disabled="item.isNotAccess" class="address_radio test_732825a3" type="radio" ng-model="aPlaceIndex" ng-value="$index" ng-change="selectAddress($index,3)" name="aAddress">
+                        <div ng-if="item.transportType == seaId || item.transportType == airId" class="test_2d4c81ca">
+                           <span class="span-name test_c8bc34cc">{{item.name}}</span>
+                           <span class="test_f0c914da">{{item.countryName}}</span>
+                           <span class="test_1f9aecad">{{item.cityName}}</span>
+                           <span class="test_9fe3d080">{{item.transportName}}</span>
+                           <span class="test_c649bdbe">{{item.address}}</span>
+                           <span class="span-post pr30 test_7eab8f92">{{item.postcode}}</span>
+                           <span class="address_setDefault  cursorPoint test_772bb07c" ng-show="!item.isDefault" ng-click="setDefaultAddress(item.id,3)">
+                                   <%=confirmOrder_page_oPlaceContracts_setDefault%>
+                           </span>
+                           <span class="address_modify  cursorPoint test_d19b6aa9" ng-click="modifyAddress($index,3)"><%=confirmOrder_page_oPlaceContracts_modify%></span>
+                           <span class="address_modify cursorPoint test_8be51338" ng-click="delAddress(item.id,3,$index)">删除地址</span>
+                        </div>
+                        <div ng-if="item.transportType != seaId && item.transportType != airId" class="test_c3a99894">
+                            <span class="span-name test_03d41952">{{item.name}}</span>
+                            <span ng-show="item.provinceName" class="test_bdc6bdba">
+                                {{item.countryName}} {{item.provinceName}} {{item.cityName}} {{item.districtName}} {{item.streetName}}
+                            </span>
+                            <span ng-show="!item.provinceName" class="test_25df4c33">
+                                {{item.countryName}} {{item.cityName}}
+                            </span>
+                            <span class="test_23090d20">{{item.address}}</span>
+                            <span class="span-post pr30 test_9a6f7f76">{{item.postcode}}</span>
+                            <span class="address_setDefault cursorPoint  test_7e7b3834" ng-show="!item.isDefault" ng-click="setDefaultAddress(item.id,3)"><%=confirmOrder_page_destinationContracts_setDefault%></span>
+                            <span class="address_modify  cursorPoint test_19319984" ng-click="modifyAddress($index,3)"><%=confirmOrder_page_destinationContracts_modify%></span>
+                            <span class="address_modify cursorPoint test_cb3967c6" ng-click="delAddress(item.id,3,$index)">删除地址</span>
+                        </div>
+                        <div class="pl56 test_d2e5d78d">
+                            <span class="span-phone test_37a7bdff">{{item.phone}}</span>
+                            <span>{{item.telPhone}}</span>
+                            <span class="span-email test_80672f11">{{item.email}}</span>
+                        </div>
+                    </div>
+                </ul>
+                <div class="address_operator test_632586a1">
+                    <span id="aPlaceBtn" ng-show="aPlaceList.length > 0" ng-click="switchStatus('accept')" class="dAddressOperator test_2192ae28"><%=confirmOrder_page_oPlaceContracts_open%></span>
+                    <span ng-click="openAddNewAddress(3)" ng-class="{true:'couldSet',false:'couldNotSet'}[!!orderBaseInfo.productName]" class="dAddressNew btn btn-primary test_52dfd719">
+                        <%=confirmOrder_page_destinationContracts_new%>
+                    </span>
+                </div>
+            </div>
+
+            <!--貨物信息-->
+            <div id="cargoDetail" class="test_6149a010">
+                <div class="label-text test_c6c5f55e"><%=confirmOrder_page_goodsInfo%><i class="icon-more-down icon-angle-right test_8cb746bb"></i>
+                </div>
+                <ul class="isContainer switch-list  test_600a3f81" style="overflow:hidden" data-title="<%=confirmOrder_page_goodsInfo%>" id="goodsInfo">
+                    <div class="test_14a3c4b7">
+                        <label class="detail test_f4ca73cf">
+                            <b class="test_cce7715d">*</b>
+                            <%=confirmOrder_page_goodsInfo_detail%>
+                        </label>
+                        <img class="questionMark_img test_6a832054" id="questionMark" src="../public/img/question-mark.svg">
+                    </div>
+                    <div id="questionMark_div" style="display:none" class="questionMark_div test_06b0f246">
+                        <%=confirmOrder_page_questionMark%>
+                    </div>
+                    <div class="test_b03de7ff">
+                        <span ng-click="addGoods()" class="btn btn-primary addGoods test_95997999"><%=common_page_add%></span>
+                    </div>
+                    <div class="tableHead test_f7eed660">
+                        <span style="width:{{tableWidth[$index]}}" ng-repeat="td in tableHeader track by $index" class="test_232319dd">{{td.trim()}}<b style="color:red" ng-show="$index == 5" class="test_a82fe337">({{accountCurrency}})</b>
+                        </span>
+                    </div>
+                    <div class="tableBody test_febd3168" ng-repeat="goods in goodsList track by $index">
+                        <input style="width:{{tableWidth[$index]}}" ng-trim="false" ng-repeat="th in goodsMenu " class="input-text goodsItem test_2c22cc2a" id="{{th+ $parent.$index}}" name="{{goodsMenu[$index]+ $index}}" ng-model="goods[goodsMenu[$index]]" type="text" maxlength="{{tableItemLength[$index]}}" title="{{goods[goodsMenu[$index]]}}" ng-change="goodsCheck()" ng-class="{true:'',false:'error'}[submited && goods[goodsMenu[$index]]]" required>
+                        <span class="tableOpe test_c9d0feae" style="width:{{tableWidth[7]}}" ng-click="delGoods($index)"><%=common_page_delete%></span>
+                    </div>
+
+                </ul>
+                <div class="verification test_38f193ee" style="bottom: 10px;position: relative;">
+                        <span class="errors test_9d42e8b1" ng-show="goodsListRule">
+                              {{goodsListRule}}
+                        </span>
+                </div>
+            </div>
+
+            <!--添加附件-->
+            <div id="fileMsg" class="test_9b233b79">
+                <div class="label-text test_c936afb2"><%=confirmOrder_page_fileMsg%>
+                    <i class="icon-more-down icon-angle-right test_69438332"></i>
+                </div>
+                <ul class="isContainer switch-list test_436d2a5f" data-title="<%=confirmOrder_page_fileMsg%>" id="confirmOrderUploadFile">
+                    <div class="confirmOrderFileContent test_b1f4271e" id="confirmOrderFileContent"></div>
+                </ul>
+            </div>
+
+            <!--客戶留言-->
+            <div id="customMsg" class="test_6bba7e30">
+                <div class="label-text test_c6c5f55e"><%=confirmOrder_page_customerMsg%><i class="icon-more-down icon-angle-right test_8cb746bb"></i></div>
+                <ul class="isContainer switch-list  test_6cff6d08" data-title="<%=confirmOrder_page_customerMsg%>" id="customerMsg">
+                    <div class="leaveMsg test_a5a06c31">
+                        <textarea ng-trim="false" id="customerMessageBox" class="input-text test_3c359324 ng-pristine ng-untouched ng-valid ng-valid-maxlength" ng-change="showTextNumber();" ng-model="orderCustomerMsg.msg" rows="5" maxlength="140" ng-keyup="remainWord()"></textarea>
+
+                        <div class="show-string-length leaveMsg_maxWord test_ef5d6d2c"><span class="test_de5e5a37 ng-binding">{{remainWords}}</span>字
+                        </div>
+                    </div>
+                </ul>
+            </div>
+
+            <!--服务信息-->
+            <div class="fatherDiv" ng-show="orderNo && orderStatus != 'DRAFT' && orderStatus != 'COMMITED'">
+                <div class="label-text">服务信息<i class="icon-more-down icon-angle-right"></i></div>
+                <div include="tpl/fragment/ordersDetail/serviceInfo.html" ng-controller="serviceInfoCtrl"></div>
+            </div>
+
+            <link rel="stylesheet" href="tpl/fragment/ordersStatus/ordersStatus.css" class="test_f7592230">
+            <!--订单状态-->
+            <div class="fatherDiv clearfix test_a28bf2fc" ng-show="orderNo && orderStatus != 'DRAFT' ">
+                <div class="label-text test_c6c5f55e"><%=confirmOrder_page_detail_orderStatus%><i class="icon-more-down icon-angle-right test_8cb746bb"></i></div>
+                <div include="tpl/fragment/ordersStatus/ordersStatus.html" class="test_bfd162b7"></div>
+            </div>
+            <!--物流状态-->
+            <div class="fatherDiv clearfix test_4e34508f" ng-show="orderNo && orderStatus != 'DRAFT'">
+                <div class="label-text test_c6c5f55e"><%=confirmOrder_page_detail_orderStatusFlow%><i class="icon-more-down icon-angle-right test_8cb746bb"></i></div>
+                <div include="tpl/fragment/ordersStatus/subOrderFlow.html" class="test_a73a9571"></div>
+            </div>
+
+        </form>
+        <div ng-show="orderStatus == 'DRAFT'" class="operation confirmOrderOperation test_fe91edcf">
+            <button ng-click="submitOrder('DRAFT')" name="prompt-close" class="btn btn-default test_8c60ee5c" data-event="close"><%=confirmOrder_page_saveDraft%>
+            </button>
+            <button ng-click="submitOrder('COMMITED')" name="prompt-save" style="margin-left:40px;" class="btn btn-primary test_4a3fcf00" data-event="close"><%=confirmOrder_page_saveOrder%>
+            </button>
+        </div>
+
+        <div ng-show="orderStatus != 'DRAFT'" class="operation confirmOrderOperation test_fe91edcf">
+            <button ng-click="cancelEdit()" name="prompt-close" class="btn btn-default test_8c60ee5c" data-event="close"><%=confirmOrder_page_orderCancel%>
+            </button>
+            <button ng-click="submitOrder('COMMITED')" name="prompt-save" style="margin-left:40px;" class="btn btn-primary test_4a3fcf00" data-event="close"><%=confirmOrder_page_orderSave%>
+            </button>
+        </div>
+    </div>
+    <div class="cm-main operation-log" ng-show="activeTab == 'OPERATIONLOG'">
+        <div include="/tpl/fragment/orderLog/orderLog.html" ng-controller="orderLogCtrl"></div>
+    </div>
+</section>
+
+<!--订单详情页面-->
+<section ng-show="!couldEdit" name="confirmOrder" class="test_1bc8a6ad">
+    <div class="test_6001e665">
+        <div class="cm-goBack test_4b69e846">
+            <button ng-click="goBack();" class="btn btn-default test_705536ed"><%=common_page_back%></button>
+            <button ng-show="!isJustShow&&canEdit" ng-click="jumpTo(3);" class="btn wCardEdit btn-primary test_705536ed">
+                <%=confirmOrder_page_createWorkOrder%>
+            </button>
+            <button ng-show="orderStatus!='RECEIVED' && !isJustShow && canEdit" ng-click="edit();" class="btn wCardEdit btn-primary test_705536ed">
+                <%=confirmOrder_page_edit%>
+            </button>
+        </div>
+        <div class="cm-addTitle test_3eec6ad6">
+            <p class="test_c364e286">{{orderDetail.waybillNo}}</p>
+        </div>
+    </div>
+    <ul class="bill-tabs" ng-if="isOrderSearch">
+        <li ng-class="{active: activeTab == 'ORDERDETAIL'}" ng-click="switchTab('ORDERDETAIL')"><%=confirmOrder_add_detail%></li>
+        <li ng-class="{active: activeTab == 'OPERATIONLOG'}" ng-click="switchTab('OPERATIONLOG')"><%=confirmOrder_operationLog%></li>
+    </ul>
+    <div class="cm-main test_e901d653"  ng-show="activeTab == 'ORDERDETAIL'">
+        <form class="ConformOrderForm test_7f446ccb" name="ConformOrderFormDetail" novalidate="novalidate">
+            <!--訂單基本信息-->
+            <div class="test_69337bb6">
+                <div class="label-text test_41a768a5"><%=confirmOrder_page_baseInfo%>
+                    <i class="icon-more-down icon-angle-right test_b26d431d"></i>
+                </div>
+                <div id="orderDetailBaseInfo" class="switch-list test_fdf40e1d clearfix" data-title="<%=confirmOrder_page_baseInfo%>">
+                    <div style="float:left;width:60%;margin-left:30px;">
+                        <div class="test_83a442a0">
+                            <!--客户名称-->
+                            <label class="test_2e313e3f"><%=confirmOrder_page_baseInfo_customer%>：</label>
+                            <span class="test_1c6bf293">{{orderDetail.cusUserName}}</span>
+                        </div>
+                        <div class="test_83a442a0">
+                            <!--客户名称-->
+                            <label class="test_2e313e3f"><%=confirmOrder_client_num%>：</label>
+                            <span class="test_1c6bf293">{{orderBaseInfo.externalNo}}</span>
+                        </div>
+                        <div class="test_b1cd4edc">
+                            <!--产品-->
+                            <label class="test_052264d7"><%=confirmOrder_page_baseInfo_product%>：</label>
+                            <span ng-click="jumpTo(2,orderDetail.productId,orderDetail.productUid)" class="jumpSpan test_c18ba055">{{orderDetail.productName}}</span>
+                        </div>
+                        <div ng-show="serviceStr" class="test_b1b79a8a">
+                            <!--所选服务-->
+                            <label class="test_052264d7"><%=confirmOrder_page_baseInfo_service%>：</label>
+
+                            <div ng-show="serviceStr" class="test_98482528">
+                                <span class="test_b07b3e87">{{serviceStr}}</span>
+                            </div>
+                        </div>
+                        <div class="test_122a0326">
+                            <!--货物类型-->
+                            <label class="test_052264d7"><%=confirmOrder_page_baseInfo_productType%>：</label>
+                            <span class="test_3ec52e6d">{{orderDetail.cargoTypeName}}</span>
+                        </div>
+                        <div class="test_2d98f0f3">
+                            <!--货物件数-->
+                            <label class="test_052264d7"><%=confirmOrder_page_baseInfo_number%>：</label>
+                            <span calss="" class="test_c863e779">{{orderDetail.packageNum}}</span>
+                        </div>
+                        <div class="test_0f8673b3">
+                            <!--货物总重-->
+                            <label class="test_052264d7"><%=confirmOrder_page_baseInfo_totalWeight%>：</label>
+                            <span class="test_611b71c5">{{orderDetail.cusWeight + " " + orderDetail.cusWeightUnit}}</span>
+                        </div>
+                    </div>
+                    <div ng-if="orderStatus != 'DRAFT'" class="order-base-number" style="float: left;width:30%">
+                        <p><span class="u-span-left">订单号：</span><span>{{orderDetail.orderNo}}</span></p>
+                        <p><span class="u-span-left">运单号：</span><span>{{orderDetail.waybillNo}}</span></p>
+                        <p><span class="u-span-left">渠道单号：</span><span>{{orderDetail.channelNo}}</span></p>
+                        <p><span class="u-span-left">货物实重：</span><span ng-if="orderDetail.supWeight">{{orderDetail.supWeight}} {{orderDetail.supWeightUnit}}</span></p>
+                        <p><span class="u-span-left">体积重：</span><span ng-if="orderDetail.volumeWeight">{{orderDetail.volumeWeight}} {{orderDetail.volumeWeightUnit}}</span></p>
+                        <p><span class="u-span-left">计费重：</span><span ng-if="orderDetail.feeCalcWeight">{{orderDetail.feeCalcWeight}} {{orderDetail.feeCalcWeightUnit}}</span></p>
+                        <div ng-show="orderInfo.packageNum == 1" ng-repeat="subOrder in ordSubOrderDtos">
+                            <div class="u-span-left" style="display: inline-block">
+                                体积<span ng-if="subOrder.lwhUnit">({{subOrder.lwhUnit}})</span>：
+                            </div>
+                            <span ng-show="subOrder.length">{{subOrder.length + "*" + subOrder.width + "*" + subOrder.height}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--支付信息-->
+            <div class="fatherDiv">
+                <div class="label-text">支付信息<i class="icon-more-down icon-angle-right"></i></div>
+                <div include="tpl/fragment/ordersDetail/payInfo.html" ng-controller="payInfoCtrl"></div>
+            </div>
+            <!--子订单详情-->
+            <div ng-show="orderDetail.packageNum > 1" class="test_4009e81c">
+                <div class="label-text test_8ba78266"><%=confirmOrder_page_detail_subOrderInfo%>
+                    <i class="icon-more-down icon-angle-right test_592f8c72"></i>
+                </div>
+                <div class="switch-list test_fdf40e1d" style="margin-bottom:10px;overflow:hidden;" data-title="<%=confirmOrder_page_baseInfo%>">
+                    <div class="subOrderList test_f4d70483" ng-repeat="subOrder in ordSubOrderDtos" style="scroll:hidden;">
+                        <span class="test_bdf90241"><%= confirmOrder_page_detail_subOrderNum%></span>
+                        <span class="test_2bde155c">{{subOrder.subOrderNo}}</span>
+                        <span class="test_162396f0"><%=confirmOrder_page_detail_weight%></span>
+                        <span ng-show="subOrder.weight" class="test_e8d7b77a">{{subOrder.weight + subOrder.weightUnit}}</span>
+                        <span class="test_810788db"><%= confirmOrder_page_detail_space%>({{subOrder.lwhUnit||""}})</span>
+                        <span ng-show="subOrder.length" class="test_005fd6de">{{subOrder.length + "*" + subOrder.width + "*" + subOrder.height}}</span>
+                    </div>
+                </div>
+            </div>
+            <!--始發地聯繫人-->
+            <div class="test_09c9e0dd">
+                <div class="label-text test_c6c5f55e"><%=confirmOrder_page_oPlaceContracts%>
+                    <i class="icon-more-down icon-angle-right test_8cb746bb"></i></div>
+                <ul class="isContainer switch-list  test_03bb838d" data-title="<%=confirmOrder_page_oPlaceContracts%>">
+                    <div class="currentUseAddress pl56 test_53640be8" style="border-bottom: 0px">
+                        <div ng-if="orderDetail.fromAddress.transportType == seaId || orderDetail.fromAddress.transportType == airId" class="test_e3999c52">
+                            <span class="span-name test_bf89bfc2">{{orderDetail.fromName}}</span>
+                            <span class="test_b1f2552b">{{orderDetail.fromAddress.countryName}}</span>
+                            <span class="test_b08118f5">{{orderDetail.fromAddress.cityName}}</span>
+                            <span class="test_573ca217">{{orderDetail.fromAddress.transportName}}</span>
+                            <span class="test_4059aec6">{{orderDetail.fromAddress.address}}</span>
+                            <span class="span-post test_46c5bce2">{{orderDetail.fromAddress.postcode}}</span>
+                        </div>
+                        <div ng-if="orderDetail.fromAddress.transportType != seaId && orderDetail.fromAddress.transportType != airId" class="test_6129864c">
+                            <span class="span-name test_5b4a952f">{{orderDetail.fromName}}</span>
+                            <span ng-show="orderDetail.fromAddress.provinceName" class="test_3cdc434a">
+                                {{orderDetail.fromAddress.countryName}} {{orderDetail.fromAddress.provinceName}} {{orderDetail.fromAddress.cityName}} {{orderDetail.fromAddress.districtName}} {{orderDetail.fromAddress.streetName}}
+                            </span>
+                            <span ng-show="!orderDetail.fromAddress.provinceName" class="test_79fdc41c">
+                                 {{orderDetail.fromAddress.countryName}} {{orderDetail.fromAddress.cityName}}
+                            </span>
+                            <span class="test_d64d88f2">{{orderDetail.fromAddress.address}}</span>
+                            <span class="span-post test_48daf7c8">{{orderDetail.fromAddress.postcode}}</span>
+                        </div>
+                        <div class="test_ce4dac7a">
+                            <span class="span-phone test_3c429a8c">{{orderDetail.fromPhone}}</span>
+                            <span>{{orderDetail.fromTelephone}}</span>
+                            <span class="span-email test_8f0e0342">{{orderDetail.fromAddress.email}}</span>
+                        </div>
+                    </div>
+                </ul>
+            </div>
+            <!--目的地聯繫人-->
+            <div class="test_e540e950">
+                <div class="label-text test_c6c5f55e"><%=confirmOrder_page_destinationContracts%><i class="icon-more-down icon-angle-right test_8cb746bb"></i>
+                </div>
+                <ul class="isContainer switch-list  test_d4f57141" data-title="<%=confirmOrder_page_destinationContracts%>">
+                    <div class="currentUseAddress pl56 test_e7d7fd11" style="border-bottom: 0px">
+                        <div ng-if="orderDetail.toAddress.transportType == seaId || orderDetail.toAddress.transportType == airId" class="test_778adc1a">
+                            <span class="span-name test_8d5ba53d">{{orderDetail.toName}}</span>
+                            <span class="test_51113bc6">{{orderDetail.toAddress.countryName}}</span>
+                            <span class="test_429dece2">{{orderDetail.toAddress.cityName}}</span>
+                            <span class="test_4b34662a">{{orderDetail.toAddress.transportName}}</span>
+                            <span class="test_796fa28a">{{orderDetail.toAddress.address}}</span>
+                            <span class="span-post test_9b96db49">{{orderDetail.toAddress.postcode}}</span>
+                        </div>
+                        <div ng-if="orderDetail.toAddress.transportType != seaId && orderDetail.toAddress.transportType != airId" class="test_507aea84">
+                            <span class="span-name test_b992a524">{{orderDetail.toName}}</span>
+                            <span ng-show="orderDetail.toAddress.provinceName" class="test_1ff79d4a">
+                                {{orderDetail.toAddress.countryName}} {{orderDetail.toAddress.provinceName}} {{orderDetail.toAddress.cityName}} {{orderDetail.toAddress.districtName}} {{orderDetail.toAddress.streetName}}
+                            </span>
+                            <span ng-show="!orderDetail.toAddress.provinceName" class="test_25447ce0">
+                                 {{orderDetail.toAddress.countryName}} {{orderDetail.toAddress.cityName}}
+                            </span>
+                            <span class="test_92fafcf1">{{orderDetail.toAddress.address}}</span>
+                            <span class="span-post test_9b6c891b">{{orderDetail.toAddress.postcode}}</span>
+                        </div>
+                        <div class="test_f8c9a4f7">
+                            <span class="span-phone test_76678e8a">{{orderDetail.toPhone}}</span>
+                            <span>{{orderDetail.toTelephone}}</span>
+                            <span class="span-email test_c11a5883">{{orderDetail.toAddress.email}}</span>
+                        </div>
+                    </div>
+                </ul>
+            </div>
+
+            <!--揽货地址-->
+            <div ng-if="productReceived" class="test_3feacef0">
+                <div class="label-text test_c6c5f55e">提货地及联系人信息<i class="icon-more-down icon-angle-right test_8cb746bb"></i>
+                </div>
+                <ul class="isContainer switch-list  test_32a91147" data-title="提货地及联系人信息">
+                    <div class="currentUseAddress pl56 test_145f41b5" style="border-bottom: 0px">
+                        <div ng-if="orderDetail.fetchAddress.transportType == seaId || orderDetail.fetchAddress.transportType == airId" class="test_c15bf52c">
+                            <span class="span-name test_56030a32">{{orderDetail.fetchName}}</span>
+                            <span class="test_06fc3a41">{{orderDetail.fetchAddress.countryName}}</span>
+                            <span class="test_2e84f121">{{orderDetail.fetchAddress.cityName}}</span>
+                            <span class="test_43e56dc4">{{orderDetail.fetchAddress.transportName}}</span>
+                            <span class="test_71325018">{{orderDetail.fetchAddress.address}}</span>
+                            <span class="span-post test_481f25e8">{{orderDetail.fetchAddress.postcode}}</span>
+                        </div>
+                        <div ng-if="orderDetail.fetchAddress.transportType != seaId && orderDetail.fetchAddress.transportType != airId" class="test_c54d833f">
+                            <span class="span-name test_27788d65">{{orderDetail.fetchName}}</span>
+                            <span ng-show="orderDetail.fetchAddress.provinceName" class="test_a2b4230d">
+                                {{orderDetail.fetchAddress.countryName}} {{orderDetail.fetchAddress.provinceName}} {{orderDetail.fetchAddress.cityName}} {{orderDetail.fetchAddress.districtName}} {{orderDetail.fetchAddress.streetName}}
+                            </span>
+                            <span ng-show="!orderDetail.fetchAddress.provinceName" class="test_337c3acb">
+                                 {{orderDetail.fetchAddress.countryName}} {{orderDetail.fetchAddress.cityName}}
+                            </span>
+                            <span class="test_e0b48468">{{orderDetail.fetchAddress.address}}</span>
+                            <span class="span-post test_f3148876">{{orderDetail.fetchAddress.postcode}}</span>
+                        </div>
+                        <div class="test_06d45942">
+                            <span class="span-phone test_b20dc746">{{orderDetail.fetchPhone}}</span>
+                            <span>{{orderDetail.fetchTelephone}}</span>
+                            <span class="span-email test_08724fe6">{{orderDetail.fetchAddress.email}}</span>
+                        </div>
+                    </div>
+                </ul>
+            </div>
+
+            <!--貨物信息-->
+            <div class="test_4aa64c46">
+                <div class="label-text test_c6c5f55e"><%=confirmOrder_page_goodsInfo%><i class="icon-more-down icon-angle-right test_8cb746bb"></i>
+                </div>
+                <ul class="isContainer switch-list  test_8758f722" data-title="<%=confirmOrder_page_goodsInfo%>" id="goodsInfo1">
+                    <div class="test_79c409cf">
+                        <label class="detail test_564178b2">
+                            <%=confirmOrder_page_goodsInfo_detail%>
+                        </label>
+                        <img class="questionMark_img test_8e144a98" id="questionMark_1" src="../public/img/question-mark.svg">
+                    </div>
+                    <div id="questionMark_div1" style="display:none" class="questionMark_div test_c6a85c1a">
+                        <%=confirmOrder_page_questionMark%>
+                    </div>
+
+                    <div class="tableHead test_979ef76d">
+                        <span style="width:{{tableWidth[$index]}}" ng-repeat="td in detailTableHeader track by $index" class="test_fa902a59">{{td}}
+                            <b style="color:red" ng-show="$index == 5" class="test_f04f7086">({{accountCurrency}})</b>
+                        </span>
+                    </div>
+                    <div class="tableBody test_d8996e9d" ng-repeat="goods in orderDetail.orderCargoDtos track by $index">
+                        <span style="width:{{tableWidth[$index]}}" class="test_481758da" ng-repeat="order in goodsMenu">{{goods[order]||" "}}</span>
+
+                    </div>
+
+                </ul>
+            </div>
+            <!--添加附件-->
+            <div class="test_be85b30d">
+                <div class="label-text test_4b496894"><%=confirmOrder_page_fileMsg%>
+                    <i class="icon-more-down icon-angle-right test_a18ad231"></i>
+                </div>
+                <ul class="isContainer switch-list test_3fc8111b" data-title="<%=confirmOrder_page_fileMsg%>">
+                    <div id="confirmOrderFileContentInfo" class="test_40f85ea3"></div>
+                </ul>
+            </div>
+            <!--客戶留言-->
+            <div class="test_9d9a4cf6">
+                <div class="label-text test_c6c5f55e"><%=confirmOrder_page_customerMsg%><i class="icon-more-down icon-angle-right test_8cb746bb"></i></div>
+                <ul class="isContainer switch-list  test_3990bb69">
+                    <div class="test_ff161783">
+                        <span class="test_959a8842">{{orderDetail.customerNote}}</span>
+                    </div>
+                </ul>
+            </div>
+
+            <!--服务信息-->
+            <div class="fatherDiv clearfix" ng-show="orderNo && orderStatus != 'DRAFT' && orderStatus != 'COMMITED'">
+                <div class="label-text">服务信息<i class="icon-more-down icon-angle-right"></i></div>
+                <div include="tpl/fragment/ordersDetail/serviceInfo.html" ng-controller="serviceInfoCtrl"></div>
+            </div>
+
+            <link rel="stylesheet" href="tpl/fragment/ordersStatus/ordersStatus.css" class="test_fb322697">
+            <!--订单状态-->
+            <div class="fatherDiv clearfix test_ead67807">
+                <div class="label-text test_c6c5f55e"><%=confirmOrder_page_detail_orderStatus%><i class="icon-more-down icon-angle-right test_8cb746bb"></i></div>
+                <div include="tpl/fragment/ordersStatus/ordersStatus.html" class="test_525a670b"></div>
+            </div>
+            <!--物流状态-->
+            <div class="fatherDiv clearfix test_1ea3d902">
+                <div class="label-text test_c6c5f55e"><%=confirmOrder_page_detail_orderStatusFlow%><i class="icon-more-down icon-angle-right test_8cb746bb"></i></div>
+                <div include="tpl/fragment/ordersStatus/subOrderFlow.html?ts=1" class="test_787e4a9e"></div>
+            </div>
+
+            <div ng-show="orderNo" class="confirmOrderCreatorTime test_9d83abd3">
+                <span class="test_b1e8e45f"><%=confirmOrder_page_detail_creator %>:</span>
+                <span class="test_080591cd">{{orderDetail.createFullName}}</span>
+                <span class="test_ada9a592">{{orderDetail.createUserName}}</span>
+                <span class="test_2a3c85e2"><%=confirmOrder_page_detail_creatTime %>:</span>
+                <span class="test_59cdbe31">{{orderDetail.createTime}}</span>
+            </div>
+        </form>
+    </div>
+    <div class="cm-main operation-log" ng-show="activeTab == 'OPERATIONLOG'">
+        <div include="/tpl/fragment/orderLog/orderLog.html" ng-controller="orderLogCtrl"></div>
+    </div>
+</section>
+
+<!--编辑地址弹出层-->
+<div ng-show="showAddressForm" ng-init="initSelectList()" class="prompt-modal middle-box test_9844b473">
+    <div class="prompt-wrap test_76717d43">
+        <div class="bomb-box confirmOrderPrompt test_5461fbb7">
+            <div id="addOrModifyAddress" class="title test_4002f818"><%=confirmOrder_model_addNewAddress%></div>
+            <div class="confirmOrderPromptContent  test_32868393">
+                <form id="AddNewAddressForm" name="AddNewAddressForm" novalidate="novalidate" class="test_977ce063">
+                    <!--姓名-->
+                    <div class="test_3b1c48c5">
+                        <div class="formLeft test_73eeeebd">
+                            <label class="test_052264d7"">
+                                <b class="test_70355897">*</b>
+                                <%=confirmOrder_model_name%>：</label>
+                        </div>
+                        <div class="formRight test_e0bb4aec">
+                            <input class="input-text test_55801dbc" verification="{'ruleType':'namespace'}" maxlength="30" name="addressName" ng-model="currentAddress.name" type="text" required>
+
+                            <div class="verification test_38f193ee">
+                                <span class="errors test_9d42e8b1" id="name-msg" ng-show="AddNewAddressForm.addressName.$dirty &&
+                                               AddNewAddressForm.addressName.$invalid &&
+                                               AddNewAddressForm.addressName.$$rawModelValue">
+                                      {{AddNewAddressForm.addressName.errorTips}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <!--地址-->
+                    <div class="test_52ea7da1">
+                        <div class="formLeft test_e18614cb">
+                            <label class="test_28dc8749">
+                                <b class="test_b3defcc9">*</b>
+                                <%=confirmOrder_model_address%>：
+                            </label>
+                        </div>
+                        <div class="formRight test_327c79b4">
+                            <div class="select-box test_efb80af6">
+                                <input id="country" name="addressCountry" ng-model="currentAddress.countryName" type="text" maxlength="30" autocomplete="off" ng-click="getCountry(true)" style="width:316px;" class="u-info-input select-box test_f1935c9b" placeholder="<%=confirmOrder_model_address_PH2%>" required>
+                            </div>
+                            <!--速递地址-->
+                            <div ng-show="isOrdinary || isOriginAddress==3" class="search-cell test_5571d7df">
+                                <div class="area-input-box test_11f9e035" ng-show="CNAddress">
+                                    <div class="addressUnit select-box test_92bd1907">
+                                        <div class="input-box test_9dfb8968">
+                                            <input placeholder="<%=area_select_tips%>" id="province" verification="{'ruleType':'name'}" readonly="readonly" name="addressProvince" ng-model="currentAddress.provinceName" type="text" maxlength="30" class="u-info-input select-box test_392fc792" required>
+                                            <i class="select-icon right35 icon-drop-down test_30698209"></i>
+                                        </div>
+                                        <span class="test_880ea48e">省</span>
+                                    </div>
+                                    <div class="addressUnit select-box test_e6418543">
+                                        <div class="input-box test_73996092">
+                                            <input placeholder="<%=area_select_tips%>" type="text" id="city" readonly="readonly" maxlength="30" name="addressCity" ng-model="currentAddress.cityName" class="u-info-input select-box test_c901b08a" required>
+                                            <i class="select-icon right35 icon-drop-down test_b3530d60"></i>
+                                        </div>
+                                        <span class="test_3a88f124">市</span>
+                                    </div>
+                                    <div class="addressUnit select-box test_f0fadca3">
+                                        <div class="input-box test_809d550d">
+                                            <input placeholder="<%=area_select_tips%>" type="text" maxlength="30" readonly="readonly" ng-model="currentAddress.districtName" name="addressArea" id="area" class="test_47d6c018">
+                                            <i class="select-icon right35 icon-drop-down test_babba531"></i>
+                                        </div>
+                                        <span class="test_a28443a9">区/县</span>
+                                    </div>
+                                    <div class="addressUnit select-box test_3a93328b">
+                                        <div class="input-box test_c4ae07d5">
+                                            <input placeholder="<%=area_select_tips%>" type="text" maxlength="30" readonly="readonly" ng-model="currentAddress.streetName" name="addressStreet" id="street" class="test_acdb775e">
+                                            <i class="select-icon right35 icon-drop-down test_85c176b0"></i>
+                                        </div>
+                                        <span class="test_44388818">街道</span>
+                                    </div>
+                                </div>
+
+                                <div class="test_e0b03bfe" ng-show="!CNAddress">
+                                    <input ng-trim="false" class="input-text test_55801dbc" maxlength="15" name="addressState" id="state" readonly="readonly" ng-click="initNotCNAddress()" ng-model="currentAddress.cityName" style="width:316px;margin-top:20px;" type="text" placeholder="<%=confirmOrder_model_addressUs_area%>" required>
+                                </div>
+                                <div class="test_ded345c1">
+                                    <input class="input-text  right35 test_55801dbc" verification="{'ruleType':'namespace'}" maxlength="30" name="addressAddress" ng-model="currentAddress.address" type="text" style="width:316px;margin-top:20px;" placeholder="<%=confirmOrder_model_address_PH1%>" required>
+
+                                    <div class="verification test_0d5a362e">
+                                        <span class="errors test_9d42e8b1" ng-show="AddNewAddressForm.addressAddress.$dirty &&
+                                               AddNewAddressForm.addressAddress.$invalid &&
+                                               AddNewAddressForm.addressAddress.$$rawModelValue">
+                                            {{AddNewAddressForm.addressAddress.errorTips}}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--海运 或 空运-->
+                            <div ng-show="!isOrdinary && isOriginAddress != 3" class="test_85532b31">
+                                <div class="select-box test_80ba6b32">
+                                    <input style="margin-top:20px;" id="select-air-sea" name="airSea" ng-model="airSea" ng-value="airSeaValue" type="text" maxlength="30" autocomplete="off" ng-click="getAirSeaList()" style="width:316px;" class="u-info-input select-box test_90e64de2" required="required" readonly="readonly">
+                                </div>
+
+                                <div ng-show="addressTypeValue == seaId" class="select-box test_926fe92d">
+                                    <input ng-model="addressDetail" type="text" readonly="readonly" maxlength="30" autocomplete="off" style="width:316px;margin-top:20px;" id="addressDetail" class="u-info-input select-box test_d5eff006" placeholder="请输入详细地址">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--移动电话-->
+                    <div class="test_52ea7da1">
+                        <div class="formLeft test_292fee43">
+                            <label class="test_28dc8749">
+                                移动电话：
+                            </label>
+                        </div>
+                        <div class="formRight test_aedbccbb">
+                            <input ng-change="changePhone()" id="mobile-phone" ng-trim="false" class="input-text test_065d6ee0" validate-code="{ruleReg:'phone', ruleRegMsg:'<%=common_validate_mobilephone%>'}" maxlength="30" name="addressPhone" ng-model="currentAddress.phone" type="text" placeholder="电话、手机号码必须填一项">
+
+                            <div class="verification test_0d5a362e">
+                                 <span class="errors test_9d42e8b1" ng-show="AddNewAddressForm.addressPhone.$dirty && AddNewAddressForm.addressPhone.$invalid && AddNewAddressForm.addressPhone.$$rawModelValue">
+                                     {{AddNewAddressForm.addressPhone.errorTips}}
+                                 </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--固定电话-->
+                    <div>
+                        <div class="formLeft">
+                            <label>固定电话：</label>
+                        </div>
+                        <div class="formRight">
+                            <input ng-change="changePhone()" id="tel-phone" ng-trim="false" class="input-text" validate-code="{ruleReg:'phone', ruleRegMsg:'请输入数字或符号“-”、“_”、“+”'}" maxlength="30" name="addressTel" ng-model="currentAddress.telPhone" type="text">
+                            <div class="verification">
+                                 <span class="errors" ng-show="AddNewAddressForm.addressTel.$dirty && AddNewAddressForm.addressTel.$invalid && AddNewAddressForm.addressTel.$$rawModelValue">
+                                     {{AddNewAddressForm.addressTel.errorTips}}
+                                 </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--邮编-->
+                    <div class="test_52ea7da1">
+                        <div class="formLeft test_470250f8">
+                            <label class="test_28dc8749">
+                                <b class="test_b3defcc9">*</b>
+                                <%=confirmOrder_model_code%>：
+                            </label>
+                        </div>
+                        <div class="formRight test_9d1ce2b9">
+                            <input ng-trim="true" ng-blur="resetInput($event)" class="input-text test_065d6ee0" verification="{'ruleReg':'/^[A-Za-z0-9]+$/', 'ruleRegMsg':'<%=confirmOrder_model_mailCode%>'}" maxlength="15" name="addressPostcode" ng-model="currentAddress.postcode" type="text" required>
+
+                            <div class="verification test_0d5a362e">
+                             <span class="errors test_9d42e8b1" ng-trim="true" ng-show="AddNewAddressForm.addressPostcode.$dirty &&
+                                               AddNewAddressForm.addressPostcode.$invalid &&
+                                               AddNewAddressForm.addressPostcode.$$rawModelValue">
+                                 {{AddNewAddressForm.addressPostcode.errorTips}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!--电子邮件-->
+                    <div class="test_52ea7da1">
+                        <div class="formLeft test_15bc6e8c">
+                            <label class="test_28dc8749">
+                                <%=confirmOrder_model_email%>：
+                            </label>
+                        </div>
+                        <div class="formRight test_720a16d5">
+                            <input ng-trim="true" ng-blur="checkCode()" class="input-text test_065d6ee0" verification="{'ruleType':'email'}" maxlength="30" name="addressEmail" ng-model="currentAddress.email" type="text">
+
+                            <div class="verification test_0d5a362e">
+                                <span class="errors test_988753eb" ng-show="AddNewAddressForm.addressEmail.$dirty &&
+                                               AddNewAddressForm.addressEmail.$invalid &&
+                                               AddNewAddressForm.addressEmail.$$rawModelValue">
+
+                                     {{AddNewAddressForm.addressEmail.errorTips}}
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </form>
+                <div class="operation test_fe91edcf">
+                    <button ng-click="cancelAddNewAddress();" name="prompt-close" class="btn btn-default test_8c60ee5c" data-event="close"><%=common_page_cancel%>
+                    </button>
+                    <button ng-click="saveAddNewAddress();" name="prompt-save" style="margin-left:40px;" class="btn btn-primary test_4a3fcf00" data-event="close"><%=common_page_save%>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="slides" class="test_9c28067c"></div>

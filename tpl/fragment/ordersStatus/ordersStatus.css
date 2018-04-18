@@ -1,0 +1,187 @@
+#ordersStatus {
+    position: relative;
+}
+
+.fatherDiv > div {
+    width: 100%;
+    clear:both;
+    margin: 0 !important;
+}
+
+.fatherDiv .os-goBack {
+    padding-left: 15px;
+}
+
+.fatherDiv .os-orderNum {
+    font-family: PingFangSC-Medium;
+    font-size: 22px;
+    color: #555555;
+    text-align: center;
+}
+
+.fatherDiv .os-main {
+    background: #fff;
+    border: 1px solid #ddd;
+    overflow-y: scroll;
+    padding-top: 60px;
+    padding-left: 60px;
+    position: absolute;
+    top: 100px;
+    left: 15px;
+    bottom: 15px;
+    right: 15px;
+}
+
+.fatherDiv .os-main > div {
+    margin-bottom: 10px;
+}
+
+.fatherDiv .os-label {
+    font-family: PingFangSC-Medium;
+    font-size: 18px;
+    color: #555555;
+    line-height: 20px;
+}
+
+.fatherDiv .os-label_left {
+    clear: both;
+    display: inline-block;
+    float: left;
+    font-size: 16px;
+    margin-left: 37px;
+    margin-top: 10px;
+}
+
+.fatherDiv .os-label_right {
+    font-size: 16px;
+    display: inline-block;
+    margin-top: 10px;
+    margin-left: 20px;
+}
+
+.fatherDiv .os-label_right_column1 {
+    display: inline-block;
+    float: left;
+    clear: both;
+}
+
+.fatherDiv .os-label_right_column2 {
+    display: inline-block;
+    float: left;
+    margin-left: 20px;
+}
+
+.fatherDiv .os-label_right_column2 span {
+    display: block;
+    font-family: PingFangSC-Regular;
+    font-size: 16px;
+    color: #555555;
+    margin-bottom: 10px;
+    line-height: 20px;
+}
+
+.fatherDiv .processStyle {
+    display: inline-block;
+    float: left;
+}
+
+.fatherDiv .processDiv {
+    margin: 30px 0 60px -8px;
+}
+
+.fatherDiv .processStyle_img {
+    float: right;
+    margin-left: 6.5px;
+}
+
+.fatherDiv .dividingLine {
+    width: 100px;
+    line-height: 47px;
+    display: inline-block;
+    text-align: justify;
+    color: #bdbdbd;
+    letter-spacing: 15px;
+    text-indent: 10px;
+    font-size: 20px;
+}
+
+.fatherDiv .processStyle_txt {
+    font-family: PingFangSC-Medium;
+    font-size: 18px;
+    line-height: 20px;
+    float: right;
+    clear: both;
+    width: 60px;
+    text-align: center;
+    margin-top: 16px;
+}
+
+.fatherDiv .orderStatusColor {
+    color: #3BAFDA;;
+}
+
+.fatherDiv .label-text {
+    margin: 0 35px;
+}
+
+.fatherDiv .subOrders {
+    width: 90%;
+    padding-left:10%;
+    display: block;
+}
+
+.fatherDiv .subOrdersArea {
+    width:90%!important;
+    margin:auto;
+}
+.fatherDiv .subOrdersAreaTitle{
+    font-family: PingFangSC-Medium;
+    font-size: 16px;
+    color: #555555;
+    clear:both;
+}
+.fatherDiv .subOrdersAreaTitle:first-child{
+    margin-top:20px;
+}
+.fatherDiv .icon_open{
+    transform:rotate(-90deg);
+    position:absolute;
+    margin-left:10px;
+}
+.fatherDiv .icon_close{
+    transform:rotate(90deg);
+    position:absolute;
+    margin-left:10px;
+}
+
+.fatherDiv .subOrderAreaDate{
+    display:inline-block;
+    float:left;
+    width: 15%;
+    /*min-width: 110px;*/
+}
+.fatherDiv .subOrders_detail_span{
+    display: inline-block;
+    width: 100%;
+    font-family:PingFangSC-Regular;
+    font-size: 16px;
+    color: #555555;
+    padding: 10px 0 10px 5px;
+    margin:0;
+    line-height: 20px;
+}
+.fatherDiv .subOrderAreaFlow{
+    display:inline-block;
+    width:75%;
+    float:left;
+}
+.fatherDiv .subOrdersAreaOrderLabel{
+    display:inline-block;
+    width:10%;
+}
+.statusColor{
+    color:#34B3DC!important;
+}
+.fatherDiv .paddleftzero{
+    padding-left: 0px!important;
+}

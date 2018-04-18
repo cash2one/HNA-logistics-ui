@@ -1,0 +1,23 @@
+{
+    "logistics_page_updateLogisticInfo" : "更新物流状态",
+    "logistics_label_orderNum" : "订单编号",
+    "logistics_select_orderNumType" : "请选择编号类型",
+    "logistics_input_orderNum_PH" : "请输入主单号或子单号，多个用逗号或空格隔开",
+    "logistics_textarea_100" : "最多支持输入100条订单信息",
+    "logistics_label_updateTime" : "事件时间",
+    "logistics_label_infoType" : "信息类型",
+    "logistics_radio_infoType_normal" : "正常",
+    "logistics_radio_infoType_abnormal" : "异常",
+    "logistics_label_infoType_PH":"请选择信息类型",
+    "logistics_label_logisticsInfo" : "物流信息",
+    "logistics_select_logisticsInfo_PH" : "请选择物流消息模板",
+    "logistics_select_input_PH" : "请输入消息内容或编码",
+    "logistics_label_placeA" : "A地",
+    "logistics_label_placeB" : "B地",
+    "logistics_label_place_PH" : "请输入地点或站点名称",
+    "logistics_btn_update":"更新",
+    "logistics_input_validation":"请输入中英文、数字或符号“-”、“_” ",
+    "logistics_select_main":"主订单号",
+    "logistics_select_sub":"子订单号"
+
+}

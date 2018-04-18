@@ -1,0 +1,64 @@
+<!-- prompt box -->
+<div ng-show="nestLogDetail" id="nest-logDetail" class="prompt-modal log-detail-modal">
+    <div class="prompt-wrap">
+        <div class="bomb-box">
+            <div class="title">{{detailTable.tableTitle}}详情</div>
+            <div class="prompt-content" ng-controller="tableController">
+                <table class="table table-box table-bordered detail-table">
+                    <thead>
+                        <tr>
+                            <th ng-repeat="item in detailTable.tableHeader">{{item}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-if="showRecordTxt" ng-repeat="item in recordTxtList">
+                            <td>{{$index + 1}}</td>
+                            <td class="record-txt-detail">{{item}}</td>
+                        </tr>
+                        <tr ng-if="detailTable.tableBody.length !== 0" ng-repeat="item in detailTable.tableBody" class="record-list">
+                            <td>{{$index + indexNum}}</td>
+                            <td>
+                                <div class="record-detail">
+                                    <span>修改字段：</span>
+                                    <p>{{item.paramName}}</p>
+                                </div>
+                                <div class="record-detail">
+                                    <span>修改前：</span>
+                                    <p>{{item.preValue}}</p>
+                                </div>
+                                <div class="record-detail">
+                                    <span>修改后：</span>
+                                    <p>{{item.laterValue}}</p>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="operation" ng-click="cancelShowDetail()">关闭</div>
+        </div>
+    </div>
+</div>
+
+<!-- main content -->
+<div class="table-container" ng-controller="tableController">
+    <table class="table table-box table-bordered log-table" cellpadding="0" cellspacing="0">
+        <thead>
+            <tr>
+                <th ng-repeat="item in logTable.tableHeader">{{item}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in logTable.tableBody"  ng-init="renderFinish($last)">
+                <td>{{$index + 1}}</td>
+                <td>{{item.operTime}}</td>
+                <td class="modify-type" ng-click="showDetail(item.id, item.eventName)">{{item.eventName}}</td>
+                <td>{{item.operUserName}}<span ng-if="item.operUserNum">({{item.operUserNum}})</span></td>
+                <td>{{item.operSource}}</td>
+                <td>{{item.orderStatusChange}}</td>
+                <td>{{item.payStatusChange}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+

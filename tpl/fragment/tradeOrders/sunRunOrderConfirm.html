@@ -1,0 +1,758 @@
+
+<style class="ng-scope">
+    .headerInfo{
+        clear: both;padding-top: 11.2px;padding-bottom: 19px
+    }
+    .headerInfoLeft{
+        float: left;text-align: left;
+    }
+    .headerInfoLeft ul li{
+        margin-bottom: 20px;
+    }
+    .headerInfoRight{
+        float: right;
+        text-align: left;
+    }
+    .headerInfoRight ul li{
+        margin-bottom: 20px;
+    }
+
+    .headerInfoRight span{
+        float: right;
+    }
+    .headerInfoRight label{
+        text-align: right;
+        width: 135px;
+        margin-right: 10px;
+    }
+    .hr{
+        margin: 0;border: 0;border-top:3px solid #4A4A4A;clear: both;
+    }
+    .orderConfirmation{
+        clear:both;float: right;color: #000000;font-weight: bold;font-size: 20px;font-family:PingFangSC-Semibold
+    }
+    .confirmationInfo{
+        padding: 7px 0 12px 0;font-family:PingFangSC-Regular;color: #555555;clear: both;overflow: hidden;
+    }
+    .orderLeft{
+        float: left;
+        text-align: left;
+    }
+    .orderLeft label{
+        display: inline-block;
+        text-align: left;
+        width: 100px;
+        margin-right: 10px;
+    }
+    #sunRunTemplate ul li{
+        margin-bottom: 20px;
+    }
+    .search-input span{
+        margin-left: 0!important;
+    }
+
+    .orderRight{
+        margin-right: 10px;
+        width: 450px;
+        float: right;
+    }
+    .orderRight li{
+        text-align: left;
+    }
+
+    .orderRight label{
+        display: inline-block;
+        text-align: left;
+        width: 100px;
+        margin-right: 10px;
+    }
+
+    .contentBox{
+        padding-top:9px;
+    }
+
+    .contentBox ul {
+        text-align: left;
+    }
+
+    .contentBox label{
+        vertical-align: top;
+        display: inline-block;
+        text-align: left;
+        width: 105px;
+        margin-right: 10px;
+    }
+
+    .contentBox textarea{
+        min-width: 200px;
+        padding-top: 8px;
+        padding-bottom: 5px;
+        padding-left: 12px;
+        padding-right: 10px;
+    }
+    .relative{
+        position: relative;
+
+    }
+    .justfiy{
+        position: absolute;
+        width: 310px;
+        text-align: left;
+    }
+    .header-title{
+        background-image: linear-gradient(#e5004e, #851f57);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 4em;
+        font-weight: 700;
+        font-style: italic;
+        line-height: 1.2;
+        float: right;
+        margin-right: 0px;
+    }
+
+    #sunRunTemplate label b{
+        color: red;
+    }
+
+    .content-title b{
+        color: red;
+    }
+
+    .detail pre{
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        margin: 0;
+    }
+</style>
+
+<div ng-controller="sunRunConfirmOrderController" class="detail">
+    <div class="detail ng-scope">
+        <h4 class="title">订单确认单</h4>
+        <button class="btn btn-default btn-bill" ng-click="goBack('fresh')">返回</button>
+        <div id="form-content">
+            <div class="search-order" style="border-bottom-width: 0px;">
+                <div class="search-input">
+                    <form  name="sunRunTemplate" id="sunRunTemplate" novalidate="novalidate" style="overflow: hidden;padding: 50px 56px;border:1px solid #979797" class="ng-pristine ng-valid ng-valid-defined ng-valid-maxlength">
+                        <div>
+                            <div id="headerTitle" style="float: right">
+                                <!--<img src="/public/img/Image.png">-->
+                                <h1 class="header-title">SUNRUN</h1>
+                            </div>
+                        </div>
+                        <div id="headerInfo" class="headerInfo">
+                            <div class="headerInfoLeft">
+                                <ul style="width: 500px;word-break: break-all">
+
+                                    <li class="ng-binding">
+                                        <pre style="font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif;font-weight: 400;">{{template.purchaserCompanyName}}</pre>
+                                    </li>
+
+                                    <li class="relative">
+                                        <span ng-show="!IsEdit">{{template.custCompanyNickName}}</span>
+                                        <span class="content-title"><b ng-show="IsEdit">*</b>Att.:</span>
+                                        <input ng-show="IsEdit" type="text" name="custCompanyNickName" ng-model="template.custCompanyNickName" class="input-text"
+                                               verification="{'ruleType':'templatename'}"
+                                               placeholder="请输入对方称呼" maxlength="30" required>
+                                        <div class="verification justfiy" ng-show="IsEdit">
+                                            <span class="errors " ng-show="sunRunTemplate.custCompanyNickName.$viewValue && sunRunTemplate.custCompanyNickName.$error.defined && sunRunTemplate.custCompanyNickName.$dirty">{{sunRunTemplate.custCompanyNickName.errorTips}}</span>
+                                        </div>
+                                    </li>
+
+                                    <li class="relative">
+                                        <textarea ng-show="!IsEdit" rows="5" cols="60" style="width: 250px;border: none;padding: 0;color: #555555;text-align: left"
+                                                  type="text" name="custCompanyAddress" ng-model="template.custCompanyAddress"
+                                                  required>
+                                        </textarea>
+
+                                        <span class="content-title" style="position: relative;top: -77px;"><b ng-show="IsEdit">*</b></span>
+                                        <textarea ng-show="IsEdit" rows="5" cols="60" style="width: 250px;height: 94px;color: #555555"
+                                                  type="text" name="custCompanyAddress" ng-model="template.custCompanyAddress"
+                                                  placeholder="请输入对方地址"  required>
+
+                                        </textarea>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="headerInfoRight">
+                                <ul>
+                                    <li style="position: relative">
+                                        <label style="width: 0px;top: 10px;position: absolute;"><b ng-show="IsEdit">*</b></label>
+                                        <label style="width: 60px;display: inline-block;">Our ref.:</label>
+                                        <div class="relative" style="display: inline-block">
+                                            <input ng-trim="false" ng-show="IsEdit" type="text" name="businessNo" ng-model="template.businessNo"
+                                                   class="input-text ng-pristine ng-untouched ng-valid ng-valid-defined ng-valid-maxlength"
+                                                   verification="{ruleType:'ordernumber',maxLength:'30'}"
+                                                   placeholder="请输入业务单号" maxlength="30" required>
+                                            <div class="verification justfiy" ng-show="IsEdit">
+                                                <span class="errors " ng-show="sunRunTemplate.businessNo.$viewValue && sunRunTemplate.businessNo.$error.defined && sunRunTemplate.businessNo.$dirty">{{sunRunTemplate.businessNo.errorTips}}</span>
+                                            </div>
+                                        </div>
+
+                                        <span ng-show="!IsEdit" style="float: right">{{template.businessNo}}</span>
+
+                                    </li>
+                                    <li >
+                                        <label style="width: 60px;display: inline-block;">Your ref.:</label>
+                                        <div class="relative" style="display: inline-block">
+                                            <input ng-trim="false" ng-show="IsEdit" type="text" name="custOrderNo" ng-model="template.custOrderNo"
+                                                   class="input-text ng-pristine ng-untouched ng-valid ng-valid-defined ng-valid-maxlength"
+                                                   verification="{ruleType:'ordernumber',maxLength:'30'}"
+                                                   placeholder="请输入对方订单" maxlength="30" >
+                                            <div class="verification justfiy" ng-show="IsEdit">
+                                                <span class="errors " ng-show="sunRunTemplate.custOrderNo.$viewValue && sunRunTemplate.custOrderNo.$error.defined && sunRunTemplate.custOrderNo.$dirty">{{sunRunTemplate.custOrderNo.errorTips}}</span>
+                                            </div>
+                                        </div>
+
+                                        <span ng-show="!IsEdit" style="float: right">{{template.custOrderNo}}</span>
+                                    </li>
+                                    <li>
+                                        <label style="width: 60px;display: inline-block;">Date:</label>
+                                        <div class="relative" style="display: inline-block" >
+                                            <input ng-show="IsEdit" type="text"  id="createTime" ng-model="template.createTime" name="createTime"
+                                                   ng-change="createTimeFormat(template.createTime)"
+                                                   class="input-text ng-pristine ng-untouched ng-valid ng-valid-defined ng-valid-maxlength" readonly>
+                                        </div>
+                                        <span ng-show="!IsEdit">{{template.createTime}}</span>
+                                    </li>
+                                    <li>
+                                        <label style="width: 60px;display: inline-block;">Page:</label>
+                                        <span>{{pageSize}}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div style="clear: both;"></div>
+                            <div class="orderConfirmation">
+                                ORDER CONFIRMATION
+                            </div>
+                            <hr class="hr">
+                            <div class="confirmationInfo">
+                                <div style="padding-bottom: 11px;text-align: left;">With reference to correspondence, we are pleased to confirm the following order:</div>
+                                <ul class="orderLeft">
+                                    <li>
+                                        <label><b ng-show="IsEdit">*</b>Vessel name:</label>
+                                        <span ng-show="!IsEdit">{{template.shipName}}</span>
+                                        <div class="relative" style="display: inline-block">
+                                            <input ng-show="IsEdit" type="text" name="shipName" ng-model="template.shipName"
+                                                   class="input-text ng-pristine ng-untouched ng-valid ng-valid-defined ng-valid-maxlength"
+                                                   verification="{ruleType:'templatename'}" maxlength="30" placeholder="请输入船名" required>
+                                            <div class="verification justfiy" ng-show="IsEdit">
+                                                <span class="errors " ng-show="sunRunTemplate.shipName.$viewValue && sunRunTemplate.shipName.$error.defined && sunRunTemplate.shipName.$dirty">{{sunRunTemplate.shipName.errorTips}}</span>
+                                            </div>
+                                        </div>
+
+                                    </li>
+                                    <li>
+                                        <label><b ng-show="IsEdit">*</b>Delivery port:</label>
+                                        <span ng-show="!IsEdit" class="ng-binding ng-hide">{{template.destinationPort}}</span>
+                                        <div class="relative" style="display: inline-block">
+                                            <input ng-show="IsEdit" type="text" name="destinationPort" ng-model="template.destinationPort"
+                                                   class="input-text ng-pristine ng-untouched ng-valid ng-valid-defined ng-valid-maxlength"
+                                                   verification="{ruleType:'templatename'}" maxlength="30" placeholder="请输入目的港" required>
+                                            <div class="verification justfiy" ng-show="IsEdit">
+                                                <span class="errors " ng-show="sunRunTemplate.destinationPort.$viewValue && sunRunTemplate.destinationPort.$error.defined && sunRunTemplate.destinationPort.$dirty">{{sunRunTemplate.destinationPort.errorTips}}</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <label><b ng-show="IsEdit">*</b>Delivery date:</label>
+                                        <input ng-show="IsEdit" type="text"  id="transportStartTime" ng-model="template.transportStartTime" name="transportStartTime"
+                                               ng-change="transportStartTimeFormat(template.transportStartTime)" placeholder="运输开始时间" style="width:150px;padding-left:2px" autocomplete="off"  readonly>
+                                        <span ng-show="IsEdit">to</span>
+                                        <input ng-show="IsEdit" type="text"  id="transportEndTime" ng-model="template.transportEndTime" name="transportEndTime"
+                                               ng-change="transportEndTimeFormat(template.transportEndTime)" placeholder="运输结束时间" style="width:150px;padding-left:2px" autocomplete="off"  readonly>
+                                        <span ng-show="!IsEdit" >
+                                            {{template.transportStartTime}}
+                                            <span ng-show="template.transportStartTime&&template.transportEndTime"> to </span>
+                                            {{template.transportEndTime}}</span>
+                                    </li>
+                                    <li>
+                                        <label><b ng-show="IsEdit">*</b>ETA:</label>
+                                        <input ng-show="IsEdit" type="text"  id="sailStartTime" ng-model="template.sailStartTime" name="sailStartTime"
+                                               ng-change="sailStartTimeFormat(template.sailStartTime)" placeholder="预计开航开始时间" style="width:150px;padding-left:2px" autocomplete="off"  readonly>
+                                        <span ng-show="IsEdit">to</span>
+                                        <input ng-show="IsEdit" type="text"  id="sailEndTime" ng-model="template.sailEndTime" name="sailEndTime"
+                                               ng-change="sailEndTimeFormat(template.sailEndTime)" placeholder="预计开航结束时间" style="width:150px;padding-left:2px" autocomplete="off"  readonly>
+                                        <span ng-show="!IsEdit" >{{template.sailStartTime}}
+                                            <span ng-show="template.sailStartTime&&template.sailEndTime"> to </span>
+                                            {{template.sailEndTime}}</span>
+                                    </li>
+
+                                </ul>
+                                <ul class="orderRight">
+                                    <li>
+                                        <label><b ng-show="IsEdit">*</b>IMO number:</label>
+                                        <div class="relative" style="display: inline-block">
+                                            <span ng-show="!IsEdit" >{{template.imoCode}}</span>
+                                            <input ng-trim="false" ng-show="IsEdit" type="text" name="imoCode"
+                                                   ng-model="template.imoCode" class="input-text ng-pristine ng-untouched ng-valid ng-valid-defined ng-valid-maxlength"
+                                                   verification="{ruleType:'imocode'}" maxlength="9" required>
+                                            <div class="verification justfiy"  ng-show="IsEdit">
+                                                <span class="errors " ng-show="sunRunTemplate.imoCode.$viewValue && sunRunTemplate.imoCode.$error.defined && sunRunTemplate.imoCode.$dirty">{{sunRunTemplate.imoCode.errorTips}}</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <label>Berth/Position:</label>
+                                        <span ng-show="!IsEdit" class="ng-binding ng-hide">{{template.mooringSite}}</span>
+                                        <div class="relative" style="display: inline-block">
+                                            <input ng-show="IsEdit" type="text" name="mooringSite" ng-model="template.mooringSite"
+                                                   class="input-text ng-pristine ng-untouched ng-valid ng-valid-defined ng-valid-maxlength"
+                                                   verification="{ruleType:'templatename'}" maxlength="30" placeholder="停泊位置">
+                                            <div class="verification justfiy" ng-show="IsEdit">
+                                                <span class="errors " ng-show="sunRunTemplate.mooringSite.$viewValue && sunRunTemplate.mooringSite.$error.defined && sunRunTemplate.mooringSite.$dirty">{{sunRunTemplate.mooringSite.errorTips}}</span>
+                                            </div>
+
+                                        </div>
+
+                                    </li>
+                                    <li>
+                                        <label>Delivery hours:</label>
+                                        <span ng-show="!IsEdit" class="ng-binding ng-hide">{{template.transportDuration}}</span>
+                                        <div class="relative" style="display: inline-block">
+                                            <input ng-trim="false" ng-show="IsEdit" type="text" name="transportDuration" ng-model="template.transportDuration"
+                                                   class="input-text ng-pristine ng-untouched ng-valid ng-valid-defined ng-valid-maxlength"
+                                                   verification="{ruleType:'positiveinteger'}" maxlength="10"
+                                                   placeholder="运输时长">
+                                            <div class="verification justfiy" ng-show="IsEdit">
+                                                <span class="errors " ng-show="sunRunTemplate.transportDuration.$viewValue && sunRunTemplate.transportDuration.$error.defined && sunRunTemplate.transportDuration.$dirty">{{sunRunTemplate.transportDuration.errorTips}}</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <label><b ng-show="IsEdit">*</b>ETD:</label>
+                                        <input ng-show="IsEdit" type="text"  id="reachStartTime" ng-model="template.reachStartTime" name="reachStartTime"
+                                               ng-change="reachStartTimeFormat(template.reachStartTime)" placeholder="预计抵达开始时间" style="width:150px;padding-left:2px" autocomplete="off"  readonly>
+                                        <span ng-show="IsEdit">to</span>
+                                        <input ng-show="IsEdit" type="text"  id="reachEndTime" ng-model="template.reachEndTime" name="reachEndTime"
+                                               ng-change="reachEndTimeFormat(template.reachEndTime)" placeholder="预计抵达结束时间" style="width:150px;padding-left:2px" autocomplete="off"  readonly>
+                                        <span ng-show="!IsEdit" >
+                                            {{template.reachStartTime}}
+                                            <span ng-show="template.reachStartTime&&template.reachEndTime">to</span>
+                                            {{template.reachEndTime}}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <hr class="hr">
+                            <section class="content_box content_table">
+                                <table style="width: 100%; border-collapse: collapse; border-spacing: 0px; visibility: visible;">
+                                    <thead style="display: table-header-group;vertical-align: middle;border-color: inherit;">
+                                    <tr style=" display: table-row;vertical-align: inherit;border-color: inherit; border-bottom: 1px solid;">
+                                        <th style="text-align: left; width: 273px; padding: 0.2rem 0.4rem; color: rgb(85, 85, 85); min-width: 20px; max-width: 273px; text-overflow: ellipsis;">Product</th>
+                                        <th style="width: 257px; padding: 0.2rem 0.4rem; color: rgb(85, 85, 85); min-width: 20px; max-width: 257px; text-overflow: ellipsis;">Quantity</th>
+                                        <th style="width: 247px; padding: 0.2rem 0.4rem; color: rgb(85, 85, 85); min-width: 20px; max-width: 247px; text-overflow: ellipsis;">Price</th>
+                                        <th style="width: 241px; padding: 0.2rem 0.4rem; color: rgb(85, 85, 85); min-width: 20px; max-width: 241px; text-overflow: ellipsis;"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="item in template.orderGoods">
+                                        <td style="text-align: left; height: 50px; min-width: 20px; max-width: 273px; width: 273px; overflow: hidden; text-overflow: ellipsis;word-break: break-all;">{{item.goodsName}}</td>
+                                        <td style="text-align: center; min-width: 20px; max-width: 257px; width: 257px; overflow: hidden; text-overflow: ellipsis;">
+                                            <span>{{goodsNum(item.minLimit)}}</span>
+                                            <span ng-if="item.minLimit && item.maxLimit">-</span>
+                                            <span>{{goodsNum(item.maxLimit)}} {{item.goodsUnit}}</span>
+                                        </td>
+                                        <td style="text-align: center; min-width: 20px; max-width: 247px; width: 247px; overflow: hidden; text-overflow: ellipsis;">{{item.goodsCurrencyType}}</td>
+                                        <td style="min-width: 20px; max-width: 241px; width: 241px; overflow: hidden; text-overflow: ellipsis;">{{goodsPrice(item.goodsPrice)}}/{{item.goodsUnit}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </section>
+                            <hr class="hr">
+                            <section class="contentBox">
+                                <ul>
+                                    <li style="position: relative">
+                                        <label><b ng-show="IsEdit">*</b>Payment terms:</label>
+                                        <textarea style="width: 900px;height: 80px;"
+                                                  ng-trim="false" ng-hide="visible" ng-show="IsEdit" name="paymentClause"
+                                                  ng-model="template.paymentClause"
+                                                  class="test_e85b565e ng-pristine ng-valid ng-valid-maxlength ng-touched ng-untouched" required>
+                                        </textarea>
+                                        <!--<div ng-show="IsEdit" style="position: absolute;bottom: 22px;right: 100px;">-->
+                                            <!--<span class="test_22650be8">{{paymentTermtextareaNumber}}</span>字-->
+                                        <!--</div>-->
+                                        <div style="width: 900px;display: inline-block;">
+                                            <pre style="margin: 0;font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif;"
+                                                 ng-show="!IsEdit" class="ng-hide">{{template.paymentClause}}</pre>
+                                        </div>
+
+                                    </li>
+                                    <li style="position: relative">
+                                        <label><b ng-show="IsEdit">*</b>Buyer:</label>
+                                        <div style="width: 900px;display: inline-block;">
+                                            <pre style="font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif;">{{template.purchaser}}</pre>
+                                        </div>
+
+                                    </li>
+                                    <li style="position: relative">
+                                        <label>Agent:</label>
+
+                                        <textarea style="width: 900px;height: 80px;"
+                                                  ng-trim="false" ng-hide="visible" ng-show="IsEdit"
+                                                  ng-model="template.agent"
+                                                  class="test_e85b565e ng-pristine ng-valid ng-valid-maxlength ng-touched ng-untouched">
+                                        </textarea>
+                                        <!--<div ng-show="IsEdit" style="position: absolute;bottom: 22px;right: 100px;">-->
+                                            <!--<span class="test_22650be8">{{agentTextareaNumber}}</span>字-->
+                                        <!--</div>-->
+                                        <div style="width: 900px;display: inline-block;">
+                                            <pre style="font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif;"
+                                                 ng-show="!IsEdit" class="ng-hide">{{template.agent}}</pre>
+                                        </div>
+
+
+                                    </li>
+                                    <li style="position: relative">
+                                        <label><b ng-show="IsEdit">*</b>Remarks:</label>
+                                        <textarea style="width: 900px;height: 80px;"
+                                                  ng-trim="false" ng-hide="visible" ng-show="IsEdit"
+                                                  ng-model="template.note"  name="note"
+                                                  class="test_e85b565e ng-pristine ng-valid ng-valid-maxlength ng-touched ng-untouched" required>
+
+                                        </textarea>
+                                        <!--<div ng-show="IsEdit" style="position: absolute;bottom: 22px;right: 100px;">-->
+                                            <!--<span class="test_22650be8">{{remarkTextareaNumber}}</span>字-->
+                                        <!--</div>-->
+                                        <div style="width: 900px;display: inline-block;">
+                                            <pre style="margin: 0;font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif;"
+                                                 ng-show="!IsEdit" class="ng-hide">{{template.note}}</pre>
+                                        </div>
+
+                                    </li>
+                                </ul>
+                                <div>
+                                    <div style="text-align: left;margin-top: 30px;font-family:PingFangSC-Regular;">
+                                        <p>Contractual terms:</p>
+                                        <p>The general terms and conditions of Sunrun Bunkering Limited, which have been made known to you,</p>
+                                        <p>shall apply. A copy of these terms is available at request.
+                                        </p><p>Mere receipt of this confirmation signifies acceptance of responsibility for payment of our bunker invoice</p>
+                                        <p>by each and all of them.</p>
+                                        <p>We thank you for this nomination and kindly remind you that we can also offer all grades of lubricants worldwide.</p>
+                                    </div>
+                                    <div style="text-align: left;margin-top: 30px;">
+                                        <p>Best regards</p>
+                                        <strong>Sunrun Bunkering Limited</strong>
+                                        <div>
+                                            <span ng-show="!IsEdit" class="ng-binding ng-hide">{{template.representativeName}} As representative only</span>
+                                            <div ng-show="IsEdit" class="relative" style="display: inline-block">
+                                                <span class="content-title" style="position: absolute;left: -8px;">
+                                                <b ng-show="IsEdit">*</b>
+                                                </span>
+                                                <input  type="text" name="representativeName" ng-model="template.representativeName"
+                                                       class="input-text ng-pristine ng-untouched ng-valid ng-valid-defined ng-valid-maxlength"
+                                                       verification="{ruleType:'templatename'}" maxlength="30"
+                                                       placeholder="请输入我方代表名称" maxlength="30" style="margin-bottom: 20px; margin-right: 4px;" required>As representative only
+                                                <div class="verification justfiy"  style="bottom: 20px;">
+                                                    <span class="errors " ng-show="sunRunTemplate.representativeName.$viewValue && sunRunTemplate.representativeName.$error.defined && sunRunTemplate.representativeName.$dirty">{{sunRunTemplate.representativeName.errorTips}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <span ng-show="IsEdit" class="ng-binding ng-hide">
+                                                <span class="content-title"><b ng-show="IsEdit">*</b></span>Direct line:</span>
+                                            <span ng-show="!IsEdit">
+                                                Direct line:{{template.representativePhone}}</span>
+                                            <div class="relative" style="display: inline-block">
+                                                <input ng-show="IsEdit" type="text" name="representativePhone" ng-model="template.representativePhone"
+                                                       class="input-text ng-pristine ng-untouched ng-valid ng-valid-defined ng-valid-maxlength"
+                                                       validate-code="{ruleReg:'fix', ruleRegMsg:'请输入数字、空格和符号()-+'}" maxlength="30"
+                                                       placeholder="请输入我方电话"  style="margin-bottom: 20px" required>
+                                                <div class="verification justfiy" ng-show="IsEdit" style="bottom: 20px">
+                                                    <span class="errors " ng-show="sunRunTemplate.representativePhone.$viewValue && sunRunTemplate.representativePhone.$error.defined && sunRunTemplate.representativePhone.$dirty">{{sunRunTemplate.representativePhone.errorTips}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <hr style="margin: 0;border: 0;border-top:3px solid #4A4A4A;clear: both; ">
+                            <div id="footer" style="padding-top: 10px;padding-bottom: 96px;font-family:PingFangSC-Regular;overflow: hidden;">
+                                <div style="float: left;text-align: left">
+                                    <textarea ng-show="!IsEdit" rows="5" cols="60" style="width: 250px;border: none;padding: 0;text-align: left"
+                                              type="text" name="companyAddress" ng-model="template.companyAddress"
+                                              required>
+                                        </textarea>
+
+                                    <span class="content-title" style="position: relative;top: -77px;"><b ng-show="IsEdit">*</b></span>
+                                    <textarea ng-show="IsEdit" rows="5" cols="60" style="width: 250px;height: 94px;"
+                                              type="text" name="companyAddress" ng-model="template.companyAddress"
+                                              placeholder="请输入对方地址" required>
+                                    </textarea>
+                                </div>
+                                <div style="float: right;padding-right: 70px">
+                                    <dl style="position: relative;margin: 0">
+                                        <dt style=" position: absolute;top: 0;left: 0;">
+                                            <span class="content-title" style="    position: absolute;left: -8px;">
+                                                <b ng-show="IsEdit">*</b>
+                                            </span>
+                                            Phone:
+                                        </dt>
+                                        <dd style="margin-left: 50px;text-align: right">
+                                            <span ng-show="!IsEdit">
+                                                    {{template.companyPhone}}</span>
+                                            <div class="relative" style="display: inline-block">
+                                                <input ng-show="IsEdit" type="text" name="companyPhone" ng-model="template.companyPhone"
+                                                       class="input-text ng-pristine ng-untouched ng-valid ng-valid-defined ng-valid-maxlength"
+                                                       validate-code="{ruleReg:'fix', ruleRegMsg:'请输入数字、空格和符号()-+'}" maxlength="30"
+                                                       style="margin-bottom: 20px" required>
+                                                <div class="verification justfiy" ng-show="IsEdit" style="bottom: 20px">
+                                                    <span class="errors " ng-show="sunRunTemplate.companyPhone.$viewValue && sunRunTemplate.companyPhone.$error.defined && sunRunTemplate.companyPhone.$dirty">{{sunRunTemplate.companyPhone.errorTips}}</span>
+                                                </div>
+                                            </div>
+                                        </dd>
+                                    </dl>
+                                    <dl style="position: relative;margin: 0">
+                                        <dt style=" position: absolute;top: 0;left: 0;">
+                                            <span class="content-title" style="    position: absolute;left: -8px;">
+                                                <b ng-show="IsEdit">*</b>
+                                            </span>
+                                            Fax:
+                                        </dt>
+                                        <dd style="margin-left: 50px;text-align: right">
+                                            <span ng-show="!IsEdit">
+                                                    {{template.companyFax}}</span>
+                                            <div class="relative" style="display: inline-block">
+                                                <input ng-show="IsEdit" type="text" name="companyFax" ng-model="template.companyFax"
+                                                       class="input-text ng-pristine ng-untouched ng-valid ng-valid-defined ng-valid-maxlength"
+                                                       validate-code="{ruleReg:'fix', ruleRegMsg:'请输入数字、空格和符号()-+'}" maxlength="30"
+                                                       style="margin-bottom: 20px" required>
+                                                <div class="verification justfiy" ng-show="IsEdit" style="bottom: 20px">
+                                                    <span class="errors " ng-show="sunRunTemplate.companyFax.$viewValue && sunRunTemplate.companyFax.$error.defined && sunRunTemplate.companyFax.$dirty">{{sunRunTemplate.companyFax.errorTips}}</span>
+                                                </div>
+                                            </div>
+                                        </dd>
+
+                                    </dl>
+                                    <dl style="position: relative;margin: 0">
+                                        <dt style=" position: absolute;top: 0;left: 0;">
+                                            <span class="content-title" style="    position: absolute;left: -8px;">
+                                                <b ng-show="IsEdit">*</b>
+                                            </span>
+                                            E-mail:</dt>
+                                        <dd style="margin-left: 50px;text-align: right">
+                                            <span ng-show="!IsEdit" >{{template.companyEmail}}</span>
+
+                                            <input ng-show="IsEdit" type="text" name="companyEmail" ng-model="template.companyEmail"
+                                                   class="input-text ng-pristine ng-untouched ng-valid ng-valid-defined ng-valid-maxlength"
+                                                   validate-code="{ruleReg:'email', ruleRegMsg:'邮箱格式不正确', maxLength:'30'}"
+                                                   placeholder="我方代表电子邮件" maxlength="30" required>
+                                            <div class="verification " ng-show="IsEdit">
+                                                <span class="errors  ng-binding ng-hide" ng-show="sunRunTemplate.companyEmail.$viewValue && sunRunTemplate.companyEmail.$error.defined && sunRunTemplate.companyEmail.$dirty">{{sunRunTemplate.companyEmail.errorTips}}</span>
+                                            </div>
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="btn-group btn-group-center" >
+                        <button ng-if="IsEdit"class="btn btn-primary" ng-click="confirm()">确定</button>
+                        <a  style="display: inline-block; height: 34px;" class="btn btn-primary" ng-if="!IsEdit" href="{{fileUrl}}"
+                            download="{{template.businessNo}} {{template.shipName}} at {{template.destinationPort}} on {{template.transportStartTime}}">下载</a>
+                    </div>
+
+
+
+
+
+                    <form style="display:none;font-size:12px;font-family:Arial;color: #000000" name="form7" novalidate="novalidate"  class="ng-pristine ng-valid" id="sunRunConfirmOrder">
+                        <div id="sunRunTemplate"  style="width: 675px;padding: 42.2px 0px 0px 0px;margin: 0 auto;font-size:12px;font-family:Arial">
+                            <div id="header-title" style="float: right;">
+                                <div style="width: 205px;height: 57px"></div>
+                            </div>
+                            <div id="header-info" style="clear: both;padding-top: 11.2px;height: 120px;margin-bottom: 0;font-size:12px">
+                                <div id="header-info-left" style="float: left;text-align: left;width: 120px;">
+                                    <div>
+                                        <div style="margin-bottom: 5px;font-family:Arial,Helvetica,sans-serif;">{{template.purchaserCompanyName}}</div>
+                                        <div style="margin-bottom: 5px;font-family:Arial,Helvetica,sans-serif;">Att.:{{template.custCompanyNickName}}</div>
+                                        <pre style="margin:0;padding:0;font-weight:normal;font-family:Arial,Helvetica,sans-serif;
+                                        width: 250px;border: none;padding: 0;">{{template.custCompanyAddress}}
+                                        </pre>
+                                    </div>
+                                </div>
+                                <div id="header-info-right" style="float: right;text-align: left;width: 260px;font-family:Arial,Helvetica,sans-serif;">
+                                    <div style="position: relative;">
+                                        <div style="margin-bottom: 5px">
+                                            <label style="">Our ref.:</label>
+                                            <span style="float: right;">{{template.businessNo}}</span>
+                                        </div>
+                                        <div style="clear: both;margin-bottom: 5px">
+                                            <label>Your ref.:</label>
+                                            <span style="float: right">{{template.custOrderNo}}</span>
+                                        </div>
+                                        <div style="margin-bottom: 5px">
+                                            <label>Date:</label>
+                                            <span style="float: right">{{template.createTime}}</span>
+                                        </div>
+                                        <div>
+                                            <label>Page:</label>
+                                            <span style="float: right">&Page&</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div style="clear: both"></div>
+                            <pre style="margin:0;padding:0;float: right;font-weight: 900;font-size: 28px;font-family:Arial,Helvetica,sans-serif;line-height: 10px">
+                                ORDER CONFIRMATION
+                            </pre>
+                            <hr style="margin: 0;border: 0;border-top:4px solid #4A4A4A;clear: both; ">
+                            <div id="confirmationInfo" style="padding: 7px 0 12px 0;clear: both;overflow: hidden;font-family:Arial,Helvetica,sans-serif;">
+                                <div style="padding-bottom: 11px;text-align: left;">With reference to correspondence, we are pleased to confirm the following order:</div>
+                                <div id="order-left" style="width: 300px;float: left;">
+                                    <div style="min-height: 15px">
+                                        <div style="width: 100px;float: left;">Vessel name:</div>
+                                        <div style="width:160px;margin-left: 30px;float: left;text-align: left;">{{template.shipName}}</div>
+                                    </div>
+                                    <div style="min-height: 15px">
+                                        <div style="width: 100px;float: left;">Delivery port:</div>
+                                        <div style="width:160px;margin-left: 30px;float: left;text-align: left;">{{template.destinationPort}}</div>
+                                    </div>
+                                    <div style="min-height: 15px">
+                                        <div style="width: 100px;float: left;">Delivery date:</div>
+                                        <div style="width:160px;margin-left: 30px;float: left;text-align: left;">
+                                            {{template.transportStartTime}}
+                                            <span ng-if="template.transportStartTime&&template.transportEndTime"> to </span>
+                                            {{template.transportEndTime}}</div>
+                                    </div>
+                                    <div style="min-height: 15px">
+                                        <div style="width: 100px;float: left; text-align: left;">ETA:</div>
+                                        <div style="width:160px;margin-left: 30px;float: left;text-align: left;">
+                                            {{template.sailStartTime}}
+                                            <span ng-if="template.sailStartTime&&template.sailEndTime"> to </span>
+                                            {{template.sailEndTime}}
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div id="order-right" style="width: 300px;float: right;">
+                                    <div style="overflow: hidden;min-height: 15px">
+                                        <div style="width: 100px;float: left;text-align: left;">IMO number:</div>
+                                        <div style="width:160px;margin-left: 30px;float: left;text-align: left;">{{template.imoCode}}</div>
+                                    </div>
+                                    <div style="overflow: hidden;min-height: 15px">
+                                        <div style="width: 100px;float: left;">Berth/Position:</div>
+                                        <div style="width:160px;margin-left: 30px;float: left;text-align: left;">{{template.mooringSite}}</div>
+                                    </div>
+                                    <div style="overflow: hidden;min-height: 15px">
+                                        <div style="width: 100px;float: left">Delivery hours:</div>
+                                        <div style="width:160px;margin-left: 30px;float: left;text-align: left;">{{template.transportDuration}}</div>
+                                    </div>
+                                    <div style="overflow: hidden;min-height: 15px">
+                                        <div style="width: 100px;float: left; text-align: left;">ETD:</div>
+                                        <div style="width:160px;margin-left: 30px;float: left;text-align: left">
+                                            {{template.reachStartTime}}
+                                            <span ng-if="template.reachStartTime&&template.reachEndTime"> to </span>
+                                            {{template.reachEndTime}}</div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <hr style="margin: 0;border: 0;border-top:5px solid #4A4A4A;clear: both; ">
+                            <section>
+                                <hr style="margin: 0;border: 0;border-top:1px solid #DDDDDD;position: relative;top:20px">
+
+                                <table style="width: 100%;border-collapse: collapse;border-spacing: 0;font-family:Arial,Helvetica,sans-serif;">
+                                    <thead style="display: table-header-group;vertical-align: middle;">
+                                    <tr style=" display: table-row;vertical-align: inherit;">
+                                        <th style="text-align: left;width: 20%;padding: .2rem .4rem;color: #000000;">Product</th>
+                                        <th style="width: 20%;padding: 2px 4px;text-align: center">Quantity</th>
+                                        <th style="width: 20%;padding: 2px 4px;text-align: center">Price</th>
+                                        <th style="width: 20%;padding: 2px 4px;text-align: center"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="item in template.orderGoods">
+                                        <td style="text-align: left;word-break: break-all;height: 40px;">{{item.goodsName}}</td>
+                                        <td style="text-align: center; min-width: 20px; max-width: 257px; width: 257px; overflow: hidden; text-overflow: ellipsis;">
+                                            <span>{{goodsNum(item.minLimit)}}</span>
+                                            <span ng-if="item.minLimit && item.maxLimit">-</span>
+                                            <span>{{goodsNum(item.maxLimit)}} {{item.goodsUnit}}</span>
+                                        </td>
+                                        <td style="text-align: center">{{item.goodsCurrencyType}}</td>
+                                        <td style="min-width: 20px; max-width: 241px; width: 241px; overflow: hidden; text-overflow: ellipsis;">{{goodsPrice(item.goodsPrice)}}/{{item.goodsUnit}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </section>
+                            <hr style="margin: 0;border: 0;border-top:1px solid #4A4A4A;clear: both; ">
+
+                            <section id="content_box" style="padding-top: 9px;font-family:Arial,Helvetica,sans-serif;">
+                                <div>
+                                    <div style="text-align: left;margin-bottom: 5px">
+                                        <p style="display: inline-block;width: 100px;">Payment terms:</p>
+                                        <pre style="margin-left: 50px;vertical-align: top;text-align: left;display: inline-block;width: 400px;
+                                        padding:0;font-weight:normal;font-family:Arial,Helvetica,sans-serif;
+                                        border: none;padding: 0;">{{template.paymentClause}}</pre>
+                                    </div>
+                                    <div style="text-align: left;margin-bottom: 5px">
+                                        <p style="display: inline-block;width: 100px;">Buyer:</p>
+                                        <pre style="margin-left: 50px;vertical-align: top;text-align: left;display: inline-block;width: 400px;
+                                        padding:0;font-weight:normal;font-family:Arial,Helvetica,sans-serif;
+                                        border: none;padding: 0;">{{template.purchaser}}</pre>
+                                    </div>
+                                    <div style="text-align: left;margin-bottom: 5px">
+                                        <p style="display: inline-block;width: 100px;">Agent:</p>
+                                        <pre style="margin-left: 50px;vertical-align: top;text-align: left;display: inline-block;width: 400px;
+                                        padding:0;font-weight:normal;font-family:Arial,Helvetica,sans-serif;
+                                        border: none;padding: 0;">{{template.agent}}</pre>
+                                    </div>
+                                    <div style="text-align: left;margin-bottom: 5px">
+                                        <p style="display: inline-block;width: 100px;">Remarks:</p>
+                                        <pre style="margin-left: 50px;vertical-align: top;text-align: left;display: inline-block;width: 400px;
+                                        padding:0;font-weight:normal;font-family:Arial,Helvetica,sans-serif;
+                                        border: none;padding: 0;">{{template.note}}</pre>
+                                    </div>
+
+                                </div>
+                                <div>
+                                    <div style="text-align: left;margin-top: 48px;">
+                                        <p style="margin: 0">Contractual terms:</p>
+                                        <p style="margin: 0">The general terms and conditions of Sunrun Bunkering Limited, which have been made known to you,</p>
+                                        <p style="margin: 0">shall apply. A copy of these terms is available at request.
+                                        </p><p style="margin: 0">Mere receipt of this confirmation signifies acceptance of responsibility for payment of our bunker invoice</p>
+                                        <p style="margin: 0">by each and all of them.</p>
+                                        <p style="margin: 0">We thank you for this nomination and kindly remind you that we can also offer all grades of lubricants worldwide.</p>
+                                    </div>
+                                    <div style="text-align: left;margin-top: 30px;">
+                                        <p style="margin: 0">Best regards</p>
+                                        <strong style="margin: 0; font-weight: bold;">Sunrun Bunkering Limited</strong>
+                                        <p style="margin: 0">
+                                            <span>{{template.representativeName}} </span>
+                                            As representative only</p>
+                                        <p style="margin: 0">Direct line: {{template.representativePhone}}</p>
+                                    </div>
+                                </div>
+                            </section>
+                            <hr style="margin-top: 30px;border: 0;border-top:3px solid #4A4A4A;clear: both; ">
+                            <div style="padding-top: 10px;overflow: hidden;font-family:Arial,Helvetica,sans-serif;">
+                                <div style="float: left;text-align: left">
+                                    <pre style="width: 250px;border: none;padding: 0;margin:0;text-align: left;
+                                        font-family:Arial,Helvetica,sans-serif;border: none;padding: 0;">{{template.companyAddress}}
+                                    </pre>
+                                </div>
+                                <div style="float: right;padding-right: 70px">
+                                    <dl style="position: relative;margin: 0">
+                                        <dt style=" position: absolute;top: 0;left: 0;">Phone:</dt>
+                                        <dd style="margin-left: 50px">{{template.companyPhone}}</dd>
+                                    </dl>
+                                    <dl style="position: relative;margin: 0">
+                                        <dt style=" position: absolute;top: 0;left: 0;">Fax:</dt>
+                                        <dd style="margin-left: 50px">{{template.companyFax}}</dd>
+                                    </dl>
+                                    <dl style="position: relative;margin: 0">
+                                        <dt style=" position: absolute;top: 0;left: 0;">E-mail:</dt>
+                                        <dd style="margin-left: 50px;text-align: right;">{{template.companyEmail}}</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

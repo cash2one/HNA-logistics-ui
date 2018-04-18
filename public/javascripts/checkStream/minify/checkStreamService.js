@@ -1,0 +1,1 @@
+app.factory("checkStreamService",["easyHttp",function(r){var a={};return a.getPriceStream=function(a){return r.get("logistics.getPriceStream",{urlParams:a.urlParams,seatParams:a.seatParams})},a.getProductStream=function(a){return r.get("logistics.getProductStream",{urlParams:a.urlParams,seatParams:a.seatParams})},a}]);

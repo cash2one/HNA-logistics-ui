@@ -1,0 +1,168 @@
+<div ng-controller="detail" class="detail">
+    <h4 class="title">{{ id ? '商品详情' : '添加商品' }}</h4>
+    <button type="button" class="btn btn-default btn-bill" ng-click="goBack()">返回</button>
+    <button type="button" class="btn btn-primary btn-bill btn-edit" ng-click="edit()" ng-class="{hide : isEdit}">编辑</button>
+    <div>
+        <form name="customerForm" novalidate="novalidate">
+
+            <ul class="good-detail clearfix">
+                <li>
+                    <label><i>*</i>商品名称</label>
+                    <div class="content-info required" ng-show="isEdit">
+                        <input ng-trim name="name" ng-model="data.name" ng-style="{ borderColor: dataNameError ? '#FA787E' : '' }" type="text" placeholder="" maxlength="100" required>
+                    </div>
+                    <div class="required" ng-show="!isEdit" style="line-height: 20px;  word-break: break-all;padding-left: 8px;position: relative">
+                        <p id="commodityName" style="position: absolute;top: 7px;">{{data.name}}</p>
+                    </div>
+                </li>
+                <li>
+                    <label><i>*</i>商品类别</label>
+                    <div class="content-info required" ng-show="isEdit">
+                        <input ng-trim="false" name="goodsTypeName" type="text" ng-model="data.goodsTypeName" ng-click="loadGoodsType()" readonly="readonly"
+                            required>
+                    </div>
+                    <div class="content-info required" ng-show="!isEdit">
+                        <p id="commodityType" class="content-text">{{data.goodsTypeName}}</p>
+                    </div>
+                </li>
+                <li>
+                    <label><i>*</i>供应商</label>
+                    <div class="content-info required" ng-show="isEdit">
+                        <input ng-trim="false" name="supplierName" readonly ng-model="data.supplierName" id="supplierName" type="text" ng-click="initSupplier()"
+                            placeholder="" required>
+                        <!--supplierId-->
+                    </div>
+                    <div class="content-info required" ng-show="!isEdit">
+                        <p id="commoditySupplier" class="content-text">{{data.supplierName}}</p>
+                    </div>
+                </li>
+                <li ng-if="!!data.code">
+                    <label>商品代码</label>
+                    <div class="content-info required">
+                        <p class="content-text">{{data.code}}</p>
+                    </div>
+                </li>
+                <li>
+                    <label>HS编码</label>
+                    <div class="content-info required" ng-show="isEdit">
+                        <input ng-trim="false" ng-style="{ borderColor: hsCodeError ? '#FA787E' : '' }" maxlength="{{ data.hsCode.indexOf('.') !== -1 ? 11 : 10 }}"
+                            ng-keyup="checkLength(data.hsCode)" name="hsCode" ng-model="data.hsCode" type="text" placeholder="">
+                        <div class="verification" ng-if="hsCodeError">
+                            <span class="errors">请输入数字和"."</span>
+                        </div>
+                        <!--supplierId-->
+                    </div>
+                    <div class="content-info required" ng-show="!isEdit">
+                        <p id="commodityHSCode" class="content-text">{{data.hsCode}}</p>
+                    </div>
+                </li>
+                <li>
+                    <label><i>*</i>计量单位</label>
+                    <div class="content-info required" ng-show="isEdit">
+                        <input ng-trim="false" validate-code="{ruleReg:'name', ruleRegMsg:'<%=common_validate_name%>', maxLength:'30'}" name="unitName"
+                            ng-model="data.unitName" id="unitName" type="text" placeholder="" required>
+                        <i class="select-icon icon-drop-down"></i>
+                    </div>
+                    <div class="content-info required" ng-show="!isEdit">
+                        <p id="commodityWeight" class="content-text">{{data.unitName}}</p>
+                    </div>
+                </li>
+                <li>
+                    <label><i>*</i>单价</label>
+                    <div class="content-info required" ng-show="isEdit">
+                        <input ng-trim validate-code="{ruleReg:'floatTwo', ruleRegMsg:'请输入数字，小数点后保留两位', maxLength:'10'}" name="price" ng-model="data.price"
+                            type="text" placeholder="" required>
+                        <validatetip from-model="customerForm.price"></validatetip>
+                    </div>
+                    <div class="content-info required" ng-show="!isEdit">
+                        <p id="commodityPrice" class="content-text">{{data.price}}</p>
+                    </div>
+                </li>
+                <li>
+                    <label><i>*</i>货币单位</label>
+                    <div class="content-info required" ng-show="isEdit">
+                        <input ng-trim="false" validate-code="{ruleReg:'name', ruleRegMsg:'<%=common_validate_name%>', maxLength:'30'}" name="currencyName"
+                            ng-model="data.currencyName" id="currencyName" type="text" ng-click="manualCurrency()" readonly required>
+                    </div>
+                    <div class="content-info required" ng-show="!isEdit">
+                        <p id="commodityCurrency" class="content-text">{{data.currencyName}}</p>
+                    </div>
+                </li>
+                <li class="splide"></li>
+                <li>
+                    <label>限制项目</label>
+                    <div class="content-info radio-label" ng-show="isEdit">
+                        <label><input type="radio" ng-model="data.projectLimit"  name="projectLimit" value="1">是</label>
+                        <label><input type="radio" ng-model="data.projectLimit"  name="projectLimit" value="0">否</label>
+                    </div>
+                    <div class="content-info required" ng-show="!isEdit">
+                        <p id="commodityLimitPro" class="content-text">{{data.projectLimit == '1' ? '是' : '否'}}</p>
+                    </div>
+                </li>
+                <li>
+                    <label>限制采购企业</label>
+                    <div class="content-info radio-label" ng-show="isEdit">
+                        <label><input type="radio" ng-model="data.purchaserLimit"  name="purchaserLimit" value="1">是</label>
+                        <label><input type="radio" ng-model="data.purchaserLimit"  name="purchaserLimit" value="0">否</label>
+                    </div>
+                    <div class="content-info required" ng-show="!isEdit">
+                        <p id="commodityLimitEnt" class="content-text">{{data.purchaserLimit == '1' ? '是' : '否'}}</p>
+                    </div>
+                </li>
+                <li ng-class="setClass('pro')" class="hide">
+                    <label><i>*</i>项目</label>
+                    <div class="content-info required" ng-show="isEdit">
+                        <!--projectIds 这里是多选-->
+                        <input ng-trim="false" name="projectIds" ng-init="initProjectShort()" ng-model="projectIds" id="projectIds2" type="text"
+                            readonly required>
+                    </div>
+                    <div class="content-info required" ng-show="!isEdit">
+                        <p  id="commodityLimitProject" class="content-text"><span ng-repeat="item in data.project">{{ item.name + '(' + item.code + ')' }},</span></p>
+                    </div>
+                </li>
+                <li ng-class="setClass('pur')" class="hide">
+                    <label><i>*</i>采购企业</label>
+                    <div class="content-info required" ng-show="isEdit">
+                        <!--这里是多选-->
+                        <input ng-trim="false" name="purchaserCustomerCodes" id="purchaserCustomerCodes2" ng-model="purchaserCustomerCodes" ng-init="initPurchaseCus()"
+                            type="text" readonly required>
+                    </div>
+                    <div class="content-info required" ng-show="!isEdit">
+                        <p  id="commodityLimitEnterprise" class="content-text"><span ng-repeat="item in data.purchaserCustomer">{{ item.userName + '(' + item.code + ')' }},</span></p>
+                    </div>
+                </li>
+                <li class="splide"></li>
+                <li>
+                    <label>启用状态</label>
+                    <div class="content-info radio-label" ng-show="isEdit">
+                        <label><input type="radio" ng-model="data.enabled"  name="enabled" value="1">启用</label>
+                        <label><input type="radio" ng-model="data.enabled"  name="enabled" value="0">停用</label>
+                    </div>
+                    <div class="content-info required" ng-show="!isEdit">
+                        <p id="commodityEnable" class="content-text">{{data.enabled ? '启用' : '停用'}}</p>
+                    </div>
+                </li>
+                <li style="height: auto;">
+                    <label>图片上传</label>
+                    <div class="content-info radio-label file-upload">
+                        <div>
+                            <img ng-src="{{fileUrl}}" width="80" height="80" ng-show="fileUrl" />
+                        </div>
+                        <input type="file" accept="image/jpeg,image/png,image/bmp,image/tiff" id="projectFile" file-model="projectFile" ng-show="isEdit">
+                    </div>
+                </li>
+            </ul>
+            <ul class="creator" ng-show="data.createUserName && data.createTime">
+                <li>
+                    创建人：{{data.createUserName}}  {{ data.createUserId }}
+                </li>
+                <li>
+                    创建时间：{{data.createTime}}
+                </li>
+            </ul>
+            <div class="btn-group btn-group-center">
+                <button type="button" class="btn btn-default btn-bill" ng-click="cancelEdit()" ng-class="{hide : !isEdit || !id}">取消</button>
+                <button type="button" class="btn btn-primary btn-bill" ng-click="save()" ng-class="{hide : !isEdit}">保存</button>
+            </div>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+{
+    "company_title_detail": "Essential information",
+
+    "company_label_name": "Airline name：",
+    "company_label_country": "Country：",
+    "company_label_triadCode": "Figure two：",
+    "company_label_tetradCode": "Figure three：",
+    "company_label_remark": "Remarks：",
+
+    "company_placeholder_name": "Please enter airline",
+    "company_placeholder_country": "Please enter country name",
+    "company_placeholder_triadCode": "Please enter the code two",
+    "company_placeholder_tetradCode": "Please enter the code three",
+    "company_placeholder_remark": "Please enter a note",
+
+    "company_validate_name": "Airline name already exists",
+    "company_validate_triadCode": "The two code already exists",
+    "company_validate_tetradCode": "The three code already exists",
+
+    "company_title_international": "Internationalization",
+
+    "company_label_cn": "English：",
+    "company_label_hk": "chinese traditional：",
+
+    "company_placeholder_search": "Please enter a name, country, two word or three word",
+
+    "company_table_name": "Airline name",
+    "company_table_country": "Country",
+    "company_table_triadCode": "Figure two",
+    "company_table_tetradCode": "Figure three",
+    "company_table_remark": "Remarks",
+
+   "company_prompt_new": "Add airline",
+   "company_prompt_edit": "Airlines details",
+    "company_prompt_delete": "Delete selected Airlines？",
+
+    "company_input_two_code_limit": "Please input two English letters",
+    "company_input_three_code_limit": "Please input three English letters",
+    "company_prompt_delay_tip": "Please select Data"
+}

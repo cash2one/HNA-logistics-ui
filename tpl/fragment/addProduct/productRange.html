@@ -1,0 +1,90 @@
+<div id="product-range">
+    <div class="top-btn-group">
+        <button ng-disabled="disabledAdd" ng-show="canEditRange || $parent.isNew" ng-class="{'btn':true, 'btn-primary':true, 'btn-disable':disabledAdd}" class="btn btn-primary" ng-click="add();">添加</button>
+        <button ng-show="canEditRange" class="btn btn-primary" ng-click="del();" style="margin-left:10px;">删除</button>
+    </div>
+
+    <div class="table-container" ng-controller="tableController">
+        <table class="product-table table-box" cellpadding="0" cellspacing="0">
+            <thead>
+                <tr>
+                    <th ng-show="canEditRange">
+                        <div class="checkbox checkbox-info">
+                            <input type="checkbox" ng-model="productTable.selectFlag" ng-click="table.selectAll(productTable);">
+                            <label></label>
+                        </div>
+                    </th>
+                    <th ng-repeat="item in productTable.tableHeader">{{item}}</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr ng-repeat="value in productTable.tableBody" ng-init="renderFinish($last)">
+                    <td ng-show="canEditRange">
+                        <div class="checkbox checkbox-info">
+                            <input type="checkbox" ng-checked="value.checkbox" ng-click="table.selectOne(productTable, value.checkboxId, $event);">
+                            <label></label>
+                        </div>
+                    </td>
+                    <td>{{(productTable.pagination.currentPage-1)*productTable.pagination.pageSize+$index+1}}</td>
+                    <td title="{{value.type == 's' ? '起点范围' : '终点范围'}}">
+                        <a href="javascript:;" ng-if="IsDraftStatus || (isOffline && parameter.from != 'new')" ng-click="edit(value)">{{value.type == 's' ? '起点范围' : '终点范围'}}</a>
+                        <span ng-if="!IsDraftStatus && (!isOffline || parameter.from === 'new')">{{value.type == 's' ? '起点范围' : '终点范围'}}</span>
+                    </td>
+                    <td title="{{value.code}}">{{value.code}}</td>
+                    <td title="{{value.creator}}">{{value.creator}}</td>
+                    <td title="{{value.createTime}}">{{value.createTime}}</td>
+                    <td>
+                        <a href="javascript:;" ng-click="regionDetail(value.schemaUid, value.type == 's' ? '起点范围' : '终点范围')">点击查看</a>
+                    </td>
+                    <td title="{{value.remark}}">{{value.remark}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<!--分区方案 -->
+<div style="display: none;" id="regionDetail">
+    <form name="regionForm" novalidate="novalidate">
+        <dd>
+            <label class="label-tip"><b>*</b>范围类型：</label>
+            <div class="content-info" style="line-height: 32px;">
+                <div class="radio radio-single radio-primary">
+                    <input ng-disabled="sDisabled" style="margin-left:0px;" value="s" ng-checked="rangeRadio == 's'" type="radio" ng-model="rangeRadio">
+                    <label></label>
+                </div>
+                <span style="margin-right: 20px;vertical-align: middle;">起点范围</span>
+
+                <div class="radio radio-single radio-primary">
+                    <input ng-disabled="eDisabled" style="margin-left:0px;" value="e" ng-checked="rangeRadio == 'e'" type="radio" ng-model="rangeRadio">
+                    <label></label>
+                </div>
+                <span style="vertical-align: middle;">终点范围</span>
+            </div>
+        </dd>
+        <dd ng-if="showCode">
+            <label class="label-tip"><b>*</b>编码：</label>
+            <div class="content-info">
+                <input disabled="disabled" ng-trim="false" ng-blur="checkCode()" verification="{'ruleType':'code','tipsType':'two'}"  maxlength="15" name="code" ng-model="code" type="text" placeholder="请输入编码" required="required" autocomplete="off">
+                <div class="verification test_0d5a362e">
+                    <span id="code-msg" class="errors test_988753eb" ng-show="regionForm.code.$viewValue && regionForm.code.$error.defined && regionForm.code.$dirty">{{regionForm.code.errorTips}}</span>
+                </div>
+            </div>
+        </dd>
+        <dd>
+            <label class="label-tip">备注：</label>
+            <div class="content-info" style="height: 92px;">
+                <textarea text-length="" ng-trim="false" maxlength="140" rows="5" name="description" ng-model="description" type="text" ></textarea>
+            </div>
+        </dd>
+        <dd ng-hide="isDetailCheck" class="isHref-box">
+            <div class="checkbox checkbox-info">
+                <input type="checkbox" ng-model="isSaveNext" ng-checked="isSaveNext">
+                <label></label>
+            </div>
+            <span class="isHref-tip">保存并跳转到详情页</span>
+        </dd>
+    </form>
+</div>

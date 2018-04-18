@@ -1,0 +1,1 @@
+app.factory("projectDetailView",[function(){return{}}]);

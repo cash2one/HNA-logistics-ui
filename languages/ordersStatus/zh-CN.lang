@@ -1,0 +1,19 @@
+{
+   "ordersStatus_page_oStatus":"订单状态",
+   "ordersStatus_page_draft":"草稿",
+   "ordersStatus_page_submitted":"已提交",
+   "ordersStatus_page_pendingAudit":"待审核",
+   "ordersStatus_page_pendingCanvassing":"待揽货 ",
+   "ordersStatus_page_inTransit":"运输中",
+   "ordersStatus_page_pendingReceipt":"代签收",
+   "ordersStatus_page_received":"已收货",
+
+   "ordersStatus_page_logisticsInfo":"物流信息",
+   "ordersStatus_page_transportCompany":"运输公司",
+   "ordersStatus_page_transportNum":"运输单号",
+   "ordersStatus_page_orderNum":"子单号",
+   "ordersStatus_page_logisticsTrack":"物流跟踪",
+
+
+   "confirmOrder_page_detail_subOrderNum":"子单号"
+}

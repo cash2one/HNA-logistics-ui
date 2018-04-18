@@ -1,0 +1,110 @@
+.area-box {
+    width:1000px;
+    top:65px;
+    position:absolute;
+    margin-left:auto;
+    margin-right:auto;
+    bottom: 15px;
+    left: 0;
+    right: 0;
+}
+.area-box ul.nav-tabs {
+    top:-50px;
+}
+.area-box .m-tab .tab-content {
+    position: absolute;
+    top: -1px;
+    bottom: 0;
+
+}
+.area-box .area-input-box {
+     margin-top: 126px;
+     height:34px;
+     text-align:center;
+}
+.area-box .input-box {
+    width:165px;
+    height:34px;
+    display:inline-block;
+    vertical-align:middle;
+    position:relative
+}
+.area-box .input-box input {
+    width:165px;
+    height:34px;
+}
+.area-box .area-input-box span {
+    font-size:16px;
+    display:inline-block;
+    vertical-align:middle;
+}
+.area-box .select-box {
+    position: relative;
+    background: #fff;
+    display:inline-block;
+    vertical-align:middle;
+    margin-right:26px;
+}
+.area-box .select-icon {
+    position: absolute;
+    right: 0px;
+    top: 0;
+    width: 24px;
+    line-height: 34px;
+    text-align: center;
+    background: #3AAFDA;
+    color: #fff;
+    z-index: 10;
+    cursor:pointer;
+}
+.address-detail {
+    margin-top:80px;
+    width:240px;
+    margin-left:380px;
+}
+.address-detail span {
+    display:inline-block;
+    vertical-align:middle;
+    font-size:16px;
+}
+.address-detail p {
+    margin-bottom:50px;
+}
+.address-detail .detail-title {
+    width:70px;
+}
+.address-detail .detail-content {
+    margin-left:20px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width:140px;
+}
+.area-box .select-list-box li {
+    text-align:left;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.master-table {
+    border:none;
+    position:static;
+}
+.master-table td {
+    text-align:center !important;
+}
+.kkpage button.page-size {
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+.hidden {
+    display:none;
+}
+.add-search-box .list-search-box {
+    vertical-align:middle;
+}
+.btn-primary {
+    vertical-align:middle;
+    margin-left:10px;
+    padding: 0 30px;
+}

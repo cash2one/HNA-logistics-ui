@@ -1,0 +1,138 @@
+<div id="commodityList" class="test_9c6c99e8" ng-hide="fromCockpit">
+    <div class="bills bills-with-tab test_31337e16">
+        <div class="bill-btn-line clearfix test_7fde733f">
+            <div class="bill-line clearfix test_ad4298e9">
+                <div class="bill-input bill-status test_54468ae2">
+                    <label class="test_15af0054">订单编号</label>
+                    <p class="test_8d6e69e8">
+                        <input type="text" placeholder="请输入订单编号或者业务单号" ng-model="search.orderNo" maxlength="30" class="test_61f4f43c">
+                    </p>
+                </div>
+                <div class="bill-input bill-status test_7cf0f508">
+                    <label class="test_7df187b6">项目</label>
+                    <!--下拉-->
+                    <p class="test_61f8a78f">
+                        <input type="text" id="projectId" ng-click="initProjectShort()" ng-model="projectId" readonly="readonly" class="test_dffc0cf8">
+                    </p>
+                </div>
+                <div class="bill-input bill-status test_df3aa89a" ng-if="orderType === 'SALE'">
+                    <label class="test_4457b499">商品信息</label>
+                    <!-- goodsId -->
+                    <p class="test_270c8298">
+                        <input type="text" readonly ng-click="initGoods()" id="goods" ng-model="salesgoods" class="test_17c02ea4">
+                        <!--<input type="text" placeholder="" ng-click="initPurchaseCus()" id="goodsId" ng-model="goodsId" />-->
+                    </p>
+                </div>
+            </div>
+            <div class="bill-line clearfix test_344693b9">
+                <div class="bill-input bill-status test_ae1f954a">
+                    <label class="test_b498951c">起始时间</label>
+                    <p class="test_777b6260">
+                        <input type="text" ng-model="search.startTime" placeholder="" id="startTime" class="test_61414f76">
+                    </p>
+                </div>
+                <div class="bill-input bill-status test_8530ebfd">
+                    <label class="test_f901aece">截止时间</label>
+                    <p class="test_fd52a4c9">
+                        <input type="text" placeholder="" id="endTime" ng-model="search.endTime" class="test_89b106cf">
+                    </p>
+                </div>
+                <div class="bill-input bill-status test_8530ebfd">
+                    <label class="test_f901aece">订单状态</label>
+                    <div class="select-box test_1ec44d75">
+                        <input ng-model="ordersStatusName" ng-click="showOrderStatus();"
+                             placeholder="全部"  id="select-orders-status" readonly="readonly" ng-trim="false" type="text" maxlength="30"
+                               autocomplete="off"  class="test_836a236d">
+                        <i class="select-icon icon-drop-down test_cf8d7ede"></i>
+                    </div>
+                </div>
+                <!--下拉 goodsTypeId-->
+                <!-- <div class="bill-input bill-status">
+                    <label>商品类型</label>
+                    <p>
+                        <input type="text" ng-model="goodsTypeId" ng-click="goodsTypeIdSelect()" required readonly="readonly" />
+                    </p>
+                </div> -->
+            </div>
+            <div class="bill-line clearfix test_cc513aa3">
+                <div class="bill-input bill-status test_02544dbf" ng-if="orderType === 'SALE'">
+                    <label class="test_9a73780d">所属客户</label>
+                    <p class="test_dc7d11dc">
+                        <input type="text" id="customerId" readonly name="customerId" ng-model="customerId" ng-click="initCustomerId()" class="test_2c13471c">
+                    </p>
+                </div>
+                <div class="bill-input bill-status likedusernamelist test_c4268413" ng-if="orderType === 'SALE'">
+                    <p class="test_40ee4bdd">
+                        <input type="text" id="likedusernamelist" readonly name="likedusernamelist" ng-model="likedusernamelist" ng-click="initLikedusernamelist()"
+                            ng-disabled="!search.customerId" class="test_66b4c065">
+                    </p>
+                </div>
+                <div class="bill-input bill-status test_ca2dbc1a" ng-if="orderType === 'PURCHASE'">
+                    <label class="test_9e0cc85f">供应商</label>
+                    <p class="test_ab439446">
+                        <input type="text" readonly id="supplierName" name="supplierName" ng-model="supplierName" ng-click="initSupplier()"
+                            class="test_724c38d5">
+                    </p>
+                </div>
+                <div class="bill-input bill-status test_94f2d3e9" ng-if="orderType === 'PURCHASE'">
+                    <label class="test_fe4c1f65">商品信息</label>
+                    <!-- goodsId -->
+                    <p class="test_7557b249">
+                        <input type="text" readonly ng-click="initGoods()" id="goods" ng-model="goods" class="test_3742e4ba">
+                        <!--<input type="text" placeholder="" ng-click="initPurchaseCus()" id="goodsId" ng-model="goodsId" />-->
+                    </p>
+                </div>
+                <div class="bill-btn test_70621752" style="margin-top: 0;">
+                    <span class="clear-search test_b03374cb" ng-click="clearSearch()" style="margin:0px 10px;">重置</span>
+                    <button class="btn btn-primary btn-bill test_ba31691d" ng-click="searchBtn()">搜索</button>
+                </div>
+            </div>
+        </div>
+        <div class="table-container test_65f1d0cd" ng-controller="tableController">
+            <!-- <div class="table-wrap" id="tableWrap"> -->
+            <table class="customer-table table-box test_ce1ed881" cellpadding="0" cellspacing="0">
+                <thead class="test_d60d5e33">
+                    <tr class="test_b25a938c">
+                        <!--<th style="width:5%" class="test_3b704692">-->
+                            <!--<div class="checkbox checkbox-info test_59b73c18">-->
+                                <!--<input type="checkbox" ng-model="tableModel.selectFlag" ng-click="table.selectAll(tableModel);" class="test_2a080570">-->
+                                <!--<label class="test_a9221def"></label>-->
+                            <!--</div>-->
+                        <!--</th>-->
+                        <th style="width:{{tableModel.tableHeaderSize[$index]}}" ng-repeat="item in tableModel.tableHeader" class="test_d3185226">{{item}}</th>
+                    </tr>
+                </thead>
+                <tbody class="test_38014570">
+                    <tr ng-repeat="value in tableModel.tableBody" ng-init="renderFinish($last)" class="test_5437560d">
+                        <!--<td class="test_46cc7933">-->
+                            <!--<div class="checkbox checkbox-info test_66219bfc">-->
+                                <!--<input type="checkbox" ng-checked="value.checkbox" ng-click="table.selectOne(tableModel, value.checkboxId, $event);" class="test_4f0ab8ba">-->
+                                <!--<label class="test_9485300f"></label>-->
+                            <!--</div>-->
+                        <!--</td>-->
+                        <td class="test_0dd163c6">{{(tableModel.restData.pageIndex-1)*tableModel.restData.pageSize+$index+1}}</td>
+                        <td ng-if="value.orderStatusCode != '1'" title="{{value.orderNo}}" class="test_e6bade43"><span class="span-a test_52ce5afc" ng-click="getDetail('sdetail',value.orderNo)">{{value.orderNo}}</span></td>
+                        <td ng-if="value.orderStatusCode == '1'" title="{{value.orderNo}}" class="test_52c78b28"><span class="span-a test_405f3140" ng-click="getDetail('detail',value.orderNo)">{{value.orderNo}}</span></td>
+                        <td>{{value.businessNo}}</td>
+                        <td class="td-p test_ab2092af" title="{{orderGoodsMsg(value.orderGoods)}}">
+                            <p ng-repeat="item in value.orderGoods" class="test_f080718c">{{item.goodsName}}</p>
+                        </td>
+                        <!--<td class="test_26808035">-->
+                            <!--<p ng-if="value.projectName" title="{{value.projectName}}({{value.projectCode}})" class="test_5bbd434c">{{value.projectName}}({{value.projectCode}})</p>-->
+                        <!--</td>-->
+                        <td title="{{value.sellerName}}" class="test_6c6b5ce1">{{value.sellerName}}</td>
+                        <td title="{{value.purchaserName}}" class="test_c2431ffc">{{value.purchaserName}}</td>
+                        <td class="test_679975b5">{{value.orderTime}}</td>
+                        <td>{{value.orderStatusName}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- </div> -->
+            <hnapagination table-service="table" page-table-model="tableModel" class="test_b761f0d6"></hnapagination>
+            <div ng-show="!tableModel.pagination.isVisiblePage" class="undefinedsvg test_511fc0aa">
+                <img src="/public/img/undefined.svg" class="test_07a1a28a">
+            </div>
+        </div>
+    </div>
+</div>
+<div id="detail" class="test_16a99f5d"></div>

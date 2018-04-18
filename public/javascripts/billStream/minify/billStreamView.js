@@ -1,0 +1,1 @@
+app.factory("billStreamView",[function(){return{}}]);

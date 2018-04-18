@@ -1,0 +1,120 @@
+.area-box {
+    width:1000px;
+    margin-top:3.5%;
+    position:relative;
+    margin-left:auto;
+    margin-right:auto;
+}
+.name {
+    cursor:pointer;
+}
+.table-box td+td {
+    height:40px;
+}
+.select-icon {
+    top:15px!important;
+}
+.switch-list {
+    overflow:visible!important;
+}
+.select-list-box {
+    z-index:1000!important;
+}
+.unit {
+    font-size: 10px;
+    float: right;
+    position: relative;
+    top: -15px;
+    right: 12px;
+    color: #555;
+}
+.middle-box .prompt-content {
+    overflow:visible!important;
+}
+.input-weight-box {
+    width:295px;
+    display:inline-block;
+    vertical-align:top;
+}
+.input-weight {
+    margin-bottom:10px;
+
+}
+.start-point, .end-point {
+    width:122px!important;
+    height:34px;
+    margin-right:10px;
+    vertical-align:middle;
+}
+.delete-icon, .add-icon {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    border: 2px solid #F96268;
+    vertical-align: middle;
+    border-radius: 13px;
+    cursor:pointer;
+    text-align:center;
+    line-height:12px;
+}
+.delete-center {
+    display: inline-block;
+    height: 2px;
+    background-color: #F96268;
+    width: 60%;
+    margin-left: 0.5px;
+}
+.add-icon {
+    border:2px solid  #3BAFDA;
+}
+.add-center {
+    color: #3BAFDA;
+    font-size: 19px;
+    display: inline;
+    line-height: 15px;
+}
+.add-tips {
+    display:inline-block;
+    vertical-align: middle;
+    margin-left: 5px;
+}
+.switch-list {
+    height: 400px;
+    overflow-y: auto!important;
+    overflow-x: hidden!important;
+    padding-right:5px;
+}
+.word-count {
+    right: 5px;
+    position: absolute;
+    bottom: -35px;
+    font-size:10px;
+    color:#888;
+}
+.weight-unit {
+    float:right;
+}
+.batch-operation {
+    overflow:hidden;
+}
+.verification {
+    text-align:left;
+}
+.add-search-box .list-search-box {
+    vertical-align:middle;
+}
+.btn-primary {
+    vertical-align:middle;
+    margin-left:10px;
+    padding: 0 30px;
+}
+.select-list-box li {
+    text-align:left;
+}
+.content-main {
+    left:60px!important;
+    right:-45px!important;
+}
+td {
+  text-align: center !important;
+}

@@ -1,0 +1,41 @@
+<input ng-model="typeId" type="hidden">
+<table class="customer-table table-box" cellpadding="0" cellspacing="0">
+    <thead>
+    <tr>
+        <th style="width:5%" ng-if="!pageOfCustomerAudit">
+            <div class="checkbox checkbox-info">
+                <input id="select-all" type="checkbox" ng-model="tableModel.selectFlag" ng-click="table.selectAll(tableModel);">
+                <label></label>
+            </div>
+        </th>
+        <th style="width:{{tableModel.tableHeaderSize[$index]}}" ng-repeat="item in tableModel.tableHeader">{{item}}</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr ng-repeat="value in tableModel.tableBody" ng-init="renderFinish($last)">
+        <td ng-if="!pageOfCustomerAudit">
+            <div class="checkbox checkbox-info">
+                <input class="checkbox" data-status="{{value.authStatusName}}" type="checkbox" ng-checked="value.checkbox" ng-click="table.selectOne(tableModel, value.checkboxId, $event);">
+                <label></label>
+                <span class="state-code" style="display: none;">{{value.status}}</span>
+            </div>
+        </td>
+        <td>{{(tableModel.pagination.currentPage-1)*tableModel.pagination.pageSize+$index+1}}</td>
+        <!--<td title="{{value.locked}}">{{value.locked}}</td>-->
+        <td title="{{value.userName}}">
+            <a href="javascript:void(0);" ng-click="editServiceDetail(value)" title="{{value.userName}}" ng-bind-html="value.userName | trustHtml:q"></a>
+        </td>
+        <td title="{{value.code}}" ng-bind-html="value.code | trustHtml:q"></td>
+        <td title="{{value.fullName}}" ng-bind-html="value.fullName | trustHtml:q"></td>
+        <td ng-if="userType === 1"  title="{{value.combosName}}">{{value.combosName}}</td>
+        <td title="{{value.evaluateLevalName}}">{{value.evaluateLevalName}}</td>
+        <td title="{{value.authStatusName}}">{{value.authStatusName}}</td>
+        <!--<td title="{{value.refSalesId}}">{{value.refSalesId}}</td>-->
+    </tr>
+    </tbody>
+</table>
+<div ng-show="!tableModel.pagination.isVisiblePage" style="position: absolute;top:165px;bottom:0px;width:100%;">
+    <img style="width:100%;height:100%;" src="/public/img/undefined.svg">
+</div>
+<hnapagination table-service="table" page-table-model="tableModel"></hnapagination>

@@ -1,0 +1,10 @@
+{
+    "projectDetail_project_code": "Project Code",
+    "projectDetail_project_name": "Project Name",
+    "projectDetail_business_type": "Business Type",
+    "projectDetail_relationship_enterprise": "Relationship Enterprise",
+    "projectDetail_project_all": "全部",
+    "projectDetail_project_save": "保存草稿",
+    "projectDetail_project_submit": "提交审核",
+    "projectDetail_project_creator": "创建人"
+}

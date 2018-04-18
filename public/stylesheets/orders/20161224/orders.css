@@ -1,0 +1,158 @@
+.g-orders{
+    height: auto;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    position: absolute;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    top: 59px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.m-orders-top{
+    padding: 0px 50px 20px 50px;
+    line-height: 34px;
+    border-bottom:1px solid #ddd;
+}
+.m-orders-top .row-list{
+    margin-top:20px;
+}
+.m-orders-btn{
+    margin:10px 15px;
+}
+.btn-bill {
+    padding: 0;
+    width: 98px;
+    height: 34px;
+    margin-right: 7px;
+}
+.table-container {
+    text-align: center;
+    position: relative;
+}
+.orders-table th:nth-child(1), .orders-table td:nth-child(1){
+    width: 5%;
+    -ms-text-overflow: inherit!important;
+    text-overflow: inherit!important;
+}
+.orders-table th:nth-child(2), .orders-table td:nth-child(2){
+    width: 5%;
+}
+.orders-table th:nth-child(3), .orders-table td:nth-child(3){
+    width: 10%;
+}
+.orders-table th:nth-child(4), .orders-table td:nth-child(4){
+    width: 15%;
+}
+.orders-table th:nth-child(5), .orders-table td:nth-child(5){
+    width: 10%;
+}
+.orders-table th:nth-child(6), .orders-table td:nth-child(6){
+    width: 12%;
+}
+.orders-table th:nth-child(7), .orders-table td:nth-child(7){
+    width: 8%;
+}
+.orders-table th:nth-child(8), .orders-table td:nth-child(8){
+    width: 14%;
+}
+.orders-table th:nth-child(9), .orders-table td:nth-child(9){
+    width: 13%;
+}
+.orders-table th:nth-child(10), .orders-table td:nth-child(10){
+    width: 7%;
+}
+.ui-datepicker{
+    z-index:100003!important;
+    background:#fff;
+}
+.ui-datepicker td{
+    width:30px;
+}
+.u-clear-condition{
+    cursor: pointer;
+    margin-right:20px;
+}
+.u-clear-condition:hover {
+    color:#999!important;
+}
+body .canlander {
+    width:19%!important;
+}
+
+.bill-tabs {
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    height: 50px;
+    z-index: 2;
+}
+.bill-tabs li{
+    width: 160px;
+    height: 50px;
+    float: left;
+    background: #F6F6F6;
+    border: 1px solid #DDDDDD;
+    color: #555;
+    font-size: 18px;
+    text-align: center;
+    line-height: 50px;
+    cursor: pointer;
+}
+.bill-tabs li ~ li {
+    border-left: 0;
+}
+.bill-tabs .active {
+    background-color: #fff;
+    border-bottom-color: #fff;
+    cursor: default;
+}
+
+.modalTitle{
+    text-align: center;
+    line-height: 30px;
+    background-color: #DDDDDD;
+    height: 30px;
+    font-size: 18px;
+}
+.modalContent{
+    padding: 15px;
+    border: 1px solid #dddddd;
+}
+.fileContent.prompt-modal{
+    display:table-cell;
+}
+.fileContent .upload_file{
+    position: relative;
+    left: 20%;
+    top:20%;
+    width: 60%;
+}
+.fileContent .uploadFileTittle{
+    text-align: center;
+    background-color: #3BAFDA;
+    height: 40px;
+    padding-top: 7px;
+    font-size: 16px;
+    color: #fff
+}
+.fileContent .uploadFileContent{
+    background-color: #fff;
+    height: 300px;
+}
+.fileContent .uploadFileButton{
+    background-color: #fff;
+    text-align: center;
+    height: 40px;
+}
+.fileContent .uploadFileButton button {
+    margin-left: -3.5px;
+    margin-right: 10px;
+}
+.accepted-msg-p{
+    line-height:25px;
+}
+td {
+  text-align: center !important;
+}

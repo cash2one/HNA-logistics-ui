@@ -1,0 +1,14 @@
+{
+    "account_page_globalization": "国际化",
+    "account_page_addAccount": "添加结算方式",
+    "account_page_baseinfo": "基本信息",
+    "account_page_accountType": "名称",
+    "account_page_accountTypePlacer": "请输入名称",
+    "account_page_code": "编码",
+    "account_page_codePlacer": "请输入编码",
+    "account_page_remarkPlacer": "请输入备注",
+    "account_page_globalizationName": "国际化",
+    "account_page_accountDetail": "结算方式详情",
+    "account_code_accountConfirm": "确定删除已选结算方式？",
+    "account_page_searchPlacer": "请输入名称或编码"
+}

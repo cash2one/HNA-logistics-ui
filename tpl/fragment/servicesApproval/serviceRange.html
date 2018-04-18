@@ -1,0 +1,147 @@
+<style>
+    .flight-table th:first-child,
+    .flight-table td:first-child {
+        border-left: 1px solid #ddd;
+    }
+    .flight-table th:nth-child(1),
+    .flight-table td:nth-child(1) {
+        border-left: 1px solid #ddd;
+        width: 10%;
+    }
+    .flight-table th:nth-child(2),
+    .flight-table td:nth-child(2) {
+        width: 10%;
+    }
+    .flight-table th:nth-child(3),
+    .flight-table td:nth-child(3) {
+        width: 20%;
+    }
+    .flight-table th:nth-child(4),
+    .flight-table td:nth-child(4) {
+        width: 20%;
+    }
+    .flight-table th:nth-child(5),
+    .flight-table td:nth-child(5) {
+        border-right: 1px solid #ddd;
+        width: 20%;
+    }
+    .flight-table th:nth-child(6),
+    .flight-table td:nth-child(6) {
+        width: 20%;
+    }
+    .flight-table th:last-child,
+    .flight-table td:last-child {
+        border-right: 1px solid #ddd;
+    }
+</style>
+
+<div ng-hide="subServiceTypeCode === 'MAINLINESHIP' || subServiceTypeCode === 'MAINLINEAIR'">
+    <div class="top-btn-group" ng-show="isOffline">
+        <button ng-disabled="disabledAdd" ng-class="{'btn':true, 'btn-primary':true, 'btn-disable':disabledAdd}" class="btn btn-primary"
+            ng-click="add();">添加</button>
+        <button class="btn btn-primary" ng-click="del();" style="margin-left:10px;">删除</button>
+    </div>
+    <div class="table-container" ng-controller="tableController" id="service-range">
+        <table class="service-table table-box" cellpadding="0" cellspacing="0">
+            <thead>
+                <tr>
+                    <th ng-if="isOffline || currentServicesStatus === 1">
+                        <div class="checkbox checkbox-info">
+                            <input type="checkbox" ng-model="serviceRangeModel.selectFlag" ng-click="table.selectAll(serviceRangeModel);">
+                            <label></label>
+                        </div>
+                    </th>
+                    <th ng-repeat="item in serviceRangeModel.tableHeader">{{item}}</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr ng-repeat="value in serviceRangeModel.tableBody" ng-init="renderFinish($last)">
+                    <td ng-if="isOffline || currentServicesStatus === 1">
+                        <div class="checkbox checkbox-info">
+                            <input type="checkbox" ng-checked="value.checkbox" ng-click="table.selectOne(serviceRangeModel, value.checkboxId, $event);">
+                            <label></label>
+                        </div>
+                    </td>
+                    <td>{{(serviceRangeModel.pagination.currentPage-1)*serviceRangeModel.pagination.pageSize+$index+1}}</td>
+                    <td title="{{value.type == 's' ? '起点范围' : '终点范围'}}">
+                        <a ng-show="isOffline || currentServicesStatus === 1" href="javascript:;" ng-click="edit(value)">{{value.type == 's' ? '起点范围' : '终点范围'}}</a>
+                        <span ng-show="!isOffline && currentServicesStatus !== 1">{{value.type == 's' ? '起点范围' : '终点范围'}}</span>
+                    </td>
+                    <td title="{{value.code}}">{{value.code}}</td>
+                    <td title="{{value.creator}}">{{value.creator}}</td>
+                    <td title="{{value.createTime}}">{{value.createTime}}</td>
+                    <td>
+                        <a href="javascript:;" ng-click="regionDetail(value.schemaUid, value.type === 's' ? '起点范围' : '终点范围')">点击查看</a>
+                    </td>
+                    <td title="{{value.remark}}">{{value.remark}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- <hnapagination table-service="table" page-table-model="serviceRangeModel"></hnapagination> -->
+    </div>
+</div>
+<div ng-show="subServiceTypeCode === 'MAINLINESHIP' || subServiceTypeCode === 'MAINLINEAIR'">
+    <form name="mainlineForm" novalidate="novalidate">
+        <div class="operation-box right">
+            <button ng-if="isOffline" ng-show="visible" name="editService" ng-click="editService();" class="btn btn-primary">
+                <%=common_page_edit%>
+            </button>
+        </div>
+        <div class="rows">
+            <dl class="panel" style="width: 100%">
+                <dd style="width: 50%">
+                    <label>航线</label>
+                    <div class="content-info">
+                        <span ng-show="visible" class="text-info">{{lineName}}</span>
+                        <input name="lineName" id="lineId" ng-model="lineName" ng-hide="visible" type="text" ng-value="lineName" ng-click="initLineIds()" readonly required>
+                    </div>
+                </dd>
+                <dd>
+                    <label>航班</label>
+                    <div class="content-info">
+                        <!-- <input name="className" id="classIds" ng-model="className" ng-hide="visible" type="text" ng-value="className" ng-click="initFlightIds()" readonly required> -->
+                        <div class="table-container" ng-controller="tableController">
+                            <table class="flight-table table-box" cellpadding="0" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th ng-if="!visible">
+                                            <div class="checkbox checkbox-info">
+                                                <input type="checkbox" ng-disabled="visible" ng-model="flightTable.selectFlag" ng-click="table.selectAll(flightTable);">
+                                                <label></label>
+                                            </div>
+                                        </th>
+                                        <th ng-repeat="item in flightTable.tableHeader">{{item}}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="value in flightTable.tableBody" ng-init="renderFinish($last)">
+                                        <td ng-if="!visible">
+                                            <div class="checkbox checkbox-info">
+                                                <input type="checkbox" ng-disabled="visible" ng-checked="value.checkbox" ng-click="table.selectOne(flightTable, value.checkboxId, $event);">
+                                                <label></label>
+                                            </div>
+                                        </td>
+                                        <td>{{(flightTable.pagination.currentPage-1)*flightTable.pagination.pageSize+$index+1}}</td>
+                                        <td title="{{value.code}}">{{value.code}}</td>
+                                        <td title="{{value.carrierCompanyName || value.shippingCompanyName}}">{{value.carrierCompanyName || value.shippingCompanyName}}</td>
+                                        <td title="{{value.startTime || value.eta}}">{{value.startTime || value.eta}}</td>
+                                        <td title="{{value.endTime || value.etd}}">{{value.endTime || value.etd}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </dd>
+            </dl>
+        </div>
+        <div class="operation-box">
+            <button ng-hide="visible" ng-click="cancelService();" class="btn btn-default">
+                <%=common_page_cancel%>
+            </button>
+            <button ng-hide="visible" ng-click="submitFlights();" name="saveFlights" class="btn btn-primary">
+                <%=common_page_save%>
+            </button>
+        </div>
+    </form>
+</div>

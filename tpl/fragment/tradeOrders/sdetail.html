@@ -1,0 +1,124 @@
+<div ng-controller="sdetail" class="detail">
+	<h4 class="title">{{data.orderNo}}</h4>
+	<button class="btn btn-default btn-bill" ng-click="goBack()" >返回</button>
+	<button class="btn btn-primary btn-bill" ng-if="data.orderStatus === 'DRAFT'" id="edit-order" ng-click="getDetail('detail',data.orderNo)">编辑</button>
+	<div>
+		<ul class="order-ul">
+			<li>
+			<h4>基本信息</h4>
+			<div class="good-detail clearfix">
+				<form name="customerForm" novalidate="novalidate">
+					<ul>
+					<li class="good-li hide">
+					    <label>订单类型：</label>
+					    <div class="content-info required">
+					        <p class="content-text">{{data.orderTypeName}}</p>
+					    </div>
+				    </li>
+				    <li class="good-li">
+					    <label>销售方：</label>
+					    <div class="content-info required">
+					        <p class="content-text">{{data.sellerName}}</p>
+					    </div>
+				    </li>
+				    <li class="good-li">
+					    <label>采购方：</label>
+					    <div class="content-info required">
+					        <p class="content-text">{{data.purchaserName}}</p>
+					    </div>
+				    </li>
+				    <li class="good-li">
+					    <label>项目：</label>
+					    <div class="content-info required">
+					        <p class="content-text">{{data.projectName}}</p>
+					    </div>
+				    </li>
+				    <li class="good-li">
+					    <label>业务单号：</label>
+					    <div class="content-info required">
+					        <p class="content-text">{{data.businessNo}}</p>
+					    </div>
+				    </li>
+				    </ul>
+					</form>
+				</div>
+			</li>
+			<li>
+				<h4>商品信息</h4>
+				<div class="good-detail clearfix">
+					<div class="table-box-div">
+					<table class="goods-table" cellpadding="0" cellspacing="0">
+					    <thead>
+					    	<tr>
+					    		<th>序号</th>
+					    		<th>名称</th>
+					    		<!--<th>商品类别</th>-->
+					    		<!--<th>HS编码</th>-->
+					    		<!--<th>计量单位</th>-->
+								<th>采购数量</th>
+					    		<th>单价</th>
+					    		<!--<th>币种</th>-->
+					    		<th>采购金额</th>
+					    	</tr>
+					    </thead>
+					    <tbody>
+					    	<tr ng-repeat="item in data.orderGoods">
+					    		<td>{{$index+1}}</td>
+					    		<td>{{item.goodsName}}</td>
+					    		<!--<td>{{item.goodsTypeName}}</td>-->
+					    		<!--<td>{{item.goodsHSCode}}</td>-->
+					    		<!--<td>{{item.goodsUnit}}</td>-->
+								<td>{{item.goodsNum +' '+item.goodsUnit}}</td>
+					    		<td>{{item.goodsPrice +' '+item.goodsCurrencyType}}</td>
+					    		<!--<td>{{item.goodsCurrencyType}}</td>-->
+					    		<td>{{item.amountDue && item.amountDue.toFixed(2)}}</td>
+					    	</tr>
+							<tr>
+								<td class="total" colspan="5">
+									<span style="margin:0px 10px;">增值税：{{(data.vat).toFixed(2)}}({{data.currencyCode}})</span>
+									<span style="margin:0px 10px;">采购总金额：{{(data.noVat).toFixed(2)}}({{data.currencyCode}})</span>
+								</td>
+							</tr>
+					    	<tr><td class="total" colspan="5">订单总金额：{{(data.amountDue).toFixed(2)}}({{data.currencyCode}})</td></tr>
+					    </tbody>
+					    </table>
+					    </div>
+				</div>
+			</li>
+			<li>
+				<h4>客户留言</h4>
+				<div class="order-item">
+					<p class="content-text content-text-info">{{data.customerNote}}</p>
+				</div>
+			</li>
+			<li>
+				<h4>附件信息</h4>
+				<div class="sdetailFileContent" id="sdetailFileContent" style="margin: 15px 0;"></div>
+			</li>
+			<li>
+				<h4>订单状态</h4>
+				<div class="order-item fatherDiv clearfix">
+					<div class="processDiv">
+					    <div class="processStyle statusColor" ng-repeat="item in statusList">
+					    	<span ng-if="$index != 0" class="dividingLine ">.....</span>
+					        <img class="processStyle_img" ng-src="./public/img/{{item.svg}}.svg" width="47" height="47" type="image/svg+xml">
+					        <div class="processStyle_txt {{item.svg}}">{{item.name}}</div>
+					    </div>
+					</div>
+				</div>
+			</li>
+			<li>
+				<a style="cursor: pointer;" id="confirmOrder"  ng-click="checkConfirmOrderUrl()" ng-show="(status != 'DRAFT')&&(orderType == 'SALE') && (data.orderConfirmUrl)" download="{{data.orderNo}}.pdf">订单确认单</a>
+				<a style="cursor: pointer;" id="deliveryOrder" ng-click="checkDeliveryOrderUrl()"  ng-show="(status == 'SIGNED')&&(orderType == 'SALE') && (data.orderDeliverUrl)" download="{{data.orderNo}}.pdf">收货确认单</a><br/>
+				<a href="javascript:void(0)" ng-show="(status != 'DRAFT')&&(orderType == 'PURCHASE')" ng-click="loadPDFJS(1)">{{button1Txt}}</a><br/>
+				<a href="javascript:void(0)" ng-show="(status == 'DRAFT')&&(orderType == 'PURCHASE')" ng-click="loadPDFJS(2)">{{button2Txt}}</a>
+			</li>
+			<li class="creator-msg">
+				<strong>创建者：</strong><span>{{data.createUserFullName}} {{data.createUserName}}</span>
+				<strong>创建时间：</strong><span>{{data.createTime}}</span>
+			</li>
+		</ul>
+	</div>
+
+</div>
+<small class="closePDF" ng-click="closePDF()">关闭</small>

@@ -1,0 +1,162 @@
+<style>
+    .go-back {
+        padding-left: 15px;
+    }
+    .shipping-detail-title{
+        text-align: center;
+        font-size: 22px;
+    }
+    .content{
+        padding: 35px 60px;
+    }
+    .form{
+        margin: 15px 0;
+        display: inline-block;
+    }
+    .form-left{
+        width: 120px;
+        text-align: right;
+        display: inline-block;
+    }
+    .form-left i{
+        color: #f00;
+        font-size: 16px;
+        margin-right: 5px;
+    }
+
+    .form-right{
+        display: inline-block;
+        width: 360px;
+    }
+
+    .operation{
+        margin-top: 40px;
+        text-align: center;
+    }
+
+    .operation-box button{
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .onlylist{
+        position: absolute;
+        left: 15px;
+        top: 93px;
+        right: 15px;
+        background: #fff;
+        border: 1px solid #ddd;
+        overflow-x: auto;
+        bottom: 10px;
+    }
+
+    #shipSettingDetailtable table tr td input{
+        width: 80%;
+    }
+    #shipSettingDetailtable table tr td {
+        width: 20%;
+        text-align: center;
+        height: 50px;
+        border: 1px solid #ddd
+    }
+
+    #shipSettingDetailtable table th {
+        width: 20%;
+        text-align: center;
+        height: 50px;
+        border: 1px solid #ddd;
+        font-size: 14px;
+        font-weight: 400;
+    }
+
+</style>
+<div>
+    <div class="go-back">
+        <button ng-click="goback()" class="btn btn-default">返回</button>
+        <button ng-show="!isEdit" ng-click="edit()" class="btn btn-primary" style="float: right">编辑</button>
+    </div>
+    <h4 class="shipping-detail-title" ng-show="!id">添加航次</h4>
+    <h4 class="shipping-detail-title" ng-show="id">航次详情</h4>
+    <div name="shippingDetail" class="onlylist" >
+        <form class="content" name="shippingSettingsDetail">
+            <div class="form" style="position: relative">
+                <div class="form-left"><i ng-show="isEdit">*</i>航次号：</div>
+                <span ng-show="!isEdit" class="form-right">{{data.shippingVessel}}</span>
+                <input id="shippingVessel" name="shippingVessel" ng-model="data.shippingVessel" ng-blur="checkShippingVesselUnique()" ng-show="isEdit"
+                       class="input-text ng-pristine ng-valid ng-touched"  type="text"  style="width: 360px" required ng-focus="clearUniqueError()"
+                       verification="{ruleType:'codewithblank',maxLength:'30'}" maxlength="30">
+                <div class="verification">
+                    <span class="errors" ng-show="shippingSettingsDetail.shippingVessel.$viewValue && shippingSettingsDetail.shippingVessel.$error.defined && shippingSettingsDetail.shippingVessel.$dirty">{{shippingSettingsDetail.shippingVessel.errorTips}}</span>
+                </div>
+                <div class="verification test_12900edc">
+                    <span class= "errors test_66b8215a" ng-show="showShippingVesselUniqueError">航次号已经存在！</span>
+                </div>
+            </div>
+
+            <div class="form">
+                <div class="form-left"><i ng-show="isEdit">*</i>所属航线：</div>
+                <span ng-show="!isEdit" class="form-right">{{data.shippingLineName}}</span>
+                <input id="shippingLine" name="shippingLineName" ng-model="data.shippingLineName" ng-click="getShippingLine()" ng-show="isEdit"
+                       class="input-text ng-pristine ng-valid ng-touched" type="text" readonly style="width: 360px" required>
+            </div>
+
+            <div class="form">
+                <div class="form-left"><i ng-show="isEdit">*</i>船名：</div>
+                <span ng-show="!isEdit" class="form-right">{{data.shippingName}}</span>
+                <input id="shippingName" name="shippingName" ng-model="data.shippingName" ng-click="getShippingName()" ng-show="isEdit"
+                       class="input-text ng-pristine ng-valid ng-touched" type="text" readonly style="width: 360px" required>
+            </div>
+            <div id="shipSettingDetailtable" style="margin-top: 25px">
+                <table width="100%" border="1" cellspacing="0">
+                    <thead class="test_06e8ff93">
+
+                    <th width="20%">港口</th>
+                    <th width="20%">到港时间</th>
+                    <th width="20%">截关时间</th>
+                    <th width="20%">截货时间</th>
+                    <th width="20%">离港时间</th>
+
+                    </thead>
+                    <tbody class="tbody test_7a14645d" ng-show="tableModel.tableBody.ports.length" >
+                    <tr ng-repeat="value in tableModel.tableBody.ports" ng-init="renderFinish($last)" class="test_4dab6b9e">
+
+                        <td style="width: 20%" title="{{value.portEnglishName}}" class="test_bcd16dfc">{{value.portName}}</td>
+                        <!--到港时间-->
+                        <td style="width: 20%" title="{{value.etaStr}}" ng-show="!isEdit" class="test_9ed4cda1"  style="text-align: center">{{value.etaStr}}</a></td>
+                        <td style="width: 20%" title="{{value.etaStr}}" ng-show="isEdit" class="test_9ed4cda1"  style="text-align: center">
+                            <input type="text" ng-model="value.etaStr" id="eta-{{$index}}" name="etaStr{{$index}}" ng-blur="checkEtaTime($index)"
+                                   class="input-text ng-pristine ng-untouched ng-valid ng-valid-defined ng-valid-maxlength">
+                        </td>
+                        <!--截关时间-->
+                        <td style="width: 20%" title="{{value.portDeadTimeStr}}" ng-show="!isEdit" style="text-align: center">{{value.portDeadTimeStr}}</td>
+                        <td style="width: 20%" title="{{value.portDeadTimeStr}}" ng-show="isEdit" class="test_9ed4cda1"  style="text-align: center">
+                            <input type="text"  ng-model="value.portDeadTimeStr" id="portDeadTime-{{$index}}" name="portDeadTimeStr{{$index}}" ng-blur="checkPortDeadTimeTime($index)"
+                                   class="input-text ng-pristine ng-untouched ng-valid ng-valid-defined ng-valid-maxlength">
+                        </td>
+
+                        <!--截货时间-->
+                        <td style="width: 20%" title="{{value.cargoDeadTimeStr}}" ng-show="!isEdit" style="text-align: center" class="test_6ec0304e">{{value.cargoDeadTimeStr}}</td>
+                        <td style="width: 20%" title="{{value.cargoDeadTimeStr}}" ng-show="isEdit" class="test_9ed4cda1"  style="text-align: center">
+                            <input type="text"  ng-model="value.cargoDeadTimeStr" id="cargoDeadTime-{{$index}}" name="cargoDeadTimeStr{{$index}}" ng-blur="checkCargoDeadTimeTime($index)"
+                                   class="input-text ng-pristine ng-untouched ng-valid ng-valid-defined ng-valid-maxlength">
+                        </td>
+                        <!--离港时间-->
+                        <td style="width: 20%;text-align: center;" title="{{value.etdStr}}" ng-show="!isEdit"  class="test_6ec0304e">{{value.etdStr}}</td>
+                        <td style="width: 20%" title="{{value.etdStr}}" ng-show="isEdit" class="test_9ed4cda1"  style="text-align: center">
+                            <input type="text"  ng-model="value.etdStr" id="etd-{{$index}}" name="etdStr{{$index}}"
+                                   class="input-text ng-pristine ng-untouched ng-valid ng-valid-defined ng-valid-maxlength"  ng-blur="checkEtdTime($index)">
+                        </td>
+                    </tr>
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </form>
+        <div class="operation operation-box test_c1578338" ng-show="isEdit" style="margin-bottom: 30px">
+            <button ng-click="cancelDetail();" class="btn btn-default test_75034fc3" ><%=common_page_cancel%></button>
+            <button ng-click="saveDetail();"  class="btn btn-primary test_2b751043" ><%=common_page_save%></button>
+        </div>
+    </div>
+</div>

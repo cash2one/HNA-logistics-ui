@@ -1,0 +1,125 @@
+<section class="content test_eeea1f58">
+    <div class="g-orders test_a8ca1234">
+        <div class="m-orders-top test_2dafc26f">
+            <div class="row row-list clearfix test_1a8cca9d">
+                <div class="text-right col-md-4 test_85a4cb5a">
+                    <div class="row clearfix test_8825b393">
+                        <div class="text-right col-md-3 test_fbfdbe45" style="width:80px;padding-right:0px;">
+                            单号
+                        </div>
+                        <div class="text-left col-md-9 test_511443dd" style="padding:0px;">
+                            <input ng-model="orderSearch.keyword" ng-trim="true" type="text" maxlength="30" autocomplete="off" placeholder="请输入运单号或者客户单号" class="test_261a5d30">
+                        </div>
+                    </div>
+                </div>
+                <div class="text-right col-md-4 test_0dcb4fcf">
+                    <div class="row clearfix test_3fcb8464">
+                        <div class="text-right col-md-3 test_340ba3c1" style="width:80px;padding-right:0px;">
+                            起始时间
+                        </div>
+                        <div class="text-left col-md-9 test_3f712553" style="padding:0px;">
+                            <input ng-model="orderSearch.startTime" readonly="readonly" id="startTime" ng-trim="false" type="text" maxlength="30" autocomplete="off" class="test_ee578ea2">
+                        </div>
+                    </div>
+                </div>
+                <div class="text-right col-md-4 test_208c8a15">
+                    <div class="row clearfix test_2630ccb2">
+                        <div class="text-right col-md-3 test_8995e659" style="width:80px;padding-right:0px;">
+                            截止时间
+                        </div>
+                        <div class="text-left col-md-9 test_d0964412" style="padding:0px;">
+                            <input ng-model="orderSearch.endTime" readonly="readonly" id="endTime" ng-trim="false" type="text" maxlength="30" autocomplete="off" class="test_63eed71c">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row row-list clearfix test_57a8b8b0">
+                <div class="text-right col-md-4">
+                    <div class="row clearfix">
+                        <div class="text-right col-md-3" style="width:80px;padding-right:0px;">
+                            产品
+                        </div>
+                        <div class="text-left col-md-9" style="padding:0px;">
+                            <input ng-model="orderProduct" readonly="readonly" id="select-product" ng-enter="search()" ng-trim="true" type="text" maxlength="30" autocomplete="off">
+                        </div>
+                    </div>
+                </div>
+                <div class="text-right col-md-4 test_d5e93d62">
+                    <div class="row clearfix test_b24dff49">
+                        <div class="text-right col-md-3 test_f215106e" style="width:80px;padding-right:0px;">
+                            客户帐号
+                        </div>
+                        <div class="text-left col-md-9 test_f69d17db" style="padding:0px;">
+                            <input id="select-customer" ng-click="getCustomer();" readonly="readonly" ng-model="orderCustomerName" ng-value="orderCustomerValue" ng-trim="false" type="text" maxlength="30" autocomplete="off" class="test_b6e7f671">
+                        </div>
+                    </div>
+                </div>
+                <div class="text-right col-md-4 test_4d3df997">
+                    <div class="row clearfix test_3c6e841b">
+                        <div class="text-right col-md-3 test_35e1fb11" style="width:80px;padding-right:0px;">
+                            订单状态
+                        </div>
+                        <div class="text-left col-md-9 test_898ad591" style="padding:0px;">
+                            <div class="select-box test_1ec44d75">
+                                <input ng-model="ordersStatusName" ng-click="showOrderStatus();" id="select-orders-status" readonly="readonly" ng-trim="false" type="text" maxlength="30" autocomplete="off" placeholder="<%=common_all_tips%>" class="test_836a236d">
+                                <i class="select-icon icon-drop-down test_cf8d7ede"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row row-list clearfix test_57a8b8b0">
+                <div class="text-right test_70cf2920" style="padding-right: 8px;float: right">
+                    <span class="u-clear-condition test_ddfafe56" ng-click="clearCondition();" style="color: #888888;"><%=common_clear_data%></span>
+                    <button class="btn btn-primary btn-bill test_8d9359e2" ng-click="search();"><%=common_page_search%></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="m-orders-table test_6dc6dce6">
+            <div class="table-container test_00d3f050" ng-controller="tableController">
+                <table class="orders-table table-box test_a73eb60a" cellpadding="0" cellspacing="0">
+                    <thead class="test_ac419ff6">
+                    <tr class="test_230f2cf8">
+
+                        <th ng-repeat="item in tableModel.tableHeader" class="test_6688cf4a">{{item}}</th>
+                    </tr>
+                    </thead>
+
+                    <tbody class="test_0a2b0060">
+                    <tr ng-repeat="value in tableModel.tableBody" ng-init="renderFinish($last)" class="test_9ea98073">
+
+                        <td class="test_381e1064">{{(tableModel.pagination.currentPage-1)*tableModel.pagination.pageSize+$index+1}}</td>
+                        <td title="{{value.externalNo}}" class="test_fb632ba6">
+                            <a href="javascript:;" ng-click="showDetail(value.orderNo,value.orderStatus)" ng-bind-html="value.externalNo|trustHtml:clientNum" class="test_3fc0e613">{{value.externalNo}}</a>
+                        </td>
+                        <td title="{{value.waybillNo}}" class="test_cd15c166"  ng-bind-html="value.waybillNo|trustHtml:orderCode">
+                            {{value.waybillNo}}
+                        </td>
+
+                        <td title="{{value.productName}}" class="test_6da8147b">{{value.productName}}</td>
+                        <td title="{{value.customerName+ '-' + value.cusUserName}}" class="test_26f36aac">{{value.customerName+ '-' +value.cusUserName}}</td>
+                        <td title="{{value.cargoTypeName}}" class="test_3a5f6edd">{{value.cargoTypeName}}</td>
+                        <td title="{{value.fromAddress.cityName+'('+value.fromAddress.countryCode+') - '+value.toAddress.cityName+'('+value.toAddress.countryCode+')'}}" class="test_c3880e94">
+                            {{value.fromAddress.cityName+'('+value.fromAddress.countryCode+') - '+value.toAddress.cityName+'('+value.toAddress.countryCode+')'}}
+                        </td>
+                        <td title="{{value.createTime}}" class="test_17aedbc2">{{value.createTime}}</td>
+                        <td style="text-align: center;" title="{{value.orderStatusName}}" class="test_adfcacb9">
+                            <p style="line-height:20px;" class="test_b99fcbab">{{value.orderStatusName}}</p>
+                            <a href="javascript:;" ng-click="showFlowProcess(value.waybillNo, value.orderStatus)" style="display:block;line-height:20px" class="test_a0d270b2">
+                                订单流转
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <hnapagination table-service="table" page-table-model="tableModel" class="test_f51a65a3"></hnapagination>
+            </div>
+
+            <div ng-show="!tableModel.pagination.isVisiblePage" style="position: absolute;top:235px;bottom:0px;width:100%;" class="test_340e8ad3">
+                <img style="width:100%;height:100%;" src="/public/img/undefined.svg" class="test_140c5908">
+            </div>
+        </div>
+    </div>
+</section>

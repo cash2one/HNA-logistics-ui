@@ -1,0 +1,42 @@
+<div class="table-container">
+    <table class="table-box" cellpadding="0" cellspacing="0">
+        <thead>
+        <th style="width:5%" ng-if="viewButton.isShowCheckBox">
+            <div class="checkbox checkbox-info">
+                <input type="checkbox" id="select-all" ng-model="tableModel.selectFlag" ng-click="table.selectAll(tableModel);">
+                <label></label>
+            </div>
+        </th>
+        <th style="width:{{tableModel.tableHeaderSize[$index]}}" ng-repeat="item in tableModel.tableHeader">
+            {{item}}
+        </th>
+        </thead>
+        <tbody class="tbody">
+        <tr ng-repeat="value in tableModel.tableBody" ng-init="renderFinish($last)">
+            <td ng-if="viewButton.isShowCheckBox" style="text-align:center!important">
+                <div class="checkbox checkbox-info">
+                    <input class="checkbox" type="checkbox" data-status="{{value.statusName}}" ng-value="{{value.id}}" ng-checked="value.checkbox" ng-click="table.selectOne(tableModel, value.checkboxId);">
+                    <label></label>
+                </div>
+            </td>
+            <td style="text-align:center!important">{{(tableModel.pagination.currentPage-1)*tableModel.pagination.pageSize+$index+1}}</td>
+            <td title="{{value.name}}"><a ng-click="editProduct(value.uid, value.id)" href="javascript:void(0)" ng-bind-html="value.name | trustHtml:q"></a></td>
+            <td title="{{value.code}}" ng-bind-html="value.code | trustHtml:q"></td>
+            <td title="{{value.groupName}}">{{value.groupName}}</td>
+            <td title="{{value.goodsType}}">{{value.goodsType}}</td>
+            <td title="{{value.remarks}}">{{value.introduction}}</td>
+            <td title="{{value.statusName}}" style="text-align:center!important">
+                <p style="line-height:20px">{{value.statusName}}</p>
+                <a href="javascript:void(0)" ng-click="showCheckStream(value.uid, value.name)" style="display:block;line-height:20px">
+                    <span ng-if="value.isRejected" class="u-red-dot ng-scope" title="待处理"></span>
+                    <span style="margin-left:-3px"><%=product_stream%></span>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div ng-show="!tableModel.pagination.isVisiblePage" style="position: absolute;top:165px;bottom:0px;width:100%;">
+        <img style="width:100%;height:100%;" src="/public/img/undefined.svg">
+    </div>
+    <hnapagination table-service="table" page-table-model="tableModel" style="margin-top:5px"></hnapagination>
+</div>

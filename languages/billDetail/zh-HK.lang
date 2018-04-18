@@ -1,0 +1,21 @@
+{
+    "order_number": "訂單號",
+    "order_number_placer": "請輸入訂單號",
+    "billing_time": "計費時間",
+    "account_name": "賬號名",
+    "account_name_placer": "請輸入賬號名",
+    "product_name": "產品名",
+    "product_name_placer": "請輸入產品名",
+    "clear_search_data": "清空搜索條件",
+    "count": "總計",
+    "audit_opinion": "審核意見",
+    "to_draft": "打回草稿",
+    "audit_passed": "審核通過",
+    "audit_tips": "請先選擇審核意見",
+    "comments": "意見說明",
+    "comments_placer": "請輸入意見說明",
+    "submit_opinion": "提交意見",
+    "account_detail": "賬單詳情",
+    "product_names": "產品名稱",
+    "price_detail": "價格明細"
+}

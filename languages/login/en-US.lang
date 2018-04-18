@@ -1,0 +1,19 @@
+{
+    "login_code_userNameTips": "Please enter user name",
+    "login_code_passWordTips": "Please enter a password",
+    "login_code_login": "Login",
+    "login_code_backtrack": "Back to login",
+    "login_code_sliderTips": "Press and hold the left slider",
+    "login_data_110000": "Wrong username or password",
+    "login_data_110001": "Too many attempts, the remaining number of times:",
+    "login_data_110002": "Account is locked",
+    "login_data_110003": "Too many attempts, the remaining number of times:",
+    "login_data_110004": "Wrong username or password",
+    "login_data_110005": "Verification code error",
+    "login_page_forget": "Forget password？",
+    "login_page_phone": "Phone",
+    "login_page_email": "Email",
+    "login_page_connect": "Forget password？Please contact your administrator",
+    "login_page_locked": "Your account is locked! Please contact your administrator",
+    "login_out_time": "Session timeout, please relogin"
+}

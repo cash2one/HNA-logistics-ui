@@ -1,0 +1,89 @@
+<!-- 单号监督 -->
+<div class="superviseInfo-table">
+    <div class="superviseInfo-search-box">
+        <div style="width:100%;padding-left:20px">
+            <!--搜索渠道单号-->
+            <div class="search-cell" style="width: 30%" ng-if="module==='channelNumber'">
+                <span><%=orderNumber_table_channelNumber%></span>
+                <div class="select-box" style="width: 69%">
+                    <input ng-model="$parent.searchChannelNumber" autocomplete="off" maxlength="30"
+                           class="input-text" type="text">
+                </div>
+            </div>
+            <!--搜索运单号-->
+            <div class="search-cell" style="width: 30%;padding-left: 14px;" ng-if="module==='waybillNumber'">
+                <span><%=orderNumber_table_waybillNumber%></span>
+                <div class="select-box" style="width: 70%">
+                    <input ng-model="$parent.searchWaybillNumber" autocomplete="off" maxlength="30"
+                           class="input-text" type="text">
+                </div>
+            </div>
+            <!--搜索订单号-->
+            <div class="search-cell" style="width: 30%">
+                <span><%=orderNumber_table_orderNumber%></span>
+                <div class="select-box" style="width: 70%">
+                    <input ng-model="searchOrderNumber" autocomplete="off" maxlength="30"
+                           class="input-text" type="text">
+                </div>
+            </div>
+            <!--搜索批次号-->
+            <div class="search-cell" style="width: 30%">
+                <span><%=orderNumber_table_batchNumber%></span>
+                <div class="select-box" style="width: 70%">
+                    <input ng-model="searchBatchNumber" autocomplete="off" maxlength="30"
+                           class="input-text" type="text">
+                </div>
+            </div>
+        </div>
+        <div style="width:100%;padding: 15px 15px 0px 43px">
+            <!--搜索状态-->
+            <div class="search-cell" style="width: 30%;padding-left: 4px;">
+                <span><%=orderNumber_table_useInfo%></span>
+                <div class="select-box" style="width: 71%">
+                    <input ng-trim="false" class="input-text" id="supervise-useInfo" autocomplete="off"
+                           type="text" ng-model="superviseUseInfo" placeholder="<%=orderNumber_select_used%>"
+                           ng-click="getSearchSuperviseUseInfoData()" readonly>
+                    <i class="select-icon icon-drop-down"></i>
+                </div>
+            </div>
+            <div style="display: inline-block;float: right">
+                <span ng-click="resetData()" class="btn btn-reset"><%=common_clear_data%></span>
+                <button ng-click="getTable(true);" class="btn btn-primary" style="padding:0 30px;position:relative;top:2px">
+                    <%=orderNumber_tab_search%>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="table-container" ng-controller="tableController">
+        <table class="rule-table-info table-box" cellpadding="0" cellspacing="0">
+            <thead>
+            <tr>
+                <th ng-repeat="item in tableModel.tableHeader" style="width:{{tableModel.tableHeaderSize[$index]}}">{{item}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="value in tableModel.tableBody" ng-init="renderFinish($last)">
+                <td>{{(tableModel.pagination.currentPage-1)*tableModel.pagination.pageSize+$index+1}}</td>
+                <td ng-if="module==='channelNumber'" title="{{value.serialNumber}}"
+                    ng-bind-html="value.serialNumber | trustHtml:tableModel.restData.channelNumber">
+                </td>
+                <td ng-if="module==='waybillNumber'" title="{{value.serialNumber}}"
+                    ng-bind-html="value.serialNumber | trustHtml:tableModel.restData.waybillNumber">
+                </td>
+                <td title="{{value.orderNumber}}" ng-bind-html="value.orderNumber | trustHtml:tableModel.restData.orderNumber"></td>
+                <td ng-if="module==='channelNumber'" title="{{value.refUidName}}">{{value.refUidName}}</td>
+                <td ng-if="module==='channelNumber'" title="{{value.refIdName}}">{{value.refIdName}}</td>
+                <td ng-if="module==='waybillNumber'" title="{{value.customerName}}">{{value.customerName}}</td>
+                <td title="{{value.batchNumber}}" ng-bind-html="value.batchNumber | trustHtml:tableModel.restData.batchNumber"></td>
+                <td title="{{value.usedStatus}}">{{value.usedStatus}}</td>
+                <td title="{{value.usedTime}}">{{value.usedTime}}</td>
+            </tr>
+            </tbody>
+        </table>
+        <hnapagination table-service="table" page-table-model="tableModel"></hnapagination>
+    </div>
+
+    <div ng-show="!tableModel.pagination.isVisiblePage" style="position: absolute;top:165px;bottom:0px;width:100%;">
+        <img style="width:100%;height:100%;" src="/public/img/undefined.svg">
+    </div>
+</div>

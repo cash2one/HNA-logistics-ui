@@ -1,0 +1,14 @@
+{
+    "account_page_globalization": "Globalization",
+    "account_page_addAccount": "Add billing method",
+    "account_page_baseinfo": "Basic Information",
+    "account_page_accountType": "Settlement method",
+    "account_page_accountTypePlacer": "Please enter a billing method",
+    "account_page_code": "Code",
+    "account_page_codePlacer": "Please enter a code",
+    "account_page_remarkPlacer": "Please enter a comment",
+    "account_page_globalizationName": "Settlement Internationalization Name",
+    "account_page_accountDetail": "Details of the billing method",
+    "account_code_accountConfirm": "Are you sure you want to delete the selected billing method?",
+    "account_page_searchPlacer": "Please enter a name or code"
+}

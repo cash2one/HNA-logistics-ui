@@ -1,0 +1,171 @@
+<div class="payment-pwd-wrap">
+	<div class="payment-set-pwd" ng-show="setPassword">
+		<!-- 设置财务密码 -->
+		<div class="title">设置财务密码</div>
+		<div ng-show="setPwdContainer">
+			<form name="setPwds" id="setPwds">
+				<dl class="panel">
+					<dd>
+						<div class="container clearfix">
+							<label class="label-left"><b class="red">*</b>财务密码：</label>
+							<input type="password" autocomplete="off" name="setPwd" ng-model="setPwd" ng-trim="false" ng-keyup="checkPwdStrength()" ng-blur="checkPwd()" class="input-text" placeholder="请输入密码" maxlength="18" required>
+						</div>
+						<div class="container clearfix">
+							<label class="label-left label-tips"></label>
+							<div ng-show="ExistNoSupWord" class="no-support tips">密码格式不正确，请重新输入。</div>
+							<div ng-show="showPwLow && !ExistNoSupWord" class="no-support tips">密码不符合要求，请重新设置。</div>
+						</div>
+						<div class="container clearfix">
+							<label class="label-left label-tips"></label>
+							 <table width="320px" border="0" cellspacing="0" cellpadding="1" bordercolor="#eeeeee">
+								<tr align="center" bgcolor="#f5f5f5">
+									<td width="33%" id="strength_L">弱</td>
+									<td width="33%" id="strength_M">中</td>
+									<td width="33%" id="strength_H">强</td>
+								</tr>
+	                    	</table>
+						</div>
+						<div class="container clearfix">
+							<label class="label-left"></label>
+							<div class="tips">密码格式6-18位，密码不能包含用户名，包含大、小写，数字,符号至少三种，符号至少三种，符号可以输入!@#&()_+,./\</div>
+						</div>
+					</dd>
+					<dd>
+						<div class="contaienr">
+							<label class="label-left"><b class="red">*</b>确认财务密码：</label>
+							<input type="password" autocomplete="off" name="setPwdConfirm" ng-model="setPwdConfirm" ng-trim="false" ng-blur="checkVerify()" class="input-text" placeholder="请再次输入密码" maxlength="18" required>
+						</div>
+						<div class="container clearfix">
+							<label class="label-left"></label>
+							<div class="no-support tips" ng-show="showDiffErr">确认财务密码和财务密码应该相同！</div>
+						</div>
+					</dd>
+				</dl>
+			</form>
+			<div class="btn-container">
+				<button class="btn btn-primary" ng-click="initPwd()">确认</button>
+			</div>
+		</div>
+
+		<div ng-hide="setPwdContainer" class="set-password-success">
+			<div class="set-password-success">
+				<div class="success-set" ng-show="setSuccess">
+					<div class="check-mark icon-Success"></div>
+					<p>{{setSuccessTxt}}</p>
+					<div class="set-pwd-confirm">
+						<button class="btn btn-primary" ng-click="goToReset()">确定</button>
+					</div>
+				</div>
+				<div class="failed-set" ng-hide="setSuccess">
+					<div class="check-mark icon-Error"></div>
+					<p>{{setSuccessTxt}}</p>
+					<div class="set-pwd-confirm">
+						<button class="btn btn-primary" ng-click="goToReset()">确定</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="payment-reset-pwd" ng-hide="setPassword">
+		<!-- 重置财务密码 -->
+		<div class="title">重置财务密码</div>
+		<div class="set-password-progress clearfix">
+			<dl class="progress1 active">
+				<dt>1</dt>
+				<dd>验证密码</dd>
+			</dl>
+			<dl class="progress2" ng-class="{active:(resetProgress == 2 || resetProgress == 3) ? true : false}">
+				<dt>2</dt>
+				<dd>重置财务密码</dd>
+			</dl>
+			<dl class="progress3" ng-class="{active:resetProgress == 3 ? true : false}">
+				<dt>3</dt>
+				<dd>{{setPasswordSuccess}}</dd>
+			</dl>
+			<h6 class="dash-line"></h6>
+		</div>
+		<div class="verify-password-container" ng-show="resetProgress == 1">
+			<form name="resetPwd" id="resetPwd">
+				<dl class="panel">
+					<dd>
+						<div class="contaienr origin-password">
+							<label class="label-left"><b class="red">*</b>财务密码：</label>
+							<input type="password" autocomplete="off" name="resetPwdConfirm" ng-model="resetPwdConfirm" ng-trim="false" class="input-text" id="resetPwdConfirm" placeholder="请输入财务密码" maxlength="18" required>
+							<a href="javascript:;" class="forget-password" ng-click="forgetPwd()">忘记密码？</a>
+						</div>
+						<div class="container clearfix">
+							<label class="label-left"></label>
+							<div class="no-support tips" ng-show="ErrorPayPwd" id="ErrorPayPwd">密码错误！！</div>
+						</div>
+					</dd>
+				</dl>
+			</form>
+			<div class="btn-container">
+				<button class="btn btn-primary next-step" ng-click="checkPaymentPwd()">下一步</button>
+			</div>
+		</div>
+
+		<div class="update-password-container" ng-show="resetProgress == 2">
+			<form name="updatePwd" id="updatePwd">
+				<dl class="panel">
+					<dd>
+						<div class="container clearfix">
+							<label class="label-left"><b class="red">*</b>财务密码：</label>
+							<input type="password" autocomplete="off" name="updatePayPwd" ng-model="updatePayPwd" ng-trim="false" ng-keyup="checkUpddateStrength()" ng-blur="checkUpdatePwd()" class="input-text" placeholder="请输入密码" maxlength="18" required>
+						</div>
+						<div class="container clearfix">
+							<label class="label-left label-tips"></label>
+							<div ng-show="updateExistNoSupWord" class="no-support tips">密码格式不正确，请重新输入。</div>
+							<div ng-show="showUpdatePwLow && !updateExistNoSupWord" class="no-support tips">密码不符合要求，请重新设置。</div>
+						</div>
+						<div class="container clearfix">
+							<label class="label-left label-tips"></label>
+							 <table width="320px" border="0" cellspacing="0" cellpadding="1" bordercolor="#eeeeee">
+								<tr align="center" bgcolor="#f5f5f5">
+									<td width="33%" id="reset_strength_L">弱</td>
+									<td width="33%" id="reset_strength_M">中</td>
+									<td width="33%" id="reset_strength_H">强</td>
+								</tr>
+	                    	</table>
+						</div>
+						<div class="container clearfix">
+							<label class="label-left"></label>
+							<div class="tips">密码格式6-18位，密码不能包含用户名，包含大、小写，数字,符号至少三种，符号至少三种，符号可以输入!@#&()_+,./\</div>
+						</div>
+					</dd>
+					<dd>
+						<div class="contaienr">
+							<label class="label-left"><b class="red">*</b>确认财务密码：</label>
+							<input type="password" autocomplete="off" name="updatePayPwdConfirm" ng-model="updatePayPwdConfirm" ng-trim="false" ng-blur="checkResetVerify()" class="input-text" placeholder="请再次输入密码" maxlength="18" required>
+						</div>
+						<div class="container clearfix">
+							<label class="label-left"></label>
+							<div class="no-support tips" ng-show="showUpdateDiffErr">确认财务密码和财务密码应该相同！</div>
+						</div>
+					</dd>
+				</dl>
+			</form>
+			<div class="btn-container">
+				<button class="btn btn-primary" ng-click="updatePaymentPwd()">确认</button>
+			</div>
+		</div>
+
+		<div class="update-password-success" ng-show="resetProgress == 3">
+			<div class="reset-success" ng-show="resetSuccess">
+				<div class="check-mark icon-Success"></div>
+				<p>{{resetSuccessTxt}}</p>
+				<div class="set-pwd-confirm">
+					<button class="btn btn-primary" ng-click="goToReset()">确定</button>
+				</div>
+			</div>
+			<div class="reset-failed" ng-hide="resetSuccess">
+				<div class="check-mark icon-Error"></div>
+				<p>{{resetSuccessTxt}}</p>
+				<div class="set-pwd-confirm">
+					<button class="btn btn-primary" ng-click="goToReset()">确定</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

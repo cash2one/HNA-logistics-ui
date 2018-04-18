@@ -1,0 +1,14 @@
+{
+    "shippingSetting_vessel_voyage": "航次",
+    "shippingSetting_vessel_name": "船名",
+    "shippingSetting_vessel_company": "船公司",
+    "shippingSetting_vessel_departurePort": "起运港",
+    "shippingSetting_vessel_arrivalPort": "目的港",
+    "shippingSetting_vessel_reset": "重置",
+    "shippingSetting_vessel_search": "搜索",
+    "shippingSetting_vessel_num": "航次号",
+    "shippingSetting_vessel_departureTime": "离港时间",
+    "shippingSetting_vessel_arrivalTime": "到港时间",
+    "shippingSetting_vessel_totalTime": "全程时长",
+    "shippingSetting_code_modelDelTips": "确定删除已选航班？"
+}

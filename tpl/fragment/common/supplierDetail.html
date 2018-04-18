@@ -1,0 +1,240 @@
+<div ng-controller="supplierController" class="m-tab" id="supplier-tab">
+    <ul class="nav nav-tabs clearfix">
+        <li class="active"><a href="javascript:void(0);"><%=services_supplier_tab_one%></a></li>
+        <li><a href="javascript:void(0);">BD</a></li>
+        <li><a href="javascript:void(0);"><%=services_supplier_tab_two%></a></li>
+        <li><a href="javascript:void(0);"><%=services_supplier_tab_Four%></a></li>
+        <li><a href="javascript:void(0);"><%=services_supplier_tab_Five%></a></li>
+    </ul>
+    <div class="tab-content">
+
+        <!-- 基本信息 -->
+        <div class="table-pane active">
+            <form name="baseForm" novalidate="novalidate">
+                <div class="operation-box right">
+                </div>
+                <div class="rows">
+                    <dl class="panel">
+                        <dd>
+                            <label><%=services_supplier_name%></label>
+                            <div class="content-info">
+                                <span class="text-info">{{supplierModel.supplierData.name}}</span>
+                            </div>
+                        </dd>
+                        <dd>
+                            <label><%=services_supplier_short_name%></label>
+                            <div class="content-info">
+                                <span class="text-info">{{supplierModel.supplierData.simpleName}}</span>
+                            </div>
+                        </dd>
+                        <dd>
+                            <label><%=services_supplier_code%></label>
+                            <div class="content-info">
+                                <span class="text-info">{{supplierModel.supplierData.code}}</span>
+                            </div>
+                        </dd>
+                        <dd>
+                            <label><%=services_supplier_fax%></label>
+                            <div class="content-info">
+                                <span class="text-info">{{supplierModel.supplierData.fax}}</span>
+                            </div>
+                        </dd>
+                    </dl>
+
+                    <dl class="panel">
+                        <dd>
+                            <label><%=services_supplier_website%></label>
+                            <div class="content-info">
+                                <span class="text-info">{{supplierModel.supplierData.website}}</span>
+                            </div>
+                        </dd>
+                        <dd>
+                            <label><%=services_supplier_country%></label>
+                            <div class="content-info">
+                                <span class="text-info">{{supplierModel.supplierData.country}}</span>
+                            </div>
+                        </dd>
+                        <dd>
+                            <label><%=services_supplier_type%></label>
+                            <div class="content-info">
+                                <span class="text-info">{{supplierModel.supplierData.serviceTypes}}</span>
+                            </div>
+                        </dd>
+                        <dd>
+                            <label><%=services_supplier_rank%></label>
+                            <div class="content-info">
+                                <input name="rankInfo" ng-value="rankInfo" style="display: none;" id="stars" value="0" type="number" class="rating" min="0" max="5" step="1" data-size="xs">
+                            </div>
+                        </dd>
+                    </dl>
+                </div>
+                <div class="rows">
+                    <div class="panel">
+                        <dd>
+                            <label><%=services_supplier_remark%></label>
+                            <div class="content-info">
+                                <span class="text-info">{{supplierModel.supplierData.description}}</span>
+                            </div>
+                        </dd>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- BD -->
+        <div class="table-pane" ng-controller="tableController">
+            <div class="batch-operation box">
+            </div>
+            <div class="table-container">
+                <input ng-model="typeId" type="hidden">
+                <table class="bd-table table-box" cellpadding="0" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th ng-repeat="item in tableBDModel.tableHeader">{{item}}</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr ng-repeat="value in tableBDModel.tableBody" ng-init="renderFinish($last)">
+                        <td>{{$index+1}}</td>
+                        <td title="{{value.responsibility}}">{{value.responsibility}}</td>
+                        <td>
+                            <a href="javascript:;" ng-click="editBDDetail(value.id)" title="{{value.name}}">{{value.name}}</a>
+                        </td>
+                        <td title="{{value.code}}">{{value.code}}</td>
+                        <td title="{{value.org}}">{{value.org}}</td>
+                        <td title="{{value.position}}">{{value.position}}</td>
+                        <td title="{{value.mobilephone}}">{{value.mobilephone}}</td>
+                        <td title="{{value.telephone}}">{{value.telephone}}</td>
+                        <td title="{{value.description }}">{{value.description }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 联系人 -->
+        <div class="table-pane" ng-controller="tableController">
+            <div class="batch-operation box">
+            </div>
+            <div class="table-container">
+                <input ng-model="typeId" type="hidden">
+                <table class="contacts-table table-box" cellpadding="0" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th ng-repeat="item in tableContactsModel.tableHeader">{{item}}</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr ng-repeat="value in tableContactsModel.tableBody" ng-init="renderFinish($last)">
+                        <td>{{$index+1}}</td>
+                        <td title="{{value.responsibility}}">{{value.responsibility}}</td>
+                        <td>
+                            <a href="javascript:;" ng-click="editContactsDetail(value.id)" title="{{value.name}}">{{value.name}}</a>
+                        </td>
+                        <td title="{{value.org}}">{{value.department}}</td>
+                        <td title="{{value.position}}">{{value.position}}</td>
+                        <td title="{{value.mobilephone}}">{{value.mobilephone}}</td>
+                        <td title="{{value.telephone}}">{{value.telephone}}</td>
+                        <td title="{{value.remark}}">{{value.description}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 业务信息 -->
+        <div class="table-pane">
+            <div class="operation-box right">
+            </div>
+            <form name="businessForm" novalidate="novalidate">
+                <div class="rows">
+                    <div class="panel">
+                        <dd>
+                            <label><%=services_supplier_mainService%></label>
+                            <div class="content-info business">
+                                <span class="text-info">{{supplierModel.supplierData.mainService}}</span>
+                            </div>
+                        </dd>
+                        <dd>
+                            <label><%=services_supplier_bizScope%></label>
+                            <div class="content-info business">
+                                <span class="text-info">{{supplierModel.supplierData.bizScope}}</span>
+                            </div>
+                        </dd>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- 财务信息 -->
+        <div class="table-pane">
+            <div class="operation-box right">
+            </div>
+            <form name="financialForm" novalidate="novalidate">
+                <div class="rows">
+                    <dl class="panel">
+                        <dd>
+                            <label><%=services_supplier_taxpayerNumber%><span class="subsidiary"><%=services_supplier_taxpayerNumber_tip%></span></label>
+                            <div class="content-info">
+                                <span class="text-info">{{supplierModel.supplierData.taxpayerNumber}}</span>
+                            </div>
+                        </dd>
+                        <dd>
+                            <label><%=services_supplier_bankName%></label>
+                            <div class="content-info">
+                                <span class="text-info">{{supplierModel.supplierData.bankName}}</span>
+                            </div>
+                        </dd>
+                        <dd>
+                            <label><%=services_supplier_bankAccount%></label>
+                            <div class="content-info">
+                                <span class="text-info">{{supplierModel.supplierData.bankAccount}}</span>
+                            </div>
+                        </dd>
+                        <dd>
+                            <label><%=services_supplier_companyTel%></label>
+                            <div class="content-info">
+                                <span class="text-info">{{supplierModel.supplierData.companyTel}}</span>
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl class="panel">
+                        <dd>
+                            <label><%=services_supplier_address%></label>
+                            <div class="content-info">
+                                <span class="text-info">{{supplierModel.supplierData.address}}</span>
+                            </div>
+                        </dd>
+                        <dd>
+                            <label><%=services_supplier_lealPerson%></label>
+                            <div class="content-info">
+                                <span class="text-info">{{supplierModel.supplierData.lealPerson}}</span>
+                            </div>
+                        </dd>
+                        <dd>
+                            <label><%=services_supplier_picture%></label>
+                            <div class="content-info">
+                                <div class="img-list-box clearfix" ng-controller="pictureController">
+                                    <div class="img-box" ng-repeat="item in pictureModel.picture">
+                                        <div title="{{item.name}}" ng-mousedown="getPictureUrl(item.picUrlID.id)" class="img-pic">
+
+                                            <img ng-if="item.typeImage && item.suffix!='tiff'" class="imgs" ng-src="{{item.picUrlID.path}}" height="80" width="80">
+                                            <div ng-if="item.typePdf" type="application/pdf" class="imgs" style="background-image: url('../../../public/img/pdf-file.svg')" height="80" width="80"></div>
+                                            <div ng-if="item.typeImage && item.suffix=='tiff'" type="image/tiff" class="imgs" style="background-image: url('../../../public/img/tiff-file.svg');" height="80" width="80"></div>
+
+                                            <p class="file-name-box">{{item.name}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </dd>
+                    </dl>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="slides"></div>
+</div>
+

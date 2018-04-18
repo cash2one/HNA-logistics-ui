@@ -1,0 +1,14 @@
+{
+    "account_page_globalization": "國際化",
+    "account_page_addAccount": "添加結算方式",
+    "account_page_baseinfo": "基本信息",
+    "account_page_accountType": "結算方式",
+    "account_page_accountTypePlacer": "請輸入結算方式",
+    "account_page_code": "編碼",
+    "account_page_codePlacer": "請輸入編碼",
+    "account_page_remarkPlacer": "請輸入備註",
+    "account_page_globalizationName": "結算方式國際化名稱",
+    "account_page_accountDetail": "結算方式詳情",
+    "account_code_accountConfirm": "確定刪除已選結算方式？",
+    "account_page_searchPlacer": "請輸入名稱或編碼"
+}

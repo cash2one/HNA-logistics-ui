@@ -1,0 +1,106 @@
+<section class="content has-sides-margin test_35fde061">
+    <div class="m-table-page test_e901d653" ng-controller="tableController">
+        <div class="box-header test_d856054f">
+            <div class="search-box test_1f3cb9b6">
+                <input maxlength="30" ng-enter="getAccountTable(true);" ng-model="tableAccount.restData.q" ng-value="q" type="text" class="form-control test_27e90031" placeholder="<%=account_page_searchPlacer%>">
+                <i class="icon-search search-table test_ad5126ee"></i>
+                <div class="u-search-btn test_ec818ab3">
+                    <button ng-click="getAccountTable(true);" class="btn btn-primary test_d725f6fc"><%=common_list_search_btn%></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="batch-operation test_d5f11a61">
+            <button ng-click="addAccount();" class="btn btn-primary test_eee82431"><%=common_page_add%></button>
+            <button ng-click="delAccount();" class="btn btn-primary test_d0fc55ab"><%=common_page_delete%></button>
+            <button ng-click="international();" class="btn btn-primary test_4d49c257"><%=account_page_globalization%></button>
+        </div>
+
+        <div class="table-container test_a18d6bcf">
+            <table class="account-table table-box test_095967db" cellpadding="0" cellspacing="0">
+                <thead class="test_70e85fd7">
+                    <tr class="test_da3443c2">
+                        <th class="test_cd0c2cb2">
+                            <div class="checkbox checkbox-info test_fc7ac70b">
+                                <input type="checkbox" ng-model="tableAccount.selectFlag" ng-click="table.selectAll(tableAccount);" class="test_30a0ee2b">
+                                <label class="test_4b967fc8"></label>
+                            </div>
+                        </th>
+                        <th ng-repeat="item in tableAccount.tableHeader" class="test_c2e9933c">{{item}}</th>
+                    </tr>
+                </thead>
+
+                <tbody class="test_cbf833a2">
+                    <tr ng-repeat="value in tableAccount.tableBody" ng-init="renderFinish($last)" class="test_86718b50">
+                        <td class="test_9fcab783">
+                            <div class="checkbox checkbox-info test_cbe4c050">
+                                <input type="checkbox" ng-checked="value.checkbox" ng-click="table.selectOne(tableAccount, value.checkboxId, $event);" class="test_79d297d5">
+                                <label class="test_7e958d83"></label>
+                            </div>
+                        </td>
+                        <td class="test_12ce7299">{{(tableAccount.pagination.currentPage-1)*tableAccount.pagination.pageSize+$index+1}}</td>
+                        <td class="test_22e1c622" title="{{value.name}}">
+                            <a href="javascript:;" ng-click="editAccount(value.id)" ng-bind-html="value.name | trustHtml:q" class="test_55ca8dbb"></a>
+                        </td>
+                        <td title="{{value.code}}" ng-bind-html="value.code | trustHtml:q" class="test_bd88c125"></td>
+                        <td title="{{value.description}}" class="test_981de2a5">{{value.description}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <hnapagination table-service="table" page-table-model="tableAccount" class="test_6d128980"></hnapagination>
+        </div>
+
+        <div ng-show="!tableAccount.pagination.isVisiblePage" style="position: absolute;top:165px;bottom:0px;width:100%;" class="test_466fabe5">
+            <img style="width:100%;height:100%;" src="/public/img/undefined.svg" class="test_2752b6f8">
+        </div>
+    </div>
+</section>
+
+<div style="display: none;" ng-show="nestAccountForm" id="nest-AccountFrom" class="prompt-modal middle-box test_9844b473">
+    <div class="prompt-wrap test_76717d43">
+        <div class="bomb-box test_5461fbb7">
+            <div class="title test_4002f818"><%=account_page_addAccount%></div>
+            <div class="prompt-content test_32868393">
+                <form name="AccountForm" novalidate="novalidate" class="test_977ce063">
+                    <div id="AccountForm" class="test_18a51cfe">
+                        <div ng-click="" class="label-text test_d6c1180a"><%=account_page_baseinfo%><i style="transform:rotate(0deg);" class="icon-more-down icon-angle-down test_f55b4095"></i></div>
+                        <ul class="isContainer switch-list test_fdf40e1d" data-title="<%=account_page_baseinfo%>">
+                            <li class="test_3b1c48c5">
+                                <label class="test_052264d7"><b class="test_70355897">*</b><%=account_page_accountType%>：</label>
+                                <input ng-trim="false" class="input-text test_55801dbc" verification="{'ruleType':'name'}" maxlength="{{AccountForm.accountName.maxLength}}" name="accountName" ng-model="accountName" type="text" required>
+                                <div class="verification test_6d0cc0af">
+                                    <span class="errors test_d24d3661" ng-show="AccountForm.accountName.$viewValue && AccountForm.accountName.$error.defined && AccountForm.accountName.$dirty">{{AccountForm.accountName.errorTips}}</span>
+                                </div>
+                            </li>
+                            <li class="test_52ea7da1">
+                                <label class="test_28dc8749"><b class="test_b3defcc9">*</b><%=account_page_code%>：</label>
+                                <input ng-trim="false" ng-blur="checkCode()" class="input-text test_065d6ee0" verification="{'ruleType':'code','maxType':'15','tipsType':'two'}" maxlength="{{AccountForm.accountCode.maxLength}}" name="accountCode" ng-model="accountCode" type="text" required>
+                                <div class="verification test_0d5a362e">
+                                    <span id="code-msg" class="errors test_988753eb" ng-show="AccountForm.accountCode.$viewValue && AccountForm.accountCode.$error.defined && AccountForm.accountCode.$dirty">{{AccountForm.accountCode.errorTips}}</span>
+                                </div>
+                            </li>
+                            <li class="test_147b0ef7">
+                                <label class="test_1a2ee60a"><%=common_page_remarks%>：</label>
+                                <div class="remark-info test_8c02b0c6">
+                                    <textarea style="height:92px;" ng-change="showTextNumber();" ng-trim="false" rows="5" ng-model="remark" class="form-control textarea-text test_3c8a4887" maxlength="140"></textarea>
+                                    <div class="show-string-length test_053e4fda"><span class="test_ddf10a9b">{{textareaNumber}}</span>字</div>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="label-text test_c6c5f55e"><%=account_page_globalizationName%><i style="transform:rotate(0deg);" class="icon-more-down icon-angle-right test_8cb746bb"></i></div>
+                        <ul class="isContainer switch-list test_e42d35b8" data-title="<%=account_page_globalizationName%>" id="globalization">
+                            <li ng-repeat="item in language" class="test_8b16eb9c">
+                                <label class="test_2ed90115">{{item.localName}}：</label>
+                                <input maxlength="30" data-localname="{{item.localName}}" data-id="{{item.id}}" data-code="{{item.code}}" class="input-text test_d079cb90" type="text">
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+            <div class="operation test_fe91edcf">
+                <button ng-click="cancelAccount();" name="prompt-close" class="btn btn-default test_8c60ee5c" data-event="close"><%=common_page_cancel%></button>
+                <button ng-click="saveAccount();" name="prompt-save" class="btn btn-primary test_4a3fcf00" data-event="close"><%=common_page_save%></button>
+            </div>
+        </div>
+    </div>
+</div>

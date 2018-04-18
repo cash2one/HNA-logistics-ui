@@ -1,0 +1,46 @@
+{
+    "user_page_lockUser": "Locked user",
+    "user_page_resetPassword": "reset password",
+    "user_page_lock": "locking",
+    "user_page_unlock": "Unlock",
+
+    "user_page_back": "Return",
+    "user_page_save_again": "Save and add",
+
+    "user_page_head": "Head portrait：",
+    "user_page_change_head": "Change Avatar",
+    "user_page_fullName": "Full name：",
+    "user_page_code": "Job number：",
+    "user_page_orgName": "department：",
+    "user_page_positionName": "post：",
+    "user_page_mobilephone": "Mobile：",
+    "user_page_telephone": "Fixed：",
+    "user_page_email": "Mail：",
+    "user_page_description": "Remarks：",
+    "user_validate_sex": "Gender：",
+
+    "user_radio_man": "male",
+    "user_radio_woman": "female",
+    "user_radio_no": "Unknown",
+
+    "user_page_fullNameInfo": "Please enter your name",
+    "user_page_codeInfo": "Please enter the number",
+    "user_page_positionInfo": "Please choose a position",
+    "user_page_mobilephoneInfo": "Please enter a mobile phone",
+    "user_page_telephoneInfo": "Please enter a fixed phone",
+    "user_page_emailInfo": "Please enter a work email address",
+    "user_page_descriptionInfo": "Please enter remarks",
+
+    "user_validate_codeInfo": "Work number already exists",
+    "user_validate_emailInfo": "E - mail already exists",
+
+    "user_tree_search": "No search results",
+    "user_prompt_delete_tip": "Determine delete selected user?",
+    "user_prompt_move_tip": "Select Department",
+    "user_prompt_reset_tip": "Determine reset selected user?",
+    "user_prompt_lock_tip": "Determine lock selected users?",
+    "user_prompt_unlock_tip": "Determine unlock selected users？",
+    "user_prompt_upload_tip":"Upload success",
+    "user_prompt_upload_too_large":"Single image maximum support 4M!",
+    "user_prompt_upload_zero":"Image cannot be empty!"
+}

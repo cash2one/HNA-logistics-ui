@@ -1,0 +1,313 @@
+<section class="content  test_818c1819">
+    <div class="m-tab test_be9df6ae" id="m-tab">
+
+        <!--tab-title-->
+        <ul class="nav nav-tabs test_19ffbdb7">
+            <li ng-class="{'active':type == 'service'}" ng-click="tabChange('service');" class="test_46d94321">
+                <a href="javascript:void(0);" class="test_6b27916f">服务成本计费</a>
+            </li>
+            <li ng-class="{'active':type == 'product'}" ng-click="tabChange('product');" class="test_e4ef6550">
+                <a href="javascript:void(0);" class="test_75596064">产品计费</a>
+            </li>
+        </ul>
+
+        <!--tab-content 服务成本计费 和 产品计费-->
+        <div class="tab-content test_0a90f4d7">
+            <div class="table-pane active test_bd5ef834">
+                <div class="row clearfix test_9593a25b">
+                    <div class="col-md-6 test_a515707b">
+                        <!--起点-->
+                        <div class="row row-list clearfix test_d60b315e">
+                            <div class="text-right col-md-4 test_57afee4e">
+                                <label class="test_ed84d218">
+                                    起点：
+                                </label>
+                            </div>
+                            <div class="text-left col-md-8 test_aa2e5e02">
+                                <div class="select-box test_06140a80">
+                                    <input id="select-start-address" ng-value="iInputStartValue" ng-click="getCountry('start');" readonly="readonly" ng-trim="false" name="iInputStart" ng-model="iInputStart" type="text" maxlength="30" autocomplete="off" class="u-info-input test_f3bf685c" placeholder="请选择国家">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div ng-if="iInputStartValue == 'CN'" class="row row-list clearfix test_3a8f0a68">
+                            <div class="text-right col-md-3 test_df4d0515" style="padding:0px 5px;">
+                                <div class="select-box test_6b543625">
+                                    <input id="select-start-province" ng-value="iProvinceStartValue" ng-click="getProvince('start');" readonly="readonly" ng-trim="false" name="iProvinceStart" ng-model="iProvinceStart" type="text" maxlength="30" autocomplete="off" class="u-info-input test_d6bb4354" placeholder="请选择省">
+                                </div>
+                            </div>
+                            <div class="text-left col-md-3 test_8b4fe88d" style="padding:0px 5px;">
+                                <div class="select-box test_018584c9">
+                                    <input id="select-start-city" ng-value="iCityStartValue" ng-click="getCity('start');" readonly="readonly" ng-trim="false" name="iCityStart" ng-model="iCityStart" type="text" maxlength="30" autocomplete="off" class="u-info-input test_087e3ab2" placeholder="请选择市">
+                                </div>
+                            </div>
+                            <div class="text-left col-md-3 test_7ce6219b" style="padding:0px 5px;">
+                                <div class="select-box test_b9e1e251">
+                                    <input id="select-start-area" ng-value="iAreaStartValue" ng-click="getArea('start');" readonly="readonly" ng-trim="false" name="iAreaStart" ng-model="iAreaStart" type="text" maxlength="30" autocomplete="off" class="u-info-input test_7004a941" placeholder="请选择县">
+                                </div>
+                            </div>
+                            <div class="text-left col-md-3 test_68686f29" style="padding:0px 5px;">
+                                <div class="select-box test_097cfc68">
+                                    <input id="select-start-street" ng-value="iStreetStartValue" ng-click="getStreet('start');" readonly="readonly" ng-trim="false" name="iStreetStart" ng-model="iStreetStart" type="text" maxlength="30" autocomplete="off" class="u-info-input test_4b82b762" placeholder="请选择街道">
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-if="iInputStartValue && iInputStartValue != 'CN'" class="row row-list clearfix test_3ec426f5">
+                            <div class="text-right col-md-4 test_f153b1b9"></div>
+                            <div class="text-left col-md-8 test_8e0be0b5">
+                                <div class="select-box test_3204553f">
+                                    <input id="select-start-other" ng-value="iOtherStartValue" ng-click="getOther('start');" readonly="readonly" ng-trim="false" name="iOtherStart" ng-model="iOtherStart" type="text" maxlength="30" autocomplete="off" class="u-info-input test_dc45b8f9" placeholder="请选择地区">
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!--重量-->
+                        <div class="row row-list clearfix test_a2737407">
+                            <div class="text-right col-md-4 test_f2104070">
+                                <a title="添加" href="javascript:;" class="u-add-goods test_95dc1adc" ng-click="addGoodsAttr();">
+                                    <i class="add-node icon-add test_6b8b0e4d"></i>
+                                </a>
+                                <a title="重置" style="left:30px;font-size:22px;" href="javascript:;" class="u-add-goods test_1ca1a639" ng-click="resetGoodsAttr();">
+                                    <i class="add-node icon-refresh test_9d338234"></i>
+                                </a>
+                                <label class="test_7862079a">
+                                    重量：
+                                </label>
+                            </div>
+                            <div class="text-right col-md-8 test_fb7d082b" id="weight-box">
+                                <div class="row clearfix test_f6156350" style="margin-bottom:10px;" ng-repeat="item in goods.weight">
+                                    <div class="text-left col-md-6 test_40bcb78d">
+                                        <div class="select-box test_f4c3e05d">
+                                            <input ng-trim="false" ng-value="item.value" type="text" maxlength="10" autocomplete="off" class="weight-value u-info-input test_0d7a07d5">
+                                        </div>
+                                    </div>
+                                    <div ng-if="$index == 0" class="text-left col-md-6 test_38e38877" style="height: 34px;line-height:34px;font-size:16px;padding-left: 15px;">
+                                        <div class="select-box test_cf100100">
+                                            <input ng-click="getWeightUnit();" readonly="readonly" id="select-weight-unit" ng-value="iInputWeightUnitValue" ng-trim="false" name="iInputWeightUnit" ng-model="iInputWeightUnit" type="text" maxlength="10" autocomplete="off" class="u-info-input test_b66b0b04" placeholder="请选择单位">
+                                            <i class="select-icon icon-drop-down test_d776a433"></i>
+                                        </div>
+                                    </div>
+                                    <div ng-if="$index != 0" class="text-left col-md-6 test_38e38877" style="height: 34px;line-height:34px;font-size:16px;padding-left: 15px;">
+                                        {{iInputWeightUnit}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--服务-->
+                        <div ng-if="type == 'service'" class="row row-list clearfix test_42614238">
+                            <div class="text-right col-md-4 test_e20d82bd">
+                                <label class="test_e1d1b989">
+                                    服务：
+                                </label>
+                            </div>
+                            <div class="text-left col-md-8 test_e4aa08c0">
+                                <div class="select-box test_a926b972">
+                                    <input id="select-service" ng-value="iInputServicesValue" ng-click="getServices();" readonly="readonly" ng-trim="false" name="iInputServices" ng-model="iInputServices" type="text" maxlength="30" autocomplete="off" class="u-info-input test_7e5745f6" placeholder="请选择服务">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--产品分类-->
+                        <div ng-if="type == 'product'" class="row row-list clearfix test_b852dd9bc">
+                            <div class="text-right col-md-4 test_255cd0cd">
+                                <label class="test_85ab2c15">
+                                    产品分类：
+                                </label>
+                            </div>
+                            <div class="text-left col-md-8" style="padding-top: 8px;">
+                                <div ng-repeat="item in groupType" class="checkbox checkbox-info">
+                                    <input value="{{item.id}}" ng-checked="item.checked" type="checkbox" ng-click="checkGroupType(item.id);">
+                                    <label>{{item.name}}</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--货物类型-->
+                        <div class="row row-list clearfix test_c284856a">
+                            <div class="text-right col-md-4 test_45c4dd97">
+                                <label class="test_bc459aca">
+                                    <b ng-show="isEdit" class="u-must-red test_f85f879e">*</b>
+                                    货物类型：
+                                </label>
+                            </div>
+                            <div class="text-left col-md-8 test_4a11e4b3">
+                                <div class="select-box test_318b6937">
+                                    <input id="select-goods" ng-click="getGoods();" readonly="readonly" ng-trim="false" name="iInputGoodsType" ng-value="iInputGoodsTypeValue" ng-model="iInputGoodsType" type="text" maxlength="30" autocomplete="off" class="u-info-input test_f338b3e6" placeholder="请选择货物类型">
+                                    <i class="select-icon icon-drop-down test_77f039f4"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--客户-->
+                        <div ng-if="type == 'product'" class="row row-list clearfix test_a16e872f">
+                            <div class="text-right col-md-4 test_9074b64d">
+                                <label class="test_b81e03dc">
+                                    客户：
+                                </label>
+                            </div>
+                            <div class="text-left col-md-8 test_c7b60702">
+                                <div class="select-box test_6b458843">
+                                    <input id="select-client" ng-value="iInputClientValue" ng-click="getClient();" readonly="readonly" ng-trim="false" name="iInputClient" ng-model="iInputClient" type="text" maxlength="30" autocomplete="off" class="u-info-input test_d57c2d8a" placeholder="请选择客户">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 test_08336033">
+                        <!--终点-->
+                        <div class="row row-list clearfix test_29f34b07">
+                            <div class="text-right col-md-4 test_f0d7fe54">
+                                <label class="test_79a22918">
+                                    终点：
+                                </label>
+                            </div>
+                            <div class="text-left col-md-8 test_3e48af93">
+                                <div class="select-box test_ae0dd00f">
+                                    <input id="select-end-address" ng-value="iInputEndValue" ng-click="getCountry('end');" readonly="readonly" ng-trim="false" name="iInputEnd" ng-model="iInputEnd" type="text" maxlength="30" autocomplete="off" class="u-info-input test_6f9f6b81" placeholder="请选择国家">
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-if="iInputEndValue == 'CN'" class="row row-list clearfix test_82a83f33">
+                            <div class="text-right col-md-3 test_5ef39ae3" style="padding:0px 5px;">
+                                <div class="select-box test_306009d1">
+                                    <input id="select-end-province" ng-value="iProvinceEndValue" ng-click="getProvince('end');" readonly="readonly" ng-trim="false" name="iProvinceEnd" ng-model="iProvinceEnd" type="text" maxlength="30" autocomplete="off" class="u-info-input test_5b186e43" placeholder="请选择省">
+                                </div>
+                            </div>
+                            <div class="text-left col-md-3 test_6ea207aa" style="padding:0px 5px;">
+                                <div class="select-box test_2e49e95f">
+                                    <input id="select-end-city" ng-value="iCityEndValue" ng-click="getCity('end');" readonly="readonly" ng-trim="false" name="iCityEnd" ng-model="iCityEnd" type="text" maxlength="30" autocomplete="off" class="u-info-input test_130a14c2" placeholder="请选择市">
+                                </div>
+                            </div>
+                            <div class="text-left col-md-3 test_810af0e8" style="padding:0px 5px;">
+                                <div class="select-box test_96f28a61">
+                                    <input id="select-end-area" ng-value="iAreaEndValue" ng-click="getArea('end');" readonly="readonly" ng-trim="false" name="iAreaEnd" ng-model="iAreaEnd" type="text" maxlength="30" autocomplete="off" class="u-info-input test_ab4103c6" placeholder="请选择县">
+                                </div>
+                            </div>
+                            <div class="text-left col-md-3 test_1b8b3fd0" style="padding:0px 5px;">
+                                <div class="select-box test_65f2ea2a">
+                                    <input id="select-end-street" ng-value="iStreetEndValue" ng-click="getStreet('end');" readonly="readonly" ng-trim="false" name="iStreetEnd" ng-model="iStreetEnd" type="text" maxlength="30" autocomplete="off" class="u-info-input test_a64c3db4" placeholder="请选择街道">
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-if="iInputEndValue && iInputEndValue != 'CN'" class="row row-list clearfix test_393f64fc">
+                            <div class="text-right col-md-4 test_e8cb9813"></div>
+                            <div class="text-left col-md-8 test_18d9d825">
+                                <div class="select-box test_3b28c66a">
+                                    <input id="select-end-other" ng-value="iOtherEndValue" ng-click="getOther('end');" readonly="readonly" ng-trim="false" name="iOtherEnd" ng-model="iOtherEnd" type="text" maxlength="30" autocomplete="off" class="u-info-input test_47534aad" placeholder="请选择地区">
+                                </div>
+                            </div>
+                        </div>
+                        <!--体积-->
+                        <div class="row row-list clearfix test_aac14890">
+                            <div class="text-right col-md-4 test_88fd535b">
+                                <label class="test_ece7f394">
+                                    <b ng-show="isEdit" class="u-must-red test_98660e46">*</b>
+                                    体积（CM）：
+                                </label>
+                            </div>
+                            <div class="text-left col-md-8 test_b4f6d310" id="volume-box">
+                                <div class="row clearfix test_eae46fe0" style="margin-bottom:10px;" ng-repeat="item in goods.volume">
+                                    <div class="col-md-4 test_2d22c1f7">
+                                        <input class="volume-length test_eab55fa8" ng-trim="false" ng-value="item.length" type="text" maxlength="10" autocomplete="off" placeholder="长">
+                                    </div>
+                                    <div class="col-md-4 test_0a5e22d8">
+                                        <input class="volume-width test_88696063" ng-trim="false" ng-value="item.width" type="text" maxlength="10" autocomplete="off" placeholder="宽">
+                                    </div>
+                                    <div class="col-md-4 test_add09942">
+                                        <input class="volume-height test_80105ced" ng-trim="false" ng-value="item.height" type="text" maxlength="10" autocomplete="off" placeholder="高">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--结算方式-->
+                        <div ng-if="type == 'service'" class="row row-list clearfix test_91e2ffdb">
+                            <div class="text-right col-md-4 test_500a505d">
+                                <label class="test_798d57a9">
+                                    结算方式：
+                                </label>
+                            </div>
+                            <div class="text-left col-md-8 test_e256a5db">
+                                <div class="select-box test_6082e239">
+                                    <input id="select-account" ng-value="iAccountValue" ng-click="getAccount();" readonly="readonly" ng-trim="false" name="iAccount" ng-model="iAccount" type="text" maxlength="30" autocomplete="off" class="u-info-input test_3cfa8d5b" placeholder="请选择结算方式">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--产品-->
+                        <div ng-if="type == 'product'" class="row row-list clearfix test_9bb2683f">
+                            <div class="text-right col-md-4 test_dbf9281f">
+                                <label class="test_7d282092">
+                                    产品：
+                                </label>
+                            </div>
+                            <div class="text-left col-md-8 test_164fdc16">
+                                <div class="select-box test_661391c5">
+                                    <input ng-class="{'u-info-input':true,'disabled':(selLength > 1)}" ng-disabled="selLength > 1" id="select-product" ng-value="iInputProductsValue" ng-click="getProducts();" readonly="readonly" ng-trim="false" name="iInputProducts" ng-model="iInputProducts" type="text" maxlength="30" autocomplete="off" placeholder="请选择产品">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--时间-->
+                        <div class="row row-list clearfix test_b852d9bc">
+                            <div class="text-right col-md-4 test_255cd0cd">
+                                <label class="test_85ab2c15">
+                                    时间：
+                                </label>
+                            </div>
+                            <div class="text-left col-md-8 test_f0775635">
+                                <input id="begin-time" readonly="readonly" ng-trim="false" name="iInputBeginTime" ng-model="iInputBeginTime" type="text" maxlength="30" autocomplete="off" class="u-info-input test_238b396f" placeholder="请选择时间">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--计算结-->
+                <div class="btn-groups text-center test_df32a570" style="margin-top:30px;">
+                    <button ng-click="count()" class="btn btn-primary test_4cca4d83" style="margin-left: 15px;">计算</button>
+                </div>
+                <div class="m-msg test_8b26c886" ng-if="msg">
+                    <table class="table-box test_69b444b2" cellpadding="0" cellspacing="0">
+                        <thead class="test_dea08295">
+                            <tr class="test_a5f6b4e2">
+                                <th class="test_a729b3ed">序号</th>
+                                <th class="test_97a8a3f9">产品分类-产品-价格-价格类型-价格等级-服务名称</th>
+                                <th class="test_b77ba766">销售价格</th>
+                            </tr>
+                        </thead>
+
+                        <tbody class="test_cffecbba">
+                            <tr ng-repeat="value in result" class="test_49078a25">
+                                <td class="test_2f123805">{{$index+1}} </td>
+                                <td style="text-align:left" class="test_7cea3411">
+                                    {{value.groupName}}
+                                    -
+                                    {{value.productName}}
+                                    -
+                                    {{value.quotationName}}(id:{{value.quotationId}},code:{{value.quotationCode}})
+                                    -
+                                    {{value.quotationGradeType==1?"等级价":(value.quotationGradeType==2?"协议价":"套餐价")}}
+                                    -
+                                    {{(value.quotationGradeType==1||value.quotationGradeType==3)? value.quotationGrade :"_"}}
+                                    -
+                                    {{value.serviceName}}
+                                </td>
+                                <td class="test_e6d3ea72">{{value.amount}}{{value.currencyCode}} </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="m-msg test_89268886" ng-if="msg">
+                    {{msg}}（代码：{{errorCode}}）：
+                </div>
+                <div class="m-msg-content test_cc9fc7f5" ng-if="msg">
+                    <p ng-repeat="keys in calcMsgs track by $index" class="test_3c9f535d">
+                        <b class="test_196a464c">{{$index+1}}.</b> {{keys}}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

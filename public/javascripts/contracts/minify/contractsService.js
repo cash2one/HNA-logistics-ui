@@ -1,0 +1,1 @@
+app.factory("contractsService",["easyHttp",function(t){var r={};return r.delContracts=function(r,n){return t.post("logistics.delContracts",{urlParams:r},n)},r.getContractType=function(r){return t.get("logistics.getContractType",r)},r.uploadContract=function(r,n){return t.post("logistics.uploadContract",{urlParams:r},n)},r}]);

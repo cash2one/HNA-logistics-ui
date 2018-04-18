@@ -1,0 +1,456 @@
+<style>
+    #normalOrderConfirm .title{
+        text-align: center;
+        font-size: 22px;
+    }
+    #normalOrderConfirm .headerInfo{
+        float: right;
+        text-align: left;
+    }
+
+    #normalOrderConfirm  ul li{
+        margin-bottom: 20px;
+    }
+
+    #normalOrderConfirm .headerInfo span{
+        float: right;
+    }
+    #normalOrderConfirm .headerInfo label{
+        text-align: right;
+        width: 135px;
+        margin-right: 10px;
+    }
+    #normalOrderConfirm .relative{
+        position: relative;
+
+    }
+
+    #normalOrderConfirm label b{
+        color: red;
+    }
+
+    #normalOrderConfirm .requireItem{
+        width: 0px!important;
+        top: 10px;
+        position: absolute;
+        left:-10px
+    }
+
+    #normalOrderConfirm .buyerInfo{
+        float: left;
+    }
+
+    #normalOrderConfirm .salesInfo{
+        float: left;
+        margin-left: 100px;
+    }
+
+    #normalOrderConfirm td span{
+        margin-left: 0!important;
+    }
+
+    #normalOrderConfirm .search-input span{
+        margin-left: 0!important;
+    }
+
+    .justfiy{
+        position: absolute;
+        left: -30px;
+    }
+
+    #normalOrderConfirm pre{
+        word-wrap: break-word;
+        white-space: pre-wrap;
+        padding: 5px 0 20px 0;
+    }
+
+</style>
+
+<div ng-controller="normalConfirmOrderController" class="detail" id="normalOrderConfirm">
+    <h1 class="title">订单确认单</h1>
+    <button class="btn btn-default btn-bill" ng-click="goBack('fresh')">返回</button>
+    <div id="form-content">
+        <div class="search-order" style="border-bottom-width: 0px;">
+            <div class="search-input">
+                <form  name="normalTemplate" novalidate="novalidate">
+                    <div class="headerInfo">
+                        <ul>
+                            <li >
+                                <label style="width: 60px;display: inline-block;">订单号:</label>
+                                <span style="float: right">{{template.custOrderNo}}</span>
+                            </li>
+                            <li style="position: relative">
+                                <label style="width: 60px;display: inline-block;">业务单号:</label>
+                                <div class="relative" style="display: inline-block">
+                                    <input ng-trim="false" ng-show="IsEdit" type="text" name="businessNo" ng-model="template.businessNo"
+                                           class="input-text ng-pristine ng-untouched ng-valid ng-valid-defined ng-valid-maxlength"
+                                           verification="{ruleType:'ordernumber',maxLength:'30'}"
+                                           placeholder="请输入业务单号" maxlength="30">
+                                    <div class="verification justfiy" ng-show="IsEdit">
+                                        <span class="errors " ng-show="normalTemplate.businessNo.$viewValue && normalTemplate.businessNo.$error.defined && normalTemplate.businessNo.$dirty">{{normalTemplate.businessNo.errorTips}}</span>
+                                    </div>
+                                </div>
+
+                                <span ng-show="!IsEdit" >{{template.businessNo}}</span>
+
+                            </li>
+
+                            <li style="position: relative">
+                                <label class="requireItem"><b ng-show="IsEdit">*</b></label>
+                                <label style="width: 60px;display: inline-block;">制单日期:</label>
+                                <div class="relative" style="display: inline-block" >
+                                    <input ng-show="IsEdit" type="text"  id="dealTime" ng-model="template.dealTime" name="dealTime"
+                                           class="input-text ng-pristine ng-untouched ng-valid ng-valid-defined ng-valid-maxlength" readonly>
+                                </div>
+                                <span ng-show="!IsEdit">{{template.dealTime}}</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div style="clear:both"></div>
+                    <div style="width: 100%">
+                        <div class="conformOrderInfo" style="width: 800px;margin: 0 auto">
+                            <div class="buyerInfo">
+                                <h2 style=" padding-bottom: 10px;text-align: left;">采购方</h2>
+                                <ul>
+                                    <li style="position: relative">
+                                        <label class="requireItem"><b ng-show="IsEdit">*</b></label>
+                                        <label style="width: 85px;display: inline-block;text-align: left">公司名称：</label>
+                                        <input ng-trim="false" ng-show="IsEdit" type="text" name="buyerCompanyName" ng-model="template.buyerCompanyName" maxlength="100"
+                                               class="input-text ng-pristine ng-untouched ng-valid ng-valid-defined ng-valid-maxlength" required >
+                                        <span ng-show="!IsEdit" style="display: inline-block;vertical-align: top;width: 250px;text-align: left;">{{template.buyerCompanyName}}</span>
+                                    </li>
+                                    <li style="position: relative">
+                                        <label class="requireItem"><b ng-show="IsEdit">*</b></label>
+                                        <label style="width: 85px;display: inline-block;text-align: left">公司地址：</label>
+                                        <input ng-trim="false" ng-show="IsEdit" type="text"  name="buyerCompanyAddress" ng-model="template.buyerCompanyAddress" maxlength="30"
+                                               class="input-text ng-pristine ng-untouched ng-valid ng-valid-defined ng-valid-maxlength" required >
+                                        <span ng-show="!IsEdit" style="display: inline-block;vertical-align: top;width: 250px;text-align: left;">{{template.buyerCompanyAddress}}</span>
+                                    </li>
+                                    <li style="position: relative">
+                                        <label class="requireItem"><b ng-show="IsEdit">*</b></label>
+                                        <label style="width: 85px;display: inline-block;text-align: left">公司电话：</label>
+                                        <input ng-trim="false" ng-show="IsEdit" type="text" name="buyerCompanyTel" ng-model="template.buyerCompanyTel" maxlength="30"
+                                               class="input-text ng-pristine ng-untouched ng-valid ng-valid-defined ng-valid-maxlength"
+                                               validate-code="{ruleReg:'fix', ruleRegMsg:'请输入数字、空格和符号()-+', maxLength:'30'}" required >
+                                        <validatetip from-model="normalTemplate.buyerCompanyTel" style="position: absolute; left: -25px;"></validatetip>
+                                        <span ng-show="!IsEdit" style="display: inline-block;width: 250px;text-align: left;">{{template.buyerCompanyTel}}</span>
+                                    </li>
+                                    <li style="position: relative">
+                                        <label class="requireItem"><b ng-show="IsEdit">*</b></label>
+                                        <label style="width: 85px;display: inline-block;text-align: left">联系人：</label>
+                                        <input ng-trim="false" ng-show="IsEdit" type="text" name="buyerCompanyContacter"
+                                               ng-model="template.buyerCompanyContacter" maxlength="30" required
+                                               validate-code="{ruleReg:'surname', ruleRegMsg:'请输入中英文、空格', maxLength:'30'}">
+                                        <div class="verification" style="position: absolute; left: -50px;">
+                                            <span class="errors" id="name-msg" ng-show="normalTemplate.buyerCompanyContacter.$viewValue && normalTemplate.buyerCompanyContacter.$error.defined && normalTemplate.buyerCompanyContacter.$dirty">{{normalTemplate.buyerCompanyContacter.errorTips}}</span>
+                                        </div>
+                                        <span ng-show="!IsEdit" style="display: inline-block;width: 250px;text-align: left;">{{template.buyerCompanyContacter}}</span>
+                                    </li>
+                                    <li style="position: relative">
+                                        <label class="requireItem"><b ng-show="IsEdit">*</b></label>
+                                        <label style="width: 85px;display: inline-block;text-align: left">联系人电话：</label>
+                                        <input ng-trim="false" ng-show="IsEdit" type="text" name="buyerCompanyContacterTel" ng-model="template.buyerCompanyContacterTel" maxlength="30"
+                                               class="input-text ng-pristine ng-untouched ng-valid ng-valid-defined ng-valid-maxlength"
+                                               validate-code="{ruleReg:'fix', ruleRegMsg:'请输入数字、空格和符号()-+', maxLength:'30'}" required >
+                                        <validatetip from-model="normalTemplate.buyerCompanyContacterTel" style="position: absolute; left: -25px;"></validatetip>
+                                        <span ng-show="!IsEdit" style="display: inline-block;width: 250px;text-align: left;">{{template.buyerCompanyContacterTel}}</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="salesInfo">
+                                <h2 style=" padding-bottom: 10px;text-align: left;">销售方</h2>
+                                <ul>
+                                    <li style="position: relative">
+                                        <label class="requireItem"><b ng-show="IsEdit">*</b></label>
+                                        <label style="width: 85px;display: inline-block;text-align: left">公司名称：</label>
+                                        <input ng-trim="false" ng-show="IsEdit" type="text" name="salerCompanyName" ng-model="template.salerCompanyName" maxlength="100"
+                                               class="input-text ng-pristine ng-untouched ng-valid ng-valid-defined ng-valid-maxlength" required >
+                                        <span ng-show="!IsEdit" style="display: inline-block;vertical-align: top;width: 250px;text-align: left;">{{template.salerCompanyName}}</span>
+                                    </li>
+                                    <li style="position: relative">
+                                        <label class="requireItem"><b ng-show="IsEdit">*</b></label>
+                                        <label style="width: 85px;display: inline-block;text-align: left">公司地址：</label>
+                                        <input ng-trim="false" ng-show="IsEdit" type="text"  name="salerCompanyAddress" ng-model="template.salerCompanyAddress" maxlength="30"
+                                               class="input-text ng-pristine ng-untouched ng-valid ng-valid-defined ng-valid-maxlength" required >
+                                        <span ng-show="!IsEdit" style="display: inline-block;vertical-align: top;width: 250px;text-align: left;">{{template.salerCompanyAddress}}</span>
+                                    </li>
+                                    <li style="position: relative">
+                                        <label class="requireItem"><b ng-show="IsEdit">*</b></label>
+                                        <label style="width: 85px;display: inline-block;text-align: left">公司电话：</label>
+                                        <input ng-trim="false" ng-show="IsEdit" type="text" name="salerCompanyTel" ng-model="template.salerCompanyTel" maxlength="30"
+                                               class="input-text ng-pristine ng-untouched ng-valid ng-valid-defined ng-valid-maxlength"
+                                               validate-code="{ruleReg:'fix', ruleRegMsg:'请输入数字、空格和符号()-+', maxLength:'30'}" required >
+                                        <validatetip from-model="normalTemplate.salerCompanyTel" style="position: absolute; left: -25px;"></validatetip>
+                                        <span ng-show="!IsEdit" style="display: inline-block;width: 250px;text-align: left;">{{template.salerCompanyTel}}</span>
+                                    </li>
+                                    <li style="position: relative">
+                                        <label class="requireItem"><b ng-show="IsEdit">*</b></label>
+                                        <label style="width: 85px;display: inline-block;text-align: left">联系人：</label>
+                                        <input ng-trim="false" ng-show="IsEdit" type="text" name="salerCompanyContacter"
+                                               ng-model="template.salerCompanyContacter" maxlength="30" required
+                                               validate-code="{ruleReg:'surname', ruleRegMsg:'请输入中英文、空格', maxLength:'30'}">
+                                        <div class="verification" style="position: absolute; left: -50px;">
+                                            <span class="errors" id="name-msg" ng-show="normalTemplate.salerCompanyContacter.$viewValue && normalTemplate.salerCompanyContacter.$error.defined && normalTemplate.salerCompanyContacter.$dirty">{{normalTemplate.salerCompanyContacter.errorTips}}</span>
+                                        </div>
+
+                                        <span ng-show="!IsEdit" style="display: inline-block;width: 250px;text-align: left;">{{template.salerCompanyContacter}}</span>
+                                    </li>
+                                    <li style="position: relative">
+                                        <label class="requireItem"><b ng-show="IsEdit">*</b></label>
+                                        <label style="width: 85px;display: inline-block;text-align: left">联系人电话：</label>
+                                        <input ng-trim="false" ng-show="IsEdit" type="text" name="salerCompanyContacterTel" ng-model="template.salerCompanyContacterTel" maxlength="30"
+                                               class="input-text ng-pristine ng-untouched ng-valid ng-valid-defined ng-valid-maxlength"
+                                               validate-code="{ruleReg:'fix', ruleRegMsg:'请输入数字、空格和符号()-+', maxLength:'30'}" required >
+                                        <validatetip from-model="normalTemplate.salerCompanyContacterTel" style="position: absolute; left: -25px;"></validatetip>
+                                        <span ng-show="!IsEdit" style="display: inline-block;width: 250px;text-align: left;">{{template.salerCompanyContacterTel}}</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div id="productInfo" style="clear: both; padding-top: 40px;">
+                                <h2 style="text-align: left">商品信息</h2>
+                                <table style="width: 100%; border-collapse: collapse; border-spacing: 0px; visibility: visible;">
+                                    <thead style="display: table-header-group;vertical-align: middle;border-color: inherit;">
+                                    <tr style=" display: table-row;vertical-align: inherit;border-color: inherit; border-bottom: 1px solid;">
+                                        <th style="text-align: left; width: 273px; padding: 0.2rem 0.4rem; color: rgb(85, 85, 85); min-width: 20px; max-width: 273px; text-overflow: ellipsis;">商品名称</th>
+                                        <th style="width: 257px; padding: 0.2rem 0.4rem; color: rgb(85, 85, 85); min-width: 20px; max-width: 257px; text-overflow: ellipsis;">采购数量</th>
+                                        <th style="width: 247px; padding: 0.2rem 0.4rem; color: rgb(85, 85, 85); min-width: 20px; max-width: 247px; text-overflow: ellipsis;">单价</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="item in template.orderGoods">
+                                        <td style="text-align: left; height: 30px; min-width: 20px; max-width: 273px; width: 273px; overflow: hidden; text-overflow: ellipsis;word-break: break-all;">{{item.goodsName}}</td>
+                                        <td style="text-align: center; min-width: 20px; max-width: 257px; width: 257px; overflow: hidden; text-overflow: ellipsis;">
+                                            <span>{{item.minLimit}}</span>
+                                            <span ng-if="item.minLimit && item.maxLimit">-</span>
+                                            <span>{{item.maxLimit}} {{item.goodsUnit}}</span>
+                                        </td>
+                                        <td style="min-width: 20px; max-width: 241px; width: 241px; overflow: hidden; text-overflow: ellipsis;">{{item.goodsPrice}} {{item.goodsCurrencyType}}/{{item.goodsUnit}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div id="confirmOrderInforAndremark" style="padding-top: 40px">
+                                <h2 style="text-align: left;margin-bottom: 10px;">订单条款及备注</h2>
+                                <div style="position:relative;text-align: left">
+                                    <label class="requireItem"><b ng-show="IsEdit">*</b></label>
+                                    <div>
+                                        <label style="width: 85px;display: inline-block;text-align: left">预计交货日期</label>
+                                        <input ng-show="IsEdit" type="text"  id="reachTime" ng-model="template.reachTime" name="reachTime" style="width: 100px"
+                                               class="input-text ng-pristine ng-untouched ng-valid ng-valid-defined ng-valid-maxlength" readonly required>
+                                    </div>
+
+                                </div>
+                                <div style="text-align: left;">
+                                    <div>
+                                        付款条款：
+                                    </div>
+                                    <textarea ng-show="IsEdit" rows="5" cols="60" style="width: 800px;height: 72px;color: #555555"
+                                              type="text"  ng-model="template.paymentProvision">
+                                    </textarea>
+                                    <div >
+                                        <pre style="padding: 5px 0 20px 0;margin: 0;font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif;"
+                                             ng-show="!IsEdit" class="ng-hide">{{template.paymentProvision}}</pre>
+                                    </div>
+                                </div>
+                                <div style="text-align: left;">
+                                    <div>
+                                        付款方：
+                                    </div>
+                                    <textarea ng-show="IsEdit" rows="5" cols="60" style="width: 800px;height: 72px;color: #555555"
+                                              type="text"  ng-model="template.payer">
+                                    </textarea>
+                                    <div >
+                                        <pre style="padding: 5px 0 20px 0;margin: 0;font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif;"
+                                             ng-show="!IsEdit" class="ng-hide">{{template.payer}}</pre>
+                                    </div>
+                                </div>
+                                <div style="text-align: left;">
+                                    <div>
+                                        代理方：
+                                    </div>
+                                    <textarea ng-show="IsEdit" rows="5" cols="60" style="width: 800px;height: 72px;color: #555555"
+                                              type="text"  ng-model="template.agent">
+
+                                    </textarea>
+                                    <div >
+                                        <pre style="padding: 5px 0 20px 0;margin: 0;font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif;"
+                                             ng-show="!IsEdit" class="ng-hide">{{template.agent}}</pre>
+                                    </div>
+                                </div>
+
+                                <div style="text-align: left;">
+                                    <div>
+                                        备注：
+                                    </div>
+                                    <textarea ng-show="IsEdit" rows="5" cols="60" style="width: 800px;height: 72px;color: #555555"
+                                              type="text" name="custCompanyAddress" ng-model="template.remark">
+                                    </textarea>
+                                    <div >
+                                        <pre style="padding: 5px 0 20px 0;margin: 0;font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif;"
+                                             ng-show="!IsEdit" class="ng-hide">{{template.remark}}</pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="btn-group btn-group-center" style="margin-top: 82px">
+                    <button  class="btn btn-primary" ng-click="confirm()">确定</button>
+                    <a style="display: inline-block; height: 34px;" class="btn btn-primary" ng-if="!IsEdit" href="{{fileUrl}}"
+                        download="{{template.businessNo}} on {{template.transportStartTime}}">下载</a>
+                </div>
+
+
+
+
+
+
+
+                <form style="display:block;font-size:12px;font-family:SimSun;color: #000000"  novalidate="novalidate"  class="ng-pristine ng-valid" id="normalOrderConfirmTemplate">
+                    <div id="normalConfirmOrder"  style="width: 675px;padding: 42.2px 0px 0px 0px;margin: 0 auto;font-size:12px;font-family:SimSun">
+                        <div style="float: right;text-align: left;">
+                            <ul>
+                                <li>
+                                    <label style="width: 60px;display: inline-block;">订单号:</label>
+                                    <span>{{template.custOrderNo}}</span>
+                                </li>
+                                <li>
+                                    <label style="width: 60px;display: inline-block;">业务单号:</label>
+                                    <span>{{template.businessNo}}</span>
+                                </li>
+
+                                <li>
+                                    <label style="width: 60px;display: inline-block;">制单日期:</label>
+                                    <span>{{template.createTime}}</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div style="clear:both"></div>
+                        <div style="width: 100%">
+                            <div style="width: 600px;margin: 0 auto">
+                                <div style="float: left;width: 300px">
+                                    <h2 style=" padding-bottom: 10px;text-align: left;">采购方</h2>
+                                    <ul style="text-align: left;">
+                                        <li >
+                                            <label style="width: 85px;display: inline-block;text-align: left">公司名称：</label>
+                                            <span  style="width: 200px;display: inline-block;vertical-align: top;">{{template.buyerCompanyName}}</span>
+                                        </li>
+                                        <li >
+                                            <label style="width: 85px;display: inline-block;text-align: left">公司地址：</label>
+                                            <span style="width: 200px;display: inline-block;vertical-align: top;">{{template.buyerCompanyAddress}}</span>
+                                        </li>
+                                        <li >
+                                            <label style="width: 85px;display: inline-block;text-align: left">公司电话：</label>
+                                            <span style="width: 200px;display: inline-block;vertical-align: top;">{{template.buyerCompanyTel}}</span>
+                                        </li>
+                                        <li >
+                                            <label style="width: 85px;display: inline-block;text-align: left">联系人：</label>
+                                            <span  style="width: 200px;display: inline-block;vertical-align: top;">{{template.buyerCompanyContacter}}</span>
+                                        </li>
+                                        <li >
+                                            <label style="width: 85px;display: inline-block;text-align: left">联系人电话：</label>
+                                            <span  style="width: 200px;display: inline-block;vertical-align: top;">{{template.buyerCompanyContacterTel}}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div style="float: left;width: 300px">
+                                    <h2 style=" padding-bottom: 10px;text-align: left;">销售方</h2>
+                                    <ul style="text-align: left;">
+                                        <li >
+                                            <label style="width: 85px;display: inline-block;text-align: left">公司名称：</label>
+                                            <span style="width: 200px;display: inline-block;vertical-align: top;">{{template.salerCompanyName}}</span>
+                                        </li>
+                                        <li >
+                                            <label style="width: 85px;display: inline-block;text-align: left">公司地址：</label>
+                                            <span style="width: 200px;display: inline-block;vertical-align: top;">{{template.salerCompanyAddress}}</span>
+                                        </li>
+                                        <li >
+                                            <label style="width: 85px;display: inline-block;text-align: left">公司电话：</label>
+                                            <span style="width: 200px;display: inline-block;vertical-align: top;">{{template.salerCompanyTel}}</span>
+                                        </li>
+                                        <li >
+                                            <label style="width: 85px;display: inline-block;text-align: left">联系人：</label>
+                                            <span style="width: 200px;display: inline-block;vertical-align: top;">{{template.salerCompanyContacter}}</span>
+                                        </li>
+                                        <li >
+                                            <label style="width: 85px;display: inline-block;text-align: left">联系人电话：</label>
+                                            <span style="width: 200px;display: inline-block;vertical-align: top;">{{template.salerCompanyContacterTel}}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div id="productInfo" style="clear: both; padding-top: 40px;">
+                                    <h2 style="text-align: left">商品信息</h2>
+                                    <table style="width: 100%; border-collapse: collapse; border-spacing: 0px; visibility: visible;">
+                                        <thead style="display: table-header-group;vertical-align: middle;border-color: inherit;">
+                                        <tr style=" display: table-row;vertical-align: inherit;border-color: inherit; border-bottom: 1px solid;">
+                                            <th style="text-align: left; width: 273px; padding: 0.2rem 0.4rem; color: rgb(85, 85, 85); min-width: 20px; max-width: 273px; text-overflow: ellipsis;">商品名称</th>
+                                            <th style="width: 257px; padding: 0.2rem 0.4rem; color: rgb(85, 85, 85); min-width: 20px; max-width: 257px; text-overflow: ellipsis;">采购数量</th>
+                                            <th style="width: 247px; padding: 0.2rem 0.4rem; color: rgb(85, 85, 85); min-width: 20px; max-width: 247px; text-overflow: ellipsis;">单价</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="item in template.orderGoods">
+                                            <td style="text-align: left; height: 30px; min-width: 20px; max-width: 273px; width: 273px; overflow: hidden; text-overflow: ellipsis;word-break: break-all;">{{item.goodsName}}</td>
+                                            <td style="text-align: center; min-width: 20px; max-width: 257px; width: 257px; overflow: hidden; text-overflow: ellipsis;">
+                                                <span>{{item.minLimit}}</span>
+                                                <span ng-if="item.minLimit && item.maxLimit">-</span>
+                                                <span>{{item.maxLimit}} {{item.goodsUnit}}</span>
+                                            </td>
+                                            <td style="min-width: 20px; max-width: 241px; width: 241px; overflow: hidden; text-overflow: ellipsis;">{{item.goodsPrice}} {{item.goodsCurrencyType}}/{{item.goodsUnit}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div id="confirmOrderInforAndremark" style="padding-top: 40px;">
+                                    <h2 style="text-align: left;margin-bottom: 10px;">订单条款及备注</h2>
+                                    <div style="text-align: left;margin-bottom: 10px">
+                                        <div>
+                                            <label style="width: 85px;display: inline-block;text-align: left">预计交货日期 </label>{{template.reachTime}}
+                                        </div>
+
+                                    </div>
+                                    <div style="text-align: left;margin-bottom: 10px">
+                                        <div>
+                                            付款条款：
+                                        </div>
+                                        <pre style="font-family: SimSun;color: #000000;margin: 0;">{{template.paymentProvision}}</pre>
+                                    </textarea>
+                                    </div>
+                                    <div style="text-align: left;margin-bottom: 10px">
+                                        <div>
+                                            付款方：
+                                        </div>
+                                        <pre style="font-family: SimSun;color: #000000;margin: 0;">{{template.payer}}</pre>
+                                    </textarea>
+                                    </div>
+                                    <div style="text-align: left;margin-bottom: 10px">
+                                        <div>
+                                            代理方：
+                                        </div>
+                                        <pre style="font-family: SimSun;color: #000000;margin: 0;">{{template.agent}}</pre>
+                                    </textarea>
+                                    </div>
+
+                                    <div style="text-align: left;margin-bottom: 10px">
+                                        <div>
+                                            备注：
+                                        </div>
+                                        <pre style="font-family: SimSun;color: #000000; margin: 0;">{{template.remark}}</pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

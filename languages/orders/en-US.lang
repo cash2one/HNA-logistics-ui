@@ -1,0 +1,20 @@
+{
+    "orders_number": "Order number",
+    "orders_number_placer": "Please enter the number",
+    "orders_begin_time": "Start time",
+    "orders_end_time": "deadline",
+    "orders_client": "client's name",
+    "orders_client_placer": "Please enter a name",
+    "orders_status": "Order Status",
+    "orders_clear_condation": "Clear the search criteria",
+    "orders_make": "Place an order",
+    "orders_process": "View the flow",
+    "orders_no": "order number",
+    "orders_product_info": "product information",
+    "orders_client_info": "Customer Information",
+    "orders_goods_type": "Type of goods",
+    "orders_address_range": "Starting and ending",
+    "orders_creat_time": "Create time",
+    "orders_order_status": "Order Status",
+    "orders_del_confrim": "Are you sure to delete selected orders?"
+}

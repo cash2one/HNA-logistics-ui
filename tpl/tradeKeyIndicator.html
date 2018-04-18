@@ -1,0 +1,107 @@
+<section class="content trade-keyindicator">
+	<h3 class="title">贸易关键指标</h3>
+	<div class="btn-option">
+		<button class="btn btn-primary" ng-click="add()">新增</button>
+	</div>
+	<div class="table-container" ng-controller="tableController">
+		<table class="balance-management-table table-box" cellpadding="0" cellspacing="0">
+			<thead>
+			<tr>
+				<th>序号</th>
+				<th>名称</th>
+				<th>逾期率(%)</th>
+				<th>周转天数(天)</th>
+				<th>年化收益率(%)</th>
+				<th>修改</th>
+				<th>删除</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr ng-repeat="item in tableModel.tableBody" ng-init="renderFinish($last)">
+				<td>{{(tableModel.pagination.currentPage-1)*tableModel.pagination.pageSize+$index+1}}</td>
+				<td>{{item.projectName}}</td>
+				<td>{{item.overdueRate}}</td>
+				<td>{{item.turnoverDay}}</td>
+				<td>{{item.annualizedReturn}}</td>
+				<td>
+					<button class="btn btn-primary" ng-click="modify(item)">修改</button>
+				</td>
+				<td>
+					<button class="btn btn-red" ng-click="del(item.id)">删除</button>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+		<div ng-show="!tableModel.pagination.isVisiblePage" style="position: absolute;top:165px;bottom:0px;width:100%;">
+			<img style="width:100%;height:100%;" src="/public/img/undefined.svg"/>
+		</div>
+		<hnapagination table-service="table" page-table-model="tableModel"></hnapagination>
+	</div>
+
+	<div ng-show="showPrompt" class="prompt-modal middle-box">
+		<div class="prompt-wrap">
+			<div class="bomb-box">
+				<div class="title">贸易关键指标</div>
+				<div class="prompt-content">
+					<form name="keyIndicator" novalidate="novalidate">
+						<ul>
+							<li>
+								<label class="labelWithComb"><b>*</b>名称：</label>
+								<div class="input-text select-box">
+									<input type="text" maxlength="30" ref="keyName" ng-model="keyName" id="keyName" name="keyName" required>
+								</div>
+								<!-- <div class="input-text select-box">
+									<input type="text" maxlength="30" ng-trim="false" ng-model="keyName" id="keyName" autocomplete="off" validate-code="{ruleReg:'surname', ruleRegMsg:'请输入正确的指标名称', maxLength:'30'}" required>
+									<div class="verfication">
+										<span class="errors" ng-show="keyIndicator.keyName.$viewValue && keyIndicator.keyName.$error.defined && keyIndicator.keyName.$dirty"></span>
+									</div>
+								</div> -->
+							</li>
+							<li>
+								<label class="labelWithComb"><b>*</b>逾期率：</label>
+								<div class="input-text select-box">
+									<input type="text" maxlength="30" ref="overdueRate" ng-model="overdueRate" id="overdueRate" name="overdueRate" required>
+								</div>
+							</li>
+							<li>
+								<label class="labelWithComb"><b>*</b>周转天数：</label>
+								<div class="input-text select-box">
+									<input type="text" maxlength="30" ref="turnoverDays" ng-model="turnoverDays" id="turnoverDays" name="turnoverDays" required>
+								</div>
+							</li>
+							<li>
+								<label class="labelWithComb"><b>*</b>年化收益率：</label>
+								<div class="input-text select-box">
+									<input type="text" maxlength="30" ref="annualizedRate" ng-model="annualizedRate" id="annualizedRate" name="annualizedRate" required>
+								</div>
+							</li>
+						</ul>
+					</form>
+				</div>
+				<div class="operation">
+					<button class="btn btn-default" ng-click="close()">取消</button>
+					<button class="btn btn-primary" ng-click="save()">保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div ng-show="confirmDelete" class="prompt-modal confirm-delete">
+		<div class="prompt-wrap">
+			<div class="bomb-box">
+				<div class="title">确认删除该项目？</div>
+				<div class="operation">
+					<button class="btn btn-default" ng-click="cancel()">取消</button>
+					<button class="btn btn-primary" ng-click="confirmDel()">删除</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+
+
+
+
+

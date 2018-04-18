@@ -1,0 +1,93 @@
+<style>
+    .radio.radio-single.radio-primary input[type="radio"] {
+        position: absolute;
+        opacity: 0;
+        z-index: 1;
+        left: 0;
+        top: -4px;
+        width: 19px;
+        height: 19px;
+        outline: none;
+        margin: 4px 0 0;
+        line-height: normal;
+        box-sizing: border-box;
+        padding: 0;
+        font-family: inherit;
+        font-size: inherit;
+    }
+
+    .radio-box {
+        height: 34px;
+        display: inline-block;
+        vertical-align: middle;
+        line-height: 34px;
+    }
+</style>
+
+
+
+<form name="weightRegularForm" id="weightRegular" novalidate="novalidate" class="ng-pristine ng-valid-defined ng-invalid ng-invalid-required">
+    <!--<div class="operate-box" style="z-index:1" ng-show="!isAudit">-->
+    <!--<button ng-if="status == 1 && !isEdit" ng-click="editBaseInfo();" class="btn btn-primary"><%=product_edit%></button>-->
+    <!--</div>-->
+    <div class="operate-box" style="z-index:1" ng-show="canEditWeight || $parent.isNew">
+        <button ng-click="editWeightInfo();" class="btn btn-primary"><%=product_edit%></button>
+    </div>
+
+    <div class="rows">
+        <dl class="panel">
+            <dd>
+                <div class="content-title" ng-show="!isEdit">是否计体积：</div>
+                <div class="content-title" ng-show="isEdit"><b>*</b>是否计体积：</div>
+                <div class="content-info">
+                    <span ng-show="!isEdit">{{isremarkVolume}}</span>
+                    <div ng-show="isEdit" style="margin-left: 20px; " class=" radio-box ">
+                        <div class="radio radio-single radio-primary ">
+                            <input value="true" ng-click="SetIsConsiderVolume($event);" type="radio" ng-model="data.remarkVolume" name="volume">
+                            <label>  </label>
+                        </div>
+                        <span>是</span>
+                        <div class="radio radio-single radio-primary " style="margin-left: 40px;">
+                            <input value="false" ng-click="SetIsConsiderVolume($event);" type="radio" ng-model="data.remarkVolume" name="volume">
+                            <label class="test_828ef16c"></label>
+                        </div>
+                        <span>否</span>
+                    </div>
+                </div>
+            </dd>
+            <div ng-show="showVolumeDetail">
+                <dd>
+                    <div class="content-title" ng-show="!isEdit">体积系数：</div>
+                    <div class="content-title" ng-show="isEdit"><b >*</b>体积系数：</div>
+                    <div class="content-info">
+                        <span ng-show="!isEdit">{{data.volumeFactor}}</span>
+                        <div ng-show="isEdit">
+                            <input ng-trim="false" validate-code="{'ruleReg':'/^[0-9]*$/', ruleRegMsg:'请输入数字', maxLength:'5'}" name="volumeFactor" ng-hide="visible"
+                                ng-model="data.volumeFactor" type="text" required class="ng-pristine ng-untouched ng-valid-defined ng-invalid ng-invalid-required"
+                                maxlength="30">
+
+                            <div class="verification" style="position: relative;">
+                                <span style="left: -130px" class="errors" id="name-msg" ng-show="weightRegularForm.volumeFactor.$viewValue && weightRegularForm.volumeFactor.$error.defined && weightRegularForm.volumeFactor.$dirty">请输入数字</span>
+                            </div>
+                        </div>
+                    </div>
+                </dd>
+                <dd>
+                    <div class="content-title" ng-show="!isEdit">取值方式：</div>
+                    <div class="content-title" ng-show="isEdit"><b >*</b>取值方式：</div>
+                    <div class="content-info select-box ">
+                        <span ng-show="!isEdit">{{data.valueMode}}</span>
+                        <div ng-show="isEdit">
+                            <input ng-trim="false" required ng-model="data.valueMode" name="valueMode" type="text" id="type-select-input" readonly="readonly">
+                            <i class="select-icon icon-drop-down "></i>
+                        </div>
+                    </div>
+                </dd>
+            </div>
+        </dl>
+    </div>
+    <div class="save-box" ng-show="isEdit && (!IsDraftStatus || IsDraftStatus == 1)">
+        <button ng-show="isEdit && uid " ng-click="cancel();" class="btn btn-default" style="padding: 0;width: 98px;margin-right: 30px;"><%=product_cancel%></button>
+        <button ng-click="saveDraft();" class="btn btn-primary" style="padding: 0;width: 98px;">{{isOffline ? '保存' : '保存草稿'}}</button>
+    </div>
+</form>

@@ -1,0 +1,807 @@
+.tree-container{
+    position: absolute;
+    top: 15px;
+    left: 0;
+    right: 0;
+    bottom: 15px;
+}
+/*组织管理，用户管理的tree*/
+.tree-scroll-box{
+    position: absolute;
+    left: 15px;
+    right: 15px;
+    bottom: 0px;
+    top: 50px;
+}
+/*用户组管理的tree*/
+.tree-scroll-isAdd-box{
+    position: absolute;
+    left: 15px;
+    right: 15px;
+    bottom: 0px;
+    top: 107px;
+}
+/*添加弹框里的tree*/
+.select-tree-box{
+    position: absolute;
+    top: 105px;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+/*角色的tree*/
+#wrap-tree{
+    position: absolute;
+    left: 15px;
+    right: 15px;
+    top: 155px;
+    bottom: 3px;
+}
+.content-main .group-detail-box{
+    float: right;
+    padding: 0;
+}
+.icon-search{
+    font-size: 15px;
+}
+.layout-container.dd{
+    border: 1px solid #e4e4e4;
+}
+#tree.layout-container.dd{
+    border-top: none;
+}
+.user-add-button{
+    padding-top: 15px;
+    background-color: #fff;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+.user-add-button .add-button{
+    width: 100%;
+    border-radius: 0;
+    height: 40px;
+    font-size: 35px;
+}
+.user-add-button .add-button:after{
+    display: table;
+    content: '+';
+    margin-top: -7px;
+    width: 100%;
+}
+
+/*==== 用户管理表格 */
+.user-table th{
+    float:none;
+}
+.user-table td{
+    height:100%!important;
+    float:none;
+}
+.user-table th:nth-child(1),.user-table td:nth-child(1){
+    width: 7%;
+    -ms-text-overflow: inherit!important;
+    text-overflow: inherit!important;
+}
+.user-table th:nth-child(2),.user-table td:nth-child(2){
+    width: 8%;
+}
+.user-table th:nth-child(3),.user-table td:nth-child(3){
+    width: 15%;
+}
+.user-table th:nth-child(4),.user-table td:nth-child(4){
+    width: 15%;
+}
+.user-table th:nth-child(5),.user-table td:nth-child(5){
+    width: 15%;
+}
+.user-table th:nth-child(6),.user-table td:nth-child(6){
+    width: 20%;
+}
+.user-table th:nth-child(7),.user-table td:nth-child(7){
+    width: 20%;
+}
+
+/*==== 用户管理表格 end */
+
+/*==== 提交表单 */
+.add-from{
+    position: absolute;
+    overflow: auto;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 2px;
+    border: 1px solid #ddd;
+}
+.updateImg{
+    height: 120px;
+    width: 120px;
+}
+.add-from .position-box{
+    position: relative;
+}
+
+/*==== 提交表单 end */
+
+
+/*==== 组织管理 */
+.content-main .right-panel-box{
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+    top: 15px;
+    z-index: 1;
+}
+.content-main .right-panel-box .layout-right{
+    position: absolute;
+    top: 0;
+    left: 10px;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+}
+.span-replace-input{
+    height:34px;
+    line-height:34px;
+}
+.tree-container .box-header.with-border{
+    padding-top: 0px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-bottom: none;
+}
+
+.box-header.with-border .retract-tree.icon-Close:before{
+    background: #BAE7F7;
+    border-radius: 3px;
+    width: 16px;
+}
+.box-header.with-border .seach-tree{
+    position: relative;
+    /*padding-left: 15px;
+    padding-right: 15px;*/
+    padding-top: 15px;
+    width: 100%;
+    height: 50px;
+    /*background-color: #fff;
+    border: 1px solid #ddd;
+    border-bottom: none;*/
+}
+.box-header.with-border .seach-tree .slimScrollDiv {
+    overflow: visible !important;
+    position: absolute;
+    background: #fff;
+    z-index: 89;
+    box-shadow: 2px 7px 13px #ccc;
+    margin: 0;
+    padding: 0;
+}
+
+.box-header.with-border .seach-tree .form-control{
+    padding-left: 35px;
+}
+.box-header.with-border .seach-tree .list-box{
+    width: 100% !important;
+}
+.box-header.with-border .seach-tree .icon-search{
+    position: absolute;
+    top: 22px;
+    left: 12px;
+    color: #CCD1D9;
+}
+.box-header.with-border.tree-detail-box{
+    text-align: right;
+    height: 34px;
+}
+.box-header.with-border.tree-detail-box.center{
+    margin-top: 25px;
+    text-align: center;
+}
+.box-header.with-border.tree-detail-box.center .btn+.btn{
+    margin-left: 40px;
+}
+
+.org-dtails{
+    padding: 25px;
+    box-sizing: border-box;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+.org-dtails b{
+    color: red;
+    position: absolute;
+    left: -15px;
+}
+.org-dtails dl{
+    position: relative;
+    padding-left: 20%;
+    padding-right: 20%;
+    margin: 0px;
+    margin-top: 50px;
+}
+.org-dtails dd{
+    position: relative;
+    line-height: 43px;
+    margin: 0;
+    padding: 15px 0;
+    padding-left: 130px;
+}
+.org-dtails dd input,textarea{
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.org-dtails dd label{
+    position: absolute;
+    left: 40px;
+}
+.org-dtails dd span.group-info{
+    display: inline-block;
+    padding-left: 13px;
+    line-height: 33px;
+    margin-top: 1px;
+    margin-left: 1px;
+}
+/*==== 组织管理 end */
+
+/*==== 用户管理 */
+.user-form .radio.radio-single.radio-primary{
+    margin-left: 15px;
+}
+.content-main .right-panel-box .layout-right.user-box{
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+.group-detail-box.right-panel-box .table-container{
+    /*position: absolute;
+    width: 100% !important;
+    overflow: auto;*/
+}
+.box-header.with-border.add-user .add-search-box{
+    width: 50%;
+    display: inline-block;
+    position: relative;
+    padding-right: 94px;
+    margin-left:-85px;
+}
+.box-header.with-border.add-user{
+    margin-top: 15px;
+    text-align: center;
+}
+.box-header.with-border.add-user button{
+    display: inline-block;
+    float: left;
+}
+.add-search-box{
+    padding:0px;
+    margin:15px;
+}
+.add-search-box input{
+    padding-left: 35px;
+    width: 100%;
+}
+.add-search-box .search-table{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    color: #ccc;
+}
+.batch-operation{
+    position: relative;
+    text-align: left;
+    padding: 15px;
+}
+.batch-operation span{
+    float: left;
+    line-height:30px;
+}
+.batch-operation button{
+    position: relative;
+    line-height: 10px;
+    padding: 0;
+    width: 68px;
+}
+
+.user-operation{
+    text-align: right;
+}
+.user-bottom-operation{
+    display: table;
+    margin-top: 50px;
+    width: 100%;
+    text-align: center;
+    padding: 0;
+}
+.user-operation button:first-child{
+    float: left;
+}
+.user-form{
+    display: table;
+    width: 100%;
+    padding: 20px;
+}
+.user-form .user-head{
+    display: table;
+    width: 100%;
+}
+.user-form .row{
+    text-align: left;
+    padding: 16px 0;
+    padding-left: 50%;
+}
+.user-form .row-left .row{
+    padding-right: 40px;
+    padding-left: 40%;
+}
+.user-form .row-right .row{
+    padding-left: 110px;
+    padding-right: 30%;
+}
+.user-form .user-head .row-left .row label.label-panel,img.updateImg{
+    bottom: 13px;
+}
+.user-form .row-left .row label.label-panel{
+    width: 40%;
+}
+.user-form .row-right .row label.label-panel{
+    width: 120px;
+}
+.user-form .row label.label-panel{
+    position: absolute;
+    left: 0px;
+    width: 50%;
+    padding-right: 40px;
+    text-align: right;
+    line-height: 34px;
+}
+.user-form .row label.label-panel b{
+    position: absolute;
+    color: red;
+    margin-left: -11px;
+}
+.user-form .row .form-info.sex-radio{
+    height: 34px;
+    line-height: 34px;
+}
+.user-form .row textarea.form-info{
+    height: 87px;
+}
+.user-form .row .form-info{
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+    height: 34px;
+    line-height: 34px;
+}
+.user-form .row .form-info.sex-radio span{
+    padding-right: 20px;
+}
+.senior-seach{
+    cursor: pointer;
+    top: 0px;
+    right: 0px;
+    position: absolute;
+    line-height: 34px;
+    color: #fff;
+    width: 84px;
+    padding: 0px;
+}
+button[name="saveOrEdit"]{
+    margin-left: 30px;
+}
+
+.fade{
+    opacity: 1;
+    display: none;
+    padding: 15px;
+    padding-bottom: 0px;
+    text-align: left;
+}
+
+
+.more-operat{
+    position: absolute;
+    border: 1px solid #A9B2BD;
+    top: 49px;
+    left: 255px;
+    z-index: 18;
+}
+.more-operat a{
+    float: left;
+    padding: 5px 0;
+    line-height: 30px;
+    background: #fff;
+    width: 100%;
+    text-align: center;
+}
+.more-operat a+a{
+    border-top: 1px solid #dfdfdf;
+}
+.more-operat a:hover{
+    background: #5fbdf0;
+    color: #fff;
+}
+.more-operat a:active{
+    background: #2699d8;
+    color: #fff;
+}
+
+.btn-primary.active{
+    color: #fff;
+    background: #4FC1E9;
+    border: 1px solid #3BAFDA;
+    box-shadow: inset 0 2px 1px 0 rgba(0,0,0,0.10);
+}
+.img-file{
+    position: absolute;
+    height: 120px;
+    width: 120px;
+    background: red;
+    top: 16px;
+    opacity: 0;
+    z-index: 10;
+}
+.img-upload{
+    position: absolute;
+    bottom: 19px;
+    height: 120px;
+    width: 120px;
+    line-height: 120px;
+    text-align: center;
+    border: none;
+    background-color: rgba(0,0,0, 0.5);
+    color: #fff;
+    z-index: 5;
+}
+.verification{
+    line-height: inherit;
+    margin-top:0px;
+}
+.verification .errors{
+    padding-left:0px;
+    width:80%;
+}
+.user-form .verification .errors {
+    position: absolute;
+    left: 0;
+    padding-left: 39%;
+    white-space: normal;
+    width: 100%;
+    color: #f00;
+}
+.user-form .row-right .verification .errors {
+    position: absolute;
+    left: 0;
+    padding-left: 15%;
+    white-space: normal;
+    width: 100%;
+    color: #f00;
+}
+.user-form .isExisted {
+    position: absolute;
+    right: 38px;
+    color: #f00;
+}
+.user-form .row-right .isExisted {
+    position: absolute;
+    left: 57%;
+    color: #f00;
+}
+
+/*==== 用户管理 end */
+
+/*==== 用户组管理 */
+.unselect .icon-user,.selected .icon-user{
+    margin-left: 5px;
+    color: #3BAFDA;
+}
+.unselect .icon-disabled,.unselect.icon-disabled{
+    color: #ccc;
+}
+.layout-right.user-org-dtails{
+    box-sizing: border-box;
+}
+.layout-right.user-org-dtails .tab-content{
+    position: absolute;
+    top: 50px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+}
+.layout-right.user-org-dtails .tab-content form{
+    padding: 25px;
+}
+.layout-right.user-org-dtails .user-group-from{
+    text-align: center;
+}
+.layout-right.user-org-dtails .user-group-from dd{
+    margin: 0;
+    padding: 20px 0;
+    line-height: 34px;
+}
+.layout-right.user-org-dtails .user-group-from .group-info{
+    width: 80%;
+}
+.layout-right.user-org-dtails .user-group-from span.group-info{
+    padding-left: 13px;
+}
+.layout-right.user-org-dtails .operation-box.right{
+    height: 34px;
+    text-align: right;
+}
+.layout-right.user-org-dtails .operation-box.center{
+    height: 34px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    text-align: center;
+}
+.layout-right.user-org-dtails .operation-box.center button.btn+button.btn{
+    margin-left: 20px;
+}
+
+.prompt-modal.box-width .bomb-box{
+    min-width: 1000px;
+}
+/*弹出框*/
+.box-form .panel{
+    position: absolute;
+    left: 40px;
+    top: 25px;
+    right: 0;
+    bottom: 0;
+    width: 280px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+}
+.box-form .panel-has-top{
+    top:25px;
+    background: #fff;
+}
+.box-form .panel-tips{
+    position: absolute;
+    top:-30px;
+    color:#888;
+    font-size:14px;
+}
+.box-form .panel.middle{
+    left: 360px;
+}
+.box-form .panel.right{
+    left: 680px;
+}
+.box-width .panel .box-header.with-border .seach-tree,.dd{
+    border: none;
+}
+.box-width .panel .box-header.tree{
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.prompt-modal.box-width .operation{
+    text-align: right;
+    padding-right: 40px;
+}
+.prompt-modal.box-width button.btn{
+    width: 120px;
+    padding: 0;
+    text-align: center;
+}
+.prompt-modal.box-width .cancel-selected{
+    position: absolute;
+    height: 50px;
+    font-size: 23px;
+    width: 20px;
+    right: 330px;
+    top: 40%;
+}
+.prompt-modal.box-width .move-select-user{
+    position: absolute;
+    right: 330px;
+    top: 50%;
+    margin-top: -85px;
+    height: 170px;
+    width: 20px;
+}
+.prompt-modal.box-width .move-select-user .cancel-selected{
+    position: absolute;
+    top:0;
+    left: 0;
+}
+.prompt-modal.box-width .move-select-user .add-unselected{
+    position: absolute;
+    top:110px;
+    left: 0;
+}
+.prompt-modal.box-width .move-select-user .btn{
+    height: 50px;
+    width: 20px;
+    font-size: 23px;
+}
+.selected-user span.selected-user-list{
+    display: block;
+    padding-left: 15px;
+    padding-right: 15px;
+    height: 40px;
+    line-height: 40px;
+    width: auto;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.selected-user span.selected-user-list.active{
+    background-color: red;
+}
+.white-background{
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 50px;
+}
+.user-org-dtails dd label{
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    line-height: 34px;
+}
+.user-org-dtails dd b{
+    color: red;
+    position: absolute;
+    left: -15px;
+}
+.user-group-from .verification .tips{
+    color:#959595;
+}
+.user-group-from .verification .isExisted{
+    position: absolute;
+    left: 115px;
+    color: #f00;
+    text-align: left;
+}
+
+/*==== 用户组管理 end */
+
+/*==== 角色管理 begin */
+.role-left .box-header.with-border{
+    background: #fff;
+    padding: 15px 15px 0px 15px;
+}
+.role-left .box-header.with-border .seach-tree{
+    padding: 0px;
+    border: none;
+}
+.role-left .box-header.with-border .seach-tree .icon-search{
+    top: 8px;
+    left: 10px;
+}
+#userRole .box-header.with-border .seach-tree{
+    border:none;
+}
+#userRole ul.nav-tabs.nav-justified li{
+    border:none;
+}
+.m-tree-layer{
+    border-top: 1px solid #e4e4e4;
+}
+.m-tree-layer .dd3-content{
+    border-left:none;
+}
+.m-table-ul{
+    text-align: left;
+}
+.m-table-ul li{
+    line-height:25px;
+    padding-right: 25px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position: relative;
+}
+.m-table-ul li i{
+    margin-left: 8px;
+    display: none;
+    vertical-align: middle;
+    background: transparent;
+    font-size: 18px;
+    color: #3BAFDA;
+    cursor: pointer;
+    position: absolute;
+    top: 4px;
+    right: 0px;
+}
+.m-table-ul li:hover i{
+    display: inline-block;
+}
+.u-blue{
+    color:#01AAED;
+}
+.panel-has-top ul.nav-tabs li{
+    font-size:14px;
+}
+.panel-has-top .dd{
+    border:none;
+}
+.panel-has-top .box-header.with-border .seach-tree .form-control{
+    height: 34px;
+}
+.panel-has-top .tab-content{
+    padding:0px!important;
+    min-height:inherit!important;
+    border:none!important;
+}
+.panel-has-top div[class~="root"]{
+    border-left:none;
+}
+.u-delete,.u-delete .icon-role{
+    color:#CFCFCF;
+}
+.u-delete input[type="checkbox"][disabled]{
+    cursor: not-allowed;
+}
+
+.u-delete,.u-delete .icon-role{
+    color:#CFCFCF;
+}
+.u-delete input[type="checkbox"][disabled]{
+    cursor: not-allowed;
+}
+.icon-role{
+    color:#01AAED;
+    font-size:16px;
+    margin-left:7px;
+    display: inline-block;
+    margin-top:12px;
+}
+/*==== 角色管理 end */
+.padding-zero{
+    padding:0px;
+}
+.text-right{
+    text-align: right;
+}
+.text-left{
+    text-align: left;
+}
+.table-box th, .table-box td{
+    display:-moz-deck;
+    float:none;
+}
+.wrap-textarea{
+    position:relative;
+    width:80%;
+}
+.wrap-textarea .show-string-length{
+    bottom: 15px;
+    right: 5px;
+}
+.role-select{
+    padding: 5px 10px 6px 10px;
+    outline:none;
+}
+.role-select option{
+    padding:0px 10px;
+    height:23px;
+    line-height: 23px;
+}
+.u-search-btn{
+    cursor: pointer;
+    top: 0px;
+    right: -85px;
+    position: absolute;
+    line-height: 34px;
+    color: #fff;
+    width: auto;
+    padding: 0px;
+}
+.u-search-btn button {
+    width: 98px;
+    padding: 0px;
+}
+.u-senior-search{
+    color:#888;
+    margin-left:10px;
+}

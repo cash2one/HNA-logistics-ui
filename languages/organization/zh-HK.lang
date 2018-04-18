@@ -1,0 +1,20 @@
+{
+    "group_page_orgName": "組織名稱：",
+    "group_page_orgShortName": "組織簡稱：",
+    "group_page_orgCode": "組織編碼：",
+    "group_page_description": "備註：",
+
+    "group_placeholder_orgNameInfo": "請輸入組織名稱",
+    "group_placeholder_orgShortNameInfo": "請輸入組織簡稱",
+    "group_placeholder_orgCodeInfo": "請輸入組織編碼",
+    "group_placeholder_descriptionInfo": "請輸入備註",
+
+    "group_validate_groupName": "組織名稱已存在",
+    "group_validate_orgShortName": "組織簡稱已存在",
+    "group_validate_orgCode": "組織編碼已存在",
+
+    "group_tree_search": "該組織下無搜索結果",
+    "group_prompt_tip": "該組織下有子組織或用戶，不能刪除！",
+    "group_prompt_box_tip": "確定刪除該組織？",
+    "group_prompt_delete_tip": "該組織下有子組織或用戶，不能刪除！"
+}

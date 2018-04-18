@@ -1,0 +1,118 @@
+.carrierMaritime-table-page{
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+    top: 15px;
+    left:15px;
+    background: #fff;
+    border: 1px solid #ddd;
+    overflow: hidden;
+}
+
+.carrierMaritime-table-page .box-header{
+    margin-top: 15px;
+}
+.carrierMaritime-table-page .batch-operation{
+    position: relative;
+    text-align: left;
+    padding: 15px;
+}
+.carrierMaritime-table-page .batch-operation button {
+    margin-left: -3.5px;
+    margin-right: 10px;
+}
+.table-container {
+    text-align: center;
+    position: relative;
+}
+.company-table-ship th, .company-table-ship td{
+    display:-moz-deck;
+    float:none;
+}
+.company-table-ship th:nth-child(1), .company-table-ship td:nth-child(1){
+    width: 10%;
+    -ms-text-overflow: inherit!important;
+    text-overflow: inherit!important;
+}
+.company-table-ship th:nth-child(2), .company-table-ship td:nth-child(2){
+    width: 10%;
+}
+.company-table-ship th:nth-child(3), .company-table-ship td:nth-child(3){
+    width: 20%;
+}
+.company-table-ship th:nth-child(4), .company-table-ship td:nth-child(4){
+    width: 20%;
+}
+.company-table-ship th:nth-child(5), .company-table-ship td:nth-child(5){
+    width: 20%;
+}
+.company-table-ship th:nth-child(6), .company-table-ship td:nth-child(6){
+    width: 20%;
+}
+
+.carrierMaritime-table-page .list-search-box{
+     width: 50%;
+     display: inline-block;
+     position: relative;
+     text-align: center;
+ }
+
+.carrierMaritime-table-page .list-search-box .icon-search{
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #ccc;
+    padding: 10px;
+}
+
+#nest-carrierMaritimeForm .verification {
+    text-align: left;
+    width: 295px;
+    margin-left: 118px;
+}
+#nest-carrierMaritimeForm .verification, span.error{
+    margin-top:0px;
+}
+/*#nest-carrierMaritimeForm .verification{*/
+    /*position: absolute;*/
+    /*right: 0px;*/
+    /*text-align: left;*/
+    /*width: 295px;*/
+/*}*/
+#nest-carrierMaritimeForm .verification .errors{
+    position: relative;
+    padding-left: 0px;
+}
+.remark-info{
+    height: 58px;
+}
+.remark-info .show-string-length{
+    bottom: 19px;
+}
+.carrierMaritime-search-btn{
+    display: inline-block;
+    float: right;
+    margin-right: 15px
+}
+.carrierMaritime-search-btn button {
+    width: 98px;
+    padding: 0px;
+}
+
+.enNameClass{
+    position: absolute;
+    right: 0px;
+    text-align: left;
+    width: 295px;
+}
+.enNameClass .errors{
+    position: relative;
+    padding-left: 0px;
+    left: 0;
+    white-space: normal;
+    width: 100%;
+    color: red;
+}
+td {
+  text-align: center !important;
+}

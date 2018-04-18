@@ -1,0 +1,219 @@
+<section class="content test_a9a039ae">
+    <div class="g-main test_7d3a1675">
+        <div class="m-back test_527fa736">
+            <button ng-click="goBack();" class="btn btn-default test_45f15ff2">
+                <%=common_page_back%>
+            </button>
+        </div>
+        <div class="m-title test_71092148">
+            {{title}}
+        </div>
+
+        <div class="m-content-box test_1d4f76bf">
+            <div class="m-bills-search test_3cf84c6c">
+                <div class="row row-list clearfix test_04c7a4d1">
+                    <div class="text-right col-md-3 test_50d5c3fc">
+                        <div class="row clearfix test_96b20799">
+                            <div class="text-right col-md-3 test_4f48b0b8">{{ module == 'trade' ? '订单号' : '运单号' }}</div>
+                            <div class="text-left col-md-9 test_9f488323" style="padding:0px;">
+                                <input ng-model="orderNum" ng-enter="search()" type="text" maxlength="30" autocomplete="off" class="test_5a3ac2ef">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-right col-md-7 test_e2f0df4f">
+                        <div class="row clearfix test_4cbacd28">
+                            <div class="text-right col-md-3 test_d70a1291">
+                                <%=billing_time%>
+                            </div>
+                            <div class="text-left col-md-4 test_bda3c2ea" style="padding-left:0px;padding-right:0px;">
+                                <input id="begin-time" ng-model="startTime" type="text" maxlength="30" autocomplete="off" class="test_b271c7ed">
+                            </div>
+                            <div class="text-center col-md-1 test_771d7ff2" style="padding:0px;">
+                                ~
+                            </div>
+                            <div class="text-left col-md-4 test_f543fc05" style="padding-left:0px;padding-right:0px;">
+                                <input id="end-time" ng-model="endTime" type="text" maxlength="30" autocomplete="off" class="test_bbb2562b">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="module == 'logistics'" class="row row-list clearfix test_70d86d35">
+                    <div class="text-right col-md-3 test_d693a336" ng-show="submodule == 'receive'">
+                        <div class="row clearfix test_6566a7dc">
+                            <div class="text-right col-md-3 test_01abab8d">
+                                <%=account_name%>
+                            </div>
+                            <div class="text-left col-md-9 test_47b7e544" style="padding:0px;">
+                                <input ng-click="getClient()" id="select-client" ng-model="orderClientName" ng-value="orderClientValue" readonly type="text" maxlength="30" autocomplete="off" class="test_e8cdaa83">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-right col-md-3 test_0eade3e2">
+                        <div class="row clearfix test_d86cec5a">
+                            <div class="text-right col-md-3 test_958ca9b5">
+                                {{ submodule == 'receive' ? '产品名' : '服务名' }}
+                            </div>
+                            <div class="text-left col-md-9 test_dfc24c08" style="padding:0px;">
+                                <input ng-show="submodule == 'receive'" id="select-product" ng-click="getProduct()" ng-model="productName" ng-value="productValue" readonly type="text" maxlength="30">
+                                <input ng-show="submodule == 'pay'" id="select-service" ng-click="getService()" ng-model="serviceName" ng-value="serviceValue" readonly type="text" maxlength="30">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-right col-md-3" ng-show="submodule == 'receive'">
+                        <div class="row clearfix">
+                            <div class="text-right col-md-3">支付状态</div>
+                            <div class="text-left col-md-9" style="padding-left:0px;">
+                                <input id="pay-status" ng-click="getPayStatus()" ng-model="payStatusName" placeholder="<%=common_all_tips%>" readonly type="text" maxlength="30">
+                                <i class="select-icon icon-drop-down" style="right: 15px;"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center col-md-3 test_7e94bdd1" style="white-space: nowrap;float: right;">
+                        <span class="u-clear-condition test_36ae6bd6" ng-click="clearCondition();">重置</span>
+                        <button class="btn btn-primary test_e34d3841" ng-click="search();"><%=common_page_search%></button>
+                    </div>
+                </div>
+
+                <div ng-if="module == 'trade'" class="row row-list clearfix test_d3b4b748">
+                    <div ng-if="submodule == 'receive'" class="text-right col-md-3 test_3ac42d08">
+                        <div class="row clearfix test_d4eb2314">
+                            <div class="text-right col-md-3 test_f658787e">
+                                <%=account_name%>
+                            </div>
+                            <div class="text-left col-md-9 test_1650e37d" style="padding:0px;">
+                                <input ng-click="getClient()" id="select-client" ng-model="orderClientName" ng-value="orderClientValue" readonly type="text" maxlength="30" autocomplete="off" class="test_39399a00">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div ng-if="submodule == 'pay'" class="text-right col-md-3">
+                        <div class="row clearfix">
+                            <div class="text-right col-md-3">
+                                供应商
+                            </div>
+                            <div class="text-left col-md-9" style="padding:0px;">
+                                <input ng-click="getSupplier()" id="select-supplier" ng-model="orderClientName" ng-value="orderClientValue" readonly type="text" maxlength="30" autocomplete="off">
+                            </div>
+                        </div>
+                    </div> -->
+                    <!-- <div class="text-right col-md-3">
+                        <div class="row clearfix">
+                            <div class="text-right col-md-3">
+                                平台实体
+                            </div>
+                            <div class="text-left col-md-9">
+                                <input id="select-platform" ng-click="getPlatform();" ng-model="platform"  ng-value="platformValue" readonly="readonly" type="text" maxlength="30" placeholder="请选择" />
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="text-right col-md-3 test_1b0bf41a">
+                        <div class="row clearfix test_390b23f2">
+                            <div class="text-right col-md-3 test_14e262b2">
+                                商品名
+                            </div>
+                            <div class="text-left col-md-9 test_3b8c1091" style="padding:0px;">
+                                <input id="select-good" ng-model="$parent.goodName" type="text" maxlength="30" class="test_bc7117d4">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center col-md-3 test_b51870ca" style="white-space: nowrap;float: right;">
+                        <span class="u-clear-condition test_af7baeee" ng-click="clearCondition();">重置</span>
+                        <button class="btn btn-primary test_f75bd2f7" ng-click="search();"><%=common_page_search%></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-container test_5eb56ab2" ng-controller="tableController">
+                <table ng-class="{'table-box':true, 'bills-table':true, 'trade-table':tableClass}" cellpadding="0" cellspacing="0" class="test_72965e49">
+                    <thead class="test_6fda1846">
+                        <tr class="test_f166d3f3">
+                            <th ng-if="item" ng-repeat="item in tableModel.tableHeader" class="test_53ff7cac">{{item}}</th>
+                        </tr>
+                    </thead>
+                    <tbody class="test_18e59730">
+                        <tr ng-repeat="value in tableModel.tableBody" ng-init="renderFinish($last)" class="test_e759e752">
+                            <td class="test_da2c8b2b">{{(tableModel.pagination.currentPage-1)*tableModel.pagination.pageSize+$index+1}}</td>
+                            <td title="{{value.waybillNo || value.orderNo}}" class="test_40e2c93d">{{value.waybillNo || value.orderNo}}</td>
+                            <td ng-if="value.customerName || value.companyName" title="{{value.customerName || value.companyName}}" class="test_53346fa1">{{value.customerName || value.companyName}}({{value.customerUserName || value.companyUserName}})</td>
+                            <td ng-if="module == 'trade'" title="{{value.platformName}}" class="test_241fe585">{{value.platformName}}</td>
+                            <td ng-if="module == 'logistics' && submodule == 'receive'" title="{{value.productName}}" class="test_f2e600d1">{{value.productName}}</td>
+                            <td ng-if="module == 'logistics' && submodule == 'pay'" title="{{value.serviceName}}" class="test_f2e600d1">{{ value.serviceName }}</td>
+                            <td ng-if="module == 'trade'" title="{{value.goodsNames}}" ng-bind-html="value.goodsNames | trustHtml:q" class="test_98273b97"></td>
+                            <td title="{{value.billTime}}" class="test_b127baf1">{{value.billTime}}</td>
+                            <td ng-if="module == 'logistics'" title="{{value.feeCalcWeight+' '+ value.feeCalcWeightUnit}}">{{value.feeCalcWeight+' '+ value.feeCalcWeightUnit}}</td>
+                            <td ng-if="module == 'logistics'" title=" {{(!value.exchangeRate || value.exchangeRate ==1) ? '-' : '1'+ value.currencyCode+'='+value.exchangeRate +''+value.custCurrencyCode}}">
+                                {{(!value.exchangeRate || value.exchangeRate ==1) ? '-' : '1'+ value.currencyCode+'='+value.exchangeRate +' '+value.custCurrencyCode}}
+                            </td>
+                            <td ng-if="module != 'trade'" style="cursor: pointer" ng-click="getPriceDetail(value.orderFeeList,value.currencyCode)">
+                                <p style="display: block;line-height: 30px;">{{value.beforeExchangeAmount}} {{value.currencyCode}}</p>
+                                <p style="display: block;line-height: 30px;">{{(!value.exchangeRate || value.exchangeRate ==1) ? '' : '('+value.afterExchangeAmount+' '+ value.custCurrencyCode +')'}}</p>
+                            </td>
+                            <td ng-if="module == 'trade'" title="{{value.amountReceived}}" class="test_448e2f4b">
+                                <%=count%>：{{value.amountReceived}}
+                            </td>
+                            <td ng-if="module == 'logistics' && submodule == 'receive'" title="{{value.payStatusName}}" class="test_f2e600d1">{{value.payStatusName}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <hnapagination table-service="table" page-table-model="tableModel" class="test_1bc285a9"></hnapagination>
+            </div>
+            <div ng-show="!tableModel.pagination.isVisiblePage" style="position: absolute;top:165px;bottom:0px;width:100%;" class="test_466fabe5">
+                <img style="width:100%;height:100%;" src="/public/img/undefined.svg" class="test_2752b6f8">
+            </div>
+        </div>
+
+        <div class="m-audit-box test_554b7d8d" ng-show="status == 'AUDITING' && parameter.from != 'billCreation'">
+            <form name="auditForm" novalidate="novalidate" class="test_46ef6b5d">
+                <div class="row row-list clearfix test_5eee8e35">
+                    <div class="text-right col-md-2 test_4b730678">
+                        <label class="test_dd056d66"><b class="u-must-red test_9857f3b8">*</b><%=audit_opinion%>：</label>
+                    </div>
+                    <div class="text-left col-md-10 test_830ee4a6" style="position: relative;">
+                        <div class="radio radio-single radio-primary test_df11d512">
+                            <input name="auditStatus" value="DRAFT" type="radio" ng-model="auditStatus" class="test_1fc4f145">
+                            <label class="test_9e3358ea"></label>
+                        </div>
+                        <span class="test_d252af90"><%=to_draft%></span>
+
+                        <div class="radio radio-single radio-primary test_0118b1a4" style="margin-left: 15px;">
+                            <input name="auditStatus" value="CHARGEOFF" type="radio" ng-model="auditStatus" class="test_59983cc3">
+                            <label class="test_102aa722"></label>
+                        </div>
+                        <span class="test_2174a976"><%=audit_passed%></span>
+
+                        <span ng-show="!auditStatus && auditSubmitStatus" class="u-must-red test_7b759311" style="position: absolute;left: 15px;top: 25px;font-size: 14px;"><%=audit_tips%></span>
+                    </div>
+                </div>
+                <div class="row row-list clearfix test_04c5a5dc">
+                    <div class="text-right col-md-2 test_f422f1cc">
+                        <label class="test_0f854c0c"><b class="u-must-red test_babb6974">*</b><%=comments%>：</label>
+                    </div>
+                    <div class="text-left col-md-10 test_2ec6c42e">
+                        <div class="wrap-textarea test_d6514534">
+                            <textarea required="required" text-length="" name="auditRemark" ng-model="auditRemark" ng-trim="false" rows="5" type="text" maxlength="140" placeholder="<%=comments_placer%>" class="test_d00a9e16"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center test_2751cd80">
+                    <button class="btn btn-primary test_c1dba042" ng-click="audit();"><%=submit_opinion%></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<div ng-show="priceDetailShow" class="prompt-modal middle-box" style="display: table;">
+    <div class="prompt-wrap">
+        <div class="bomb-box" style="min-height: 300px">
+            <div class="title">价格明细({{currencyDetail}})</div>
+            <div class="prompt-content" style="overflow: auto;" >
+                <ul style="text-align: center;line-height: 30px;">
+                    <li ng-repeat="item in priceDetailData">{{item.type}}：{{item.value}}</li>
+                </ul>
+            </div>
+            <div class="operation">
+                <button ng-click="priceDetailShow = !priceDetailShow" name="prompt-operation" class="btn btn-default" data-event="close">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>

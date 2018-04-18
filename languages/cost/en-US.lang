@@ -1,0 +1,17 @@
+{
+    "cost_page_newcost": "Add a cost type",
+    "cost_page_baseinfo": "Basic Information",
+    "cost_page_costname": "Cost Name",
+    "cost_page_costnameplacer": "Please enter a cost name",
+    "cost_page_costcode": "Code",
+    "cost_page_costall": "All",
+    "cost_page_costcodeplacer": "Please enter a code",
+    "cost_page_costtype": "Types",
+    "cost_page_choice": "please choose",
+    "cost_page_remarkinfo": "Please enter a comment",
+    "cost_page_globalization": "Globalization",
+    "cost_page_searchplacer": "Please enter a name or code",
+    "cost_code_delCostType": "Are you sure you want to delete the selected cost type?",
+    "cost_code_costDetail": "Cost Type Details",
+    "cost_page_globalizationName": "Cost Type Internationalized name"
+}

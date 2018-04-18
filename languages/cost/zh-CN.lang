@@ -1,0 +1,17 @@
+{
+    "cost_page_newcost": "添加费用类型",
+    "cost_page_baseinfo": "基本信息",
+    "cost_page_costname": "名称",
+    "cost_page_costnameplacer": "请输入名称",
+    "cost_page_costcode": "编码",
+    "cost_page_costall": "全部",
+    "cost_page_costcodeplacer": "请输入编码",
+    "cost_page_costtype": "类型",
+    "cost_page_choice": "请选择",
+    "cost_page_remarkinfo": "请输入备注",
+    "cost_page_globalization": "国际化",
+    "cost_page_searchplacer": "请输入名称或编码",
+    "cost_code_delCostType": "确定删除已选费用类型？",
+    "cost_code_costDetail": "费用类型详情",
+    "cost_page_globalizationName": "国际化"
+}

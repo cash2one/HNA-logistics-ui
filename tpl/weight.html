@@ -1,0 +1,149 @@
+<div ng-show="nestWeightFrom" id="nest-weightFrom" class="prompt-modal middle-box test_a634a0b3" style="display:none">
+    <div class="prompt-wrap test_8ae3dc44">
+        <div class="bomb-box test_6b6a5525">
+            <div class="title test_1f4bd7b5">{{promptTitle}}</div>
+            <div class="prompt-content test_e06bec24">
+                <form name="weightFrom" novalidate="novalidate" class="test_a1b01d1a">
+                    <div id="weightFrom" class="test_284dbbc1">
+                        <ul class="isContainer switch-list test_75ac7947">
+                            <li class="test_5bc8752b">
+                                <label class="test_9ba91701"><b class="test_7ad324bc">*</b><%=name%>：</label>
+                                <input ng-trim="false" maxlength="30" class="input-text test_eb017410" id="weight-name" verification="{'ruleType':'name'}" name="weightName" ng-model="weightName" type="text" required>
+                                <div class="verification test_f4129061">
+                                    <span class="errors test_5468e090" id="name-msg" ng-show="weightFrom.weightName.$viewValue && weightFrom.weightName.$error.defined && weightFrom.weightName.$dirty">{{weightFrom.weightName.errorTips}}</span>
+                                </div>
+                            </li>
+                            <li class="test_6e36d3e4">
+                                <label class="test_b3745720"><b class="test_88c87659">*</b><%=code%>：</label>
+                                <input ng-trim="false" maxlength="15" id="weight-code" ng-blur="isExistedCode()" class="input-text test_9ca4d668" verification="{'ruleType':'code'}" name="weightCode" ng-model="weightCode" type="text" required>
+                                <div class="verification test_1c5e1322">
+                                    <span class="errors test_2e4d1282" id="code-msg" ng-show="weightFrom.weightCode.$viewValue && weightFrom.weightCode.$error.defined && weightFrom.weightCode.$dirty">{{weightFrom.weightCode.errorTips}}</span>
+                                </div>
+                            </li>
+                            <li class="test_9a7811f5">
+                                <label class="test_bc2f8afa"><b class="test_d1d605d8">*</b><%=weight_unit%>：</label>
+                                <span style="line-height: 34px;position: absolute;" ng-init="initSelectList()" class="test_d7c7d45a">kg</span>
+                                <!--<input ng-init="initSelectList()" readonly id="unit" class="input-text test_cc0326f6" name="unit" ng-model="unit" type="text" placeholder="<%=weight_input_unit_tips%>" required>-->
+                                <!--<i class="select-icon icon-drop-down test_53e69c15" style="cursor:pointer"></i>-->
+                                <!--<div class="verification test_1c5e1322">-->
+                                    <!--<span class="errors test_84200b7c" id="unit-msg" ng-show="weightFrom.unit.$viewValue && weightFrom.unit.$error.defined && weightFrom.unit.$dirty">{{weightFrom.unit.errorTips}}</span>-->
+                                <!--</div>-->
+                            </li>
+                            <li style="padding-right:0px" class="test_36b64a3f">
+                                <label class="test_5cd82f5b"><b class="test_1af27f44">*</b><%=weight_section%>：</label>
+                                <div class="input-weight-box test_012e7044" style="text-align:left">
+                                    <div class="input-weight test_e30a04b5" ng-repeat="section in weightSectionList">
+                                        <input ng-keyup="limit3Data($event, $index)" maxlength="10" type="text" ng-blur="verifyWeightFormat($event)" class="start-point point test_e7ec6315" name="startPoint{{$index}}" placeholder="<%=weight_start%>" ng-model="section.startPoint" required>
+                                        <div class="verification test_b1b87846" style="display:none">
+                                            <span class="errors test_af1da01a" ng-show="weightFrom.startPoint{{$index}}.$viewValue && weightFrom.startPoint{{$index}}.$error.defined && weightFrom.startPoint{{$index}}.$dirty">{{weightFrom.startPoint$index.errorTips}}</span>
+                                        </div>
+                                        <input ng-keyup="limit3Data($event, $index)" maxlength="10" type="text" ng-blur="verifyWeightFormat($event)" class="end-point point test_ef48e1b1" name="endPoint{{$index}}" placeholder="<%=weight_end%>" ng-model="section.endPoint" required>
+                                        <div class="verification test_f7c59d14" style="display:none">
+                                            <span class="errors test_279b0e26" ng-show="weightFrom.endPoint{{$index}}.$viewValue && weightFrom.endPoint{{$index}}.$error.defined && weightFrom.endPoint{{$index}}.$dirty">{{weightFrom.endPoint$index.errorTips}}</span>
+                                        </div>
+                                        <div class="delete-icon test_91f0debf" ng-if="$last && weightSectionList.length > 1" ng-click="deleteSection()">
+                                            <div class="delete-center test_beb44164"></div>
+                                        </div>
+                                    </div>
+                                    <div class="verification test_63526df3" style="overflow:hidden;margin-bottom:8px">
+                                        <span class="errors test_92f475a3" id="weight-msg" ng-show="weightFrom.weight.$viewValue && weightFrom.weight.$error.defined && weightFrom.weight.$dirty">{{weightFrom.weight.errorTips}}</span>
+                                    </div>
+                                </div>
+                                <div class="input-weight-box test_ac8eeefc" style="text-align:left;margin-top:15px">
+                                    <div class="add-icon test_e4f5d29e">
+                                        <div class="add-center test_7ab62ee6" ng-click="addSection()">+</div>
+                                    </div>
+                                    <div class="add-tips test_1407bbd6">
+                                        <p style="font-size:16px" class="test_3ab1695b"><%=add_weight%></p>
+                                        <p style="font-size:10px" class="test_fd0dbeec"><%=add_step%></p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="test_38813c16">
+                                <label class="test_c757cd06"><%=weight_mark%>：</label>
+                                <textarea id="mark" ng-change="verifyMark()" style="height:90px" class="input-text test_a8714eb2" ng-model="mark" name="mark" ng-trim="false"></textarea>
+                                <div class="word-count test_43c7e762">{{wordCount}}字</div>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+            <div class="operation test_cc139c20">
+                <button ng-click="closePrompt();" name="prompt-close" class="btn btn-default test_011bf7df" data-event="close"><%=weight_cancel%></button>
+                <button ng-click="savePrompt();" name="prompt-save" class="btn btn-primary test_93586ec4" data-event="close"><%=weight_save%></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="weight-box test_7ce4a02a">
+    <!--tableController start-->
+    <div class="master-table test_cdf66f8f">
+        <div ng-controller="tableController" class="test_456dc374">
+            <div class="add-search-box test_92ec5dcb">
+                <div class="list-search-box test_d2cdf2af">
+                    <input maxlength="30" ng-enter="searchWeight();" ng-model="tableModel.restData.q" ng-value="q" type="text" class="form-control test_e1992994" placeholder="<%=weight_search_condition%>">
+                    <i class="icon-search search-table test_a2a432d5"></i>
+                </div>
+                <button ng-click="searchWeight();" class="btn btn-primary test_24238c77"><%=common_page_search%></button>
+            </div>
+            <div class="batch-operation test_3ab5a7e3">
+                <button ng-click="add();" class="btn btn-primary test_e66438f4"><%=weight_add%></button>
+                <button ng-click="delete();" class="btn btn-primary test_75f3302a"><%=weight_delete%></button>
+            </div>
+            <div class="table-container test_97b498f2">
+                <table class="table-box test_edbefd00" cellpadding="0" cellspacing="0">
+                    <thead class="test_07012aef">
+                    <th style="width:4%" class="test_f0547513">
+                        <div class="checkbox checkbox-info test_a5a59d2d">
+                            <input type="checkbox" ng-model="tableModel.selectFlag" ng-click="table.selectAll(tableModel);" class="test_26ef35c2">
+                            <label class="test_74a230d1"></label>
+                        </div>
+                    </th>
+                    <th style="width:{{tableModel.tableHeaderSize[$index]}}" ng-repeat="item in tableModel.tableHeader" class="test_24ccb28d">
+                        {{item}}
+                    </th>
+                    </thead>
+                    <tbody class="test_4eeadb7d">
+                    <tr ng-repeat="value in tableModel.tableBody" ng-init="renderFinish($last)" class="test_74706a0c">
+                        <td class="test_910589f9">
+                            <div class="checkbox checkbox-info test_1521453d">
+                                <input type="checkbox" ng-value="{{value.id}}" ng-checked="value.checkbox" ng-click="table.selectOne(tableModel, value.checkboxId);" class="test_54ee4b06">
+                                <label class="test_2f5df9a4"></label>
+                            </div>
+                        </td>
+                        <td class="test_4fa4e0ff">{{(tableModel.pagination.currentPage-1)*tableModel.pagination.pageSize+$index+1}}</td>
+                        <td title="{{value.name}}" ng-click="edit(value)" class="test_db256829">
+                            <a href="javascript:;" style="cursor:pointer;display:block" class="test_231be807" ng-bind-html="value.name | trustHtml:q">
+                            </a>
+                        </td>
+                        <td title="{{value.code}}" class="test_8e7f6dbb">
+                            <span ng-bind-html="value.code | trustHtml:q" class="test_38c3d274"></span>
+                        </td>
+                        <!--<td title="{{value.unit}}" class="test_2a39fe9a">-->
+                            <!--<span ng-bind-html="value.unit | trustHtml:q" class="test_ac83c269"></span>-->
+                        <!--</td>-->
+                        <td class="test_fc7112eb" title="{{value.weightSectionArray}}">
+                            {{value.weightSectionArray}}
+                        </td>
+                        <td title="{{value.creator}} {{value.accountName}}" class="test_37347a94">
+                             {{value.creator}} {{value.accountName}}
+                        </td>
+                        <td title="{{value.createTime}}" class="test_079efa34">
+                            {{value.createTime}}
+                        </td>
+                        <td ng-trim="false" title="{{value.remark}}" class="test_c96efa3c">
+                            {{value.remark}}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div ng-show="!tableModel.pagination.isVisiblePage" style="position: absolute;top:165px;bottom:0px;width:100%;" class="test_bfac5beb">
+                    <img style="width:100%;height:100%;" src="/public/img/undefined.svg" class="test_86c90eb7">
+                </div>
+                <hnapagination table-service="table" page-table-model="tableModel" class="test_9a247d9b"></hnapagination>
+            </div>
+        </div>
+    </div>
+    <!--tableController end-->
+</div>

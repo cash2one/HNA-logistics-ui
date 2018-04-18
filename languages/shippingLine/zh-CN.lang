@@ -1,0 +1,20 @@
+{
+    "shippingLine_page_international": "国际化",
+    "shippingLine_page_keyword": "关键字",
+    "shippingLine_page_empty": "重置",
+    "shippingLine_page_name": "名称",
+    "shippingLine_page_start": "始发地",
+    "shippingLine_page_end": "目的地",
+    "shippingLine_page_starPort": "起运港",
+    "shippingLine_page_endPort": "目的港",
+    "shippingLine_page_subordinatePort": "停靠港",
+    "shippingLine_page_line": "航线",
+    "shippingLine_page_code": "编码",
+    "shippingLine_page_type": "航线类型",
+    "shippingLine_page_searchPlaceholder": "请输入名称或编码",
+    "shippingLine_code_modelDelTips": "确定删除已选航线？",
+    "shippingLine_page_add": "添加航线",
+    "shippingLine_code_modelDetail": "修改航线",
+    "shippingLine_add_port": "添加港口",
+    "shippingLine_page_baseInfo": "基本信息"
+}

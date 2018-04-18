@@ -1,0 +1,1 @@
+app.factory("projectCheckView",[function(){return{}}]);

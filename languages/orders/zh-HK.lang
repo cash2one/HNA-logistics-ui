@@ -1,0 +1,20 @@
+{
+    "orders_number": "訂單編號",
+    "orders_number_placer": "請輸入編號",
+    "orders_begin_time": "起始時間",
+    "orders_end_time": "截止時間",
+    "orders_client": "客戶名稱",
+    "orders_client_placer": "請輸入名稱",
+    "orders_status": "訂單狀態",
+    "orders_clear_condation": "清空搜索條件",
+    "orders_make": "下單",
+    "orders_process": "查看流轉",
+    "orders_no": "訂單號",
+    "orders_product_info": "產品信息",
+    "orders_client_info": "客戶信息",
+    "orders_goods_type": "貨物類型",
+    "orders_address_range": "起止地",
+    "orders_creat_time": "創建時間",
+    "orders_order_status": "訂單狀態",
+    "orders_del_confrim": "確定刪除已選訂單？"
+}

@@ -1,0 +1,79 @@
+.master-table {
+    left:15px;
+    right:15px;
+}
+.add-search-box {
+    padding: 15px 10px;
+    margin-bottom:15px;
+    border-bottom:1px solid #ddd;
+}
+.select-list-box {
+    z-index:1000!important;
+}
+.add-search-box .list-search-box {
+    text-align:left;
+}
+.select-list-box li {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 0 4px!important;
+}
+.search-cell {
+    position:relative;
+    width:224px;
+    display:inline-block;
+    height:34px;
+    text-align:left;
+    margin-right:1px;
+}
+.search-cell span:nth-child(1) {
+    display: inline-block;
+    width: 24%;
+    text-align: right;
+}
+.select-box {
+    position:relative;
+    width:73%;
+    display:inline-block;
+    vertical-align:middle;
+}
+.table-box td+td {
+    height:40px;
+}
+.select-icon {
+    top:0px!important;
+    cursor:pointer!important;
+    right:1px!important;
+    z-index:10!important;
+}
+body .canlander {
+    width:14.5%!important;
+}
+body .canlander2 {
+    width:295px!important;
+}
+body .canlander2 td {
+    max-width: 41px!important;
+    width: 41px!important;
+}
+body .canlander2 {
+    width:295px!important;
+}
+.disabled, .disabled:hover{
+    background-color: #ddd;
+    border: 1px solid #ddd;
+}
+.kkpage {
+    margin-top:-30px!important;
+}
+
+.block-order{
+    display: inline-block;
+    vertical-align: middle;
+    padding-left: 10px;
+}
+
+td {
+  text-align: center !important;
+}

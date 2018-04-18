@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title></title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"></meta>
+    <link rel="stylesheet" href="loadAssets.php?urls=public/lib/bootstrap.min.css,public/lib/font-awesome.css,public/lib/fonts-hna.css"/>
+    <script type="text/javascript" src="public/common/interface.js"></script>
+    <script type="text/javascript">
+        var url = window.location.href;
+        if(url.indexOf('#/login') == -1){
+            window.location.href = url + '#/login';
+        }
+    </script>
+</head>
+<body ng-app='app' class="language-swich">
+<script id="container" type="text/html">
+        <div ng-view></div>
+</script>
+<script src="loadAssets.php?urls=public/common/cacheConfig.js"></script>
+<script src="loadAssets.php?urls=public/lib/art-template-min.js,public/lib/md5.js,public/lib/jquery.js,public/lib/bootstrap.js,public/lib/jquery.vercode.js,public/lib/angular-min.js,public/lib/angular-route.js,public/common/minify/lang.js,public/common/easyspa.js,public/common/route.js,public/common/filters.js"></script>
+</body>
+</html>

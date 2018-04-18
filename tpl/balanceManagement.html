@@ -1,0 +1,188 @@
+<div class="balance-management-wrapper">
+	<div class="balance-management-wrap" ng-hide="isManageBalance" ng-controller="tableController">
+		<div class="search-box-container">
+			<div class="search-box">
+				<input type="text" maxlength="30" ng-enter="balanceSearch()" ng-model="tableModel.restData.q" ng-value="q" class="form-control" placeholder="<%=balance_search_condition%>">
+				<i class="icon-search search-table"></i>
+				<div class="senior-search">
+					<button class="btn btn-primary" ng-click="balanceSearch()">搜索</button>
+				</div>
+			</div>
+		</div>
+		<div class="table-container">
+				<table class="balance-management-table table-box" cellpadding="0" cellspacing="0">
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>账户名</th>
+							<th>编码</th>
+							<th>公司全称</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="item in tableModel.tableBody" ng-init="renderFinish($last)">
+							<td>{{(tableModel.pagination.currentPage-1)*tableModel.pagination.pageSize+$index+1}}</td>
+							<td title="{{item.userName}}">
+								<a ng-href="#/customer?module=logistics&id={{item.customerId}}" ng-bind-html="item.userName | trustHtml:q"></a>
+							</td>
+							<td ng-bind-html="item.code | trustHtml:q" title="{{item.code}}"></td>
+							<td ng-bind-html="item.fullName | trustHtml:q" title="{{item.fullName}}"></td>
+							<td>
+								<a href="javascript:void(0);" ng-click="manageBalance(item)">管理余额</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<div ng-show="!tableModel.pagination.isVisiblePage" style="position: absolute;top:165px;bottom:0px;width:100%;">
+				    <img style="width:100%;height:100%;" src="/public/img/undefined.svg"/>
+				</div>
+				<hnapagination table-service="table" page-table-model="tableModel"></hnapagination>
+		</div>
+	</div>
+	<div class="manage-balance-wrap" ng-show="isManageBalance">
+		<div class="go-back">
+			<button class="btn btn-default" ng-click="goBack()">返回</button>
+		</div>
+		<h3 class="title">余额充值</h3>
+		<div class="main-content">
+			<form name="balanceOperation" id="balanceOperation">
+				<div class="content">
+					<dl class="clearfix">
+						<dt>账户名：</dt>
+						<dd>{{manageBalanceData.userName}}</dd>
+					</dl>
+					<dl class="clearfix">
+						<dt>编码：</dt>
+						<dd>{{manageBalanceData.code}}</dd>
+					</dl>
+					<dl class="clearfix">
+						<dt>公司全称：</dt>
+						<dd>{{manageBalanceData.fullName}}</dd>
+					</dl>
+					<dl class="clearfix">
+						<dt>当前余额：</dt>
+						<dd>{{manageBalanceData.totalBalance}} 元</dd>
+					</dl>
+					<!-- <dl class="clearfix">
+						<dt>操作类型：</dt>
+						<dd class="radio-box">
+							<div class="radio radio-single radio-primary">
+								<input type="radio" value="a" ng-model="add" ng-click="setOperationAdd($event)">
+								<label></label>
+							</div>
+							<span>充值</span>
+							<div class="radio radio-single radio-primary">
+								<input type="radio" value="d" ng-model="decrease" ng-click="setOperationDecrease($event)">
+								<label></label>
+							</div>
+							<span>减额</span>
+						</dd>
+					</dl> -->
+					<dl class="clearfix">
+						<dt>充值金额：</dt>
+						<dd>
+		                    <input ng-trim="true" validate-code="{ruleReg:'noZeroFloatTwo', ruleRegMsg:'<%=common_template_fix%>', maxLength:'9'}" class="form-control" id="transactionBalance" name="transactionBalance" ng-model="transactionBalance" type="text" ng-keyup="calTransction()" ng-blur="noZero()" required>
+		                    <div class="verification" ng-show="visible">
+		                    	<span class="errors" ng-show="balanceOperation.transactionBalance.$viewValue && balanceOperation.transactionBalance.$error.defined && balanceOperation.transactionBalance.$dirty">
+		                    		请输入大于0的数字，小数点后保留两位
+		                    	</span>
+		                    </div>
+						</dd>
+					</dl>
+					<dl class="clearfix">
+						<dt>充值后余额：</dt>
+						<dd ng-show="totalBalance && !balanceOperation.transactionBalance.$error.defined && balanceOperation.transactionBalance.$viewValue"><span ng-model="totalBalance">{{totalBalance}}</span>元</dd>
+					</dl>
+					<dl class="clearfix">
+						<dt>财务密码：</dt>
+						<dd>
+							<input ng-trim="true" id="paymentPassword" maxlength="30" name="paymentPassword" ng-model="paymentPassword" type="password" autocomplete="off" required>
+		                    <div class="verification" ng-show="visible">
+		                    	<span class="errors" id="ErrorPayPwd" ng-show="ErrorPayPwd">
+		                    		请输入数字，小数点后保留两位
+		                    	</span>
+		                    </div>
+						</dd>
+					</dl>
+				</div>
+			</form>
+			<div class="submit">
+				<button class="btn btn-primary" id="confirmBalance" ng-click="confirmBalance()">确认</button>
+			</div>
+		</div>
+	</div>
+
+	<!-- 弹框 -->
+	<div id="confirmPrompt" ng-show="confirmPrompt" class="prompt-modal middel-box">
+		<div class="prompt-wrap">
+			<div class="bomb-box">
+				<div class="title">操作确认</div>
+				<div class="prompt-content">
+					<div class="content">确认向以下账户充值<span>{{transactionBalance}}</span>元CNY?</div>
+					<p class="content-list"><span>账户名：</span>{{manageBalanceData.userName}}</p>
+					<p class="content-list"><span>编码：</span>{{manageBalanceData.code}}</p>
+					<p class="content-list"><span>公司全称：</span>{{manageBalanceData.fullName}}</p>
+				</div>
+				<div class="operation">
+					<button type="button" name="prompt-close" class="btn btn-default cancel-btn" ng-click="cancelBalance()"><%=common_page_cancel%></button>
+					<button type="button" name="prompt-confirm" class="btn btn-primary confirm-btn" ng-click="saveBalance()"><%=common_pagination_confirm%></button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="rechargeSuccess" ng-show="rechargeSuccess" class="prompt-modal box-tip recharge-success">
+		<div class="prompt-wrap">
+			<div class="bomb-box">
+				<div class="title">
+					<i class="icon-Success tip-box-icon">成功</i>
+				</div>
+				<div class="prompt-content">充值成功!</div>
+				<div class="operation">
+					<button class="btn btn-primary" ng-click="gotIt()">我知道了</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="rechargeFailed" ng-show="rechargeFailed" class="prompt-modal box-tip recharge-failed">
+		<div class="prompt-wrap">
+			<div class="bomb-box">
+				<div class="title">
+					<i class="icon-Error tip-box-icon">失败</i>
+				</div>
+				<div class="prompt-content">{{failedMsg}}</div>
+				<div class="operation">
+					<button class="btn btn-primary" ng-click="gotIt()">我知道了</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

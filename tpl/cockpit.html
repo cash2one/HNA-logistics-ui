@@ -1,0 +1,26 @@
+<section class="cockpit-container">
+    <div class="switch-wrapper">
+        <div class="switch-wrap">
+            <span ng-class="['business-statics-btn', {'active': businessStatics}]" ng-click="switchTab('businessStatics')"><em></em><%=business_statics%></span>
+            <span ng-class="['indicator-monitoring-btn ', {'active': !businessStatics}]" ng-click="switchTab('indicatorMonitoring')"><em></em><%=indicator_monitoring%></span>
+        </div>
+    </div>
+    <div class="main-content">
+    	<!-- 业务统计 -->
+		<div class="business-statics" ng-show="businessStatics">
+			<!-- 累计统计 -->
+			<div include="tpl/fragment/cockpit/cumulativeStatics.html" ng-controller="cumulativeCtrl"></div>
+			<!-- 统计排行 -->
+			<div include="tpl/fragment/cockpit/staticsRank.html" ng-controller="staticsCtrl"></div>
+		</div>
+    	<!-- 指标监控 -->
+    	<div class="data-monitoring" ng-hide="businessStatics">
+            <!--每周统计-->
+    		<div include="tpl/fragment/cockpit/weeklyStatics.html" ng-controller="weeklyStaticsCtrl"></div>
+    		<!--贸易关键指标-->
+    		<div include="tpl/fragment/cockpit/tradeIndicator.html" ng-controller="tradeIndicatorCtrl"></div>
+    		<!-- 最新订单 -->
+    		<div include="tpl/fragment/cockpit/latestOrder.html" ng-controller="latestOrderCtrl"></div>
+    	</div>
+    </div>
+</section>

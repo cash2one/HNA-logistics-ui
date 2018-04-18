@@ -1,0 +1,318 @@
+<section class="content test_bbf55073">
+    <div ng-hide="main" class="test_44f93b52">
+        <!-- 角色列表 -->
+        <div class="col-md-4 tree-container role-left test_10d164bc">
+            <div class="box-header with-border tree test_69225f2b">
+
+                <div class="select-box test_f55dc828">
+                    <input ng-trim="false" ng-value="roleModel.domainId" ng-model="roleModel.domainName" type="text" id="select-sys-input" readonly="readonly" class="test_81e20e0c">
+                    <i class="select-icon icon-drop-down test_a9d6f78d"></i>
+                </div>
+
+                <!--<select ng-model="roleModel.domainId" ng-change="roleModel.change(roleModel.domainId);" ng-options="item.domainId as item.name for item in roleModel.system" class="role-select test_b4f337a0"></select>-->
+                <div class="seach-tree test_68add119" style="margin-top:15px;">
+                    <input maxlength="30" style="color:#a9a9a9;" name="q" ng-enter="roleModel.search()" type="text" ng-model="roleModel.q" autocomplete="off" class="form-control test_90ffc14d" placeholder="<%=role_page_rolesearch%>">
+                    <i ng-click="roleModel.search()" class="icon-search search-group test_fb001e0e"></i>
+                </div>
+            </div>
+            <div class="user-add-button test_d3d2c248" style="padding-top:0px;">
+                <button ng-click="roleModel.addRole();" class="btn btn-primary add-button test_3cbd8b72"></button>
+            </div>
+            <div id="wrap-tree" class="test_9dc3fb24">
+                <div id="tree" class="m-tree-layer test_0d84d279"></div>
+            </div>
+        </div>
+
+        <!-- 角色管理 -->
+        <div ng-controller="tableController" class="col-md-8 group-detail-box right-panel-box test_2fe9f8c8" style="padding:0px;border:none;background: none;">
+            <div class="user-org-dtails layout-right test_fe54d5e1">
+                <div class="m-tab test_96cfa30d" id="m-tab">
+                    <ul class="nav nav-tabs clearfix test_c172272c">
+                        <li class="active test_85803752"><a href="javascript:void(0);" class="test_3a5b8083"><%=role_page_detail%></a></li>
+                        <li class="test_312bd004"><a href="javascript:void(0);" class="test_7a9d1d5d"><%=role_page_power%></a></li>
+                        <li class="test_a2eec269"><a href="javascript:void(0);" class="test_3b7101cc"><%=role_page_member%></a></li>
+                    </ul>
+                    <div class="tab-content test_e187ee94">
+                        <div class="table-pane active test_d437cf00">
+                            <form name="roleModel.form" novalidate="novalidate" class="test_82e4ea33">
+                                <div class="box-header with-border tree-detail-box test_9ebf5330">
+                                    <button id="editRole" ng-click="roleModel.editRole();" ng-show="!roleModel.isEdit && isSystemEdit" name="edit-org" class="btn btn-primary test_a44dc8ef"><%=common_page_edit%></button>
+                                </div>
+                                <dl class="user-group-from test_2d7620a3">
+                                    <dd class="test_9c151789 clearfix">
+                                        <div class="col-md-4 text-right padding-zero test_4c532b99">
+                                            <label class="test_b7c6c4fd">
+                                                <b ng-show="roleModel.isEdit" class="test_c5de9aab">*</b>
+                                                <span class="test_c3497c26"><%=role_page_name%>：</span>
+                                            </label>
+                                        </div>
+                                        <div class="col-md-8 text-left padding-zero test_f3fefcb8">
+                                            <span class="group-info test_c50403d7" ng-hide="roleModel.isEdit">
+                                                {{roleModel.roleName}}
+                                            </span>
+                                            <input ng-trim="false" ng-blur="checkName()" required="required" verification="{'ruleType':'name'}" ng-show="roleModel.isEdit" ng-model="roleModel.roleInputName" name="roleInputName" type="text" maxlength="{{roleModel.form.roleInputName.maxLength}}" autocomplete="off" class="form-control group-info test_247860a6">
+                                            <div class="verification test_2a2f223b" ng-show="roleModel.isEdit">
+                                                <span class="tips test_560d7577" ng-show="roleModel.form.roleInputName.info && !roleModel.form.roleInputName.$error.defined && roleModel.form.roleInputName.tips">
+                                                    {{roleModel.form.roleInputName.tips}}
+                                                </span>
+                                                <span id="name-msg" class="errors test_2501518d" ng-show="roleModel.form.roleInputName.$viewValue && roleModel.form.roleInputName.$error.defined && roleModel.form.roleInputName.$dirty">
+                                                    {{roleModel.form.roleInputName.errorTips}}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </dd>
+                                    <dd class="test_0eb4b86f clearfix">
+                                        <div class="col-md-4 text-right padding-zero test_2e55372f">
+                                            <label class="test_2034d743">
+                                                <b ng-show="roleModel.isEdit" class="test_75b61c5d">*</b>
+                                                <span class="test_dcf1d482"><%=role_page_code%>：</span>
+                                            </label>
+                                        </div>
+                                        <div class="col-md-8 text-left padding-zero test_70c6a8a2">
+                                            <span class="group-info test_56a043a6" ng-hide="roleModel.isEdit">
+                                                {{roleModel.roleCode}}
+                                            </span>
+                                            <input ng-trim="false" ng-blur="checkCode()" required="required" verification="{'ruleType':'code','maxType':'15','tipstype':'two'}" ng-show="roleModel.isEdit" ng-model="roleModel.roleInputCode" name="roleInputCode" type="text" maxlength="{{roleModel.form.roleInputCode.maxLength}}" autocomplete="off" class="form-control group-info test_9dadd5e1">
+                                            <div class="verification test_c7e84f61" ng-show="roleModel.isEdit">
+                                                <span class="tips test_29c6ef91" ng-show="roleModel.form.roleInputCode.info && !roleModel.form.roleInputCode.$error.defined && roleModel.form.roleInputCode.tips">
+                                                    {{roleModel.form.roleInputCode.tips}}
+                                                </span>
+                                                <span id="code-msg" class="errors test_16964cc1" ng-show="roleModel.form.roleInputCode.$viewValue && roleModel.form.roleInputCode.$error.defined && roleModel.form.roleInputCode.$dirty">
+                                                    {{roleModel.form.roleInputCode.errorTips}}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </dd>
+                                    <dd class="test_c85315aa clearfix">
+                                        <div class="col-md-4 text-right padding-zero test_88dd55c9">
+                                            <label class="test_b7923f75">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=common_page_remarks%>：</label>
+                                        </div>
+                                        <div class="col-md-8 text-left padding-zero test_1de4a1ac">
+                                            <span class="group-info test_d08671fd" ng-hide="roleModel.isEdit">{{roleModel.description}}</span>
+                                            <div ng-show="roleModel.isEdit" class="wrap-textarea test_8f99f0ee">
+                                                <textarea ng-change="showTextNumber();" ng-trim="false" rows="5" ng-model="roleModel.roleInputdescription" name="roleInputdescription" type="text" maxlength="140" class="form-control test_28b76043"></textarea>
+                                                <div class="show-string-length test_6c9c7d61"><span class="test_ddc47ad9">{{textareaNumber}}</span>字</div>
+                                            </div>
+                                        </div>
+                                    </dd>
+                                </dl>
+                                <div class="box-header with-border tree-detail-box center test_e07afa55">
+                                    <button ng-click="roleModel.cancelRole();" ng-show="roleModel.isEdit" name="cancel-org" class="btn btn-default test_6bb8ed23"><%=common_page_cancel%></button>
+                                    <button ng-click="roleModel.saveRole();" ng-show="roleModel.isEdit" name="save-org" ng-disabled="" class="btn btn-primary test_b86787c8"><%=common_page_save%></button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="table-pane test_135e771c">
+                            <div class="box-header with-border add-user test_74ecc51e">
+                                <div class="add-search-box test_e0b55f15">
+                                    <input maxlength="30" ng-enter="roleModel.searchResources();" ng-model="roleModel.resKey" type="text" class="form-control test_53a3f902" placeholder="<%=role_page_resourceName%>">
+                                    <i class="icon-search search-table test_9680c9d8"></i>
+                                    <div class="u-search-btn test_e25028f8">
+                                        <button ng-click="roleModel.searchResources()" class="btn btn-primary test_1c0bd353"><%=common_list_search_btn%></button>
+                                        <a href="javascript:;" ng-click="roleModel.seniorSeach()" class="u-senior-search test_28a27750">{{roleModel.seniorText}}</a>
+                                    </div>
+                                </div>
+                                <nav ng-if="roleModel.seniorFlag" class="fade test_0bd4576a" style="display: block;">
+                                    <div class="checkbox checkbox-info test_5c242aaf">
+                                        <input ng-model="roleModel.resourceFlag" type="checkbox" ng-click="roleModel.toggleChecked()" class="test_7ad6f80d">
+                                        <label class="test_22ecc119"></label>
+                                    </div>
+                                    <span class="test_55eff2fb"><%=role_page_showSelect%></span>
+                                </nav>
+                                <div class="batch-operation test_8706f6ed" style="border-bottom: 2px solid #ccc;">
+                                    <button ng-click="roleModel.saveResources();" class="btn btn-primary test_9cc549b4" style="float:none;"><%=common_page_save%></button>
+                                    <button ng-click="roleModel.shrinkResources();" class="btn btn-primary test_e2941865" style="float:none;"><%=common_page_packup%></button>
+                                </div>
+                            </div>
+                            <div id="wrap-resources" class="test_0f9c74fc">
+                                <ul id="resources" class="htree test_aad1c4c1" style="text-align:left;padding-left:45px;"></ul>
+                            </div>
+                        </div>
+                        <div class="table-pane test_8d65adc9">
+                            <div class="tab-right test_c7448e5c">
+                                <div class="box-header with-border add-user test_73c882f4">
+                                    <div class="add-search-box test_461f3343">
+                                        <input maxlength="30" ng-enter="roleModel.searchUser();" ng-model="roleModel.tableRole.restData.q" ng-value="q" type="text" class="form-control test_d154b4cc" placeholder="<%=role_page_memberSearch%>">
+                                        <i class="icon-search search-table test_c629b5f2"></i>
+                                        <div class="u-search-btn test_57bddb74">
+                                            <button ng-click="roleModel.searchUser()" class="btn btn-primary test_8e4d4c8e"><%=common_list_search_btn%></button>
+                                            <a href="javascript:;" ng-click="roleModel.userSenior()" class="u-senior-search test_dd93c6bb">{{roleModel.userSeniorFlag ? roleModel.ordinary : roleModel.senior}}</a>
+                                        </div>
+                                    </div>
+                                    <nav ng-show="roleModel.userSeniorFlag" class="fade test_0bd4576a" style="display:block;padding-top:0;">
+                                        <div style="width: 180px;" class="select-box test_f55dc828">
+                                            <input ng-trim="false" required ng-model="types" name="types" placeholder="全部" ng-value="typeValue" ng-click="getType()" type="text" id="type-select-input" readonly="readonly" class="test_81e20e0c">
+                                            <i class="select-icon icon-drop-down test_a9d6f78d"></i>
+                                        </div>
+                                    </nav>
+                                </div>
+                                <div class="batch-operation test_e8e5074a">
+                                    <button ng-click="roleModel.addUser();" class="btn btn-primary test_cb44fccd"><%=common_page_add%></button>
+                                    <button ng-click="roleModel.removeUser();" class="btn btn-primary test_6cdae003"><%=common_page_remove%></button>
+                                    <div id="userRole" style="display:none;" class="test_66116e8a">
+                                        <div class="panel panel-has-top test_0e0b8442">
+                                            <p class="panel-tips test_92dba277"><%=role_page_allMember%></p>
+
+                                            <div class="m-tab test_3a0ad851" id="m-tab-propmt">
+                                                <ul class="nav nav-tabs nav-justified test_f881308f">
+                                                    <li class="active test_eecc52d8">
+                                                        <a href="javascript:void(0);" class="test_23de67d4"><%=role_page_org%></a>
+                                                    </li>
+                                                    <li class="test_6624df0f">
+                                                        <a href="javascript:void(0);" class="test_1334eaa1"><%=role_page_group%></a>
+                                                    </li>
+                                                    <li class="test_5ef91b3d">
+                                                        <a href="javascript:void(0);" class="test_27ab7585"><%=role_page_user%></a>
+                                                    </li>
+                                                </ul>
+                                                <div class="tab-content test_04fa75b1">
+                                                    <div class="table-pane active test_4b034bf3">
+                                                        <div class="box-header with-border tree test_eedcae83" id="orgTreeTop">
+                                                            <div class="seach-tree test_d9ec30f6">
+                                                                <input maxlength="30" type="text" id="orgTreeSearch" name="orgSearch" class="form-control test_d0f3a617" placeholder="<%=role_page_orgSearch%>">
+                                                            </div>
+                                                        </div>
+                                                        <div id="wrap-orgTree" class="select-tree-box test_bbfc5f27">
+                                                            <div id="orgTree" class="test_515b1bd5"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="table-pane test_008c2758">
+                                                        <div class="box-header with-border tree test_ce80f647" id="groupTreeTop">
+                                                            <div class="seach-tree test_eb06f639">
+                                                                <input maxlength="30" id="groupTreeSearch" type="text" name="groupSearch" class="form-control test_2f054cda" placeholder="<%=role_page_groupSearch%>">
+                                                            </div>
+                                                        </div>
+                                                        <div id="wrap-groupTree" class="select-tree-box test_2c4fd5f9">
+                                                            <div id="groupTree" class="test_25c5ff30"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="table-pane test_daf1e8c2">
+                                                        <div class="box-header with-border tree test_ea4212f6" id="userTreeTop">
+                                                            <div class="seach-tree test_c1b8a5a0">
+                                                                <input maxlength="30" id="userTreeSearch" type="text" name="userSearch" class="form-control test_71410f14" placeholder="<%=role_page_userSearch%>">
+                                                            </div>
+                                                        </div>
+                                                        <div id="wrap-userTree" class="select-tree-box test_7d198c0e">
+                                                            <div id="userTree" class="test_974715e0"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel panel-has-top middle test_0b812f4c">
+                                            <p class="panel-tips test_c737cc92"><%=role_page_caMember%></p>
+                                            <div class="box-header with-border tree test_4bdcd484">
+                                                <div class="seach-tree test_b000be37">
+                                                    <input maxlength="30" ng-enter="roleModel.searchCandidateData()" ng-model="roleModel.searchCandidate" type="text" class="form-control test_f28cdaf2" placeholder="<%=role_page_memberSelect%>">
+                                                    <i ng-click="roleModel.searchCandidateData()" class="icon-search search-group test_e7993f7b"></i>
+                                                </div>
+                                            </div>
+
+                                            <div class="selected-user unselect test_aa116b48">
+                                            <span class="selected-user-list test_9cc96409">
+                                                <div class="checkbox checkbox-info test_561164b5">
+                                                    <input ng-click="roleModel.toggleCandidateAll();" ng-model="roleModel.candidateFlag" type="checkbox" class="test_216b8684">
+                                                    <label class="test_09d2268a"></label>
+                                                </div>
+                                                <%=common_page_selectAll%>
+                                            </span>
+                                                <span ng-if="value.isShow" ng-class="{'selected-user-list':true,'u-delete':value.delete}" ng-repeat="value in roleModel.candidateData" class="test_9c402502">
+                                                <div class="checkbox checkbox-info test_cf22f280">
+                                                    <input ng-disabled="value.delete" ng-click="roleModel.toggleCandidateOne(value.id, value.type);" ng-checked="value.checkbox" type="checkbox" class="test_22865d84">
+                                                     <label class="test_faa06c73"></label>
+                                                </div>
+                                                <i ng-class="{'icon-role':true,'icon-organization':value.type==1,'icon-user':value.type==0,'icon-usergroup':value.type==2}" class="test_a2f35d64"></i>
+                                                {{value.name}}
+                                            </span>
+                                            </div>
+
+                                        </div>
+                                        <div class="move-select-user test_8a738fa1">
+                                            <button ng-click="roleModel.addSelectedData();" class="cancel-selected btn btn-primary icon-angle-right test_7096691d"></button>
+                                            <button ng-click="roleModel.removeSelectedData();" class="add-unselected btn btn-primary icon-angle-left test_1dd2bbb1"></button>
+                                        </div>
+
+                                        <div class="panel panel-has-top right test_a5d1d41a">
+                                            <p class="panel-tips test_f8695691"><%=role_page_seMember%></p>
+                                            <div class="box-header with-border tree test_a07aa4a1">
+                                                <div class="seach-tree test_9084a523">
+                                                    <input maxlength="30" ng-enter="roleModel.searchSelectedData()" type="text" ng-model="roleModel.searchSelected" class="form-control test_41c038c3" placeholder="<%=role_page_memberSelect%>">
+                                                    <i ng-click="roleModel.searchSelectedData()" class="icon-search search-group test_262fa7f3"></i>
+                                                </div>
+                                            </div>
+                                            <div class="selected-user selected test_c07af2a9">
+                                            <span class="selected-user-list test_03775c21">
+                                                <div class="checkbox checkbox-info test_6e6d34a6">
+                                                    <input ng-click="roleModel.toggleSelectedAll(roleModel.selectedData);" ng-model="roleModel.selectedFlag" type="checkbox" class="test_d270d131">
+                                                    <label class="test_2a8ec3e3"></label>
+                                                </div>
+                                                <%=common_page_selectAll%>
+                                            </span>
+                                                <span ng-if="value.isShow" class="selected-user-list test_3e72701b" ng-repeat="value in roleModel.selectedData">
+                                                <div class="checkbox checkbox-info test_1fb972a0">
+                                                    <input ng-click="roleModel.toggleSelectedOne(value.id, value.type);" ng-checked="value.checkbox" type="checkbox" class="test_c52236dc">
+                                                     <label class="test_91944e49"></label>
+                                                </div>
+                                                <i ng-class="{'icon-role':true,'icon-organization':value.type==1,'icon-user':value.type==0,'icon-usergroup':value.type==2}" class="test_39ab7279"></i>
+                                                {{value.name}}
+                                            </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-container test_2dd700c3">
+                                <table class="user-table table-box test_4fa91bcb" cellpadding="0" cellspacing="0">
+                                    <div class="test_0fded0b7">
+                                        <thead class="test_446e9a78">
+                                        <tr class="test_f567ae00">
+                                            <th class="test_7b65dea1">
+                                                <div class="checkbox checkbox-info test_d1df64f1">
+                                                    <input type="checkbox" ng-model="roleModel.tableRole.selectFlag" ng-click="table.selectAll(roleModel.tableRole);" class="test_f92dfda1">
+                                                    <label class="test_c0f65c64"></label>
+                                                </div>
+                                            </th>
+                                            <th ng-repeat="item in roleModel.tableRole.tableHeader" class="test_a955cc15">{{item}}</th>
+                                        </tr>
+                                        </thead>
+                                    </div>
+                                    <tbody class="test_23a164bd">
+                                    <tr ng-repeat="value in roleModel.tableRole.tableBody" class="test_bc392425" ng-init="renderFinish($last)">
+                                        <td class="test_6a3504f5">
+                                            <div class="checkbox checkbox-info test_39e05021">
+                                                <input type="checkbox" ng-checked="value.checkbox" ng-click="table.selectOne(roleModel.tableRole, value.checkboxId);" class="test_347e00d6">
+                                                <label class="test_25bae323"></label>
+                                            </div>
+                                        </td>
+                                        <td class="test_04a058c3">{{(roleModel.tableRole.pagination.currentPage-1)*roleModel.tableRole.pagination.pageSize+$index+1}}</td>
+                                        <td style="text-align:center;" class="test_4a6ebaff">
+                                            <div class="test_b2aae18e" style="min-height:40px;">
+                                                <i ng-class="{'icon-role':true,'icon-user':value.type=='0','icon-organization':value.type=='1','icon-usergroup':value.type=='2'}" class="test_e4a59d4b"></i>
+                                            </div>
+                                        </td>
+                                        <td title="{{value.shortName}}" ng-bind-html="value.shortName | trustHtml:q" class="test_d861f8ea"></td>
+                                        <td title="{{value.code}}" ng-bind-html="value.code | trustHtml:q" class="test_68f7758d"></td>
+                                        <td title="{{value.orgName}}" class="test_0609de65">{{value.orgName || '&nbsp;'}}</td>
+                                        <td class="test_6aa0f9c1">
+                                            <ul class="m-table-ul test_cfe548fd">
+                                                <li ng-repeat="item in value.list" class="test_2108fc01">
+                                                    {{item.name}}
+                                                    <i ng-if="item.type == 0" class="delete-node icon-delete test_c9d74bfd" ng-click="roleModel.delUserRole(item.id, value.id, value.type);"></i>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <hnapagination table-service="table" page-table-model="roleModel.tableRole" class="test_8aba3b1b"></hnapagination>
+                            </div>
+                            <div ng-show="!roleModel.tableRole.pagination.isVisiblePage" style="position: absolute;top:165px;bottom:0px;width:100%;" class="test_08895153">
+                                <img style="width:100%;height:100%;" src="/public/img/undefined.svg" class="test_ba3db082">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

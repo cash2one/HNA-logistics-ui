@@ -1,0 +1,76 @@
+.user-table.airport-table th:nth-child(1),.user-table.airport-table td:nth-child(1){
+    width: 5%;
+}
+.user-table.airport-table th:nth-child(2),.user-table.airport-table td:nth-child(2){
+    width: 5%;
+}
+.user-table.airport-table th:nth-child(3),.user-table.airport-table td:nth-child(3){
+    width: 15%;
+}
+.user-table.airport-table th:nth-child(4),.user-table.airport-table td:nth-child(4){
+    width: 15%;
+}
+.user-table.airport-table th:nth-child(5),.user-table.airport-table td:nth-child(5){
+    width: 15%;
+}
+.user-table.airport-table th:nth-child(6),.user-table.airport-table td:nth-child(6){
+    width: 15%;
+}
+.user-table.airport-table th:nth-child(7),.user-table.airport-table td:nth-child(7){
+    width: 15%;
+}
+.user-table.airport-table th:nth-child(8),.user-table.airport-table td:nth-child(8){
+    width: 15%;
+}
+.remark-info{
+    height: 58px;
+}
+.remark-info .show-string-length{
+    bottom: 19px;
+}
+
+#AirportFrom .verification{
+    position: absolute;
+    right: 0px;
+    text-align: left;
+    width: 295px;
+}
+#AirportFrom .verification .errors{
+    position: relative;
+    padding-left: 0px;
+}
+
+.senior-seach{
+    cursor: pointer;
+    top: 0px;
+    right: -108px;
+    position: absolute;
+    line-height: 34px;
+    color: #fff;
+    width: auto;
+    padding: 0px;
+}
+.senior-seach button{
+    width: 98px;
+    padding: 0px;
+}
+.master-table {
+    left:20px;
+    right:20px;
+}
+.add-search-box .list-search-box {
+    width:60%;
+}
+.senior-seach {
+    right:-215px;
+}
+.add-search-box {
+    width:92.5%;
+}
+.master-table .batch-operation button {
+    margin-left: -3.5px !important;
+    margin-right: 10px !important;
+}
+td {
+  text-align: center !important;
+}

@@ -1,0 +1,25 @@
+.search-box-wrap{margin:0;padding:0;box-sizing:border-box;}
+.search-box-wrap{font:14px 'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif,\5b8b\4f53;background:#fff;text-align:left;}
+.search-box-wrap .search-input-box{width: 400px!important;height: 34px;line-height: 34px;border: 1px solid #ddd;padding-left: 8px;}
+.cityslide{width:400px;list-style:none;margin:0;padding:0;border:1px solid #A9B2BD;border-top: none;overflow:auto;max-height:260px;}
+.cityslide li{box-sizing:border-box;border-bottom: 1px solid #ddd;text-align: left;list-style:none;overflow:hidden;height:34px;padding:0px 10px;line-height:34px;font-weight:normal;width: 100%;}
+.cityslide li.on{background:#01AAED;color:#555;cursor:pointer;}
+.cityslide li:hover{background:#01AAED;color:#555;cursor:pointer;}
+.cityslide li.empty{background:#fff2e8;color:#555;}
+.cityslide li.empty em{color:red;font-style:normal;}
+.cityname{float:left;}
+.cityspell{float:right;}
+.search-box{width:400px;border:1px solid #ddd;border-top: none;overflow:hidden;}
+.search-box ul{margin:0;padding:0;overflow:hidden;padding-top: 5px}
+.search-box ul li:first-child{margin-left:5px;}
+.search-box ul li{line-height: 24px;float:left;list-style:none;padding:2px;border-bottom:1px solid #DDD;cursor:pointer;display:inline;color:#01AAED;width: auto}
+.search-box ul li.on{border-bottom-color:#555;position:relative;width: auto}
+.hide{display:none;}
+p.tip{color:#555;line-height:20px;padding:5px;margin:0;text-indent:3px;}
+.item-box{width:400px;border-top:1px solid #ddd;margin-top:-1px;clear:left;overflow:auto;_margin-bottom:8px;max-height: 260px;}
+.cityTab{overflow:hidden;}
+.cityinput{ font-size: 12px; padding-left: 2px; border: 1px solid #ddd; }
+.item-box a{padding-left:10px;line-height:34px;display:block;color:#555;text-decoration:none;border-bottom: 1px solid #ddd;}
+.item-box a:hover{color:#555;background: #01AAED;}
+.item-box .loading-top{margin-top: 0px}
+.item-box .loading img {position:relative;top:10px;  }

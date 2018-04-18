@@ -1,0 +1,20 @@
+{
+   "group_page_orgName": "Name：",
+   "group_page_orgShortName": "Abbreviation：",
+   "group_page_orgCode": "Code：",
+   "group_page_description": "Remarks：",
+
+   "group_placeholder_orgNameInfo": "Please enter the organization name",
+   "group_placeholder_orgShortNameInfo": "Please enter the organization",
+   "group_placeholder_orgCodeInfo": "Please enter the organization code",
+   "group_placeholder_descriptionInfo": "Please enter remarks",
+
+   "group_validate_groupName": "Organization name already exists",
+   "group_validate_orgShortName": "Organization referred to as already exists",
+   "group_validate_orgCode": "Organization code already exists",
+
+   "group_tree_search": "No search results under the organization",
+   "group_prompt_tip": "The organization has sub organizations or users, can not be deleted",
+   "group_prompt_box_tip": "Sure to delete the organization? ",
+   "group_prompt_delete_tip": "The organization has sub organizations or users, can not be deleted"
+}

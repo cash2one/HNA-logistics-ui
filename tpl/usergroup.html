@@ -1,0 +1,235 @@
+<section class="content test_5e70f71f">
+    <!-- 组织机构树 -->
+    <div class="col-md-4 tree-container test_31f8cbb7">
+        <div class="box-header with-border tree test_1ea6e704">
+            <div class="seach-tree test_94f168b2">
+                <input type="text" name="organization" maxlength="30" class="form-control test_caa30be6" placeholder="<%=common_tree_searchGroup%>">
+            </div>
+        </div>
+        <div class="user-add-button test_807f1d1b">
+            <button ng-click="addUsers();" class="btn btn-primary add-button test_aee77986"></button>
+        </div>
+        <div class="tree-scroll-isAdd-box test_ee51099e">
+            <input type="hidden" ng-model="getUid" class="test_6db615ea">
+            <div id="tree" class="layout-container test_a3ace418"></div>
+        </div>
+    </div>
+    <!-- 组织机构详情和用户 -->
+    <div class="col-md-8 group-detail-box right-panel-box test_007b71c6">
+        <div class="user-org-dtails layout-right test_b9ddd10c">
+            <div class="m-tab test_c0a1b258" id="m-tab">
+                <ul class="nav nav-tabs clearfix test_c1125370">
+                    <li class="active test_a9bcb3c1"><a href="javascript:void(0);" class="test_9dd4a667"><%=common_page_details%></a></li>
+                    <li class="test_59786a22"><a href="javascript:void(0);" class="test_6a0e1af1"><%=usergroup_tab_title%></a></li>
+                </ul>
+                <div class="tab-content test_6e679dec">
+                    <div class="table-pane active test_8967d633">
+                        <form name="userGroup.form" novalidate="novalidate" class="test_948be475">
+                            <input type="hidden" ng-model="userGroup.parentId" class="test_752b546b">
+                            <input type="hidden" ng-model="userGroup.orgId" class="test_8661d631">
+                            <input type="hidden" name="newOrganizationId" data-value="" class="test_81b17798">
+                            <div class="operation-box right test_a4b2cd83">
+                                <button ng-hide="userGroup.edit" ng-click="editUserGroup();" ng-disabled="disabledEdit" ng-class="{'btn-disable': disabledEdit}" class="btn btn-primary test_adf8d7bd"><%=common_page_edit%></button>
+                            </div>
+                            <dl class="user-group-from test_066b1bb5">
+                                <dd class="test_3adc8646 clearfix">
+                                    <div class="col-md-4 text-right padding-zero test_87e3a138">
+                                        <label class="test_0080c21f"><b ng-show="userGroup.visible" class="test_45fdbe12">*</b><span class="test_841bc868"><%=usergroup_page_orgName%></span></label>
+                                    </div>
+                                    <div class="col-md-8 text-left padding-zero test_1d51ab15">
+                                        <span id="userOrgName" class="group-info test_c393e7ba" ng-hide="userGroup.visible">{{userGroup.orgName}}</span>
+                                        <input ng-trim="false" validate-code="{ruleReg:'name', ruleRegMsg:'<%=common_validate_name%>', maxLength:'30'}" ng-show="userGroup.visible" ng-model="userGroup.orgNameInfo" name="orgNameInfo" ng-blur="validateOrgName();" ng-focus="focusOrgName();" type="text" class="form-control group-info test_034f3b24" required>
+                                        <div class="verification test_6db37a2c" ng-show="userGroup.visible">
+                                            <span class="isExisted test_956f8a1b" ng-show="validateOrgError"><%=usergroup_validate_orgName%></span>
+                                            <span class="errors test_a4e8057c" ng-show="userGroup.form.orgNameInfo.$viewValue && userGroup.form.orgNameInfo.$error.defined && userGroup.form.orgNameInfo.$dirty">
+                                            {{userGroup.form.orgNameInfo.errorTips}}
+                                        </span>
+                                        </div>
+                                    </div>
+                                </dd>
+                                <dd class="test_7b712966 clearfix">
+                                    <div class="col-md-4 text-right padding-zero test_fdc9f898">
+                                        <label class="test_530e956c"><b ng-show="userGroup.visible" class="test_b88babf4">*</b><span class="test_fdd579c9"><%=usergroup_page_orgShortName%></span></label>
+                                    </div>
+                                    <div class="col-md-8 text-left padding-zero test_5283bef7">
+                                        <span id="userOrgShortName" class="group-info test_cda49cc4" ng-hide="userGroup.visible">{{userGroup.orgShortName}}</span>
+                                        <input ng-trim="false" validate-code="{ruleReg:'name', ruleRegMsg:'<%=common_validate_name%>', maxLength:'30'}" verifiname="" ng-show="userGroup.visible" ng-model="userGroup.orgShortNameInfo" ng-blur="validateOrgShortName();" ng-focus="focusOrgShortName();" name="orgShortNameInfo" type="text" class="form-control group-info test_ba5aafa0" required>
+                                        <div class="verification test_4a5a347c" ng-show="userGroup.visible">
+                                            <span class="isExisted test_cd9b1551" ng-show="validateOrgShortError"><%=usergroup_validate_orgShortName%></span>
+                                            <span class="errors test_820cb226" ng-show="userGroup.form.orgShortNameInfo.$viewValue && userGroup.form.orgShortNameInfo.$error.defined && userGroup.form.orgShortNameInfo.$dirty">
+                                                {{userGroup.form.orgShortNameInfo.errorTips}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </dd>
+                                <dd class="test_fa9f1d9d clearfix">
+                                    <div class="col-md-4 text-right padding-zero test_230b5c53">
+                                        <label class="test_7641eb51"><b ng-show="userGroup.visible" class="test_62072c66">*</b><span class="test_d6b03641"><%=usergroup_page_orgCode%></span></label>
+                                    </div>
+                                    <div class="col-md-8 text-left padding-zero test_3f1b7f01">
+                                        <span id="userOrgCode" class="group-info test_77217872" ng-hide="userGroup.visible">{{userGroup.orgCode}}</span>
+                                        <input ng-trim="false" validate-code="{ruleReg:'code', ruleRegMsg:'<%=common_validate_code%>', maxLength:'15'}" ng-show="userGroup.visible" ng-model="userGroup.orgCodeInfo" ng-blur="validateOrgCode();" ng-focus="focusOrgCode();" name="orgCodeInfo" type="text" class="form-control group-info test_12345542" required>
+                                        <div class="verification test_4b08defd" ng-show="userGroup.visible">
+                                            <span class="isExisted test_73e2d73c" ng-show="validateCodeError"><%=usergroup_validate_orgCode%></span>
+                                            <span class="errors test_90d78623" ng-show="userGroup.form.orgCodeInfo.$viewValue && userGroup.form.orgCodeInfo.$error.defined && userGroup.form.orgCodeInfo.$dirty">
+                                                {{userGroup.form.orgCodeInfo.errorTips}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </dd>
+                                <dd class="test_62c81471 clearfix">
+                                    <div class="col-md-4 text-right padding-zero test_3010a6ff">
+                                        <label class="test_cb8c2ad5"><%=usergroup_page_description%></label>
+                                    </div>
+                                    <div class="col-md-8 text-left padding-zero test_e3ceaed7">
+                                        <span id="userDescription" class="group-info test_5562a078" ng-hide="userGroup.visible">{{userGroup.description}}</span>
+                                        <div ng-show="userGroup.visible" class="form-control group-info test_6c2556db" style="height: 95px;">
+                                            <textarea style="height: 95px;" ng-trim="false" ng-show="userGroup.visible" ng-focus="visibleTextNumber();" ng-blur="hiddenTextNumber();" ng-change="showTextNumber();" ng-model="userGroup.descriptionInfo" name="userGroup.descriptionInfo" type="text" maxlength="140" rows="5" class="form-control group-info test_fd7e112b"></textarea>
+                                            <div ng-show="textCountVisible" class="show-string-length test_bcbe38bb"><span class="test_e6338579">{{textNumber}}</span>字</div>
+                                        </div>
+                                    </div>
+                                </dd>
+                            </dl>
+                            <div class="operation-box center test_35b0684d">
+                                <button ng-show="userGroup.edit" ng-click="closeUserGroup();" class="btn btn-default test_d5d4e78b"><%=common_page_cancel%></button>
+                                <button name="userGroupEdit" ng-show="userGroup.edit" ng-click="submitUserGroup();" class="btn btn-primary test_403d54df"><%=common_page_save%></button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="table-pane test_a4c51a8c">
+                        <div ng-controller="tableController" class="test_369a8393">
+                            <div class="box-header with-border add-user test_01b9fe32">
+                                <div class="add-search-box test_27cf975c">
+                                    <input ng-enter="retrievalUser();" name="retrievalUserInput" ng-model="tableModel.restData.q" ng-value="q" type="text" class="form-control test_e27c5c21" placeholder="<%=common_table_searchUserGroup%>">
+                                    <i class="icon-search search-table test_4ef50912"></i>
+                                    <div class="senior-seach test_11a85ca2">
+                                        <button ng-click="retrievalUser();" class="btn btn-primary test_1d284e48"><%=common_list_search_btn%></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="batch-operation test_6b89c193">
+                                <button ng-click="addGroupUser();" class="btn btn-primary test_097c194b"><%=common_page_add%></button>
+                                <button ng-click="deleteGroupUser();" class="btn btn-primary test_e9dd0212"><%=common_page_remove%></button>
+
+                                <!-- 添加弹框的内容 -->
+                                <div id="userGroup" style="display: none;" class="test_32440dcc">
+                                    <div class="panel test_cb681d13">
+                                        <p class="panel-tips test_dbc94bf9"><%=usergroup_move_title_all%></p>
+                                        <div class="box-header with-border tree test_2f5b4302">
+                                            <div class="seach-tree test_456ed859">
+                                                <input type="text" name="userOrganization" maxlength="30" class="form-control i18n-input test_b97208f7" placeholder="<%=common_tree_searchGroup%>">
+                                                <input type="hidden" ng-model="userGroup.selectOrgId" class="test_674f29b4">
+                                            </div>
+                                        </div>
+                                        <div class="select-tree-box test_2190d83b">
+                                            <div id="selectGroup" class="test_ed772a1e"></div>
+                                        </div>
+                                    </div>
+                                    <div class="panel middle test_5a1ebd47">
+                                        <p class="panel-tips test_4e2fddd3"><%=usergroup_move_title_unselect%></p>
+                                        <div class="box-header with-border tree test_6e52c1eb">
+                                            <div class="seach-tree test_d1088e27">
+                                                <input ng-enter="searchUnSelectUser();" maxlength="30" ng-model="userGroup.moveUser.unSelectValue" type="text" class="form-control test_767dc00b" placeholder="<%=usergroup_move_search%>">
+                                                <i ng-click="searchUnSelectUser();" class="icon-search search-group test_1af987e0"></i>
+                                            </div>
+                                        </div>
+                                        <div id="orgData" class="selected-user test_d9fc9395">
+                                        <span class="selected-user-list test_5c1d0c06">
+                                            <div class="checkbox checkbox-info test_ab7db6e4">
+                                            <input ng-click="unSelectAll();" ng-checked="userGroup.moveUser.uncheckedAll" type="checkbox" class="test_7af6fdf9">
+                                            <label class="test_6c27f8c2"></label>
+                                            </div>
+                                            <%=usergroup_move_select_all%>
+                                        </span>
+                                            <span class="selected-user-list unselect test_ed67a4f8" ng-repeat="value in userGroup.tableUserGroup" ng-class="{'icon-disabled' : value.disabled}">
+                                            <div class="checkbox checkbox-info test_bd3e2274">
+                                                <input ng-click="getUnselect($event);" ng-checked="value.checked || userGroup.moveUser.unchecked" ng-disabled="value.disabled" type="checkbox" data-name="{{value.fullName}}" data-userid="{{value.userId}}" class="test_80f91ae6">
+                                                 <label class="test_e15534d0"></label>
+                                            </div>
+                                            <i class="icon-user test_2774353c" ng-class="{'icon-disabled' : value.disabled}"></i>
+                                            <span class="test_84cea1a9">{{value.fullName}}</span>
+                                        </span>
+                                        </div>
+
+                                    </div>
+                                    <div class="move-select-user test_21b80e43">
+                                        <button ng-click="addUnselected();" class="cancel-selected btn btn-primary icon-angle-right test_2bf5d94d"></button>
+                                        <button ng-click="cancelSelected();" class="add-unselected btn btn-primary icon-angle-left test_b88788f8"></button>
+                                    </div>
+                                    <div class="panel right test_2464b977">
+                                        <p class="panel-tips test_55fe383f"><%=usergroup_move_title_selected%></p>
+                                        <div class="box-header with-border tree test_bea25262">
+                                            <div class="seach-tree test_987423e7">
+                                                <input type="text" ng-enter="searchSelectedUser();" maxlength="30" ng-model="userGroup.moveUser.selectValue" class="form-control test_fe46ec78" placeholder="<%=usergroup_move_search%>">
+                                                <i class="icon-search search-group test_e66ad744" ng-click="searchSelectedUser();"></i>
+                                            </div>
+                                        </div>
+                                        <div class="selected-user test_5583be10">
+                                    <span class="selected-user-list test_73e6e39c">
+                                        <div class="checkbox checkbox-info test_24f1fd79">
+                                        <input ng-click="selectedAll();" ng-checked="userGroup.moveUser.checkedAll" type="checkbox" class="test_ac6c7d66">
+                                        <label class="test_e752962a"></label>
+                                        </div>
+                                        <%=usergroup_move_select_all%>
+                                    </span>
+                                            <span class="selected-user-list selected test_275b65ad" ng-repeat="value in userGroup.selectedUserGroup">
+                                        <div class="checkbox checkbox-info test_504e4670">
+                                            <input ng-click="getSelected($event);" ng-checked="value.checked || userGroup.moveUser.checked" type="checkbox" data-name="{{value.fullName}}" data-userid="{{value.userId}}" class="test_99400ca8">
+                                             <label class="test_5c35aeda"></label>
+                                        </div>
+                                        <i class="icon-user test_8ba34820"></i>
+                                        <span class="test_d42deaf2">{{value.fullName}}</span>
+                                    </span>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                                <!-- 添加弹框的内容 end -->
+                            </div>
+
+                            <div class="table-container test_75df97be">
+                                <input type="hidden" ng-model="getOrgName" class="test_b01c8556">
+                                <table class="user-table table-box test_50a7e3e7" cellpadding="0" cellspacing="0">
+                                    <div class="test_bb0aad24">
+                                        <thead class="test_5a705b5a">
+                                        <tr class="test_2d6816be">
+                                            <th class="test_f9b4a585">
+                                                <div class="checkbox checkbox-info test_aa938909">
+                                                    <input type="checkbox" ng-model="tableModel.selectFlag" ng-click="table.selectAll(tableModel);" class="test_c897217c">
+                                                    <label class="test_24d688d6"></label>
+                                                </div>
+                                            </th>
+                                            <th ng-repeat="item in tableModel.tableHeader" class="test_ec4761a3">{{item}}</th>
+                                        </tr>
+                                        </thead>
+                                    </div>
+                                    <tbody class="test_652b4f9d">
+                                    <tr ng-repeat="value in tableModel.tableBody" data-id="{{value.userId}}" data-orgid="{{value.orgId}}" ng-init="renderFinish($last)" class="test_fde8b488">
+                                        <td class="test_8f4038b7">
+                                            <div class="checkbox checkbox-info test_08904f9f">
+                                                <input type="checkbox" ng-value="{{value.userId}}" ng-checked="value.checkbox" ng-click="table.selectOne(tableModel, value.checkboxId);" class="test_00ad5895">
+                                                <label class="test_7b5b2143"></label>
+                                            </div>
+                                        </td>
+                                        <td class="test_c3a6381c">{{(tableModel.pagination.currentPage-1)*tableModel.pagination.pageSize+$index+1}}</td>
+                                        <td title="{{value.fullName}}" ng-bind-html="value.fullName | trustHtml:q" class="test_5fabf1eb"></td>
+                                        <td title="{{value.userCode}}" ng-bind-html="value.userCode | trustHtml:q" class="test_10ebd520"></td>
+                                        <td title="{{value.orgName}}" class="test_9dcade7c">{{value.orgName}}</td>
+                                        <td title="{{value.positionName}}" class="test_a10ae6f6">{{value.positionName}}</td>
+                                        <td title="{{value.mobilephone}}" ng-bind-html="value.mobilephone | trustHtml:q" class="test_0fd3b382"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <hnapagination table-service="table" page-table-model="tableModel" class="test_2956a1cc"></hnapagination>
+                            </div>
+                            <div ng-show="!tableModel.pagination.isVisiblePage" style="position: absolute;top:165px;bottom:0px;width:100%;" class="test_76227453">
+                                <img style="width:100%;height:100%;" src="/public/img/undefined.svg" class="test_95e6a2e1">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,62 @@
+<div class="latest-order">
+    <h3 class="title">最新订单</h3>
+    <div class="select-box test_bfd36182">
+        <input ng-model="statesName" id="states" autocomplete="off" class="input-text ng-pristine ng-untouched ng-valid" type="text">
+        <i class="select-icon icon-drop-down" style="z-index: 1"></i>
+    </div>
+    <div class="table-container" ng-controller="tableController">
+
+		<div class="logistics-table" ng-show="showLogisticsTable">
+			<table class="table-box" cellpadding="0" cellpadding="0">
+				<thead>
+				<tr>
+					<th>订单号</th>
+					<th>客户单号</th>
+					<th>产品信息</th>
+					<th>客户信息</th>
+					<th>货物类型</th>
+					<th>起止地</th>
+				</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="item in tableModel.tableBody" ng-init="renderFinish($last)">
+						<td title="{{item.orderNo}}"><a href="javascript:;" ng-click="jumpToLogisticsOrder(item.orderNo, item.orderStatus)">{{item.orderNo}}</a></td>
+						<td title="{{item.externalNo}}">{{item.externalNo}}</td>
+						<td title="{{item.productName}}">{{item.productName}}</td>
+						<td title="{{item.customerName +'-'+item.cusUserName}}">{{item.customerName +'-'+item.cusUserName}}</td>
+						<td title="{{item.cargoTypeName}}">{{item.cargoTypeName}}</td>
+						<td title="{{item.fromAddress.cityName+'('+item.fromAddress.countryCode+') - '+item.toAddress.cityName+'('+item.toAddress.countryCode+')'}}">{{item.fromAddress.cityName+'('+item.fromAddress.countryCode+') - '+item.toAddress.cityName+'('+item.toAddress.countryCode+')'}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+
+		<div class="trade-table" ng-hide="showLogisticsTable">
+			<table class="table-box" cellpadding="0" cellpadding="0">
+				<thead>
+				<tr>
+					<th>订单号</th>
+					<th>商品信息</th>
+					<th>销售方</th>
+					<th>采购方</th>
+					<th>采购量</th>
+				</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="item in tradeList" ng-init="renderFinish($last)">
+						<td title="{{item.orderNo}}"><a href="javascript:;" ng-click="jumpToTradeOrder(item)">{{item.orderNo}}</a></td>
+						<td class="goods-info">
+							<p title="{{orderGoodsMsg(val)}}" ng-repeat="val in item.orderGoods">{{val.goodsName}}</p>
+						</td>
+						<td title="{{item.sellerName}}">{{item.sellerName}}</td>
+						<td title="{{item.purchaserName}}">{{item.purchaserName}}</td>
+						<td class="goods-info">
+							<p title="{{orderGoodsMsg(val)}}" ng-repeat="val in item.orderGoods">{{val.goodsNum}}{{val.goodsUnit}}</p>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+{
+    "carrierMaritime_page_country": "国家",
+    "carrierMaritime_page_empty": "重置",
+    "carrierMaritime_search_placeholder": "请输入名称或代码",
+    "carrierMaritime_page_international": "国际化",
+    "carrierMaritime_page_name": "航运公司名称",
+    "carrierMaritime_page_nameEn": "英文名称",
+    "carrierMaritime_page_country": "国家",
+    "carrierMaritime_page_code": "代码",
+    "carrierMaritime_code_modelDelTips": "确定删除已选航运公司？",
+    "carrierMaritime_page_add": "添加航运公司",
+    "carrierMaritime_code_modelDetail": "修改航运公司",
+    "carrierMaritime_page_baseInfo": "基本信息",
+    "carrierMaritime_page_interName": "国际化名称"
+}

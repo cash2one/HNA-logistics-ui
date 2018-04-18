@@ -1,0 +1,132 @@
+<div class="c-detail-title">
+    <div class="u-back clearfix">
+        <button ng-click="goBack('bankManager');" class="btn btn-default test_2874b5ed">返回</button>
+    </div>
+    <div class="u-title">
+        银行账户管理
+    </div>
+</div>
+
+<div class="m-bank-box clearfix">
+    <div ng-repeat="item in list track by $index" class="m-unit-box">
+        <ul>
+            <li>
+                <span class="left-text">账户号：</span>
+                <span class="right-text">{{item.cardNo}}</span>
+            </li>
+            <li>
+                <span class="left-text">银行：</span>
+                <span class="right-text">{{item.bank}}</span>
+            </li>
+            <li>
+                <span class="left-text">开户行：</span>
+                <span class="right-text">{{item.subbranch}}</span>
+            </li>
+        </ul>
+        <button ng-if="item.status == 2" type="button" class="btn btn-primary u-bank-btn" ng-click="unbundled(item)">解绑</button>
+        <button ng-if="item.status == 1" type="button" class="btn btn-primary u-bank-btn" ng-click="verifyAccount(item)">验证账户</button>
+    </div>
+
+    <div class="m-unit-box m-unit-add" ng-click="addBankCard()">
+        <i class="add-bank-icon"></i>
+        <p class="add-bank-btn">添加账户</p>
+    </div>
+</div>
+
+<!--添加银行卡账户-->
+<div class="prompt-modal middle-box" ng-show="showAddCard">
+    <div class="prompt-wrap">
+        <div class="bomb-box">
+            <div class="title">添加账户</div>
+            <div class="prompt-content">
+                <form name="addBankCardFrom" novalidate="novalidate">
+                    <ul class="prompt-ul">
+                        <li class="lists">
+                            <span class="left-text"><b class="red">*</b>银行账户号：</span>
+                            <div class="right-div-text">
+                                <input ng-blur="ansycCardNo()" ng-trim="false" maxlength="30" class="input-text" type="text" name="cardNo" ng-model="cardNo" required />
+                                <div class="verification">
+                                    <span id="remote-cardNo-error" class="errors" ng-show="addBankCardFrom.cardNo.$viewValue && addBankCardFrom.cardNo.$error.defined && addBankCardFrom.cardNo.$dirty">{{addBankCardFrom.cardNo.errorTips}}</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="lists">
+                            <span class="left-text"><b class="red">*</b>所属银行：</span>
+                            <div class="right-div-text select-box">
+                                <input ng-trim="false" id="select-bank" ng-click="getBankList()" maxlength="30" class="input-text" type="text" name="bank" ng-model="bank" readonly="readonly" required/>
+                                <i class="select-icon icon-drop-down"></i>
+                            </div>
+                        </li>
+                        <li class="lists">
+                            <span class="left-text"><b class="red">*</b>开户行名称：</span>
+                            <div class="right-div-text">
+                                <input readonly="readonly" id="select-subbranch" ng-click="getSubbranchList()" ng-trim="false" maxlength="30" class="input-text" type="text" name="subbranch" ng-model="subbranch" required />
+                                <div class="verification">
+                                    <span class="errors" ng-show="addBankCardFrom.subbranch.$viewValue && addBankCardFrom.subbranch.$error.defined && addBankCardFrom.subbranch.$dirty">{{addBankCardFrom.subbranch.errorTips}}</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="lists mobile-send-code">
+                            <span class="left-text"><b class="red">*</b>手机号：</span>
+                            <div class="right-div-text">
+                                <input ng-blur="ansycVerCode()" ng-trim="false" maxlength="30" class="input-text" type="text" name="mobile" ng-model="mobile" required/>
+                                <button ng-disabled="lockVerCodeBtn" type="button" class="btn btn-primary" ng-click="sendSms()">{{getVerCodeBtnText}}</button>
+                                <div class="verification">
+                                    <span class="errors" ng-show="addBankCardFrom.mobile.$viewValue && addBankCardFrom.mobile.$error.defined && addBankCardFrom.mobile.$dirty">{{addBankCardFrom.mobile.errorTips}}</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="lists">
+                            <span class="left-text"><b class="red">*</b>验证码：</span>
+                            <div class="right-div-text">
+                                <input ng-blur="ansycVerCode()" ng-trim="false" maxlength="6" class="input-text" type="text" name="verCode" ng-model="verCode" required/>
+                                <div class="verification">
+                                    <span id="remote-verCode-error" class="errors" ng-show="addBankCardFrom.verCode.$viewValue && addBankCardFrom.verCode.$error.defined && addBankCardFrom.verCode.$dirty">{{addBankCardFrom.verCode.errorTips}}</span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            <div class="operation">
+                <button type="button" class="btn btn-default" ng-click="showAddCard = false">取消</button>
+                <button type="button" class="btn btn-primary" ng-click="saveBankCard()">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--添加银行卡账户End-->
+
+<!--验证账户-->
+<div class="prompt-modal middle-box" ng-show="showVerifyAccount">
+    <div class="prompt-wrap">
+        <div class="bomb-box" style="min-height:400px!important;">
+            <form name="verifyAccountForm" novalidate="novalidate">
+                <div class="title">验证账户</div>
+                <div class="prompt-content">
+                    <p class="prompt-tips">
+                        平安银行已向{{currentVerifyAccount.bank}}账户（尾号{{currentVerifyAccount.cardNo.slice(-4)}}）发起一笔转账，请查询转账信息并完成验证。
+                    </p>
+                    <ul class="prompt-ul">
+                        <li class="lists">
+                            <span class="left-text">
+                                <b class="red">*</b>验证金额：
+                            </span>
+                            <div class="right-div-text">
+                                <input ng-trim="false" maxlength="9" class="input-text" type="text" name="tranAmount" ng-model="tranAmount" required  verification="{'ruleType':'floatTwo','ruleRegMsg':'请输入数字，小数点后最多2位'}" />
+                                <div class="verification">
+                                    <span class="errors" ng-show="verifyAccountForm.tranAmount.$viewValue && verifyAccountForm.tranAmount.$error.defined && verifyAccountForm.tranAmount.$dirty">{{verifyAccountForm.tranAmount.errorTips}}</span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="operation">
+                    <button ng-click="showVerifyAccount = false" type="button" class="btn btn-default">取消</button>
+                    <button ng-click="confirmVerifyAccount()" type="button" class="btn btn-primary">确定</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--验证账户End-->

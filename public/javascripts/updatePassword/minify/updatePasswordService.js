@@ -1,0 +1,1 @@
+app.factory("updatePasswordService",["easyHttp",function(t){var e={};return e.updatePassword=function(e,o){return t.post("logistics.updatePassword",e,o)},e.logout=function(e){return t.get("logistics.logout",e)},e.getUserProfile=function(e){return t.get("logistics.getUserProfile",e)},e}]);

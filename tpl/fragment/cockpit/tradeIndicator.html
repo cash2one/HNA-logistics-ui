@@ -1,0 +1,13 @@
+<div class="trade-indicator">
+    <h3 class="title">贸易关键指标</h3>
+    <div class="trade-indicator-lists clearfix">
+        <div ng-repeat="item in data">
+            <h4 class="title">{{item.projectName}}</h4>
+            <div class="content">
+            	<p class="overdue-rate"><span>逾期率：</span>{{item.overdueRate}}%</p>
+            	<p class="turnover-days"><span>周转天数：</span>{{item.turnoverDay}}天</p>
+            	<p class="annualized-rate"><span>年化收益率：</span>{{item.annualizedReturn}}%</p>
+            </div>
+        </div>
+    </div>
+</div>

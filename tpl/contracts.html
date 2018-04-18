@@ -1,0 +1,194 @@
+<style class="test_ef18f55f">
+    .label{
+        width: 60px;
+        text-align: right;
+    }
+    .middle-box .bomb-box {
+        min-height: 520px;
+    }
+    /*.uploadFile{*/
+        /*position: absolute;*/
+        /*height: 34px;*/
+        /*width: 120px;*/
+        /*top: 0px;*/
+        /*left: 0px;*/
+        /*opacity: 0;*/
+        /*z-index: 10;*/
+    /*}*/
+    .img-upload-button{
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        height: 34px;
+        width: 120px;
+        z-index: 5;
+    }
+
+    .uploadFile {
+        position: absolute;
+        height: 34px;
+        width: 300px;
+        top: 22px;
+        opacity: 0;
+        z-index: 10;
+    }
+</style>
+<section class="test_aa5695b2">
+    <div class="master-table test_a1eed008" style="left: 15px;right: 15px;">
+        <div class="add-search-box test_70c06b41">
+            <div class="list-search-box test_faef05e3" style="width:100%">
+                <div class="search-cell test_2342f759">
+                    <span class="label test_554a9952">业务类型</span>
+                    <div class="select-box test_0b1cc60b">
+                        <input id="serviceType" ng-model="serviceType" style="width: 100%;padding-left: 2px;" autocomplete="off" class="input-text test_ead91745" type="text">
+                        <i class="select-icon icon-drop-down test_3041e4ad"></i>
+                    </div>
+                </div>
+                <div class="search-cell test_04ee641f">
+                    <span class="label test_ee468e5c">模板名称</span>
+                    <div class="select-box test_ba525f9b">
+                        <input ng-model="templateName" style="width: 100%;padding-left: 2px;" autocomplete="off" class="input-text test_457bef98" type="text" maxlength="30">
+
+                    </div>
+                </div>
+                <div class="search-cell test_e39e9db4">
+                    <span class="label test_43132998">合同标题</span>
+                    <div class="select-box test_9a98899c">
+                        <input ng-model="templateTitle" style="width: 100%;padding-left: 2px;" autocomplete="off" class="input-text test_77f91189" type="text" maxlength="30">
+
+                    </div>
+                </div>
+                <!--<div class="search-cell" >-->
+                    <!--<span class="label">创建人</span>-->
+                    <!--<div class="select-box" >-->
+                        <!--<input   ng-model="creater" style="width: 100%;padding-left: 2px;;padding-left:2px" autocomplete="off" class="input-text" type="text" maxlength="30">-->
+
+                    <!--</div>-->
+                <!--</div>-->
+                <div class="search-cell test_59a5ac58">
+                    <span class="test_9b05d11b">创建时间</span>
+                    <input type="text" id="begin-time" style="width:248px;padding-left:2px" autocomplete="off" class="test_1b2d981a">
+                    <span class="test_26ecd9f6">～</span>
+                    <input type="text" id="finish-time" style="width:248px;padding-left:2px" autocomplete="off" class="test_8ee8e609">
+                </div>
+                <div class="search-cell test_01243c81" style="margin-left: 98px;">
+                    <span class="label test_d4815346">合同状态</span>
+                    <div class="select-box test_0fa953e7">
+                        <input id="contractStatus" ng-model="contractStatus" style="width: 100%;padding-left: 2px;" autocomplete="off" class="input-text test_a5751d6e" type="text">
+                        <i class="select-icon icon-drop-down test_f8da6bb1"></i>
+                    </div>
+                </div>
+                <div class="search-cell test_5b349519" style="float: right;">
+                    <span style="color:#888;margin-right:10px;cursor:pointer;position:relative;" ng-click="clearData()" class="test_af43c014"><%=common_clear_data%></span>
+                    <button ng-click="search();" class="btn btn-primary test_b9495f70"><%=common_list_search_btn%></button>
+                </div>
+            </div>
+        </div>
+        <div ng-controller="tableController" class="test_42e5b88f">
+            <div class="batch-operation test_6986e7ed">
+                <button ng-click="createContract();" class="btn btn-primary test_8dfca793">添加</button>
+                <button id="delete" ng-click="deleteContract();" class="btn btn-primary test_edf5575c">删除</button>
+                <button ng-click="upLoadContracts();" class="btn btn-primary test_e3ac222b">上传合同</button>
+
+            </div>
+            <div class="table-container test_ebd7bd48">
+                <table class="table-box test_f796e610" cellpadding="0" cellspacing="0">
+                    <thead class="test_7f15a77e">
+                    <th style="width:5%" class="test_53d48076">
+                        <div class="checkbox checkbox-info test_621b6cb0">
+                            <input type="checkbox" id="select-all" ng-model="tableModel.selectFlag" ng-click="table.selectAll(tableModel);" class="test_8b6de434">
+                            <label class="test_c664e468"></label>
+                        </div>
+                    </th>
+                    <th style="width:{{tableModel.tableHeaderSize[$index]}}" ng-repeat="item in tableModel.tableHeader" class="test_7547a67d">
+                        {{item}}
+                        <p ng-if="$index==1" style="position:relative;color:#555;top:-12px;color:#555;font-size:10px;line-height:15px" class="test_c0f5eb02"></p>
+                    </th>
+                    </thead>
+                    <tbody class="tbody test_79b86cf9">
+                    <tr ng-repeat="value in tableModel.tableBody" ng-init="renderFinish($last)" class="test_482847cf">
+                        <td class="test_36867fb9">
+                            <div class="checkbox checkbox-info test_5ccc2426">
+                                <input class="checkbox test_01921cc1" type="checkbox" ng-disabled="userId!={{value.createUserId}}" data-status="{{value.statusName}}" ng-value="{{value.id}}" ng-checked="value.checkbox" ng-click="table.selectOne(tableModel, value.checkboxId);">
+                                <label class="test_c137b706"></label>
+                            </div>
+                        </td>
+                        <td class="test_67ad3a11">{{(tableModel.pagination.currentPage-1)*tableModel.pagination.pageSize+$index+1}}</td>
+                        <td title="{{value.serviceTypeName}}" class="test_de407cdc">{{value.serviceTypeName}}</td>
+                        <td title="{{value.templateName}}" ng-bind-html="value.templateName | trustHtml:templateName" class="test_d6ee6a6a">{{value.templateName}}</td>
+                        <td title="{{value.title}}" class="test_14e65c85">
+                            <a ng-show="{{value.type}} == 1" ng-click="test(value.id)" href="javascript:;" ng-bind-html="value.title | trustHtml:templateTitle" class="test_c3012fbf">{{value.title}}</a>
+                            <!--<a ng-show="{{value.type}} == 1"  href="#/contractDetail?id={{value.id}}" ng-bind-html="value.title | trustHtml:templateTitle" class="test_c3012fbf">{{value.title}}</a>-->
+                            <a ng-show="{{value.type}} == 2" style="cursor:pointer" ng-click="getPictureUrl(value);" ng-bind-html="value.title | trustHtml:templateTitle" class="test_739a20b2">{{value.title}}</a>
+                        </td>
+
+                        <td title="{{value.createUserName}}" ng-bind-html="value.createUserName | trustHtml:creater" class="test_67f408c5">{{value.createUserName}}</td>
+                        <td title="{{value.createTime}}" class="test_7d968ff0">{{value.createTime}}</td>
+                        <td title="{{value.statusName}}" class="test_e38f7206">{{value.statusName}}</td>
+                        <td class="test_b94ad8c0">
+                            <a ng-show="{{value.status}} == 1" href="#/contractDetail?id={{value.id}}" class="test_1b32a92d">查看</a>
+                            <a style="cursor:pointer" ng-show="{{value.status}} == 2" ng-click="getPictureUrl(value);" class="test_fae2864c">查看</a>
+                            <a ng-show="{{value.status}} == 2" style="cursor: pointer" href="{{value.thumbnailPath}}" download="{{value.fileName}}" class="test_507cb5b1">下载</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div ng-show="!tableModel.pagination.isVisiblePage" style="position: absolute;top:250px;bottom:0px;width:100%;" class="test_60923b70">
+                    <img style="width:100%;height:100%;" src="/public/img/undefined.svg" class="test_1ca7a4c7">
+                </div>
+            </div>
+
+            <hnapagination table-service="table" page-table-model="tableModel" class="test_08d8edab"></hnapagination>
+        </div>
+    </div>
+</section>
+
+<div ng-show="showPrompt" class="prompt-modal middle-box  test_cd5111c6">
+    <div class="prompt-wrap  test_b2d0d9ef">
+        <div class="bomb-box  test_61bf9a17">
+            <div class="title test_f54b1a5b">上传合同</div>
+            <div class="prompt-content  test_800d8f1e">
+                <form name="UploadContacter" novalidate="novalidate" class="test_7b54d66a">
+                    <ul class="isContainer switch-list  test_6168a4a2" style="height: 380px">
+                        <li class="test_a7fd821e">
+                            <label class="labelWithComb test_3ec514b1"><b class="test_ef4fd953">*</b>业务类型：</label>
+                            <input required ng-model="upLoadContractSerType" type="text" id="upLoadContractSerType" name="upLoadContractSerType" class="input-text ng-pristine ng-invalid ng-invalid-required ng-touched test_fbc7214e">
+                            <i class="select-icon icon-drop-down test_a9d6f78d" style="top:15px"></i>
+                        </li>
+                        <li class="test_4e8fe61b">
+                            <label class="labelWithComb test_05ace0bc"><b class="test_276efa1f">*</b>合同标题：</label>
+                            <input ng-model="upLoadContractTitle" type="text" id="upLoadContractTitle" name="upLoadContractTitle" class="input-text ng-pristine ng-invalid ng-invalid-required ng-touched test_ea1f7b7e" validate-code="{ruleReg:'name', ruleRegMsg:'<%=common_validate_name%>', maxLength:'30'}" required>
+                            <div class="verification test_16a871c4" style="left: 5px; text-align: left;">
+                                <span class="errors test_c43d0006" id="name-msg" ng-show="UploadContacter.upLoadContractTitle.$viewValue && UploadContacter.upLoadContractTitle.$error.defined && UploadContacter.upLoadContractTitle.$dirty">{{UploadContacter.upLoadContractTitle.errorTips}}</span>
+                            </div>
+
+                        </li>
+                        <li class="test_615bad7e">
+                            <label class="labelWithComb test_f7a23af7"><b class="test_fdb04fb3">*</b>上传文件：</label>
+                            <div class="test_b675f9bf">
+                                <input ng-model="upLoadData.name" type="text" name="upLoadContractFiles" class="input-text ng-pristine ng-invalid ng-invalid-required ng-touched test_e7f3fb18" required placeholder="请点击选择文件上传" readonly>
+
+                                <input type="file" class="uploadFile test_a98995a8" accept="image/jpeg,image/png,image/bmp,image/tiff,application/pdf" id="projectFile" file-model="projectFile">
+                            </div>
+
+                            <!--<button class="img-upload-button btn btn-primary ">上传</button>-->
+                            <!--<div style="position: absolute;left: 140px;">{{upLoadData.name}}</div>-->
+                        </li>
+                        <!--<li >-->
+                            <!--<input type="file" class="uploadFile" accept="image/jpeg,image/png,image/bmp,image/tiff,application/pdf" id="projectFile" file-model="projectFile">-->
+                            <!--<button class="img-upload-button btn btn-primary ">上传</button>-->
+                            <!--<div style="position: absolute;left: 140px;">{{upLoadData.name}}</div>-->
+                        <!--</li>-->
+
+                    </ul>
+                </form>
+            </div>
+            <div class="operation test_a24469e3">
+                <button ng-click="closePrompt();" name="prompt-close" class="btn btn-default  test_cf2d4f4a" data-event="close"><%=common_page_cancel%></button>
+                <button ng-click="savePrompt();" name="prompt-save" class="btn btn-primary  test_457935ab" data-event="close"><%=common_page_save%></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="slides" class="test_58a13f04"></div>

@@ -1,0 +1,78 @@
+<section class="content test_709ef38b">
+  <div class="project-top test_9bf56888">
+    <div class="row test_2dc7bb16">
+      <button class="btn btn-default test_0a783f8a" ng-click="goback()">返回</button>
+    </div>
+    <div class="project-top-header test_54719ce2">
+      <h1 class="test_380bd35d">{{ identityName | approvalIdentity }}</h1>
+    </div>
+  </div>
+  <div class="project-check test_85728c14">
+    <div class="check-content test_c56726a8">
+      <div class="row test_43a29354">
+        <div class="col-md-12 check-result test_b259aed0" ng-disabled="isPass || !identity.includes(identityName)">
+          <div class="form-group test_3933c278">
+            <label class="required test_c6334f96" ng-if="projectAction == 1">{{ checkResult == 'qa' ? '问询内容：' : '审核结果：' }}</label>
+            <label class="required test_be8e5fb9" ng-if="projectAction == 2">{{ checkResult == 'qa' ? '添加问询：' : '审核结果：' }}</label>
+            <div class="form-control test_29c6982d">
+              <label class="test_594320d6"><input type="radio" name="checkResult" ng-disabled="projectAction == 1" ng-model="checkResult" value="true" class="test_1bc9d58d">通过</label>
+              <label class="test_d0d450cf"><input type="radio" name="checkResult" ng-disabled="projectAction == 1" ng-model="checkResult" value="false" class="test_594102d2">拒绝</label>
+              <label class="test_28fb99ed"><input type="radio" name="checkResult" ng-model="checkResult" ng-change="togglecheckResult" ng-disabled="checkResultOpinion && approvalInfo.auditorId" value="qa" class="test_76e37222">问询</label>
+            </div>
+          </div>
+          <div class="form-group test_8d1bb1ac" ng-if="approvalInfo.auditorId">
+            <label class="required test_33651a59">审核意见：</label>
+            <div class="form-control test_bd99f13d">
+              {{ checkResultOpinion }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row test_5b1e51c0">
+        <div class="col-md-12 check-qa test_bf69b640">
+          <label ng-if="projectAction == 1 && qaList.length" class="test_c5742236">问询内容：</label>
+          <ul ng-repeat="item in qaList" ng-style="{ marginLeft: item.questionId == item.id ? '0' : '30px' }" class="test_902247a1">
+            <li class="test_520255b0"><strong class="test_584c59c1">{{ item.userName }}</strong></li>
+            <li class="test_155dac53">{{ item.createTime }}</li>
+            <li ng-if="item.questionId == item.id" class="test_7eab0054"><p class="test_82c1d09a">{{ item.content }}</p></li>
+            <li ng-if="item.questionId != item.id" class="test_ffcc0012"><p style="color: #3bafda;" class="test_3f0df88d">{{ item.content.substr(0, item.content.indexOf('...')+3) }}</p><p class="test_9dc24ff0">{{ item.content.substr(item.content.indexOf('...')+3) }}</p></li>
+            <li class="test_d804a0c0">
+              <ol ng-if="item.projectFileDtos.length" class="test_34916b2b">
+                <li ng-repeat="subject in item.projectFileDtos track by $index" class="test_141a6d7c">
+                  <span ng-click="getPictureUrl(subject.fileId)" class="test_17c73c56">{{ subject.fileName }}</span>
+                  <span class="del test_71d88ba2" ng-show="identity == 0 && !isPass" ng-click="delFile($event, $index)">&minus;</span>
+                </li>
+              </ol>
+            </li>
+            <li class="text-right test_e84c5daf" ng-show="!isPass && (identity.includes(identityName) || identity == 0)" ng-click="answerQuestion(item.questionId, $index)">回复</li>
+          </ul>
+        </div>
+      </div>
+      <!-- <div class="row" ng-show="identity != 0 || !identity.includes(identityName)"> -->
+      <div class="row check-action test_ceb4b2ee" ng-show="(showCheckInput || projectAction == 2) && !approvalInfo.auditorId">
+        <div class="col-md-12 form-group test_15d58703" ng-disabled="isPass || (!identity.includes(identityName) && identity != 0)">
+          <label class="required test_96795e0f" ng-if="projectAction == 1">{{ checkResult == 'qa' ? '回复：' : '审核意见：' }}</label>
+          <label class="required test_6c744087" ng-if="projectAction == 2 && identity.includes(identityName)">{{ checkResult == 'qa' ? '问询内容：' : '审核意见：' }}</label>
+          <div class="form-control test_c6589694">
+            <textarea class="form-control test_d3b81ceb" cols="30" rows="5" maxlength="1000" ng-model="checkResultOpinion" placeholder="{{ opinionHolder }}" ng-style="{ borderColor: formError ? '#f33' : '' }"></textarea>
+            <button type="button" class="btn btn-primary upload test_ab37efd6" ng-show="projectAction == 1 && !isPass" ng-disabled="uploadDisabled">
+              上传文件
+              <input type="file" multiple accept="image/jpeg,image/png,image/bmp,image/tiff,application/pdf" id="qaFile" file-model="qaFile" class="test_2d150ec3">
+            </button>
+            <ol ng-if="qaFiles.length" class="test_573760cf">
+              <li ng-repeat="item in qaFiles" class="test_2660e87a">
+                <span ng-click="getPictureUrl(item.id)" class="test_40c6baed">{{ item.name }}</span>
+                <span class="del test_e84c9f7f" ng-click="delFile($index)">&minus;</span>
+              </li>
+            </ol>
+          </div>
+        </div>
+        <div class="form-footer text-center test_5157e688" ng-show="(identity == 0 || identity.includes(identityName)) && !isPass">
+          <button class="btn btn-default test_25c7a956" ng-click="cancelAnswer()">取消</button>
+          <button class="btn btn-primary test_a94ab0cc" ng-click="checkDone()">提交</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="slides" class="test_312f154f"></div>
+</section>

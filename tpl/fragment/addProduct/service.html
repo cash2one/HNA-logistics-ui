@@ -1,0 +1,330 @@
+<style>
+    .wrap {
+        padding: 15px;
+    }
+
+    .show-remark {
+        position: absolute;
+        bottom: -38px;
+        right: 5px;
+        color: #999;
+        line-height: 15px;
+    }
+
+    .labelWithComb:after {
+        content:"：";
+    }
+    .middle-box .prompt-content {
+        padding-top: 20px;
+    }
+    .middle-box .bomb-box {
+        height: 600px;
+    }
+    .bomb-box .operation {
+        padding-top: 0;
+        padding-bottom: 20px;
+    }
+    .switch-list {
+        position: relative;
+        display: block;
+        overflow-y: hidden;
+    }
+    .switch-list li {
+        text-align: left;
+    }
+    .switch-list li label {
+        display: inline-block;
+        width: 100px;
+        text-align: right;
+    }
+    .switch-list li .input-text, .switch-list li .textarea-text {
+        left: 125px;
+    }
+</style>
+
+<!-- 服务详细信息配置 -->
+<div ng-show="modifyPrompt" id="modifyPrompt" class="prompt-modal middle-box" style="display:none;">
+    <div class="prompt-wrap">
+        <div class="bomb-box">
+            <div class="title">{{ isEdit ? '修改服务' : '添加服务' }}</div>
+            <div class="prompt-content modify-content">
+                <form name="serviceItemForm" novalidate="novalidate">
+                    <ul class="isContainer switch-list" style="height: 510px;">
+                        <li>
+                            <label class="labelWithComb">
+                                <b>*</b>服务名称</label>
+                            <input required readonly ng-click="SetServiceByServiceType()" ng-model="serviceRelInfo.serviceName" name="serviceName" type="text" id="serviceName" class="input-text">
+                            <div class="verification" style="text-align: left;right: 0px;width: 295px;">
+                                <span class="errors" ng-show="showServiceExist">同一服务只能添加一次!</span>
+                            </div>
+                        </li>
+                        <li ng-show="showServicesRegions">
+                            <label><b>*</b>服务范围：</label>
+                            <input required readonly ng-click="showRegions()" ng-value="selectedRegionsStr" name="regions" type="text" placeholder="{{ data.serviceTypeCode === 'ST004' ? '请选择航班' : '请选择服务范围' }}" class="input-text">
+                            <i class="select-icon icon-drop-down" style="top:15px;right:10px;"></i>
+                        </li>
+                        <li>
+                            <label><b>*</b>货物类型：</label>
+                            <input required readonly ng-click="showCargos()" ng-value="selectedCargosStr" name="cargos" type="text" placeholder="请选择货物类型" class="input-text">
+                            <i class="select-icon icon-drop-down" style="top:15px;right:10px;"></i>
+                        </li>
+                        <li>
+                            <label class="labelWithComb">重量限制</label>
+                            <div class="input-text row">
+                                <div class="col-md-4">
+                                    <input oninput="if(value.length>10)value=value.slice(0,10)" id="weightLimitBegin" ng-change="checkWeightLimit(serviceRelInfo.weightLimitMin, 'weightLimitBegin')" name="weightLimitMin" validate-code="{ruleReg:'floatThree', ruleRegMsg:'请输入数字,最多保留三位小数'}" maxlength="10" ng-model="serviceRelInfo.weightLimitMin" type="number" placeholder="下限">
+                                </div>
+                                <div class="col-md-4">
+                                    <input oninput="if(value.length>10)value=value.slice(0,10)" id="weightLimitEnd" ng-change="checkWeightLimit(serviceRelInfo.weightLimitMax, 'weightLimitEnd')" name="weightLimitMax" validate-code="{ruleReg:'floatThree', ruleRegMsg:'请输入数字,最多保留三位小数'}" maxlength="10" ng-model="serviceRelInfo.weightLimitMax" type="number" placeholder="上限">
+                                </div>
+                                <div class="col-md-4 text-center" style="line-height: 34px;">Kg</div>
+                                <validatetip from-model="serviceItemForm.weightLimitMin"></validatetip>
+                                <validatetip from-model="serviceItemForm.weightLimitMax"></validatetip>
+
+                                <div class="verification">
+                                    <span id="weight-msg" class="errors"></span>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <label class="labelWithComb">客户等级</label>
+                            <div class="input-text row">
+                                <div class="col-md-6">
+                                    <input readonly ng-click="initCustomerLevel()" ng-model="serviceRelInfo.customerLevelName" name="customerLevel" id="customerLevel" type="text">
+                                    <i class="select-icon icon-drop-down" style="right: 10px"></i>
+                                </div>
+                                <div class="col-md-6">
+                                    <input readonly ng-disabled="!serviceRelInfo.customerLevel" ng-click="initCustomerLevelRange()" ng-model="serviceRelInfo.customerLevelExtName" name="customerLevelRange" type="text" id="customerLevelRange">
+                                    <i class="select-icon icon-drop-down"></i>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <label class="labelWithComb">申报价值</label>
+                            <div class="input-text row">
+                                <div class="col-md-4">
+                                    <input name="declaredValueMin" min="0" validate-code="{ruleReg:'floatTwo', ruleRegMsg:'请输入数字,最多保留两位小数', maxLength:'10'}" ng-model="serviceRelInfo.declaredValueMin" type="number" placeholder="下限">
+                                </div>
+                                <div class="col-md-4">
+                                    <input name="declaredValueMax" ng-min="serviceRelInfo.declaredValueMin" validate-code="{ruleReg:'floatTwo', ruleRegMsg:'请输入数字,最多保留两位小数', maxLength:'10'}" ng-model="serviceRelInfo.declaredValueMax" type="number" placeholder="上限">
+                                </div>
+                                <div class="col-md-4 text-center" style="line-height: 34px;">{{ currencyName }}</div>
+                                <validatetip from-model="serviceItemForm.declaredValueMin"></validatetip>
+                                <validatetip from-model="serviceItemForm.declaredValueMax"></validatetip>
+                            </div>
+                        </li>
+                        <li>
+                            <label class="labelWithComb">单量</label>
+                            <div class="input-text row">
+                                <div class="col-md-6">
+                                    <input readonly ng-click="initOrderQuantity()" ng-value="{{ serviceRelInfo.orderQuantity ? serviceRelInfo.orderQuantity + serviceRelInfo.orderQuantityUnit : '' }}" name="orderQuantity" id="orderQuantity" type="text">
+                                    <i class="select-icon icon-drop-down" style="right: 10px"></i>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            <div class="operation">
+                <button type="button" ng-click="closeModifyPrompt();" name="prompt-close" class="btn btn-default" data-event="close" style="width: 98px;padding:0;">
+                    <%=common_page_cancel%>
+                </button>
+                <button type="button" ng-click="saveModifyPrompt();" name="prompt-save" class="btn btn-primary" data-event="close" style="width: 98px;padding:0;">
+                    <%=common_page_save%>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 服务范围/航班选择 -->
+<div class="select__layer" id="regions" style="display:none;">
+    <div class="layer__content">
+        <div class="box__tab">
+            <ul class="tab__title">
+                <li ng-class="{ active: tabActive === 1 }" ng-click="toggleData(1)">起点范围</li>
+                <li ng-class="{ active: tabActive === 2 }" ng-click="toggleData(2)">终点范围</li>
+            </ul>
+            <div class="tab__content">
+                <div class="tab__panel" ng-show="tabActive === 1">
+                    <ul class="select__box">
+                        <li ng-repeat="item in regionsSelected track by $index">
+                            <div class="checkbox checkbox-info">
+                                <input type="checkbox" ng-value="{{ item.id }}" ng-model="item.checked">
+                                <label></label>
+                            </div>
+                            {{ item.name }}
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab__panel" ng-show="tabActive === 2">
+                    <ul class="select__box">
+                        <li ng-repeat="item in regionsSelectedEnd track by $index">
+                            <div class="checkbox checkbox-info">
+                                <input type="checkbox" ng-value="{{ item.id }}" ng-model="item.checked">
+                                <label></label>
+                            </div>
+                            {{ item.name }}
+                        </li>
+                        <span ng-if="!regionsSelectedEnd.length">该范围暂无区域限制</span>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 货物类型选择 -->
+<div class="select__layer" id="cargos" style="display:none;">
+    <div class="layer__content">
+        <div class="content__box">
+            <ul class="select__box">
+                <li ng-repeat="item in cargosSelected track by $index">
+                    <div class="checkbox checkbox-info">
+                        <input type="checkbox" ng-value="{{ item.cargoTypeCode }}" ng-model="item.checked">
+                        <label></label>
+                    </div>
+                    {{ item.cargoTypeName }}
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="wrap" ng-hide="showPrompt">
+    <div class="batch-operation" ng-if="canEditService || $parent.isNew">
+        <button type="button" ng-click="addServiceConfig();" class="btn btn-primary">
+            <%=common_page_add%>
+        </button>
+        <button type="button" ng-click="deleteServiceConfig();" class="btn btn-primary">
+            <%=common_page_delete%>
+        </button>
+    </div>
+</div>
+
+<!-- 已保存服务列表 -->
+<div class="service-table-content" ng-hide="showPrompt">
+    <div class="customer-table-container" ng-controller="tableController">
+        <table class="customer-table table-box" cellpadding="0" cellspacing="0">
+            <thead>
+                <tr>
+                    <th style="width:5%" ng-show="canEditService">
+                        <div class="checkbox checkbox-info">
+                            <input type="checkbox" ng-model="tableModel.selectFlag" ng-click="table.selectAll(tableModel);">
+                            <label></label>
+                        </div>
+                    </th>
+                    <th style="width:{{tableModel.tableHeaderSize[$index]}}" ng-repeat="item in tableModel.tableHeader">{{item}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in tableModel.tableBody track by $index" ng-init="renderFinish($last)">
+                    <td ng-show="canEditService">
+                        <div class="checkbox checkbox-info">
+                            <input type="checkbox" ng-checked="item.checkbox" ng-click="table.selectOne(tableModel, item.checkboxId, $event);">
+                            <label></label>
+                            <span class="state-code" style="display: none;">{{item.status}}</span>
+                        </div>
+                    </td>
+                    <td>{{(tableModel.pagination.currentPage-1)*tableModel.pagination.pageSize+$index+1}}</td>
+                    <td title="{{item.servicePropertyName}}"><a href="javascript:void(0)" ng-click="addServiceConfig($index, item)">{{item.servicePropertyName}}</a></td>
+                    <td title="{{item.serviceTypeName}}">{{item.serviceTypeName}}</td>
+                    <td title="{{item.description}}">{{item.description}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div ng-show="!tableModel.tableBody.length" style="position: absolute;top:165px;bottom:0px;width:100%;">
+        <img style="width:100%;height:100%;" src="/public/img/undefined.svg">
+    </div>
+    <!-- <hnapagination table-service="table" page-table-model="tableModel" style="margin-top:5px"></hnapagination> -->
+</div>
+
+<!-- 修改服务页面 -->
+<div class="service-modify-content" ng-show="showPrompt">
+    <div class="modify-content">
+        <form name="serviceForm" novalidate="novalidate">
+            <ul class="isContainer switch-list" style="width: 430px;height: 320px">
+                <li>
+                    <label>节点：</label>
+                    <p class="input-text" style="line-height:36px;">{{ordinal}}</p>
+                </li>
+                <li>
+                    <label>
+                        <b ng-if="canEditService">*</b>属性：</label>
+                    <input required ng-disabled="data.productServiceRelInfos.length" ng-model="data.servicePropertyName" name="servicePropertyName" type="text" id="proprety" placeholder="请选择" class="input-text">
+                    <i class="select-icon icon-drop-down" style="top:15px"></i>
+                </li>
+                <li>
+                    <label class="labelWithComb">
+                        <b ng-if="canEditService">*</b>服务类型</label>
+                    <input required readonly ng-click="InitServiceTypeSelect()" ng-disabled="data.productServiceRelInfos.length" ng-model="data.serviceTypeName" name="serviceTypeName" type="text" id="service-type" placeholder="请选择" class="input-text">
+                    <i class="select-icon icon-drop-down" style="top:15px"></i>
+                </li>
+                <li>
+                    <label class="labelWithComb">
+                        <b ng-if="canEditService">*</b>择优条件</label>
+                    <div class="input-text" style="text-align: left;">
+                        <div class="row" style="margin: 0;">
+                            <label class="col-md-4" style="width: auto;">价格权重</label>
+                            <input name="rankPrice" ng-model="data.agingWeighting" style="display: none;" id="starsPrice" value="0" type="number" class="rating col-md-8"
+                                min="0" max="5" step="1" data-size="xs" required>
+                        </div>
+                        <div class="row" style="margin: 0;">
+                            <label class="col-md-4" style="width: auto;">时效权重</label>
+                            <input name="rankTime" ng-model="data.priceWeighting" style="display: none;" id="starsTime" value="0" type="number" class="rating col-md-8"
+                                min="0" max="5" step="1" data-size="xs" required>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </form>
+        <div class="batch-operation" ng-if="canEditService || $parent.isNew">
+            <button type="button" ng-click="showModifyPrompt();" class="btn btn-primary"><%=common_page_add%></button>
+        </div>
+        <div class="modify-table-container">
+            <table class="modify-table" cellpadding="0" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>服务名称</th>
+                        <th>服务范围</th>
+                        <th>货物类型</th>
+                        <th>重量限制</th>
+                        <th>客户等级</th>
+                        <th>申报价值</th>
+                        <th>单量</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in data.productServiceRelInfos track by $index">
+                        <td>
+                            <a href="javascript:void(0);" title="{{item.serviceName}}" ng-click="showModifyPrompt($index)" ng-if="canEditService || $parent.isNew">{{item.serviceName}}</a>
+                            <span ng-if="!canEditService && !$parent.isNew">{{item.serviceName}}</span>
+                        </td>
+                        <td>{{ (item.regionsStart || item.regionsStart.length) ? arrToString(item.regionsStart, 'name') : '/' }} {{ (item.regionsEnd || item.regionsEnd.length) ? arrToString(item.regionsEnd, 'name') : '' }}</td>
+                        <td>{{ (item.cargos || item.cargos.length) ? arrToString(item.cargos, 'cargoTypeName') : '/' }}</td>
+                        <td>{{ minMax(item.weightLimitMin, item.weightLimitMax, 'Kg') }} </td>
+                        <td>{{ item.customerLevelName ? (item.customerLevelName + item.customerLevelExtName) : '/' }}</td>
+                        <td>{{ minMax(item.declaredValueMin, item.declaredValueMax, currencyName) }}</td>
+                        <td>{{ item.orderQuantity ? (item.orderQuantity + item.orderQuantityUnit) : '/' }}</td>
+                        <td>
+                            <a href="javascript:void(0)" ng-click="delOneServiceRelInfo($index, item)" ng-if="canEditService || $parent.isNew">删除</a>
+                            <span ng-if="!canEditService && !$parent.isNew">/</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="operation" style="margin-top: 20px;text-align: center;">
+        <button type="button" ng-click="closePrompt();" name="prompt-close" class="btn btn-default" data-event="close" style="width: 98px;padding:0;margin-right: 30px;">
+            <%=common_page_cancel%>
+        </button>
+        <button type="button" ng-if="newService && (canEditService || $parent.isNew)" ng-click="savePrompt();" name="prompt-save" class="btn btn-primary" data-event="close" style="width: 98px;padding:0;">
+            {{ '保存' }}
+        </button>
+        <button type="button" ng-if="!newService && (canEditService || $parent.isNew)" ng-click="savePrompt();" name="prompt-save" class="btn btn-primary" data-event="close" style="width: 114px;padding:0;">
+            {{ '保存并返回' }}
+        </button>
+    </div>
+</div>

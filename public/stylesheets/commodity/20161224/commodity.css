@@ -1,0 +1,427 @@
+.bills {
+	position: absolute;
+	z-index: 1;
+	top: 10px;
+	bottom: 10px;
+	left: 10px;
+	right: 10px;
+	background: #fff;
+	border:1px solid #ddd;
+	padding-top: 10px;
+	overflow: hidden;
+}
+
+.bill-input {
+	position: relative;
+	padding-left: 65px;
+	float: left;
+	width: 28%;
+}
+.bill-input label {
+	position: absolute;
+	left: 0;
+	width: 60px;
+	text-align: right;
+	top: 50%;
+	margin-top: -12px;
+}
+.bill-input > p {
+	width: 250px;
+	position: relative;
+}
+.bill-input p input {
+	width: 250px;
+}
+
+
+.bill-inputs span {
+	margin: 0 7px;
+}
+.bill-line {
+	margin: 8px 0;
+}
+.bill-line ~ .bill-line {
+	margin-top: 15px;
+}
+
+.bill-btn-line .bill-line .bill-input {
+	margin-left: 2%;
+	margin-right: 2%;
+}
+.bill-btn-line .bill-btn {	
+	float: left;
+	margin-left: 36px;
+}
+.bill-btn-line .bill-btn-r {
+	float: right;
+	margin-right: 30px;
+}
+.bills .btn-bill {
+	padding: 0;
+	width: 98px;
+	height: 34px;
+}
+.bill-border-line {
+	border-bottom: 1px solid #ddd;
+	height: 55px;
+	margin-bottom: 5px;
+}
+.btn-group {
+	margin-left: 24px;
+	margin-top:6px;
+}
+.btn-group-center {
+	text-align: center;
+}
+.btn-group .btn ~ .btn {
+	margin-left: 5px;
+}
+
+
+.table-container {
+	margin-top: 15px;
+	position: relative;
+}
+.btn[disabled] {
+	background: #ddd;
+	border-color:#ddd;
+}
+.clear-search {
+	color:#bbb;
+}
+.clear-search:hover {
+	color: #999;
+	cursor: pointer;
+}
+#bill .table-box td {
+	text-align: center;
+}
+.undefinedsvg {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	text-align: center;
+}
+.undefinedsvg img {
+	max-width: 600px;
+}
+
+.bills input::placeholder {
+	color: #aaa;
+}
+
+
+
+
+.table-wrap {
+	height: 400px;
+	overflow: auto;
+}
+
+.detail {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	background-color: #eee;
+	z-index: 1000;
+}
+.detail > div {
+	position: absolute;
+	top: 70px;
+	left: 10px;
+	right: 10px;
+	bottom: 10px;
+	background-color: #fff;
+	overflow-x: auto;
+}
+.detail > button {
+	position: absolute;
+	left: 10px;
+	top: 15px;
+	width: 80px;
+	padding: 0;
+}
+.detail > .btn-edit {
+	left: auto;
+	right: 15px;
+}
+.good-detail {
+	width: 1000px;
+	padding: 30px 30px 10px 30px;
+}
+.good-detail > li {
+	position: relative;
+	padding-left: 125px;
+	width: 50%;
+	float: left;
+	margin-bottom: 80px;
+	height: 35px;
+}
+
+
+.good-detail .table-li {
+	padding: 0;
+	border-left: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+
+}
+.table-li td,.table-li th {
+	width: 33%;
+}
+.good-detail > li label {
+	position: absolute;
+	left: 0;
+	width: 120px;
+	text-align: right;
+	top: 50%;
+	margin-top: -10px;
+}
+.good-detail > li label i {
+	color: #f00;
+	font-size: 16px;
+	margin-right:5px;
+	
+}
+.good-detail .content-text {
+	line-height: 36px;
+	padding-left: 8px;
+}
+.good-detail > li .radio-label {
+	padding-left: 10px;
+}
+.good-detail > li .radio-label label {
+	position: static;
+	left: auto;
+	top: auto;
+	width: auto;
+	text-align: left;
+	margin:0;
+	line-height: 35px;
+}
+.good-detail > li .required {
+	position: relative;
+}
+.good-detail .splide {
+	width: 100%;
+	height: 1px;
+	margin:0;
+	padding: 0;
+}
+.good-detail .ml {
+	margin-left: 50%;
+}
+
+.good-detail > li .unit {
+	padding-right: 40px;
+}
+.good-detail > li .unit-span {
+	position: absolute;
+	right: 0;
+	top: 0;
+	line-height: 35px;
+	width: 36px;
+	text-align: left;
+	margin-left: 4px;
+}
+
+.good-detail > li .radio-label input {
+	margin:0 5px;
+}
+.creator {
+	padding: 15px;
+	margin-right: 75px;
+	text-align: right;
+}
+.creator li {
+	display: inline-block;
+	margin-right: 10px;
+}
+.title {
+	text-align: center;
+	font-size: 24px;
+	padding: 15px 40px 0 0;
+}
+.checkbox-css3 {
+
+}
+.checkbox-css3 .chk {
+	display: none;
+}
+.checkbox-css3 .chk + label {
+	background-color: #fafbfa;
+    padding: 9px;
+    border-radius: 50px;
+    display: inline-block;
+    position: relative;
+    margin-right: 30px;
+    margin-top: 0;
+    -webkit-transition: all 0.1s ease-in;
+    transition: all 0.1s ease-in;
+    width: 40px;
+    height: 15px;
+    box-sizing: content-box;
+
+}
+.checkbox-css3 .chk:checked + label:before {
+    content: ' ';
+    position: absolute;
+    left: 26px;
+    border-radius: 100px;
+}
+.checkbox-css3 .chk:checked + label:after {
+    content: ' ';
+    font-size: 1.5em;
+    position: absolute;
+    background: #4cda60;
+    box-shadow: 0 0 1px #4cda60;
+}
+.checkbox-css3 .chk + label:before {
+	content: ' ';
+    position: absolute;
+    background: white;
+    top: 1px;
+    left: 1px;
+    z-index: 999999;
+    width: 31px;
+    -webkit-transition: all 0.1s ease-in;
+    transition: all 0.1s ease-in;
+    height: 31px;
+    border-radius: 100px;
+    box-shadow: 0 3px 1px rgba(0,0,0,0.05), 0 0px 1px rgba(0,0,0,0.3);
+}
+.checkbox-css3 .chk + label:after {
+	content: ' ';
+    position: absolute;
+    top: 0;
+    -webkit-transition: box-shadow 0.1s ease-in;
+    transition: box-shadow 0.1s ease-in;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 100px;
+    box-shadow: inset 0 0 0 0 #eee, 0 0 1px rgba(0,0,0,0.4);
+}
+
+.table-box tbody tr td,.table-box tbody tr td p {
+	text-align: center;
+	margin: 0;
+}
+.table-box tbody tr td p {
+	line-height: 22px;
+}
+.span-a {
+	color: #3BAFDA;
+	cursor: pointer;
+}
+.good-type {
+	position: absolute;
+	top:0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	background-color: rgba(0,0,0,.2);
+	z-index: 2000;
+}
+.good-type > div {
+	position: absolute;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	width: 350px;
+	padding: 15px 30px;
+	background-color: #eee;
+	overflow: hidden;
+}
+.good-type > div > strong {
+	font-size: 18px;
+
+}
+.good-type-div {
+	border:1px solid #ddd;
+	background-color: #fff;
+	position: relative;
+	margin-top: 14px;
+	position: absolute;
+	top: 35px;
+	bottom: 60px;
+	left: 30px;
+	right: 30px;
+	overflow: auto;
+}
+.good-type-div > p {
+	padding:5px 0 5px 30px;
+	border-bottom: 1px solid #ccc
+}
+
+.good-type-div p {
+	line-height: 30px;
+}
+.good-type-div p input {
+	position: absolute;
+	left: 10px;
+	top: 13px;
+}
+.good-type-div > p input {
+	top: 14px;
+}
+.good-type-div li {
+	position: relative;
+	border-top: 1px solid #ddd;
+	padding: 4px 0;
+}
+.good-type-div > ul {
+	padding-left: 40px;
+	border-bottom: 1px solid #ddd;
+
+}
+.good-type-div > ul > li:first-child {
+	border-top: 0;
+}
+.good-type-div > ul li {
+	border-left: 1px dashed #ccc;
+	padding-left: 5px;
+}
+.good-type-div > ul ul {
+	padding-left: 15px;
+	border-left: 1px dashed #ccc;
+
+}
+.good-type-btn {
+	position: absolute;
+	bottom: 14px;
+	right: 30px;
+}
+.good-type-btn button {
+	margin-right: 16px;
+}
+.verification {
+	margin:0;
+}
+.verification .errors {
+	padding-left: 0;
+}
+.hide {
+	display: none;
+}
+.show {
+	display: block;
+}
+.file-upload input[type=file] {
+    position: absolute;
+    z-index: 9;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+.file-upload > div {
+	width: 80px;
+	height: 80px;
+	overflow:hidden;
+	background: url('public/img/add-P.png') no-repeat center center;
+	border:1px dashed #ccc;
+}

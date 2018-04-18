@@ -1,0 +1,1 @@
+app.factory("contractTemplatesService",["easyHttp",function(t){var e={};return e.getContractType=function(e){return t.get("logistics.getContractType",e)},e.delContractTemplate=function(e,r){return t.post("logistics.delContractTemplate",{urlParams:e},r)},e.checkContractTemplateName=function(e,r){return t.get("logistics.delContractTemplate",{urlParams:e},r)},e}]);

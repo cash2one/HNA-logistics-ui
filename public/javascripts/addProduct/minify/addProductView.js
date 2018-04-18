@@ -1,0 +1,1 @@
+app.factory("addProductView",[function(){var a={};return a.tab=function(a,t){return $(a).tab({callback:t})},a}]);

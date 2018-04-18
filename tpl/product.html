@@ -1,0 +1,59 @@
+<div class="tab-list test_1915f445" ng-show="viewButton.isTabList">
+    <a class="tab-active test_ad5964df" style="border-right:none;margin-right:-4px" ng-click="switchTab($event, 1)" data-type="1"><%=product_wait_verify%></a>
+    <a ng-click="switchTab($event, 2)" data-type="2" class="test_7fbcb5ec"><%=product_verified%></a>
+</div>
+<div class="product-box test_286d7c6b">
+    <div class="master-table test_8923c1d8" style="{{viewButton.isTabList ? 'top:65px' : ''}}">
+        <div class="add-search-box test_5c0619d5">
+            <div style="width:100%;padding-left:1%;padding-bottom:20px" ng-class="{'list-search-box': true, 'list-search-box-reset': !viewButton.isShowOperAreaLine}" class="test_71fae5a5">
+                <div class="search-cell test_47e9c3a1" style="width:20%">
+                    <span class="test_5b7f1b98"><%=product_name%></span>
+                    <div class="select-box test_d3ef556f">
+                        <input placeholder="<%=product_input_name_tips%>" maxlength="30" ng-model="productName" style="width:100%;padding-left:2px" autocomplete="off" class="input-text test_d22a83a4" type="text">
+                    </div>
+                </div>
+                <div class="search-cell test_05750ffc" style="width: 16%!important;">
+                    <span class="test_0a6af1a6"><%=product_good_type%></span>
+                    <div class="select-box test_3df23958" style="width: 64%;">
+                        <input id="goods-type" placeholder="<%=common_all_tips%>" ng-model="goodsType" style="width:100%;padding-left:2px" autocomplete="off" class="input-text test_e0910bb3" type="text">
+                        <i class="select-icon icon-drop-down test_8e254660"></i>
+                    </div>
+                </div>
+                <div class="search-cell test_8fc85176" style="width:20%" ng-show="showSelectStatus">
+                    <span class="test_06c72f21"><%=product_state%></span>
+                    <div class="select-box test_eb614934">
+                        <input id="service-state" placeholder="<%=common_all_tips%>" ng-model="state" style="width:100%;padding-left:2px" autocomplete="off" class="input-text test_723525bf" type="text">
+                        <i class="select-icon icon-drop-down test_b7e8cc46"></i>
+                    </div>
+                </div>
+                <div class="search-cell test_4afc772b" style="width:20%">
+                    <span class="test_3109f702"><%=product_group%></span>
+                    <div class="select-box test_a43d0621">
+                        <input id="product-group1" placeholder="<%=common_all_tips%>" ng-model="productGroup1" style="padding-left:2px" autocomplete="off" class="input-text test_ab7bf796" type="text">
+                        <i class="select-icon icon-drop-down test_208f904e"></i>
+                    </div>
+                </div>
+                <div class="search-cell test_954d48c1" style="width:16%!important">
+                    <div class="select-box test_0368b784">
+                        <input id="product-group2" placeholder="<%=common_all_tips%>" ng-model="productGroup2" style="padding-left:2px" autocomplete="off" class="input-text test_3fcd24ed" type="text">
+                        <i class="select-icon icon-drop-down test_57d6c070"></i>
+                    </div>
+                </div>
+
+
+                <div class="search-cell test_21d7c5a1" style="margin-left: 9px;position: absolute;top: -2px;right: -52px;width: 20%!important">
+                    <span class="btn btn-reset test_0c7bf6f3" ng-click="resetData()"><%=common_clear_data%></span>
+                    <button ng-click="search();" class="btn btn-search test_40d9da75" style="padding:0 30px;position:relative;top:2px"><%=product_search%></button>
+                </div>
+            </div>
+            <div ng-controller="tableController" class="test_98198a1d">
+                <div class="batch-operation test_a2aa6dd3" ng-if="!viewButton.isTabList">
+                    <button ng-click="add();" class="btn btn-primary test_b3740d57" style="float:left"><%=product_add%></button>
+                    <button id="delete" ng-click="delete();" class="btn btn-primary test_76818e79" style="float:left"><%=product_delete%></button>
+                    <button id="submitVerify" ng-click="verify();" class="btn btn-primary test_bc968034"><%=product_submit_verify%></button>
+                </div>
+                <div include="tpl/fragment/product/table.html" class="test_8c631122"></div>
+            </div>
+       </div>
+    </div>
+</div>

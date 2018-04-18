@@ -1,0 +1,138 @@
+<div include="tpl/fragment/costPrice/prompt.html" id="test" ng-ready="promptReady" ng-if="viewButton.copyPrompt" class="test_c03dcb5f"></div>
+<div class="tab-list test_e3b1737e" ng-show="viewButton.isTabList">
+    <a class="tab-active test_99ca6c6e" style="border-right:none;margin-right:-4px" ng-click="switchTab($event, 1)" data-type="1"><%=price_wait_verify%></a>
+    <a ng-click="switchTab($event, 2)" data-type="2" class="test_dde6e391"><%=price_verified%></a>
+</div>
+<div class="price-box test_cd713941">
+    <div class="master-table test_bd172c12" style="{{viewButton.isTabList ? 'top:65px' : ''}}">
+        <div class="add-search-box test_4d26cb31">
+            <div style="width:100%;padding-left:1%" ng-class="{'list-search-box': true, 'list-search-box-reset': !viewButton.isShowOperAreaLine}" class="test_d44c867f">
+                <div class="search-cell test_289fc144" style="width:20%">
+                    <span class="test_30060289"><%=price_key_word%></span>
+                    <div class="select-box test_2cffe9bc">
+                        <input placeholder="<%=price_input_price_tips%>" ng-model="pricePlan" maxlength="30" style="width:100%;padding-left:2px" autocomplete="off" class="input-text test_229153ce" type="text">
+                    </div>
+                </div>
+                <!--<div class="search-cell test_1e844575" style="width:20%">
+                    <span class="test_16168726"><%=price_cost_type%></span>
+                    <div class="select-box test_1d4b12cd">
+                        <input placeholder="<%=common_all_tips%>" ng-model="costTypeStart" id="cost-type-start" style="width:45.5%;padding-left:2px" autocomplete="off" class="input-text test_7de974b8" type="text">
+                        <i class="select-icon icon-drop-down test_3ee003f1" style="left:28.6%"></i>
+                        <input placeholder="<%=price_cost_price_end_tips%>" ng-model="costTypeEnd" id="cost-type-end" style="width:51.5%;padding-left:2px" autocomplete="off" class="input-text test_ca4cbf01" type="text">
+                    </div>
+                </div>-->
+                <div class="search-cell test_5571d7df" style="width:20%" ng-show="viewButton.isBelongToService">
+                    <span class="test_1b3543e7"><%=price_belong_service%></span>
+                    <div class="select-box test_696a88d7">
+                        <input id="belong-service" ng-value="belongServiceId" ng-model="belongService" style="width:100%;padding-left:2px" autocomplete="off" class="input-text test_a1efe6e4" type="text">
+                    </div>
+                </div>
+                <div class="search-cell test_52365983" style="width:20%" ng-show="viewButton.isBelongToProduct">
+                    <span class="test_b804fe8f"><%=price_belong_product%></span>
+                    <div class="select-box test_8061bae1">
+                        <input id="belong-product" ng-model="belongProduct" readonly="readonly" style="width:100%;padding-left:2px" autocomplete="off" class="input-text test_a44439a3" type="text">
+                    </div>
+                </div>
+                <div class="search-cell test_e8d7eb12" style="width:20%">
+                    <span class="test_6c788808"><%=price_goods_type%></span>
+                    <div class="select-box test_d9aeefe8">
+                        <input placeholder="<%=common_all_tips%>" ng-model="goodsType" id="goods-type" style="width:100%;padding-left:2px" autocomplete="off" class="input-text test_b83c7621" type="text">
+                        <i class="select-icon icon-drop-down test_bc5baa6f"></i>
+                    </div>
+                </div>
+                <div class="search-cell test_c3719ab2" style="width:20%">
+                    <span class="test_c0ab7771"><%=price_account_type%></span>
+                    <div class="select-box test_bfd36182">
+                        <input placeholder="<%=common_all_tips%>" ng-model="accountType" id="account-type" style="width:100%;padding-left:2px" autocomplete="off" class="input-text test_8edc5904" type="text">
+
+                    </div>
+                </div>
+                <div class="search-cell test_9ef6bb60" style="width:20%">
+                    <span class="test_c81495fa"><%=price_start_time%></span>
+                    <div class="select-box test_c774cf8e">
+                        <input id="start-time" style="width:100%;padding-left:2px" autocomplete="off" class="input-text test_00361114" type="text">
+                    </div>
+                </div>
+                <div class="search-cell test_45ba152e" style="width:20%">
+                    <span class="test_df2e74a5"><%=price_end_time%></span>
+                    <div class="select-box test_4436db8d">
+                        <input id="end-time" style="width:100%;padding-left:2px" autocomplete="off" class="input-text test_a82d5752" type="text">
+                    </div>
+                </div>
+                <div class="search-cell test_fa0d7162" style="width:20%">
+                    <span class="test_64865dbe"><%=price_valuation_currency%></span>
+                    <div class="select-box test_72f2db3b">
+                        <input placeholder="<%=common_all_tips%>" ng-model="valuationCurrency" id="valuation-currency" style="width:100%;padding-left:2px" autocomplete="off" class="input-text test_c434f4c9" type="text">
+                    </div>
+                </div>
+                <div class="search-cell test_5185caac" style="width:20%">
+                    <span class="test_04aca90e"><%=price_start_address%></span>
+                    <div class="select-box test_11ab65bb">
+                        <input ng-model="startAddress" placeholder="<%=price_input_start_address_tips%>" maxlength="30" style="width:100%;padding-left:2px" autocomplete="off" class="input-text test_9c29ae8d" type="text">
+                    </div>
+                </div>
+                <!--<div class="search-cell test_dddc519f" style="width:10%" ng-show="viewButton.isShowPriceType">-->
+                    <!--<span class="test_0bf88b9e"><%=price_type%></span>-->
+                    <!--<div class="select-box test_5a80e3dd">-->
+                        <!--<input placeholder="<%=common_all_tips%>" id="price-type" ng-model="priceType" style="width:100%;padding-left:2px" autocomplete="off" class="input-text test_44c88b37" type="text">-->
+                        <!--<i class="select-icon icon-drop-down test_82c9681d"></i>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <div class="search-cell test_b1d9cc06" style="width:20%" ng-show="viewButton.isShowVerifyList">
+                    <span class="test_6c4420b4"><%=price_verify_state%></span>
+                    <div class="select-box test_a1b2bfb6">
+                        <input placeholder="<%=common_all_tips%>" id="verify-state" ng-model="verifyState" style="width:100%;padding-left:2px" autocomplete="off" class="input-text test_e541ea6d" type="text">
+                        <i class="select-icon icon-drop-down test_3041620a"></i>
+                    </div>
+                </div>
+                <div class="search-cell test_dddc519f" style="width:10%" ng-show="viewButton.isShowPriceType">
+                    <span class="test_0bf88b9e"><%=price_type%></span>
+                    <div class="select-box test_5a80e3dd">
+                        <input placeholder="<%=common_all_tips%>" id="price-type" ng-model="priceType" style="width:100%;padding-left:2px" autocomplete="off" class="input-text test_44c88b37" type="text">
+                        <i class="select-icon icon-drop-down test_82c9681d"></i>
+                    </div>
+                </div>
+                <div class="search-cell price-level-list test_4b22266c" style="width:10%;left:-18px" ng-show="isShowPriceLevelList">
+                    <label for="level1" class="test_d053016c">
+                        <input type="checkbox" name="grade" ng-model="level1" id="level1" class="test_a8478c52"><span class="test_e7421f44"><%=price_level1%></span>
+                    </label>
+                    <label for="level2" class="test_421d5de3">
+                        <input type="checkbox" name="grade" ng-model="level2" id="level2" class="test_59849bf8"><span class="test_6720054f"><%=price_level2%></span>
+                    </label>
+                    <label for="level3" class="test_f024fe6f">
+                        <input type="checkbox" name="grade" ng-model="level3" id="level3" class="test_ee1ab147"><span class="test_900cfe26"><%=price_level3%></span>
+                    </label>
+                    <label for="level4" class="test_4464abe0">
+                        <input type="checkbox" name="grade" ng-model="level4" id="level4" class="test_1adae174"><span class="test_4d74c985"><%=price_level4%></span>
+                    </label>
+                    <label for="level5" class="test_d1ebd105">
+                        <input type="checkbox" name="grade" ng-model="level5" id="level5" class="test_e8283d29"><span class="test_2a042149"><%=price_level5%></span>
+                    </label>
+                </div>
+                <div class="search-cell test_f6062094" style="width:20%" ng-show="viewButton.isShowUseState">
+                    <span class="test_640136f1"><%=price_use_state%></span>
+                    <div class="select-box test_ed59d181">
+                        <input placeholder="<%=common_all_tips%>" id="use-state" ng-model="useState" style="width:100%;padding-left:2px" autocomplete="off" class="input-text test_8f4b5429" type="text">
+                        <i class="select-icon icon-drop-down test_beebbde7"></i>
+                    </div>
+                </div>
+                <div style="margin-right: 4.5%;float: right;width: auto!important;" ng-class="{'resetSearchCls': isResetSearchCls, 'search-cell': true}" class="test_c018a33a">
+                    <span ng-click="resetData()" class="btn btn-reset test_6b2feace"><%=common_clear_data%></span>
+                    <button ng-click="search();" class="btn btn-primary test_e777d328" style="width: 98px;padding:0 30px;position:relative;top:2px"><%=price_search%></button>
+                </div>
+        </div>
+        <div ng-controller="tableController" class="test_602fa336">
+            <div class="batch-operation test_04f21e98">
+                <button ng-click="add();" class="btn btn-primary test_102a0b32" ng-if="viewButton.isAdd"><%=price_add%></button>
+                <button ng-click="delete();" id="delete" class="btn btn-primary test_65af50d5" ng-if="viewButton.isDelete"><%=price_delete%></button>
+                <button ng-click="copy();" class="btn btn-primary test_5d843460" ng-if="viewButton.isCopy"><%=price_copy%></button>
+                <button ng-click="submitVerify();" id="submitVerify" class="btn btn-primary test_f130e0a1" ng-if="viewButton.isSubmitVerify"><%=price_submit_verify%></button>
+                <button ng-click="verifyOk();" class="btn btn-primary test_59374043" ng-if="viewButton.isVerifyOk"><%=price_verify_ok%></button>
+                <button ng-click="nopassDraft();" class="btn btn-primary test_5e2fdb0e" ng-if="viewButton.isNoPassDraft"><%=price_nopass_drafy%></button>
+                <button ng-click="startUse();" class="btn btn-primary test_97fe4244" ng-if="viewButton.isShowStartUse"><%=price_start_use%></button>
+                <button ng-click="stopUse();" class="btn btn-primary test_77f6bb0d" ng-if="viewButton.isShowStopUse"><%=price_stop_use%></button>
+            </div>
+            <div include="tpl/fragment/common/table.html" class="test_d3851f1f"></div>
+        </div>
+    </div>
+</div></div>

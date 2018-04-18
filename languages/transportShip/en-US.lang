@@ -1,0 +1,20 @@
+{
+    "transportShip_page_international": "国际化",
+    "transportShip_page_keyword": "关键字",
+    "transportShip_page_empty": "重置",
+    "transportShip_page_name": "船舶名称",
+    "transportShip_page_nameEn": "英文船名",
+    "transportShip_page_country": "国家",
+    "transportShip_page_picture": "船舶图",
+    "transportShip_page_mmsi": "MMSI",
+    "transportShip_page_mio": "IMO",
+    "transportShip_page_callSign": "呼号",
+    "transportShip_page_add": "添加船舶",
+    "transportShip_page_baseInfo": "基本信息",
+    "transportShip_page_interName": "船舶国际化名称",
+     "transportShip_code_modelDelTips": "确定删除已选船舶？",
+     "transportShip_code_modelDetail": "船舶详情",
+     "transportShip_code_maxUploadTIps" : "最多支持上传",
+     "transportShip_page_nameEnRegMsg" : "已有该英文名称",
+      "transportShip_page_searchPlaceholder": "请输入船舶名称或英文名称"
+}

@@ -1,0 +1,1 @@
+app.factory("regionDetailView",[function(){var t={};return t.height=function(t){var e=0;switch(t){case"table":e=$(".master-table").height()-350;break;case"selectedUser":e=window.innerHeight-252}return e},t.slimscroll=function(t,e){$(t).slimscroll({height:e})},t.promptBox=function(t){$(document).promptBox(t)},t.tab=function(t,e){return $(t).tab({callback:e})},t}]);

@@ -1,0 +1,1 @@
+app.factory("templateService",["easyHttp",function(t){return{uploadTemplate:function(e,a){t.post("logistics.uploadTemplate",e,a)},getTemplate:function(e,a){t.get("logistics.getTemplate",e,a)},getTemplateData:function(e,a){t.get("logistics.getTemplateData",e,a)}}}]);

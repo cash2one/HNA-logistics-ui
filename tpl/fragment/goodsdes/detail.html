@@ -1,0 +1,82 @@
+<div ng-controller="detail" class="detail">
+<form name="customerForm" novalidate="novalidate">
+<ul class="good-detail">
+	<li>
+	    <label><b ng-show="isEdit">*</b>业务类型</label>
+	    <div class="content-info">
+	        <input ng-trim="false" validate-code="{ruleReg:'name', ruleRegMsg:'<%=common_validate_name%>', maxLength:'30'}" name="name1"  ng-model="name1" type="text" placeholder="<%=product_name_tips%>" required>
+	        <validatetip from-model="customerForm.name"></validatetip>
+	    </div>
+    </li>
+    <li>
+	    <label><b ng-show="isEdit">*</b>品名</label>
+	    <div class="content-info">
+	        <input ng-trim="false" validate-code="{ruleReg:'name', ruleRegMsg:'<%=common_validate_name%>', maxLength:'30'}" name="name2"  ng-model="name2" type="text" placeholder="<%=product_name_tips%>" required>
+	       
+	        <validatetip from-model="customerForm.name"></validatetip>
+	    </div>
+    </li>
+    <li>
+	    <label><b ng-show="isEdit">*</b>品名代码</label>
+	    <div class="content-info">
+	        <input ng-trim="false" validate-code="{ruleReg:'name', ruleRegMsg:'<%=common_validate_name%>', maxLength:'30'}" name="name3"  ng-model="name3" type="text" placeholder="<%=product_name_tips%>" required>
+	     
+	        <validatetip from-model="customerForm.name"></validatetip>
+	    </div>
+    </li>
+    <li>
+	    <label><b ng-show="isEdit">*</b>供应商</label>
+	    <div class="content-info">
+	        <input ng-trim="false" validate-code="{ruleReg:'number', ruleRegMsg:'请输入数字', maxLength:'30'}" name="name4"  ng-model="name4" type="text" placeholder="" required>
+	      
+	        <validatetip from-model="customerForm.name4"></validatetip>
+	    </div>
+    </li>
+    <li>
+	    <label><b ng-show="isEdit">*</b>规格</label>
+	    <div class="content-info">
+	    <button class="btn btn-primary btn-bill" ng-click="searchTaskList()">添加规格</button>
+	    </div>
+    </li>
+    <li class="table-li">
+    	<table class="table-box" cellpadding="0" cellspacing="0">
+	    <thead>
+	    	<tr>
+	    		<th>规格名</th>
+	    		<th>规格代码</th>
+	    		<th>生效状态</th>
+	    	</tr>
+	    </thead>
+	    <tbody>
+	    	<tr ng-repeat="item in descriptions">
+	    		<td>
+	    			<div class="content-info">
+				        <input ng-trim="false" validate-code="{ruleReg:'number', ruleRegMsg:'请输入数字', maxLength:'30'}" ng-model="item.name" id="reply{{$index + 1}}" name="reply{{$index + 1}}" placeholder="">
+				        <validatetip from-model="customerForm['reply'+($index+1)]"></validatetip>
+				    </div>
+	    		</td>
+	    		<td>
+	    			
+	    		</td>
+	    		<td></td>
+	    	</tr>
+	    </tbody>
+	    </table>
+
+    </li>
+    <li>
+	    <label><b ng-show="isEdit">*</b>启用状态</label>
+	    <div class="content-info">
+	        
+	    </div>
+    </li>
+</ul>
+<div class="btn-group">
+		<button class="btn btn-primary btn-bill" ng-click="goBack()" >返回</button>
+		<button class="btn btn-primary btn-bill" ng-click="save()" >保存</button>
+	</div>
+          
+
+
+
+</div>

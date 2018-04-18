@@ -1,0 +1,8 @@
+{
+    "pricePackage_Name": "名称",
+    "pricePackage_Code": "编码",
+    "pricePackage_Level": "价格等级",
+    "pricePackage_Creater": "创建者",
+    "pricePackage_CreateTime": "创建时间",
+    "pricePackage_DelTips": "确定删除已选价格套餐？"
+}

@@ -1,0 +1,1 @@
+app.factory("priceDetailView",[function(){var e={};return e.initCalander=function(){Calander.init({ele:["#begin-time","#end-time"],difference:1e3})},e.height=function(e){var i=0;switch(e){case"table":i=$("#m-show-region").height()-185}return i},e.slimscroll=function(e,i){$(e).slimscroll({height:i})},e}]);

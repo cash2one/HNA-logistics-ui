@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="325px" height="212px" viewBox="0 0 325 212" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>404</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0.59166794" y="0.78055618" width="1" height="1"></rect>
+        <rect id="path-3" x="0.59166794" y="0.78055618" width="1" height="1"></rect>
+        <rect id="path-5" x="0.335715322" y="0.00799320367" width="93.467195" height="187.382009"></rect>
+        <rect id="path-7" x="0.335715322" y="0.00532880245" width="93.467195" height="187.384674"></rect>
+        <rect id="path-9" x="0.726064411" y="0.840426204" width="88.3351771" height="88.3351771"></rect>
+        <rect id="path-11" x="0.726064411" y="0.840426204" width="88.3351771" height="88.3351771"></rect>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="404" transform="translate(0.000000, 2.000000)">
+            <path d="M180.632645,182.139819 C171.31047,185.24523 161.005753,187 150.639793,187 C98.9244899,187 57,145.138098 57,93.5 C57,41.8619018 98.9244899,0 150.639793,0 C199.905395,0 240.285509,38.4454176 244,86.6856428" id="Shape" stroke="#266CD3" stroke-width="2.77778"></path>
+            <g id="Clipped" transform="translate(150.000000, 186.000000)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <g id="Rectangle-path"></g>
+                <g id="Group" opacity="0.300003" mask="url(#mask-2)">
+                    <g transform="translate(0.000000, 0.000000)" id="Clipped">
+                        <g transform="translate(0.000000, 0.000000)">
+                            <mask id="mask-4" fill="white">
+                                <use xlink:href="#path-3"></use>
+                            </mask>
+                            <g id="Rectangle-path"></g>
+                            <path d="M0.59166794,0.91944518 C0.666668,0.91944518 0.73889028,0.92500074 0.81389034,0.92500074 L0.81389034,0.78055618 C0.73889028,0.82500066 0.666668,0.8750007 0.59166794,0.91944518" id="Shape" fill="#4E8AD1" mask="url(#mask-4)"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+            <g id="Clipped" transform="translate(57.000000, 0.000000)">
+                <mask id="mask-6" fill="white">
+                    <use xlink:href="#path-5"></use>
+                </mask>
+                <g id="Rectangle-path"></g>
+                <g id="Group" opacity="0.300003" mask="url(#mask-6)">
+                    <g id="Clipped">
+                        <mask id="mask-8" fill="white">
+                            <use xlink:href="#path-7"></use>
+                        </mask>
+                        <g id="Rectangle-path"></g>
+                        <path d="M40.967834,93.6989979 C40.967834,53.2826957 63.180947,17.8941186 93.8029103,0.00799320367 C42.1614857,0.133220061 0.335715322,42.0282649 0.335715322,93.6989979 C0.335715322,145.369731 42.1614857,187.264776 93.8029103,187.390003 C63.1729538,169.506542 40.967834,134.123293 40.967834,93.6989979" id="Shape" fill="#4E8AD1" mask="url(#mask-8)"></path>
+                    </g>
+                </g>
+            </g>
+            <path d="M151,187 C120.276408,169.154266 98,133.840345 98,93.4986706 C98,53.1649723 120.281753,17.8483926 151,0 L151,187 L151,187 Z" id="Shape" stroke="#266CD3" stroke-width="2.77778" stroke-linejoin="bevel"></path>
+            <path d="M203,82.3359399 C199.127903,46.900219 177.831369,16.1172975 150,0 L150,187 C157.229345,182.815139 164.356792,177.433844 170.513534,171.491555" id="Shape" stroke="#266CD3" stroke-width="2.77778" stroke-linejoin="bevel"></path>
+            <path d="M218,29 C210.880751,42.1748358 183.124726,52 149.968075,52 C116.91252,52 89.2230047,42.2341698 82,29.1213649" id="Shape" stroke="#266CD3" stroke-width="2.77778"></path>
+            <path d="M83,159 C91.0695083,146.319312 117.9961,137 149.97242,137 C153.031899,137 156.043739,137.087096 159,137.253124" id="Shape" stroke="#266CD3" stroke-width="2.77778"></path>
+            <path d="M180,94.03 L57,94" id="Shape" stroke="#266CD3" stroke-width="2.77778"></path>
+            <path d="M315.901602,207.790053 C313.646097,208.278615 311.20685,207.928125 309.132425,206.595201 L261.175659,175.802524 C253.125612,184.559465 242.463227,191.123188 229.955429,193.823555 C198.793783,200.551902 168.068859,180.82356 161.320986,149.752084 C154.57045,118.683264 174.356044,88.0472461 205.51769,81.3162437 C236.679336,74.5878965 267.40426,94.3162389 274.152133,125.387714 C276.820392,137.668143 275.34779,149.863604 270.655702,160.550896 C270.767545,160.601345 318.870772,191.486955 318.870772,191.486955 C323.046252,194.168735 324.257886,199.747368 321.568324,203.910765 C320.234194,205.979188 318.157106,207.304147 315.901602,207.790053 Z" id="Shape" stroke="#266CD3" stroke-width="2.77778"></path>
+            <g id="Clipped" transform="translate(172.000000, 92.000000)">
+                <mask id="mask-10" fill="white">
+                    <use xlink:href="#path-9"></use>
+                </mask>
+                <g id="Rectangle-path"></g>
+                <g id="Group" opacity="0.300003" mask="url(#mask-10)">
+                    <g id="Clipped">
+                        <mask id="mask-12" fill="white">
+                            <use xlink:href="#path-11"></use>
+                        </mask>
+                        <g id="Rectangle-path"></g>
+                        <path d="M1.73670352,54.3564265 C-3.42553466,30.521301 11.7127753,7.01330348 35.5479008,1.85106531 C59.3830262,-3.31117286 82.8910238,11.8271371 88.0532619,35.6622626 C93.2155001,59.497388 78.0771901,83.0053856 54.2420647,88.1676237 C30.4069392,93.3298619 6.89894169,78.1915519 1.73670352,54.3564265" id="Shape" fill="#4E8AD1" mask="url(#mask-12)"></path>
+                    </g>
+                </g>
+            </g>
+            <path d="M174.005943,147.311515 C168.863348,123.567085 183.944055,100.148538 207.688485,95.005943 C231.432915,89.8633477 254.851462,104.944055 259.994057,128.688485 C265.136652,152.432915 250.055945,175.851462 226.311515,180.994057 C202.567085,186.136652 179.148538,171.055945 174.005943,147.311515 L174.005943,147.311515 Z" id="Shape" stroke="#266CD3" stroke-width="2.77778"></path>
+            <g id="Group-6" transform="translate(20.000000, 169.000000)" stroke="#266CD3" stroke-width="2.77778">
+                <path d="M12.5185185,0 L12.5185185,25.0745057" id="Shape"></path>
+                <path d="M25.0745057,12.5185185 L0,12.5185185" id="Shape"></path>
+            </g>
+            <g id="Group-6-Copy" transform="translate(275.000000, 35.000000)" stroke="#266CD3" stroke-width="2.77778">
+                <path d="M12.5185185,0 L12.5185185,25.0745057" id="Shape"></path>
+                <path d="M25.0745057,12.5185185 L0,12.5185185" id="Shape"></path>
+            </g>
+            <g id="Group-7" transform="translate(34.000000, 76.000000)" stroke="#266CD3" stroke-width="2.77778">
+                <path d="M6.5625,0 L6.5625,14.614595" id="Shape"></path>
+                <path d="M14.614595,7.5 L0,7.5" id="Shape"></path>
+            </g>
+            <g id="Group-7-Copy" transform="translate(260.000000, 69.000000)" stroke="#266CD3" stroke-width="2.77778">
+                <path d="M6.5625,0 L6.5625,14.614595" id="Shape"></path>
+                <path d="M14.614595,7.5 L0,7.5" id="Shape"></path>
+            </g>
+            <g id="Group-8" transform="translate(0.000000, 14.000000)" stroke="#266CD3" stroke-width="2.77778">
+                <path d="M12.5185185,0 L12.5185185,25.0745057" id="Shape"></path>
+                <path d="M25.0745057,12.5185185 L0,12.5185185" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

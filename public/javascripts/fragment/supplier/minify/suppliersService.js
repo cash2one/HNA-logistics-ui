@@ -1,0 +1,1 @@
+app.factory("suppliersService",["easyHttp",function(r){var t={};return t.initSupplier=function(r){return r},t}]);

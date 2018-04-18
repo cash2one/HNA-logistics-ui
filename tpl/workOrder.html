@@ -1,0 +1,113 @@
+<div class="work-order-box test_1d6db92b">
+    <div class="master-table test_fe88182c">
+        <div class="add-search-box test_d65305a8">
+            <div class="list-search-box test_41d607e5" style="width:100%">
+                <div class="search-cell test_9dd08056" style="width:20%">
+                    <span class="test_2e09706f"><%=workOrder_id%></span>
+                    <div class="select-box test_3fd3127b">
+                        <input id="workId" ng-model="workId" style="width:100%;padding-left:2px" autocomplete="off" class="input-text test_8e33468e" type="text" maxlength="30">
+                    </div>
+                </div>
+                <div class="search-cell test_2145c111" style="width:20%">
+                    <span class="test_5d15059c"><%=workOrder_creator%></span>
+                    <div class="select-box test_e6f7c8d6" style="width:66%">
+                        <input ng-click="resetCreator()" id="creator" ng-model="creatorName" style="width:100%;padding-left:2px" autocomplete="off" class="input-text test_3ff7deee" type="text" maxlength="30">
+                    </div>
+                </div>
+                <div class="search-cell test_5aca60d6" style="width:20%">
+                    <span class="test_cd7920fc" style="width:25%;"><%=workOrder_user_name%></span>
+                    <div class="select-box test_9ffb23ed" style="width:66%">
+                        <input ng-click="showCustomerList()" id="user-name" ng-model="username" style="width:100%;padding-left:2px" autocomplete="off" class="input-text test_6892f21b" type="text" maxlength="30">
+                    </div>
+                </div>
+                <div class="search-cell test_08ad4315" style="width:37%">
+                    <span style="width:14%" class="test_4978c99d"><%=workOrder_update_time%></span>
+                    <input type="text" id="begin-time" style="width:39%;padding-left:2px" ng-model="beginTime" autocomplete="off" class="test_6d447904">
+                    <span class="test_034d6e31">～</span>
+                    <input type="text" id="finish-time" style="width:39%;padding-left:2px" ng-model="finishTime" autocomplete="off" class="test_4a646fe0">
+                </div>
+                <div class="search-cell test_2338f01e" style="width:20%">
+                    <span class="test_a99630c5"><%=workOrder_title%></span>
+                    <div class="select-box test_a3f87333">
+                        <input placeholder="<%=workOrder_title_tips%>" id="title" ng-model="title" style="width:100%;padding-left:2px" autocomplete="off" class="input-text test_3f6270e9" type="text" maxlength="30">
+                    </div>
+                </div>
+                <div class="search-cell test_e64239aa" style="width:20%">
+                    <span class="test_56f2ea08"><%=workOrder_state%></span>
+                    <div class="select-box test_a094d580" style="width:66%">
+                        <input placeholder="<%=common_all_tips%>" id="state" ng-model="state" style="width:100%;padding-left:2px" autocomplete="off" class="input-text test_d6a623eb" type="text" maxlength="30">
+                        <i class="select-icon icon-drop-down test_43f14166"></i>
+                    </div>
+                </div>
+                <div class="search-cell" style="width:20%;padding-left: 25px">
+                    <div class="checkbox checkbox-info">
+                        <input type="checkbox" ng-checked="blockOrder" ng-click="isBlockOrder()">
+                        <label ></label>
+                    </div>
+                    <span class="block-order"><%=workOrder_block_order%></span>
+                </div>
+                <div class="search-cell test_a66c4c23" style="text-align:right;width: 35%;margin-top: 20px;margin-left: 12px; position:relative;top:2px">
+                    <span style="color:#888;margin-right:10px;cursor:pointer;position:relative;" ng-click="clearDate()" class="test_48cb01ac">重置</span>
+                    <button ng-click="search();" class="btn btn-primary test_ee0f83e4" style="padding:0 25px;"><%=common_list_search_btn%></button>
+                </div>
+            </div>
+        </div>
+        <div ng-controller="tableController" class="test_b0d8440c">
+            <div class="batch-operation test_9a33b069">
+                <button ng-click="createWorkId();" class="btn btn-primary test_209c41e7"><%=workOrder_create_workId%></button>
+                <button id="delete" ng-click="delete();" class="btn btn-primary test_047125ce"><%=workOrder_delete_workId%></button>
+            </div>
+            <div class="table-container test_1db3ae2e">
+                <table class="table-box test_7fa220b9" cellpadding="0" cellspacing="0">
+                    <thead class="test_1373dc5c">
+                    <th style="width:5%" class="test_395feb6f">
+                        <div class="checkbox checkbox-info test_bd87245b">
+                            <input type="checkbox" id="select-all" ng-model="tableModel.selectFlag" ng-click="table.selectAll(tableModel);" class="test_3916e0d9">
+                            <label class="test_804e0d31"></label>
+                        </div>
+                    </th>
+                    <th style="width:{{tableModel.tableHeaderSize[$index]}}" ng-repeat="item in tableModel.tableHeader" class="test_969ae926">
+                        {{item}}
+                        <p ng-if="$index==1" style="position:relative;color:#555;top:-12px;color:#555;font-size:10px;line-height:15px" class="test_3ab7715c"></p>
+                    </th>
+                    </thead>
+                    <tbody class="tbody test_b77b69a9">
+                    <tr ng-repeat="value in tableModel.tableBody" ng-init="renderFinish($last)" class="test_18066d29">
+                        <td class="test_99de03e4">
+                            <div class="checkbox checkbox-info test_05ef7d1b">
+                                <input class="checkbox test_e99dd735" type="checkbox" data-status="{{value.statusName}}" ng-value="{{value.id}}" ng-checked="value.checkbox" ng-click="table.selectOne(tableModel, value.checkboxId);">
+                                <label class="test_96d46eec"></label>
+                            </div>
+                        </td>
+                        <td class="test_d14a3513">{{(tableModel.pagination.currentPage-1)*tableModel.pagination.pageSize+$index+1}}</td>
+                        <td title="{{value.workOrderCode}}" class="test_e7c6306c"><a href="#/workOrderDetail?id={{value.id}}" ng-bind-html="value.workOrderCode | trustHtml:searchWorkId" class="test_b8bbfb02">></a></td>
+                        <td title="{{value.priorityName}}" class="test_ed1e5886">{{value.priorityName}}</td>
+                        <td title="{{value.typeName}}" class="test_ad8cc63d">{{value.typeName}}</td>
+                        <td title="{{value.title}}" ng-bind-html="value.title | trustHtml:searchTitle" class="test_807d6cb6"></td>
+                        <td title="{{value.anonymity}}" class="test_bc5f965f">{{value.anonymity}}</td>
+                        <td title="{{value.creatorFullName}}({{value.creatorUserName}})" class="test_23c359df">{{value.creatorFullName}}({{value.creatorUserName}})</td>
+                        <td title="{{value.transactorFullName}}（{{value.transactorUserName}}）" class="test_75cca937">{{value.transactorFullName}}（{{value.transactorUserName}}）</td>
+                        <td title="{{value.createTime}}" class="test_6b73ff88">{{value.createTime}}</td>
+                        <td title="{{value.lastUpdateTime}}" class="test_6e60d8a3">{{value.lastUpdateTime}}</td>
+                        <td title="{{value.statusName}}" class="test_d7bd6869">{{value.statusName}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div ng-show="!tableModel.pagination.isVisiblePage" style="position: absolute;top:260px;bottom:0px;width:100%;" class="test_9bda58b1">
+                    <img style="width:100%;height:100%;" src="/public/img/undefined.svg" class="test_8d745792">
+                </div>
+
+            </div>
+            <style type="text/css" class="test_fdb65cca">
+                .kkpage {
+                    position: absolute;
+                    bottom: 10px;
+                    left: 0;
+                    right: 0;
+                    margin: 0;
+                }
+            </style>
+            <hnapagination table-service="table" page-table-model="tableModel" class="test_318c9c96"></hnapagination>
+        </div>
+    </div>
+</div>

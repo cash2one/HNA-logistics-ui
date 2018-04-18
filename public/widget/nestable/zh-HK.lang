@@ -1,0 +1,5 @@
+{
+    "nestable_prompt_tip": "已存在重名組織，請修改名稱後再移動！",
+    "nestable_prompt_add_tip": "當前組織只支持添加到第5級！",
+    "nestable_prompt_seat_tip": "新增組織"
+}

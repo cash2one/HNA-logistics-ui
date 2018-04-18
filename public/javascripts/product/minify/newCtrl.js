@@ -1,0 +1,1 @@
+var controller={$scope:null,service:null,tableService:null,initViewButton:function(e){$.extend(!0,e.viewButton,{isShowOperAreaLine:!0})},init:function(e,i,t){this.initViewButton(e),this.$scope=e,this.service=i,this.tableService=t}};

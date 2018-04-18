@@ -1,0 +1,1 @@
+app.factory("billStreamService",["$http","easyHttp",function(t,e){var r={};return r.getFlowProcess=function(t){return e.get("logistics.getBillFlowProcess",t)},r}]);
